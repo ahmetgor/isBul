@@ -5,7 +5,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
-
+import { AktivitePage } from '../pages/aktivite/aktivite';
+import { AraPage } from '../pages/ara/ara';
+import { CvPage } from '../pages/cv/cv';
+import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,15 +18,19 @@ export class MyApp {
 
   rootPage: any = Page1;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Page One', component: Page1 },
-      { title: 'Page Two', component: Page2 }
+      { title: 'Page One', component: Page1, icon: null },
+      { title: 'Page Two', component: Page2, icon: null },
+      { title: 'İlan Ara', component: AraPage, icon: 'search' },
+      { title: 'Aktiviteler', component: AktivitePage, icon: 'walk' },
+      { title: 'Özgeçmiş', component: CvPage, icon: 'list-box' },
+      { title: 'Ayarlar', component: AyarlarPage, icon: 'settings' }
     ];
 
   }
