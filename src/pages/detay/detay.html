@@ -1,0 +1,60 @@
+<!--
+  Generated template for the Detay page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>İlan Detayı</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div *ngIf="ilan">
+
+  <!-- <ion-card> -->
+  <ion-item inset>
+    <ion-avatar item-left>
+      <img src="../../assets/img/icon.png">
+    </ion-avatar>
+
+    <ion-row>
+    <ion-col>
+    <h2>{{ilan.isim}}</h2>
+    </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+    <div class="firma"><h4>{{ilan.firma}}</h4></div>
+    </ion-col>
+    <ion-col>
+      <h4 align="right"><ion-icon name="calendar"></ion-icon>
+        100 gün
+      </h4>
+    </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <p><ion-icon name="pin"></ion-icon>
+          {{ilan.il}}
+        </p>
+    </ion-col>
+    <ion-col>
+      <p align="right"><ion-icon name="briefcase"></ion-icon>
+        {{ilan.tip}}
+      </p>
+    </ion-col>
+    </ion-row>
+  </ion-item>
+<!-- </ion-card> -->
+
+</div>
+</ion-content>

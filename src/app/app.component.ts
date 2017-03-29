@@ -9,6 +9,8 @@ import { AktivitePage } from '../pages/aktivite/aktivite';
 import { AraPage } from '../pages/ara/ara';
 import { CvPage } from '../pages/cv/cv';
 import { AyarlarPage } from '../pages/ayarlar/ayarlar';
+import { SonucPage } from '../pages/sonuc/sonuc';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -16,7 +18,7 @@ import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = Page1;
+  rootPage: any = SonucPage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
@@ -30,7 +32,8 @@ export class MyApp {
       { title: 'İlan Ara', component: AraPage, icon: 'search' },
       { title: 'Aktiviteler', component: AktivitePage, icon: 'walk' },
       { title: 'Özgeçmiş', component: CvPage, icon: 'list-box' },
-      { title: 'Ayarlar', component: AyarlarPage, icon: 'settings' }
+      { title: 'Ayarlar', component: AyarlarPage, icon: 'settings' },
+      { title: 'İlan Ara', component: SonucPage, icon: null },
     ];
 
   }

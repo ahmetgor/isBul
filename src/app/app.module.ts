@@ -6,6 +6,8 @@ import { Page2 } from '../pages/page2/page2';
 import { AktivitePage } from '../pages/aktivite/aktivite';
 import { AraPage } from '../pages/ara/ara';
 import { CvPage } from '../pages/cv/cv';
+import { SonucPage } from '../pages/sonuc/sonuc';
+import { DetayPage } from '../pages/detay/detay';
 import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 
 import { IlanSer } from '../providers/ilan-ser';
@@ -22,7 +24,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AktivitePage,
     AraPage,
     CvPage,
-    AyarlarPage
+    AyarlarPage,
+    SonucPage,
+    DetayPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -35,7 +39,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AktivitePage,
     AraPage,
     CvPage,
-    AyarlarPage
+    AyarlarPage,
+    SonucPage,
+    DetayPage
   ],
   providers: [
     StatusBar,

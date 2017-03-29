@@ -13,7 +13,7 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class AktivitePage {
 
-  aktivite: string = 'basvuru';
+  aktivite: string = 'basvurulan';
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
