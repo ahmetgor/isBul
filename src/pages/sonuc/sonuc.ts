@@ -37,4 +37,17 @@ export class SonucPage {
     });
   }
 
+  ilanAra(ev: any) {
+    // set val to the value of the searchbar
+    this.ilanList = this.ilanSer.createDb();
+
+    let val = ev.target.value;
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.ilanList = this.ilanList.filter((item) => {
+        return (item.isim.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
 }

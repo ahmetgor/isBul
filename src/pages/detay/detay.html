@@ -18,8 +18,7 @@
 <ion-content padding>
   <div *ngIf="ilan">
 
-  <!-- <ion-card> -->
-  <ion-item inset>
+  <ion-item no-lines>
     <ion-avatar item-left>
       <img src="../../assets/img/icon.png">
     </ion-avatar>
@@ -54,7 +53,34 @@
     </ion-col>
     </ion-row>
   </ion-item>
-<!-- </ion-card> -->
+
+  <ion-card>
+  <ion-card-header>
+    <b>Açıklama:</b>
+  </ion-card-header>
+  <ion-card-content>
+    {{ilan.aciklama}}
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+<ion-card-header>
+  <b>Detaylar:</b>
+</ion-card-header>
+<ion-card-content>
+  <!-- <ion-list>
+    <ion-item> -->
+      <p><b>Tecrübe: </b> {{ilan.tecrube}}</p>
+    <!-- </ion-item>
+    <ion-item> -->
+      <p><b>Eğitim: </b> {{ilan.egitim}}</p>
+    <!-- </ion-item>
+  </ion-list> -->
+  <p><b>Askerlik: </b> {{ilan.askerlik}}</p>
+  <p><b>Ehliyet: </b> {{ilan.ehliyet}}</p>
+  <p><b>İlan No: </b> {{ilan.id}}</p>
+</ion-card-content>
+</ion-card>
 
 </div>
 </ion-content>

@@ -16,6 +16,7 @@
 
 
 <ion-content padding>
+  <ion-searchbar (ionInput)="ilanAra($event)"></ion-searchbar>
   <ion-list>
     <button ion-item *ngFor="let ilan of ilanList" (click)="itemTapped($event, ilan)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
