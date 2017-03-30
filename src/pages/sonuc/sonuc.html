@@ -15,9 +15,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-searchbar (ionInput)="ilanAra($event)"></ion-searchbar>
-  <ion-list>
+  <ion-list text-wrap>
     <button ion-item *ngFor="let ilan of ilanList" (click)="itemTapped($event, ilan)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-avatar item-left>
@@ -36,7 +36,7 @@
       </ion-col>
       <ion-col>
         <h4 align="right"><ion-icon name="calendar"></ion-icon>
-          100 gün
+          {{getDays(ilan.olusurmaTarih)}} gün
         </h4>
       </ion-col>
       </ion-row>

@@ -26,4 +26,10 @@ ilan: any;
     console.log('ionViewDidLoad DetayPage');
   }
 
+  getDays(d1) {
+    // console.log(Date.parse(d1)+' date');
+    let diff =  Math.floor(( (new Date()).getTime() - Date.parse(d1) ) / 86400000);
+    return diff;
+  }
+
 }
