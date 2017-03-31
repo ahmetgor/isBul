@@ -3,12 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { DetayPage } from '../detay/detay';
 
-/*
-  Generated class for the Sonuc page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-sonuc',
   templateUrl: 'sonuc.html'
@@ -23,38 +18,27 @@ export class SonucPage {
               public ilanSer: IlanSer) {
 
     this.ilanList = ilanSer.createDb();
-    this.basvuruList = [ {id: 13, basvuruldu: 'Y'}, {id: 14, basvuruldu: 'Y'} ];
-    console.log(this.basvuruList.findIndex((item) => {
-        return (item.id == 15 );
+    this.getBasvuru();
 
-}));
-
-    // console.log(this.basvuruList.findIndex(13));
-    // console.log(JSON.stringify(this.basvuruList)+'1');
-    // console.log(JSON.stringify(this.basvuruList.keys())+'2');
-    // console.log(JSON.stringify(this.basvuruList[1])+'3');
-    // console.log(this.basvuruList['id']+'4');
-    //       for (const key of Object.keys(this.basvuruList)) {
-    //    console.log(key+'   '+JSON.stringify(this.basvuruList[key].id));
-    // }
+    console.log('constructor SonucPage çağrıldı');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SonucPage');
+    console.log('ionViewDidLoad SonucPage çağrıldı');
   }
 
-  itemTapped(event, ilan) {
-    // That's right, we're pushing to ourselves!
+  itemTapped(ev, ilan) {
+    console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(ilan.isim);
     this.navCtrl.push(DetayPage, {
-      ilan: ilan
+      ilan: ilan,
+      basvurulist: this.basvuruList
     });
   }
 
   ilanAra(ev: any) {
     // set val to the value of the searchbar
     this.ilanList = this.ilanSer.createDb();
-
     let val = ev.target.value;
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
@@ -64,16 +48,25 @@ export class SonucPage {
     }
   }
 
-   getBasvuru(basvuru, ilanId) {
-      return basvuru.id === ilanId;
+  getBasvuru() {
+     this.basvuruList = [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
+
+}
+
+  checkBasvuru(ilanId) {
+    return this.basvuruList.findIndex((item) => {
+        return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
   }
 
-  // { name: 'cherries', quantity: 5 }
+  checkKaydet(ilanId) {
+    return this.basvuruList.findIndex((item) => {
+        return (item.id == ilanId && item.kaydedildi == 'Y' ); }) > -1
+  }
 
-getDays(d1) {
-  // console.log(Date.parse(d1)+' date');
-  let diff =  Math.floor(( (new Date()).getTime() - Date.parse(d1) ) / 86400000);
-  return diff;
-}
+  getDays(d1) {
+    // console.log(Date.parse(d1)+' date');
+    let diff =  Math.floor(( (new Date()).getTime() - Date.parse(d1) ) / 86400000);
+    return diff;
+  }
 
 }

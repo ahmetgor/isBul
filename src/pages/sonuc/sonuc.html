@@ -35,20 +35,31 @@
       <div class="firma"><h4>{{ilan.firma}}</h4></div>
       </ion-col>
       <ion-col>
-        <h4 align="right"><ion-icon name="calendar"></ion-icon>
+        <h4 align="right" [class.my-class]="getDays(ilan.olusurmaTarih) < 10">
+          <ion-icon name="calendar"></ion-icon>
           {{getDays(ilan.olusurmaTarih)}} gün
         </h4>
       </ion-col>
       </ion-row>
 
       <ion-row>
-        <ion-col>
+      <ion-col>
           <p><ion-icon name="pin"></ion-icon>
             {{ilan.il}}
+
           </p>
       </ion-col>
       <ion-col>
-        <p align="right"><ion-icon name="briefcase"></ion-icon>
+        <p align="right">
+          <span style="float:left;">
+          <i *ngIf="checkBasvuru(ilan.id)">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </i>
+          <i *ngIf="checkKaydet(ilan.id)">
+            <ion-icon name="bookmark"></ion-icon>
+          </i>
+        </span>
+          <ion-icon name="briefcase"></ion-icon>
           {{ilan.tip}}
         </p>
       </ion-col>

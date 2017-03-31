@@ -15,11 +15,16 @@ import { IlanSer } from '../../providers/ilan-ser';
 export class DetayPage {
 
 ilan: any;
+basvuruList: Array<any>;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer) {
 
                  this.ilan = this.navParams.get('ilan');
+                 this.basvuruList = this.navParams.get('basvurulist');
+                 this.basvuruList.push({id: 'hebe'});
+                 console.log(JSON.stringify(this.basvuruList)+'detay basvuru');
               }
 
   ionViewDidLoad() {
