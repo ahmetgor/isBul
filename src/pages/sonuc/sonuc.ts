@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ModalController} from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { DetayPage } from '../detay/detay';
-
+import { FiltrelePage } from '../filtrele/filtrele';
 
 @Component({
   selector: 'page-sonuc',
@@ -12,10 +12,12 @@ export class SonucPage {
 
   ilanList: Array<any>;
   basvuruList: Array<any>;
+  detayAra: any;
+  sirala: any;
   // {id: number, isim: string, firma: string, açıklama: string, il: string, tip:string, eğitim: string, tecrübe: string, ehliyet: string, askerlik: string, görüntülenme: string, başvuru: string, olusturan:string, olusurmaTarih:string, guncelleyen:string, guncellemeTarih:string }>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ilanSer: IlanSer) {
+              public ilanSer: IlanSer, public modalCtrl: ModalController) {
 
     this.ilanList = ilanSer.createDb();
     this.getBasvuru();
@@ -28,8 +30,8 @@ export class SonucPage {
   }
 
   itemTapped(ev, ilan) {
-    console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
-    console.log(ilan.isim);
+    // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
+    // console.log(ilan.isim);
     this.navCtrl.push(DetayPage, {
       ilan: ilan,
       basvurulist: this.basvuruList
@@ -50,7 +52,19 @@ export class SonucPage {
 
   getBasvuru() {
      this.basvuruList = [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
+}
 
+presentFilter(myEvent) {
+  let modal = this.modalCtrl.create(FiltrelePage, {
+    detayAra: this.detayAra,
+    sirala: this.sirala
+  });
+  modal.onDidDismiss(data => {
+  console.log(data);
+});
+  modal.present({
+    ev: myEvent
+  });
 }
 
   checkBasvuru(ilanId) {

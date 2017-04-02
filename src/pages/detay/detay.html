@@ -48,12 +48,48 @@
         </p>
     </ion-col>
     <ion-col>
-      <p align="right"><ion-icon name="briefcase"></ion-icon>
+      <p align="right">
+        <span style="float:left;">
+        <i *ngIf="checkBasvuru(ilan.id)">
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </i>
+        <i *ngIf="checkKaydet(ilan.id)">
+          <ion-icon name="bookmark"></ion-icon>
+        </i>
+      </span>
+        <ion-icon name="briefcase"></ion-icon>
         {{ilan.tip}}
       </p>
     </ion-col>
     </ion-row>
   </ion-item>
+
+  <ion-row>
+    <ion-col>
+  <div *ngIf="!checkBasvuru(ilan.id)">
+  <button ion-button block icon-left color="secondary" (click)="basvur(ilan.id)">
+    <ion-icon name="checkmark-circle"></ion-icon>
+    Başvur</button>
+  </div>
+  <div *ngIf="checkBasvuru(ilan.id)">
+  <button ion-button block icon-left color="secondary" (click)="basvur(ilan.id)">
+    <ion-icon name="ios-arrow-dropleft"></ion-icon>
+    Başvuruyu geri al</button>
+  </div>
+  </ion-col>
+  <ion-col>
+  <div *ngIf="!checkKaydet(ilan.id)">
+  <button ion-button block icon-left color="primary" (click)="kaydet(ilan.id)">
+    <ion-icon name="bookmark"></ion-icon>
+    Kaydet</button>
+  </div>
+  <div *ngIf="checkKaydet(ilan.id)">
+  <button ion-button block icon-left color="primary" (click)="kaydet(ilan.id)">
+    <ion-icon name="ios-arrow-dropleft"></ion-icon>
+    Kaydedilenlerden çıkar</button>
+  </div>
+  </ion-col>
+  </ion-row>
 
   <ion-card>
   <ion-card-header>
@@ -71,7 +107,7 @@
 <ion-card-content>
   <!-- <ion-list>
     <ion-item> -->
-      <p><b>Tecrübe: </b> {{ilan.tecrube}}</p>
+  <p><b>Tecrübe: </b> {{ilan.tecrube}}</p>
     <!-- </ion-item>
     <ion-item> -->
       <p><b>Eğitim: </b> {{ilan.egitim}}</p>
@@ -79,6 +115,7 @@
   </ion-list> -->
   <p><b>Askerlik: </b> {{ilan.askerlik}}</p>
   <p><b>Ehliyet: </b> {{ilan.ehliyet}}</p>
+  <p><b>İlan Tarihi: </b> {{ilan.olusurmaTarih}}</p>
   <p><b>İlan No: </b> {{ilan.id}}</p>
 </ion-card-content>
 </ion-card>

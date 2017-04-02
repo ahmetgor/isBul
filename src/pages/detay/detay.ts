@@ -37,4 +37,38 @@ basvuruList: Array<any>;
     return diff;
   }
 
+  basvur(ilanId) {
+    console.log( JSON.stringify(this.basvuruList.find((item) => {
+        return (item.id == ilanId ); })) + 'console')
+
+  let i = this.basvuruList.findIndex((item) => {
+    return (item.id == ilanId); })
+
+    if(i>-1)
+    this.basvuruList[i].basvuruldu = this.basvuruList[i].basvuruldu == 'N' ? 'Y' : 'N';
+    else this.basvuruList.push({id: ilanId, basvuruldu: 'Y', kaydedildi: 'N'});
+  }
+
+  kaydet(ilanId) {
+    console.log( JSON.stringify(this.basvuruList.find((item) => {
+        return (item.id == ilanId ); })) + 'kaydetfunc')
+
+  let i = this.basvuruList.findIndex((item) => {
+    return (item.id == ilanId); })
+
+    if(i>-1)
+    this.basvuruList[i].kaydedildi = this.basvuruList[i].kaydedildi == 'N' ? 'Y' : 'N';
+    else this.basvuruList.push({id: ilanId, basvuruldu: 'N', kaydedildi: 'Y'});
+  }
+
+  checkBasvuru(ilanId) {
+    return this.basvuruList.findIndex((item) => {
+        return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
+  }
+
+  checkKaydet(ilanId) {
+    return this.basvuruList.findIndex((item) => {
+        return (item.id == ilanId && item.kaydedildi == 'Y' ); }) > -1
+  }
+
 }
