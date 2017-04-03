@@ -20,6 +20,7 @@ export class FiltrelePage {
               public viewCtrl: ViewController) {
 
     this.detayAra = navParams.get('detayAra');
+    console.log(JSON.stringify(this.detayAra) + 'detay')
     this.sirala = navParams.get('sirala');
   }
 
@@ -28,7 +29,12 @@ export class FiltrelePage {
   }
 
   dismiss() {
-  this.viewCtrl.dismiss(this.sirala);
+  this.viewCtrl.dismiss(this.sirala, this.detayAra);
+ }
+ clear() {
+ this.detayAra = {};
+ this.sirala = '';
+ this.viewCtrl.dismiss(this.sirala, this.detayAra);
 }
 
 }

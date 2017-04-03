@@ -12,8 +12,8 @@ export class SonucPage {
 
   ilanList: Array<any>;
   basvuruList: Array<any>;
-  detayAra: any;
-  sirala: any;
+  detayAra: any = {};
+  sirala: any = '';
   // {id: number, isim: string, firma: string, açıklama: string, il: string, tip:string, eğitim: string, tecrübe: string, ehliyet: string, askerlik: string, görüntülenme: string, başvuru: string, olusturan:string, olusurmaTarih:string, guncelleyen:string, guncellemeTarih:string }>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -59,8 +59,10 @@ presentFilter(myEvent) {
     detayAra: this.detayAra,
     sirala: this.sirala
   });
-  modal.onDidDismiss(data => {
-  console.log(data);
+
+  modal.onDidDismiss((sirala, detayAra) => {
+    this.ilanList = this.ilanSer.createDb();
+  console.log(sirala + 'dis' + JSON.stringify(detayAra));
 });
   modal.present({
     ev: myEvent

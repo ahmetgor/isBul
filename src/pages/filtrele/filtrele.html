@@ -7,11 +7,11 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Sırala & Detaylı Ara</ion-title>
+    <ion-title>Sırala & Filtrele</ion-title>
   <ion-buttons start>
   <button ion-button (click)="dismiss()">
     <span ion-text color="dark" showWhen="ios">Kapat</span>
-    <ion-icon name="md-close" showWhen="android, windows"></ion-icon>
+    <ion-icon name="close-circle" showWhen="android, windows"></ion-icon>
   </button>
 </ion-buttons>
   </ion-navbar>
@@ -23,19 +23,53 @@
 
   <!-- <div *ngIf="detayAra && sirala"> -->
 
+  <ion-item-group>
+    <ion-item-divider color="light"></ion-item-divider>
   <ion-item>
   <ion-label color="secondary">Sırala:</ion-label>
   <ion-select [(ngModel)]="sirala" cancelText="İptal" okText="Tamam">
-    <ion-option value='' >En Uygun</ion-option>
+    <ion-option value='' selected="true">En Uygun</ion-option>
     <ion-option value='olusurmaTarih'>En Erken</ion-option>
   </ion-select>
 </ion-item>
+</ion-item-group>
+
+<ion-item-group>
+  <ion-item-divider color="light"></ion-item-divider>
 <ion-item>
-    <ion-label floating color="primary">Yetkili kişi:</ion-label>
-    <ion-input type="text"></ion-input>
+    <ion-label floating color="primary">Firma:</ion-label>
+    <ion-input type="text" [(ngModel)]="detayAra.firma"></ion-input>
 </ion-item>
 <ion-item>
-Hebe
+  <ion-label floating color="primary">Tecrübe:</ion-label>
+  <ion-select [(ngModel)]="detayAra.tecrube" multiple="true" cancelText="İptal" okText="Tamam">
+    <!-- <ion-option value='' selected="true">Farketmez</ion-option> -->
+    <ion-option value='Az Tecrübeli (Junior)'>Az Tecrübeli (Junior)</ion-option>
+    <ion-option value='Orta Tecrübeli (Midlevel)'>Orta Tecrübeli (Midlevel)</ion-option>
+    <ion-option value='Çok Tecrübeli (Senior)'>Çok Tecrübeli (Senior)</ion-option>
+    <ion-option value='Yönetici (Manager)'>Yönetici (Manager)</ion-option>
+  </ion-select>
 </ion-item>
+<ion-item>
+<ion-label floating color="primary">Eğitim:</ion-label>
+<ion-select [(ngModel)]="detayAra.egitim" multiple="true" cancelText="İptal" okText="Tamam">
+  <ion-option value='Lise'>Lise</ion-option>
+  <ion-option value='Lisans'>Lisans</ion-option>
+  <ion-option value='Yüksek Lisans & Doktora'>Yüksek Lisans & Doktora</ion-option>
+</ion-select>
+</ion-item>
+ </ion-item-group>
+
+ <ion-row>
+ <ion-col>
+ <button ion-button block icon-left color="secondary"  (click)="clear()">
+   Temizle</button>
+ </ion-col>
+ <ion-col>
+ <button ion-button block icon-left color="primary" (click)="dismiss()">
+   <ion-icon name="search"></ion-icon>
+   Detaylı ara & Sırala</button>
+ </ion-col>
+</ion-row>
 <!-- </div> -->
 </ion-content>
