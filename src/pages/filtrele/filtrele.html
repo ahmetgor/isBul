@@ -23,13 +23,13 @@
 
   <!-- <div *ngIf="detayAra && sirala"> -->
 
-  <!-- <ion-item>
-  <ion-label  color="secondary">Sırala:</ion-label>
-  <ion-select   cancelText="İptal" okText="Tamam">
-    <ion-option value='1' >En Uygun</ion-option>
-    <ion-option value='2'>En Erken</ion-option>
+  <ion-item>
+  <ion-label color="secondary">Sırala:</ion-label>
+  <ion-select [(ngModel)]="sirala" cancelText="İptal" okText="Tamam">
+    <ion-option value='' >En Uygun</ion-option>
+    <ion-option value='olusurmaTarih'>En Erken</ion-option>
   </ion-select>
-</ion-item> -->
+</ion-item>
 <ion-item>
     <ion-label floating color="primary">Yetkili kişi:</ion-label>
     <ion-input type="text"></ion-input>

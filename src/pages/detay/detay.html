@@ -12,10 +12,6 @@
     <ion-title>İlan Detayı</ion-title>
   </ion-navbar>
 
-</ion-header>
-
-
-<ion-content  >
   <div *ngIf="ilan">
 
   <ion-item text-wrap no-lines>
@@ -74,7 +70,7 @@
   <div *ngIf="checkBasvuru(ilan.id)">
   <button ion-button block icon-left color="secondary" (click)="basvur(ilan.id)">
     <ion-icon name="ios-arrow-dropleft"></ion-icon>
-    Başvuruyu geri al</button>
+    Başvuru İptal</button>
   </div>
   </ion-col>
   <ion-col>
@@ -86,10 +82,17 @@
   <div *ngIf="checkKaydet(ilan.id)">
   <button ion-button block icon-left color="primary" (click)="kaydet(ilan.id)">
     <ion-icon name="ios-arrow-dropleft"></ion-icon>
-    Kaydedilenlerden çıkar</button>
+    Kayıt İptal</button>
   </div>
   </ion-col>
   </ion-row>
+</div>
+
+</ion-header>
+
+<ion-content  >
+
+  <div *ngIf="ilan">
 
   <ion-card>
   <ion-card-header>
@@ -98,6 +101,26 @@
   <ion-card-content>
     {{ilan.aciklama}}
   </ion-card-content>
+</ion-card>
+
+<ion-card>
+<ion-card-header>
+  <b>Detaylar:</b>
+</ion-card-header>
+<ion-card-content>
+  <!-- <ion-list>
+    <ion-item> -->
+  <p><b>Tecrübe: </b> {{ilan.tecrube}}</p>
+    <!-- </ion-item>
+    <ion-item> -->
+      <p><b>Eğitim: </b> {{ilan.egitim}}</p>
+    <!-- </ion-item>
+  </ion-list> -->
+  <p><b>Askerlik: </b> {{ilan.askerlik}}</p>
+  <p><b>Ehliyet: </b> {{ilan.ehliyet}}</p>
+  <p><b>İlan Tarihi: </b> {{ilan.olusurmaTarih}}</p>
+  <p><b>İlan No: </b> {{ilan.id}}</p>
+</ion-card-content>
 </ion-card>
 
 <ion-card>
