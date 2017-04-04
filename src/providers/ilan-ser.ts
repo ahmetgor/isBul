@@ -12,9 +12,11 @@ import 'rxjs/add/operator/map';
 export class IlanSer {
 
   ilanlar: Array<any>;
+  basvurKaydetList: any;
 
   constructor(public http: Http) {
     console.log('Hello IlanSer Provider');
+    this.basvurKaydetList = this.getBasvurKaydet();
   }
 
   createDb() {
@@ -29,6 +31,10 @@ export class IlanSer {
       {id: 20, isim: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: '', tecrube: '', ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' }
     ];
     return this.ilanlar;
+  }
+
+  getBasvurKaydet() {
+    return [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
   }
 
 }

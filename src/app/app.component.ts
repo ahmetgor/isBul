@@ -7,7 +7,7 @@ import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
 import { AktivitePage } from '../pages/aktivite/aktivite';
 import { AraPage } from '../pages/ara/ara';
-import { CvPage } from '../pages/cv/cv';
+import { OzgecmisPage } from '../pages/ozgecmis/ozgecmis';
 import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 import { SonucPage } from '../pages/sonuc/sonuc';
 
@@ -31,7 +31,7 @@ export class MyApp {
       { title: 'Page Two', component: Page2, icon: null },
       { title: 'İlan Ara', component: AraPage, icon: 'search' },
       { title: 'Aktiviteler', component: AktivitePage, icon: 'walk' },
-      { title: 'Özgeçmiş', component: CvPage, icon: 'list-box' },
+      { title: 'Özgeçmiş', component: OzgecmisPage, icon: 'list-box' },
       { title: 'Ayarlar', component: AyarlarPage, icon: 'settings' },
       { title: 'İlan Ara', component: SonucPage, icon: null },
     ];

@@ -21,15 +21,15 @@
 
 <ion-content>
 
-  <!-- <div *ngIf="detayAra && sirala"> -->
+  <div *ngIf="detayAra && sirala">
 
   <ion-item-group>
     <ion-item-divider color="light"></ion-item-divider>
   <ion-item>
   <ion-label color="secondary">Sırala:</ion-label>
   <ion-select [(ngModel)]="sirala" cancelText="İptal" okText="Tamam">
-    <ion-option value='' selected="true">En Uygun</ion-option>
-    <ion-option value='olusurmaTarih'>En Erken</ion-option>
+    <ion-option value='{}'>En Uygun</ion-option>
+    <ion-option value='{"olusurmaTarih":-1}'>En Erken</ion-option>
   </ion-select>
 </ion-item>
 </ion-item-group>
@@ -63,13 +63,14 @@
  <ion-row>
  <ion-col>
  <button ion-button block icon-left color="secondary"  (click)="clear()">
+   <ion-icon name="backspace"></ion-icon>
    Temizle</button>
  </ion-col>
  <ion-col>
  <button ion-button block icon-left color="primary" (click)="dismiss()">
    <ion-icon name="search"></ion-icon>
-   Detaylı ara & Sırala</button>
+   Filtrele & Sırala</button>
  </ion-col>
 </ion-row>
-<!-- </div> -->
+</div>
 </ion-content>

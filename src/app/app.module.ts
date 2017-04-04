@@ -6,11 +6,11 @@ import { Page2 } from '../pages/page2/page2';
 
 import { AktivitePage } from '../pages/aktivite/aktivite';
 import { AraPage } from '../pages/ara/ara';
-import { CvPage } from '../pages/cv/cv';
 import { SonucPage } from '../pages/sonuc/sonuc';
 import { DetayPage } from '../pages/detay/detay';
 import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 import { FiltrelePage } from '../pages/filtrele/filtrele';
+import { OzgecmisPage } from '../pages/ozgecmis/ozgecmis';
 
 import { IlanSer } from '../providers/ilan-ser';
 import { UserAuth } from '../providers/user-auth';
@@ -25,11 +25,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Page2,
     AktivitePage,
     AraPage,
-    CvPage,
     AyarlarPage,
     SonucPage,
     DetayPage,
-    FiltrelePage
+    FiltrelePage,
+    OzgecmisPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -41,11 +41,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     Page2,
     AktivitePage,
     AraPage,
-    CvPage,
     AyarlarPage,
     SonucPage,
     DetayPage,
-    FiltrelePage
+    FiltrelePage,
+    OzgecmisPage
   ],
   providers: [
     StatusBar,
