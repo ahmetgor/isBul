@@ -37,4 +37,29 @@ export class IlanSer {
     return [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
   }
 
+  getOzgecmis() {
+    let ozgecmis = {
+"id": "1",
+"isim": "Ahmet",
+"soyisim" : "Gör",
+"dogumTarihi": "23.11.1983",
+"tc": "Evet",
+"askerlik": "Yapıldı",
+"medeni": "Evli",
+"ehliyet": "B",
+"telefon": "2125366868",
+"email": "ahmet@gor.com",
+"adres": "Beşiktaş Beşiktaş BeşiktaşBeşiktaşBeşiktaş",
+"tecrube": [{"firma": "I2I", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz"},
+			{"firma": "TTNET", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz"}],
+"egitim": [{"okul": "İTÜ", "bolum": "Bilgisayar Müh.", "mezunTarihi": "10.10.2012", "sehir": "İstanbul"},
+			{"okul": "İEL", "bolum": "", "mezunTarihi": "10.10.2012", "sehir": "İstanbul"}],
+"yabanciDil": [{"dil": "İngilizce", "seviye": "İyi"}, {"dil": "Almanca", "seviye": "Çok iyi"}],
+"sertifika": [{"ad": "SQL Expert", "tarih": "01.01.2017", "kurum": "Oracle"},
+			  {"ad": "Excel Expert", "tarih": "01.01.2017", "kurum": "Microsoft"}]
+}
+
+return ozgecmis;
+  }
+
 }

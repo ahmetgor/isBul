@@ -1,0 +1,124 @@
+<!--
+  Generated template for the OzgecmisDetay page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Özgeçmiş Detayı</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div *ngIf="des=='kisisel'&&detay">
+
+<form [formGroup]="ozgecmisFormGroup">
+    <ion-item>
+      <ion-label floating>Doğum Tarihi</ion-label>
+      <ion-datetime formControlName="dogumTarihi" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="detay.dogumTarihi" cancelText="İptal" doneText="Tamam">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item>
+    <ion-label floating>TC Vatandaşı</ion-label>
+    <ion-select formControlName="tc" [(ngModel)]="detay.tc" cancelText="İptal" okText="Tamam">
+      <ion-option value="Evet" selected="true">Evet</ion-option>
+      <ion-option value="Hayır">Hayır</ion-option>
+    </ion-select>
+    </ion-item>
+
+    <ion-item>
+    <ion-label floating>Askerlik</ion-label>
+    <ion-select formControlName="askerlik" [(ngModel)]="detay.askerlik" cancelText="İptal" okText="Tamam">
+      <ion-option value="Yapıldı/Muaf" selected="true">Yapıldı/Muaf</ion-option>
+      <ion-option value="Tecilli/Yapılmadı">Tecilli/Yapılmadı</ion-option>
+    </ion-select>
+    </ion-item>
+
+    <ion-item>
+    <ion-label floating>Medeni Hal</ion-label>
+    <ion-select formControlName="medeni" [(ngModel)]="detay.medeni" cancelText="İptal" okText="Tamam">
+      <ion-option value="Evli" selected="true">Evli</ion-option>
+      <ion-option value="Hayır">Hayır</ion-option>
+    </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Ehliyet:</ion-label>
+        <ion-input formControlName="ehliyet" type="text" [(ngModel)]="detay.ehliyet"></ion-input>
+    </ion-item>
+
+</form>
+  </div>
+
+  <div *ngIf="des=='iletisim'&&detay">
+    <form [formGroup]="ozgecmisFormGroup">
+
+    <ion-item>
+        <ion-label floating>Telefon</ion-label>
+        <ion-input formControlName="telefon" type="number" [(ngModel)]="detay.telefon"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Email</ion-label>
+        <ion-input formControlName="email" type="email" [(ngModel)]="detay.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Adres:</ion-label>
+        <ion-input formControlName="adres" type="text" [(ngModel)]="detay.adres"></ion-input>
+    </ion-item>
+
+</form>
+  </div>
+
+  <div *ngIf="des=='tecrube'&&detay">
+    <form [formGroup]="ozgecmisFormGroup">
+
+    <ion-item>
+        <ion-label floating>Firma</ion-label>
+        <ion-input formControlName="firma" type="text" [(ngModel)]="detay.firma"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Pozisyon</ion-label>
+        <ion-input formControlName="pozisyon" type="text" [(ngModel)]="detay.pozisyon"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Kısa İş Tanımı</ion-label>
+        <ion-input formControlName="isTanimiKisa" type="text" [(ngModel)]="detay.isTanimiKisa"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>İş Tanımı</ion-label>
+        <ion-textarea formControlName="isTanimi" type="text" [(ngModel)]="detay.isTanimi"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Şehir</ion-label>
+        <ion-input formControlName="sehir" type="text" [(ngModel)]="detay.sehir"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Giriş Tarihi</ion-label>
+      <ion-datetime formControlName="giris" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="detay.giris" cancelText="İptal" doneText="Tamam">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Çıkış Tarihi</ion-label>
+      <ion-datetime formControlName="cikis" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="detay.cikis" cancelText="İptal" doneText="Tamam">
+      </ion-datetime>
+    </ion-item>
+</form>
+  </div>
+
+</ion-content>

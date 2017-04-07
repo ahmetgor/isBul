@@ -14,7 +14,7 @@
 
   <div *ngIf="ilan">
 
-  <ion-item text-wrap no-lines>
+  <ion-item text-wrap no-lines class="item">
     <ion-avatar item-left>
       <img src="../../assets/img/icon.png">
     </ion-avatar>
@@ -38,7 +38,7 @@
     </ion-row>
 
     <ion-row>
-      <ion-col>
+      <ion-col col-auto>
         <p><ion-icon name="pin"></ion-icon>
           {{ilan.il}}
         </p>
@@ -96,7 +96,7 @@
 
   <ion-card>
   <ion-card-header>
-    <b>Açıklama:</b>
+    <b>Açıklama</b>
   </ion-card-header>
   <ion-card-content>
     {{ilan.aciklama}}
@@ -105,7 +105,7 @@
 
 <ion-card>
 <ion-card-header>
-  <b>Detaylar:</b>
+  <b>Detaylar</b>
 </ion-card-header>
 <ion-card-content>
   <!-- <ion-list>

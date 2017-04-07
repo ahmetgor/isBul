@@ -17,16 +17,119 @@
 
 <ion-content>
 
-  <ion-card>
-    <ion-item text-wrap>
+  <div *ngIf="ozgecmis">
+
+  <ion-card class="item">
+    <ion-item text-wrap class="item">
     <ion-thumbnail item-left>
       <img src="../../assets/img/indir.png">
     </ion-thumbnail>
 
-    <h1>Ahmet Gör Ahmet Gör</h1>
+    <h1>{{ozgecmis.isim}} {{ozgecmis.soyisim}}</h1>
     <p>Analist</p>
     <p>I2I-Systems</p>
   </ion-item>
 </ion-card>
 
+<ion-card>
+  <ion-card-header>
+  <b>Kişisel Bilgiler</b>
+  <!-- <ion-note item-right> -->
+  <span ion-text style="float:right;" color="primary">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'kisisel')">
+    <ion-icon name="create"></ion-icon>
+    Düzenle
+  </button>
+<!-- </ion-note> -->
+  </span>
+</ion-card-header>
+  <ion-item text-wrap>
+  <ion-grid no-padding>
+  <ion-row><ion-col col-5><h4>Doğum Tarihi:</h4></ion-col> <ion-col><h4>{{ozgecmis.dogumTarihi}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>TC Vatandaşı: </h4></ion-col> <ion-col><h4>{{ozgecmis.tc}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Askerlik: </h4></ion-col> <ion-col><h4> {{ozgecmis.askerlik}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Medeni Hal:</h4> </ion-col> <ion-col><h4> {{ozgecmis.medeni}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Ehliyet Cinsi: </h4></ion-col> <ion-col><h4> {{ozgecmis.ehliyet}}</h4></ion-col> </ion-row>
+</ion-grid>
+</ion-item>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+  <b>İletişim Bilgileri</b>
+  <span ion-text style="float:right;" color="primary">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'iletisim')">
+    <ion-icon name="create"></ion-icon>
+    Düzenle
+  </button>
+  </span>
+</ion-card-header>
+  <ion-item text-wrap>
+    <ion-grid no-padding>
+  <ion-row><ion-col col-5><h4>Telefon:</h4></ion-col> <ion-col><h4>{{ozgecmis.telefon}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Email:</h4></ion-col> <ion-col><h4>{{ozgecmis.email}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Adres:</h4></ion-col> <ion-col><h4>{{ozgecmis.adres}}</h4></ion-col> </ion-row>
+</ion-grid>
+</ion-item>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+  <b>Tecrübe</b>
+  <span ion-text style="float:right;" color="primary">
+    <ion-icon name="create"></ion-icon>
+    Ekle
+  </span>
+</ion-card-header>
+<button ion-item *ngFor="let tecrube of ozgecmis.tecrube" (click)="itemTapped($event, tecrube, 'tecrube')">
+<h4><b>{{tecrube.firma}}</b> <span ion-text style="float:right;">{{tecrube.sehir}}</span></h4>
+<h4>{{tecrube.pozisyon}}</h4>
+<h4>{{tecrube.isTanimiKisa}}</h4>
+<h4>{{tecrube.giris}} - {{tecrube.cikis}}</h4>
+</button>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+  <b>Eğitim</b>
+  <span ion-text style="float:right;" color="primary">
+    <ion-icon name="create"></ion-icon>
+    Ekle
+  </span>
+</ion-card-header>
+<button ion-item *ngFor="let egitim of ozgecmis.egitim" (click)="itemTapped($event, egitim, 'egitim')">
+<h4><b>{{egitim.okul}}</b> <span ion-text style="float:right;">{{egitim.sehir}}</span></h4>
+<h4>{{egitim.bolum}}</h4>
+<h4>{{egitim.mezunTarihi}}</h4>
+</button>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+  <b>Yabancı Dil</b>
+  <span ion-text style="float:right;" color="primary">
+    <ion-icon name="create"></ion-icon>
+    Ekle
+  </span>
+</ion-card-header>
+<button ion-item *ngFor="let yabanciDil of ozgecmis.yabanciDil" (click)="itemTapped($event, yabanciDil, 'yabanciDil')">
+  <h4><b>{{yabanciDil.dil}} : </b>{{yabanciDil.seviye}}</h4>
+</button>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+  <b>Sertifika</b>
+  <span ion-text style="float:right;" color="primary">
+    <ion-icon name="create"></ion-icon>
+    Ekle
+  </span>
+</ion-card-header>
+<button ion-item *ngFor="let sertifika of ozgecmis.sertifika" (click)="itemTapped($event, sertifika, 'sertifika')">
+  <h4><b>{{sertifika.ad}}</b></h4>
+  <h4>{{sertifika.kurum}} - {{sertifika.tarih}}</h4>
+</button>
+</ion-card>
+
+</div>
 </ion-content>

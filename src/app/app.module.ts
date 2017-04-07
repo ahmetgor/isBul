@@ -11,6 +11,7 @@ import { DetayPage } from '../pages/detay/detay';
 import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 import { FiltrelePage } from '../pages/filtrele/filtrele';
 import { OzgecmisPage } from '../pages/ozgecmis/ozgecmis';
+import { OzgecmisDetayPage } from '../pages/ozgecmis-detay/ozgecmis-detay';
 
 import { IlanSer } from '../providers/ilan-ser';
 import { UserAuth } from '../providers/user-auth';
@@ -29,10 +30,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SonucPage,
     DetayPage,
     FiltrelePage,
-    OzgecmisPage
+    OzgecmisPage,
+    OzgecmisDetayPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+  monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık' ],
+
+})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,7 +50,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SonucPage,
     DetayPage,
     FiltrelePage,
-    OzgecmisPage
+    OzgecmisPage,
+    OzgecmisDetayPage
   ],
   providers: [
     StatusBar,
