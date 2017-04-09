@@ -29,13 +29,15 @@ export class OzgecmisPage {
     console.log('ionViewDidLoad OzgecmisPage');
   }
 
-  itemTapped(ev, ozDetay, des) {
+  itemTapped(ev, ozDetay, des, ozDetayList) {
     console.log(des);
-    console.log(JSON.stringify(ozDetay));
+    console.log(JSON.stringify(ozDetay)+'ozDetay');
+    console.log(JSON.stringify(ozDetayList)+'ozdetlist');
     this.navCtrl.push(OzgecmisDetayPage, {
       ozDetay: ozDetay,
       basvurulist: this.ozgecmis,
-      des: des
+      des: des,
+      ozDetayList: ozDetayList
     });
   }
 

@@ -15,6 +15,7 @@ import { OzgecmisDetayPage } from '../pages/ozgecmis-detay/ozgecmis-detay';
 
 import { IlanSer } from '../providers/ilan-ser';
 import { UserAuth } from '../providers/user-auth';
+import { DatePipe } from '../pipes/date-pipe';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,7 +32,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     DetayPage,
     FiltrelePage,
     OzgecmisPage,
-    OzgecmisDetayPage
+    OzgecmisDetayPage,
+    DatePipe
   ],
   imports: [
     IonicModule.forRoot(MyApp, {

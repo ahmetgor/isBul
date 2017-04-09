@@ -36,7 +36,7 @@
   <b>Kişisel Bilgiler</b>
   <!-- <ion-note item-right> -->
   <span ion-text style="float:right;" color="primary">
-    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'kisisel')">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'kisisel', '')">
     <ion-icon name="create"></ion-icon>
     Düzenle
   </button>
@@ -58,7 +58,7 @@
   <ion-card-header>
   <b>İletişim Bilgileri</b>
   <span ion-text style="float:right;" color="primary">
-    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'iletisim')">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'iletisim', '')">
     <ion-icon name="create"></ion-icon>
     Düzenle
   </button>
@@ -77,11 +77,13 @@
   <ion-card-header>
   <b>Tecrübe</b>
   <span ion-text style="float:right;" color="primary">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, {}, 'tecrubeEkle', ozgecmis.tecrube)">
     <ion-icon name="create"></ion-icon>
     Ekle
+  </button>
   </span>
 </ion-card-header>
-<button ion-item *ngFor="let tecrube of ozgecmis.tecrube" (click)="itemTapped($event, tecrube, 'tecrube')">
+<button ion-item *ngFor="let tecrube of (ozgecmis.tecrube | datePipe)" (click)="itemTapped($event, tecrube, 'tecrube', ozgecmis.tecrube)">
 <h4><b>{{tecrube.firma}}</b> <span ion-text style="float:right;">{{tecrube.sehir}}</span></h4>
 <h4>{{tecrube.pozisyon}}</h4>
 <h4>{{tecrube.isTanimiKisa}}</h4>
@@ -93,11 +95,13 @@
   <ion-card-header>
   <b>Eğitim</b>
   <span ion-text style="float:right;" color="primary">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, {}, 'egitimEkle', ozgecmis.egitim)">
     <ion-icon name="create"></ion-icon>
     Ekle
+  </button>
   </span>
 </ion-card-header>
-<button ion-item *ngFor="let egitim of ozgecmis.egitim" (click)="itemTapped($event, egitim, 'egitim')">
+<button ion-item *ngFor="let egitim of ozgecmis.egitim" (click)="itemTapped($event, egitim, 'egitim', ozgecmis.egitim)">
 <h4><b>{{egitim.okul}}</b> <span ion-text style="float:right;">{{egitim.sehir}}</span></h4>
 <h4>{{egitim.bolum}}</h4>
 <h4>{{egitim.mezunTarihi}}</h4>
@@ -108,27 +112,52 @@
   <ion-card-header>
   <b>Yabancı Dil</b>
   <span ion-text style="float:right;" color="primary">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, {}, 'yabanciDilEkle', ozgecmis.yabanciDil)">
     <ion-icon name="create"></ion-icon>
     Ekle
+  </button>
   </span>
 </ion-card-header>
-<button ion-item *ngFor="let yabanciDil of ozgecmis.yabanciDil" (click)="itemTapped($event, yabanciDil, 'yabanciDil')">
+<button ion-item *ngFor="let yabanciDil of ozgecmis.yabanciDil" (click)="itemTapped($event, yabanciDil, 'yabanciDil', ozgecmis.yabanciDil)">
   <h4><b>{{yabanciDil.dil}} : </b>{{yabanciDil.seviye}}</h4>
+  <!-- <ion-row><ion-col col-5><h4>{{yabanciDil.dil}} : </h4></ion-col> <ion-col><h4>{{yabanciDil.seviye}}</h4></ion-col> </ion-row> -->
+
 </button>
 </ion-card>
 
 <ion-card>
   <ion-card-header>
-  <b>Sertifika</b>
+  <b>Sertifikalar</b>
   <span ion-text style="float:right;" color="primary">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, {}, 'sertifikaEkle', ozgecmis.sertifika)">
     <ion-icon name="create"></ion-icon>
     Ekle
+  </button>
   </span>
 </ion-card-header>
-<button ion-item *ngFor="let sertifika of ozgecmis.sertifika" (click)="itemTapped($event, sertifika, 'sertifika')">
+<button ion-item *ngFor="let sertifika of ozgecmis.sertifika" (click)="itemTapped($event, sertifika, 'sertifika', ozgecmis.sertifika)">
   <h4><b>{{sertifika.ad}}</b></h4>
   <h4>{{sertifika.kurum}} - {{sertifika.tarih}}</h4>
 </button>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>
+  <b>Bilgisayar Teknolojileri</b>
+  <!-- <ion-note item-right> -->
+  <span ion-text style="float:right;" color="primary">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'bilgisayar', '')">
+    <ion-icon name="create"></ion-icon>
+    Düzenle
+  </button>
+<!-- </ion-note> -->
+  </span>
+</ion-card-header>
+  <!-- <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'bilgisayar')"> -->
+  <ion-item text-wrap>
+  <h4>{{ozgecmis.bilgisayar}}</h4>
+</ion-item>
+<!-- </button> -->
 </ion-card>
 
 </div>

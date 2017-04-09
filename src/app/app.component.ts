@@ -18,7 +18,7 @@ import { SonucPage } from '../pages/sonuc/sonuc';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = SonucPage;
+  rootPage: any = OzgecmisPage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
