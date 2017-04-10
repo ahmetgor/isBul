@@ -29,11 +29,11 @@ export class MyApp {
     this.pages = [
       { title: 'Page One', component: Page1, icon: null },
       { title: 'Page Two', component: Page2, icon: null },
-      { title: 'İlan Ara', component: AraPage, icon: 'search' },
+      { title: 'İlan Ara', component: SonucPage, icon: 'search' },
       { title: 'Aktiviteler', component: AktivitePage, icon: 'walk' },
       { title: 'Özgeçmiş', component: OzgecmisPage, icon: 'list-box' },
       { title: 'Ayarlar', component: AyarlarPage, icon: 'settings' },
-      { title: 'İlan Ara', component: SonucPage, icon: null },
+      // { title: 'İlan Ara', component: SonucPage, icon: null },
     ];
 
   }

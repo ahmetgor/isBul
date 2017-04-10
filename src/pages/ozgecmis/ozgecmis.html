@@ -101,10 +101,10 @@
   </button>
   </span>
 </ion-card-header>
-<button ion-item *ngFor="let egitim of ozgecmis.egitim" (click)="itemTapped($event, egitim, 'egitim', ozgecmis.egitim)">
+<button ion-item *ngFor="let egitim of (ozgecmis.egitim | datePipe)" (click)="itemTapped($event, egitim, 'egitim', ozgecmis.egitim)">
 <h4><b>{{egitim.okul}}</b> <span ion-text style="float:right;">{{egitim.sehir}}</span></h4>
 <h4>{{egitim.bolum}}</h4>
-<h4>{{egitim.mezunTarihi}}</h4>
+<h4>{{egitim.cikis}} - {{egitim.derece}}</h4>
 </button>
 </ion-card>
 
@@ -135,9 +135,9 @@
   </button>
   </span>
 </ion-card-header>
-<button ion-item *ngFor="let sertifika of ozgecmis.sertifika" (click)="itemTapped($event, sertifika, 'sertifika', ozgecmis.sertifika)">
+<button ion-item *ngFor="let sertifika of (ozgecmis.sertifika | datePipe)" (click)="itemTapped($event, sertifika, 'sertifika', ozgecmis.sertifika)">
   <h4><b>{{sertifika.ad}}</b></h4>
-  <h4>{{sertifika.kurum}} - {{sertifika.tarih}}</h4>
+  <h4>{{sertifika.kurum}} - {{sertifika.cikis}}</h4>
 </button>
 </ion-card>
 

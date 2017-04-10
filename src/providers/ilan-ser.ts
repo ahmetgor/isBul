@@ -52,11 +52,11 @@ export class IlanSer {
 "adres": "Beşiktaş Beşiktaş BeşiktaşBeşiktaşBeşiktaş",
 "tecrube": [{"firma": "I2I", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz", "ulke": 'Türkiye'},
 			{"firma": "TTNET", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz", "ulke": 'Türkiye'}],
-"egitim": [{"okul": "İTÜ", "bolum": "Bilgisayar Müh.", "mezunTarihi": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'},
-			{"okul": "İEL", "bolum": "", "mezunTarihi": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'}],
+"egitim": [{"okul": "İTÜ", "bolum": "Bilgisayar Müh.", "derece": "Lisans", "cikis": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'},
+			{"okul": "İEL", "bolum": "", "derece": "Lise", "cikis": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'}],
 "yabanciDil": [{"dil": "İngilizce", "seviye": "İyi"}, {"dil": "Almanca", "seviye": "Çok iyi"}],
-"sertifika": [{"ad": "SQL Expert", "tarih": "01.01.2017", "kurum": "Oracle"},
-			  {"ad": "Excel Expert", "tarih": "01.01.2017", "kurum": "Microsoft"}],
+"sertifika": [{"ad": "SQL Expert", "cikis": "01.01.2017", "kurum": "Oracle"},
+			  {"ad": "Excel Expert", "cikis": "01.01.2017", "kurum": "Microsoft"}],
 "bilgisayar": "SQL, Java"
 }
 

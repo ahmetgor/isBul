@@ -49,7 +49,7 @@ export class OzgecmisDetayPage {
           cikis: [''],
 
           okul: ['', Validators.required],
-          mezunTarihi: ['', Validators.required],
+          derece: ['', Validators.required],
           bolum: [''],
 
           dil: ['', Validators.required],
