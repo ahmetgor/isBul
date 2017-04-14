@@ -21,7 +21,10 @@
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="ilanAra($event)"></ion-searchbar>
+  <ion-searchbar  [(ngModel)]="searchTerm"  [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
+  <div *ngIf="searching" class="spinner-container">
+      <ion-spinner></ion-spinner>
+  </div>
   <ion-list text-wrap>
     <button ion-item *ngFor="let ilan of ilanList" (click)="itemTapped($event, ilan)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
@@ -31,7 +34,7 @@
 
       <ion-row>
       <ion-col>
-      <h2>{{ilan.isim}}</h2>
+      <h2>{{ilan.baslik}}</h2>
       </ion-col>
     </ion-row>
 

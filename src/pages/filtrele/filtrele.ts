@@ -29,6 +29,8 @@ export class FiltrelePage {
   }
 
   dismiss() {
+    console.log(JSON.stringify(this.detayAra)+'tecfiltre');
+    console.log(JSON.stringify(this.detayAra.tecrube)+'tecfiltre');
   this.viewCtrl.dismiss(this.sirala, this.detayAra);
  }
  clear() {

@@ -3,6 +3,8 @@ import { NavController, NavParams, ModalController} from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { DetayPage } from '../detay/detay';
 import { FiltrelePage } from '../filtrele/filtrele';
+import { FormControl } from '@angular/forms';
+import 'rxjs/add/operator/debounceTime';
 
 @Component({
   selector: 'page-sonuc',
@@ -10,23 +12,43 @@ import { FiltrelePage } from '../filtrele/filtrele';
 })
 export class SonucPage {
 
-  ilanList: Array<any>;
-  basvuruList: Array<any>;
+  ilanList: any;
+  basvuruList: any;
   detayAra: any = {};
   sirala: any = {};
+  searching: boolean = false;
+  searchTerm: string = '';
+  searchControl: FormControl;
+
   // {id: number, isim: string, firma: string, açıklama: string, il: string, tip:string, eğitim: string, tecrübe: string, ehliyet: string, askerlik: string, görüntülenme: string, başvuru: string, olusturan:string, olusurmaTarih:string, guncelleyen:string, guncellemeTarih:string }>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public modalCtrl: ModalController) {
 
-    this.ilanList = ilanSer.createDb();
-    // this.getBasvuru();
+    this.searchControl = new FormControl();
 
+    // this.getBasvuru();
     console.log('constructor SonucPage çağrıldı');
+
   }
 
   ionViewDidLoad() {
+    this.ilanListele();
     console.log('ionViewDidLoad SonucPage çağrıldı');
+    this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+    this.ilanListele();
+    console.log('searchkontrol çağrıldı');
+});
+  }
+
+  ilanListele() {
+    this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala)
+    .then(ilanlar => {
+      this.ilanList = ilanlar;
+      console.log(this.searchTerm);
+      this.searching = false;
+    });
+
   }
 
   itemTapped(ev, ilan) {
@@ -40,14 +62,15 @@ export class SonucPage {
 
   ilanAra(ev: any) {
     // set val to the value of the searchbar
-    this.ilanList = this.ilanSer.createDb();
-    let val = ev.target.value;
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.ilanList = this.ilanList.filter((item) => {
-        return (item.isim.toLowerCase().indexOf(val.toLowerCase()) > -1);
-      })
-    }
+    console.log('ilanAra started');
+    this.searching = true;
+    this.ilanListele();
+   // let val = ev.target.value;
+    // if (val && val.trim() != '') {
+    //   this.ilanList = this.ilanList.filter((item) => {
+    //     return (item.isim.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    //   })
+    // }
   }
 
 //   getBasvuru() {
@@ -60,9 +83,14 @@ presentFilter(myEvent) {
     sirala: this.sirala
   });
 
+  console.log('Dismiss started');
   modal.onDidDismiss((sirala, detayAra) => {
-    this.ilanList = this.ilanSer.createDb();
-  console.log(sirala + 'dis' + JSON.stringify(detayAra));
+    this.searching = true;
+    this.ilanSer.getIlanlar({}, this.detayAra, this.sirala)
+    .then(ilanlar => {
+      this.ilanList = ilanlar;
+      this.searching = false;
+    });
 });
   modal.present({
     ev: myEvent
@@ -84,5 +112,9 @@ presentFilter(myEvent) {
     let diff =  Math.floor(( (new Date()).getTime() - Date.parse(d1) ) / 86400000);
     return diff;
   }
+
+  onSearchInput(){
+    this.searching = true;
+}
 
 }
