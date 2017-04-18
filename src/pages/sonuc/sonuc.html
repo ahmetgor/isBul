@@ -21,7 +21,7 @@
 
 
 <ion-content>
-  <ion-searchbar  [(ngModel)]="searchTerm"  [formControl]="searchControl" (ionInput)="onSearchInput()"></ion-searchbar>
+  <ion-searchbar  [(ngModel)]="searchTerm"  [formControl]="searchControl"></ion-searchbar>
   <div *ngIf="searching" class="spinner-container">
       <ion-spinner></ion-spinner>
   </div>
@@ -45,7 +45,7 @@
       <ion-col>
         <h4 align="right" [class.my-class]="getDays(ilan.olusurmaTarih) < 10">
           <ion-icon name="calendar"></ion-icon>
-          {{getDays(ilan.olusurmaTarih)}} gün
+          {{getDays(ilan.olusturmaTarih)}} gün
         </h4>
       </ion-col>
       </ion-row>

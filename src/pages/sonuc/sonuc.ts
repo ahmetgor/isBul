@@ -15,7 +15,7 @@ export class SonucPage {
   ilanList: any;
   basvuruList: any;
   detayAra: any = {};
-  sirala: any = {};
+  sirala: any = '{}';
   searching: boolean = false;
   searchTerm: string = '';
   searchControl: FormControl;
@@ -36,12 +36,15 @@ export class SonucPage {
     this.ilanListele();
     console.log('ionViewDidLoad SonucPage çağrıldı');
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
+      // if(search.length > 2) {
     this.ilanListele();
     console.log('searchkontrol çağrıldı');
+  // }
 });
   }
 
   ilanListele() {
+    this.searching = true;
     this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala)
     .then(ilanlar => {
       this.ilanList = ilanlar;
@@ -53,29 +56,20 @@ export class SonucPage {
 
   itemTapped(ev, ilan) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
-    // console.log(ilan.isim);
+    console.log(JSON.stringify(ilan)+'ilan');
     this.navCtrl.push(DetayPage, {
       ilan: ilan,
       basvurulist: this.ilanSer.basvurKaydetList
     });
   }
 
-  ilanAra(ev: any) {
-    // set val to the value of the searchbar
-    console.log('ilanAra started');
-    this.searching = true;
-    this.ilanListele();
-   // let val = ev.target.value;
-    // if (val && val.trim() != '') {
-    //   this.ilanList = this.ilanList.filter((item) => {
-    //     return (item.isim.toLowerCase().indexOf(val.toLowerCase()) > -1);
-    //   })
-    // }
-  }
-
-//   getBasvuru() {
-//      this.basvuruList = [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
-// }
+  // ilanAra(ev: any) {
+  //  // let val = ev.target.value;
+  //   // if (val && val.trim() != '') {
+  //   //   this.ilanList = this.ilanList.filter((item) => {
+  //   //     return (item.isim.toLowerCase().indexOf(val.toLowerCase()) > -1);
+  //   //   })
+  // }
 
 presentFilter(myEvent) {
   let modal = this.modalCtrl.create(FiltrelePage, {
@@ -85,12 +79,12 @@ presentFilter(myEvent) {
 
   console.log('Dismiss started');
   modal.onDidDismiss((sirala, detayAra) => {
+    console.log(sirala+'sirala ana sayfa');
     this.searching = true;
-    this.ilanSer.getIlanlar({}, this.detayAra, this.sirala)
-    .then(ilanlar => {
-      this.ilanList = ilanlar;
-      this.searching = false;
-    });
+    this.sirala = sirala;
+    this.detayAra = detayAra;
+    this.ilanListele();
+
 });
   modal.present({
     ev: myEvent
@@ -108,8 +102,10 @@ presentFilter(myEvent) {
   }
 
   getDays(d1) {
-    // console.log(Date.parse(d1)+' date');
-    let diff =  Math.floor(( (new Date()).getTime() - Date.parse(d1) ) / 86400000);
+      // console.log(d1);
+      // console.log(JSON.stringify(d1)+'datedate');
+      // console.log((new Date(d1)).getTime() +' date'+ (new Date()).getTime());
+    let diff =  Math.floor(( (new Date()).getTime() - (new Date(d1)).getTime() ) / 86400000);
     return diff;
   }
 

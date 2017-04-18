@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>Sırala & Filtrele</ion-title>
   <ion-buttons start>
-  <button ion-button (click)="dismiss()">
+  <button ion-button (click)="kapat()">
     <span ion-text color="dark" showWhen="ios">Kapat</span>
     <ion-icon name="close-circle" showWhen="android, windows"></ion-icon>
   </button>
@@ -29,7 +29,7 @@
   <ion-label color="secondary">Sırala:</ion-label>
   <ion-select [(ngModel)]="sirala" cancelText="İptal" okText="Tamam">
     <ion-option value='{}'>En Uygun</ion-option>
-    <ion-option value='{"olusurmaTarih":-1}'>En Erken</ion-option>
+    <ion-option value='{"olusturmaTarih" :-1}'>En Erken</ion-option>
   </ion-select>
 </ion-item>
 </ion-item-group>
@@ -69,7 +69,7 @@
    Temizle</button>
  </ion-col>
  <ion-col>
- <button ion-button block icon-left color="primary" (click)="dismiss()">
+ <button ion-button block icon-left color="primary" (click)="kapat()">
    <ion-icon name="search"></ion-icon>
    Filtrele & Sırala</button>
  </ion-col>

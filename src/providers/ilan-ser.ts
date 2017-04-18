@@ -27,10 +27,17 @@ export class IlanSer {
 
       let headers = new Headers();
       // headers.append('Authorization', this.authService.token);
-      console.log(JSON.stringify(searchKayit)+'searchKayit');
+      // console.log(JSON.stringify(orderBy)+'orderBy');
+      // let order = JSON.parse(orderBy);
+      console.log(JSON.stringify(orderBy)+'orderBy service');
+      console.log(orderBy+'orderBy service string');
+      let order = JSON.parse(orderBy);
+      console.log(JSON.stringify(order)+'order service');
+      console.log(order+'order service string');
+
 
       return new Promise((resolve, reject) => {
-      this.http.get(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(orderBy)}`
+      this.http.get(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}`
       , {headers: headers})
         .map(res => res.json())
         .subscribe(data => {

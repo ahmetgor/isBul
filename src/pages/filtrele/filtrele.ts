@@ -28,14 +28,19 @@ export class FiltrelePage {
     console.log('ionViewDidLoad FiltrelePage');
   }
 
-  dismiss() {
-    console.log(JSON.stringify(this.detayAra)+'tecfiltre');
-    console.log(JSON.stringify(this.detayAra.tecrube)+'tecfiltre');
+kapat() {
+  console.log(this.sirala+'kapatfiltre');
+  // this.sirala = JSON.parse(this.sirala);
+    console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
+    // console.log(JSON.stringify(this.sirala)+'parsefiltre');
   this.viewCtrl.dismiss(this.sirala, this.detayAra);
  }
+
  clear() {
  this.detayAra = {};
- this.sirala = '';
+ this.sirala = '{}';
+ console.log(JSON.stringify(this.detayAra)+'clearfiltre');
+ console.log(JSON.stringify(this.sirala)+'clearfiltre');
  this.viewCtrl.dismiss(this.sirala, this.detayAra);
 }
 
