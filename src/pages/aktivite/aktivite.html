@@ -30,6 +30,56 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <ion-list text-wrap>
+    <button ion-item *ngFor="let basvuru of basvuruList" (click)="itemTapped($event, basvuru.basvuru)">
+      <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
+      <ion-avatar item-left>
+        <img src="../../assets/img/indir.png">
+      </ion-avatar>
+
+      <ion-row>
+      <ion-col>
+      <h2>{{basvuru.basvuru.baslik}}</h2>
+      </ion-col>
+    </ion-row>
+
+      <ion-row>
+        <ion-col>
+      <div class="firma"><h4>{{basvuru.basvuru.firma}}</h4></div>
+      </ion-col>
+      <ion-col>
+        <h4 align="right" [class.my-class]="getDays(basvuru.basvuru.olusurmaTarih) < 10">
+          <ion-icon name="calendar"></ion-icon>
+          {{getDays(basvuru.basvuru.olusturmaTarih)}} gün
+        </h4>
+      </ion-col>
+      </ion-row>
+
+      <ion-row>
+      <ion-col col-auto>
+          <p><ion-icon name="pin"></ion-icon>
+            {{basvuru.basvuru.il}}
+
+          </p>
+      </ion-col>
+      <ion-col>
+        <p align="right">
+          <span style="float:left;">
+          <i *ngIf="checkBasvuru(basvuru.basvuru.id)">
+            <ion-icon name="checkmark-circle"></ion-icon>
+          </i>
+          <i *ngIf="checkKaydet(basvuru.basvuru.id)">
+            <ion-icon name="bookmark"></ion-icon>
+          </i>
+        </span>
+          <ion-icon name="briefcase"></ion-icon>
+          {{basvuru.basvuru.tip}}
+        </p>
+      </ion-col>
+      </ion-row>
+
+    </button>
+  </ion-list>
 
 </ion-content>

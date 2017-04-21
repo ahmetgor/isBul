@@ -15,7 +15,7 @@ export class IlanSer {
 
   // url : string = 'https://servistakip.herokuapp.com/api/kayitlar/';
   url : string = 'http://127.0.0.1:8080/api/ilanlar/';
-  ilanlar: Array<any>;
+  // ilanlar: Array<any>;
   basvurKaydetList: any;
 
   constructor(public http: Http, public authService: UserAuth) {
@@ -27,14 +27,9 @@ export class IlanSer {
 
       let headers = new Headers();
       // headers.append('Authorization', this.authService.token);
-      // console.log(JSON.stringify(orderBy)+'orderBy');
-      // let order = JSON.parse(orderBy);
-      console.log(JSON.stringify(orderBy)+'orderBy service');
-      console.log(orderBy+'orderBy service string');
       let order = JSON.parse(orderBy);
-      console.log(JSON.stringify(order)+'order service');
-      console.log(order+'order service string');
-
+      // console.log(JSON.stringify(order)+'order service');
+      // console.log(order+'order service string');
 
       return new Promise((resolve, reject) => {
       this.http.get(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}`
@@ -56,19 +51,19 @@ export class IlanSer {
     //     .catch(this.handleError);
   }
 
-  createDb() {
-     this.ilanlar = [
-      {id: 13, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'Kahramanmaraş', tip:'Yarı Z.', egitim: ['Lisans', 'Lise'], tecrube: ['Az Tecrübeli (Junior)', 'Orta Tecrübeli (Midlevel)'], ehliyet: 'B', askerlik: 'Yapıldı/Muaf', goruntulenme: '', basvuru: '', olusturan:'', olusurmaTarih:'03/25/2017', guncelleyen:'', guncellemeTarih:'03/25/2017' },
-      {id: 14, baslik: 'Analist', firma: 'I2I-Systems', aciklama: 'analist aranıyor', il: 'İstanbul', tip:'Tam Z.', egitim: ['Lisans', 'Lise'], tecrube: ['Çok Tecrübeli (Senior)'], ehliyet: 'B', askerlik: 'Yapıldı/Muaf', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'03/25/2016', guncelleyen:'', guncellemeTarih:'03/25/2016' },
-      {id: 15, baslik: 'Tester', firma: 'I2I-Systems', aciklama: 'tester aranıyor', il: 'İstanbul', tip:'', egitim: ['Yüksek Lisans'], tecrube:['Az Tecrübeli (Junior)', 'Orta Tecrübeli (Midlevel)'], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-      {id: 16, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: ['Az Tecrübeli (Junior)', 'Orta Tecrübeli (Midlevel)'], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-      {id: 17, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-      {id: 18, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-      {id: 19, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-      {id: 20, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' }
-    ];
-    return this.ilanlar;
-  }
+  // createDb() {
+  //    this.ilanlar = [
+  //     {id: 13, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'Kahramanmaraş', tip:'Yarı Z.', egitim: ['Lisans', 'Lise'], tecrube: ['Az Tecrübeli (Junior)', 'Orta Tecrübeli (Midlevel)'], ehliyet: 'B', askerlik: 'Yapıldı/Muaf', goruntulenme: '', basvuru: '', olusturan:'', olusurmaTarih:'03/25/2017', guncelleyen:'', guncellemeTarih:'03/25/2017' },
+  //     {id: 14, baslik: 'Analist', firma: 'I2I-Systems', aciklama: 'analist aranıyor', il: 'İstanbul', tip:'Tam Z.', egitim: ['Lisans', 'Lise'], tecrube: ['Çok Tecrübeli (Senior)'], ehliyet: 'B', askerlik: 'Yapıldı/Muaf', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'03/25/2016', guncelleyen:'', guncellemeTarih:'03/25/2016' },
+  //     {id: 15, baslik: 'Tester', firma: 'I2I-Systems', aciklama: 'tester aranıyor', il: 'İstanbul', tip:'', egitim: ['Yüksek Lisans'], tecrube:['Az Tecrübeli (Junior)', 'Orta Tecrübeli (Midlevel)'], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
+  //     {id: 16, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: ['Az Tecrübeli (Junior)', 'Orta Tecrübeli (Midlevel)'], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
+  //     {id: 17, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
+  //     {id: 18, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
+  //     {id: 19, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
+  //     {id: 20, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' }
+  //   ];
+  //   return this.ilanlar;
+  // }
 
   getBasvurKaydet() {
     return [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
