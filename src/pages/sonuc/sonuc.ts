@@ -4,6 +4,8 @@ import { IlanSer } from '../../providers/ilan-ser';
 import { DetayPage } from '../detay/detay';
 import { FiltrelePage } from '../filtrele/filtrele';
 import { FormControl } from '@angular/forms';
+import { BasvuruSer } from '../../providers/basvuru-ser';
+
 import 'rxjs/add/operator/debounceTime';
 
 @Component({
@@ -14,6 +16,7 @@ export class SonucPage {
 
   ilanList: any;
   basvuruList: any;
+  kaydedilenList: any;
   detayAra: any = {};
   sirala: any = '{}';
   searching: boolean = false;
@@ -23,7 +26,8 @@ export class SonucPage {
   // {id: number, isim: string, firma: string, açıklama: string, il: string, tip:string, eğitim: string, tecrübe: string, ehliyet: string, askerlik: string, görüntülenme: string, başvuru: string, olusturan:string, olusurmaTarih:string, guncelleyen:string, guncellemeTarih:string }>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ilanSer: IlanSer, public modalCtrl: ModalController) {
+              public ilanSer: IlanSer, public modalCtrl: ModalController,
+              public basvuruSer: BasvuruSer) {
 
     this.searchControl = new FormControl();
 
@@ -59,7 +63,8 @@ export class SonucPage {
     console.log(JSON.stringify(ilan)+'ilan');
     this.navCtrl.push(DetayPage, {
       ilan: ilan,
-      basvurulist: this.ilanSer.basvurKaydetList
+      basvurulist: this.basvuruSer.basvuruList,
+      kaydedilenlist: this.basvuruSer.kaydedilenList
     });
   }
 
@@ -91,14 +96,12 @@ presentFilter(myEvent) {
   });
 }
 
-  checkBasvuru(ilanId) {
-    return this.ilanSer.basvurKaydetList.findIndex((item) => {
-        return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
+  checkBasvuru(ilanId: any) {
+    return this.basvuruSer.checkBasvuru(ilanId);
   }
 
-  checkKaydet(ilanId) {
-    return this.ilanSer.basvurKaydetList.findIndex((item) => {
-        return (item.id == ilanId && item.kaydedildi == 'Y' ); }) > -1
+  checkKaydedilen(ilanId: any) {
+    return this.basvuruSer.checkKaydedilen(ilanId);
   }
 
   getDays(d1) {

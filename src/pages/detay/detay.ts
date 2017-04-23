@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-
+import { BasvuruSer } from '../../providers/basvuru-ser';
 import { IlanSer } from '../../providers/ilan-ser';
 /*
   Generated class for the Detay page.
@@ -16,14 +16,15 @@ export class DetayPage {
 
 ilan: any;
 basvuruList: Array<any>;
-
+kaydedilenList: Array<any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ilanSer: IlanSer) {
+              public ilanSer: IlanSer, public basvuruSer: BasvuruSer ) {
 
                  this.ilan = this.navParams.get('ilan');
                  this.basvuruList = this.navParams.get('basvurulist');
-                 this.basvuruList.push({id: 'hebe'});
+                 this.kaydedilenList = this.navParams.get('kaydedilenlist');
+                //  this.basvuruList.push({id: 'hebe'});
                  console.log(JSON.stringify(this.basvuruList)+'detay basvuru');
               }
 
@@ -39,14 +40,14 @@ basvuruList: Array<any>;
 
   basvur(ilanId) {
     console.log( JSON.stringify(this.basvuruList.find((item) => {
-        return (item.id == ilanId ); })) + 'console')
+        return (item.basvuru == ilanId ); })) + 'console')
 
   let i = this.basvuruList.findIndex((item) => {
-    return (item.id == ilanId); })
+    return (item.basvuru == ilanId); })
 
     if(i>-1)
     this.basvuruList[i].basvuruldu = this.basvuruList[i].basvuruldu == 'N' ? 'Y' : 'N';
-    else this.basvuruList.push({id: ilanId, basvuruldu: 'Y', kaydedildi: 'N'});
+    else this.basvuruList.push({basvuru: ilanId, basvuruldu: 'Y', kaydedildi: 'N'});
   }
 
   kaydet(ilanId) {
@@ -61,14 +62,18 @@ basvuruList: Array<any>;
     else this.basvuruList.push({id: ilanId, basvuruldu: 'N', kaydedildi: 'Y'});
   }
 
-  checkBasvuru(ilanId) {
-    return this.basvuruList.findIndex((item) => {
-        return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
+  checkBasvuru(ilanId: any) {
+    console.log(JSON.stringify(this.basvuruList)+'detaylist');
+    return this.basvuruSer.checkBasvuru(ilanId);
   }
 
-  checkKaydet(ilanId) {
-    return this.basvuruList.findIndex((item) => {
-        return (item.id == ilanId && item.kaydedildi == 'Y' ); }) > -1
+  checkKaydedilen(ilanId: any) {
+    return this.basvuruSer.checkKaydedilen(ilanId);
   }
+
+  // checkKaydet(ilanId) {
+  //   return this.basvuruList.findIndex((item) => {
+  //       return (item.id == ilanId && item.kaydedildi == 'Y' ); }) > -1
+  // }
 
 }

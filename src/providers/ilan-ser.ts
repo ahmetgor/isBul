@@ -28,8 +28,8 @@ export class IlanSer {
       let headers = new Headers();
       // headers.append('Authorization', this.authService.token);
       let order = JSON.parse(orderBy);
-      // console.log(JSON.stringify(order)+'order service');
-      // console.log(order+'order service string');
+      console.log(JSON.stringify(order)+'order service');
+      console.log(order+'order service string');
 
       return new Promise((resolve, reject) => {
       this.http.get(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}`

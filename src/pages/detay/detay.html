@@ -46,10 +46,10 @@
     <ion-col>
       <p align="right">
         <span style="float:left;">
-        <i *ngIf="checkBasvuru(ilan.id)">
+        <i *ngIf="checkBasvuru(ilan)">
           <ion-icon name="checkmark-circle"></ion-icon>
         </i>
-        <i *ngIf="checkKaydet(ilan.id)">
+        <i *ngIf="checkKaydedilen(ilan)">
           <ion-icon name="bookmark"></ion-icon>
         </i>
       </span>
@@ -62,24 +62,24 @@
 
   <ion-row>
     <ion-col>
-  <div *ngIf="!checkBasvuru(ilan.id)">
+  <div *ngIf="!checkBasvuru(ilan)">
   <button ion-button block icon-left color="secondary" (click)="basvur(ilan.id)">
     <ion-icon name="checkmark-circle"></ion-icon>
     Başvur</button>
   </div>
-  <div *ngIf="checkBasvuru(ilan.id)">
+  <div *ngIf="checkBasvuru(ilan)">
   <button ion-button block icon-left color="secondary" (click)="basvur(ilan.id)">
     <ion-icon name="ios-arrow-dropleft"></ion-icon>
     Başvuru İptal</button>
   </div>
   </ion-col>
   <ion-col>
-  <div *ngIf="!checkKaydet(ilan.id)">
+  <div *ngIf="!checkKaydedilen(ilan)">
   <button ion-button block icon-left color="primary" (click)="kaydet(ilan.id)">
     <ion-icon name="bookmark"></ion-icon>
     Kaydet</button>
   </div>
-  <div *ngIf="checkKaydet(ilan.id)">
+  <div *ngIf="checkKaydedilen(ilan)">
   <button ion-button block icon-left color="primary" (click)="kaydet(ilan.id)">
     <ion-icon name="ios-arrow-dropleft"></ion-icon>
     Kayıt İptal</button>
