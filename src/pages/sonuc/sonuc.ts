@@ -30,10 +30,10 @@ export class SonucPage {
               public basvuruSer: BasvuruSer) {
 
     this.searchControl = new FormControl();
-
+    this.basvuruList = this.basvuruSer.basvuruList;
+    this.kaydedilenList = this.basvuruSer.kaydedilenList;
     // this.getBasvuru();
     console.log('constructor SonucPage çağrıldı');
-
   }
 
   ionViewDidLoad() {
@@ -55,7 +55,6 @@ export class SonucPage {
       console.log(this.searchTerm);
       this.searching = false;
     });
-
   }
 
   itemTapped(ev, ilan) {

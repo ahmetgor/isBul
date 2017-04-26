@@ -34,6 +34,8 @@ export class OzgecmisDetayPage {
           askerlik: ['', Validators.required],
           medeni: ['', Validators.required],
           ehliyet: ['', Validators.required],
+          egitimdurum: ['', Validators.required],
+          tecrubedurum: ['', Validators.required],
 
           telefon: ['', Validators.compose([ Validators.pattern('[\(]\d{3}[\)]\d{7}'), Validators.required])],
           email: ['', Validators.required],

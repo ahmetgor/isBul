@@ -18,19 +18,39 @@ export class AktivitePage {
 
   aktivite: string = 'basvurulan';
   basvuruList: any;
+  kaydedilenList: any;
+  basvurular: any;
+  kaydedilenler: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public basvuruSer: BasvuruSer, public ilanSer: IlanSer) {}
+              public basvuruSer: BasvuruSer, public ilanSer: IlanSer) {
+
+                this.basvuruList = this.basvuruSer.basvuruList;
+                this.kaydedilenList = this.basvuruSer.kaydedilenList;
+              }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AktivitePage');
+    // this.getBasvuruList();
+  }
+
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter AktivitePage');
     this.getBasvuruList();
+    this.getKaydedilenList();
   }
 
   getBasvuruList() {
     this.basvuruSer.getBasvurular()
     .then(basvurular => {
-      this.basvuruList = basvurular;
+      this.basvurular = basvurular;
+    });
+  }
+
+  getKaydedilenList() {
+    this.basvuruSer.getKaydedilenler()
+    .then(kaydedilenler => {
+      this.kaydedilenler = kaydedilenler;
     });
   }
 
@@ -39,18 +59,19 @@ export class AktivitePage {
     console.log(JSON.stringify(ilan)+'ilan');
     this.navCtrl.push(DetayPage, {
       ilan: ilan,
-      basvurulist: this.ilanSer.basvurKaydetList
+      basvurulist: this.basvuruSer.basvuruList,
+      kaydedilenlist: this.basvuruSer.kaydedilenList
     });
   }
 
   checkBasvuru(ilanId) {
-    return this.ilanSer.basvurKaydetList.findIndex((item) => {
-        return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
+    return this.basvuruSer.checkBasvuru(ilanId);
+
   }
 
   checkKaydet(ilanId) {
-    return this.ilanSer.basvurKaydetList.findIndex((item) => {
-        return (item.id == ilanId && item.kaydedildi == 'Y' ); }) > -1
+    return this.basvuruSer.checkKaydedilen(ilanId);
+
   }
 
   getDays(d1) {

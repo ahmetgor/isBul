@@ -89,7 +89,15 @@ export class IlanSer {
 "yabanciDil": [{"dil": "İngilizce", "seviye": "İyi"}, {"dil": "Almanca", "seviye": "Çok iyi"}],
 "sertifika": [{"ad": "SQL Expert", "cikis": "01.01.2017", "kurum": "Oracle"},
 			  {"ad": "Excel Expert", "cikis": "01.01.2017", "kurum": "Microsoft"}],
-"bilgisayar": "SQL, Java"
+"bilgisayar": "SQL, Java",
+"egitimdurum" : [
+    "Lisans",
+    "Lise"
+],
+"tecrubedurum" : [
+    "Az Tecrübeli (Junior)",
+    "Orta Tecrübeli (Midlevel)"
+]
 }
 
 return ozgecmis;

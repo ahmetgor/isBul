@@ -25,7 +25,7 @@ kaydedilenList: Array<any>;
                  this.basvuruList = this.navParams.get('basvurulist');
                  this.kaydedilenList = this.navParams.get('kaydedilenlist');
                 //  this.basvuruList.push({id: 'hebe'});
-                 console.log(JSON.stringify(this.basvuruList)+'detay basvuru');
+                 console.log(JSON.stringify(this.kaydedilenList)+'detay basvuru');
               }
 
   ionViewDidLoad() {
@@ -38,32 +38,41 @@ kaydedilenList: Array<any>;
     return diff;
   }
 
-  basvur(ilanId) {
-    console.log( JSON.stringify(this.basvuruList.find((item) => {
-        return (item.basvuru == ilanId ); })) + 'console')
-
-  let i = this.basvuruList.findIndex((item) => {
-    return (item.basvuru == ilanId); })
-
-    if(i>-1)
-    this.basvuruList[i].basvuruldu = this.basvuruList[i].basvuruldu == 'N' ? 'Y' : 'N';
-    else this.basvuruList.push({basvuru: ilanId, basvuruldu: 'Y', kaydedildi: 'N'});
+  basvur(ilan :any) {
+    console.log(ilan._id+'detay');
+    this.basvuruSer.addBasvuru(ilan._id);
+    console.log(JSON.stringify(this.basvuruSer.basvuruList)+'create');
+  //   console.log( JSON.stringify(this.basvuruList.find((item) => {
+  //       return (item.basvuru == ilanId ); })) + 'console')
+  //
+  // let i = this.basvuruList.findIndex((item) => {
+  //   return (item.basvuru == ilanId); })
+  //
+  //   if(i>-1)
+  //   this.basvuruList[i].basvuruldu = this.basvuruList[i].basvuruldu == 'N' ? 'Y' : 'N';
+  //   else this.basvuruList.push({basvuru: ilanId, basvuruldu: 'Y', kaydedildi: 'N'});
   }
 
-  kaydet(ilanId) {
-    console.log( JSON.stringify(this.basvuruList.find((item) => {
-        return (item.id == ilanId ); })) + 'kaydetfunc')
+  deleteBasvur(ilan: any) {
+    console.log(ilan._id+'detay');
+    this.basvuruSer.deleteBasvuru(ilan._id);
+    console.log(JSON.stringify(this.basvuruSer.basvuruList)+'detay');
 
-  let i = this.basvuruList.findIndex((item) => {
-    return (item.id == ilanId); })
+  }
 
-    if(i>-1)
-    this.basvuruList[i].kaydedildi = this.basvuruList[i].kaydedildi == 'N' ? 'Y' : 'N';
-    else this.basvuruList.push({id: ilanId, basvuruldu: 'N', kaydedildi: 'Y'});
+  kaydet(ilan :any) {
+    this.basvuruSer.addKaydedilen(ilan._id);
+    console.log(JSON.stringify(this.basvuruSer.kaydedilenList)+'create');
+
+  }
+
+  deleteKaydet(ilan :any) {
+    this.basvuruSer.deleteKaydedilen(ilan._id);
+    console.log(JSON.stringify(this.basvuruSer.kaydedilenList)+'detay');
   }
 
   checkBasvuru(ilanId: any) {
-    console.log(JSON.stringify(this.basvuruList)+'detaylist');
+    // console.log(JSON.stringify(this.basvuruList)+'detaylist');
     return this.basvuruSer.checkBasvuru(ilanId);
   }
 
