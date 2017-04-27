@@ -45,7 +45,7 @@
 </ion-card-header>
   <ion-item text-wrap>
   <ion-grid no-padding>
-  <ion-row><ion-col col-5><h4>Doğum Tarihi:</h4></ion-col> <ion-col><h4>{{ozgecmis.dogumTarihi}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Doğum Tarihi:</h4></ion-col> <ion-col><h4>{{ozgecmis.dogumTarihi | date:'dd/MM/yyyy'}}</h4></ion-col> </ion-row>
   <ion-row><ion-col col-5><h4>TC Vatandaşı: </h4></ion-col> <ion-col><h4>{{ozgecmis.tc}}</h4></ion-col> </ion-row>
   <ion-row><ion-col col-5><h4>Askerlik: </h4></ion-col> <ion-col><h4> {{ozgecmis.askerlik}}</h4></ion-col> </ion-row>
   <ion-row><ion-col col-5><h4>Medeni Hal:</h4> </ion-col> <ion-col><h4> {{ozgecmis.medeni}}</h4></ion-col> </ion-row>
@@ -90,7 +90,7 @@
 <h4><b>{{tecrube.firma}}</b> <span ion-text style="float:right;">{{tecrube.sehir}}</span></h4>
 <h4>{{tecrube.pozisyon}}</h4>
 <h4>{{tecrube.isTanimiKisa}}</h4>
-<h4>{{tecrube.giris}} - {{tecrube.cikis}}</h4>
+<h4>{{tecrube.giris | date:'MM/yyyy'}} - {{tecrube.cikis | date:'MM/yyyy'}}</h4>
 </button>
 </ion-card>
 
@@ -107,7 +107,7 @@
 <button ion-item *ngFor="let egitim of (ozgecmis.egitim | datePipe)" (click)="itemTapped($event, egitim, 'egitim', ozgecmis.egitim)">
 <h4><b>{{egitim.okul}}</b> <span ion-text style="float:right;">{{egitim.sehir}}</span></h4>
 <h4>{{egitim.bolum}}</h4>
-<h4>{{egitim.cikis}} - {{egitim.derece}}</h4>
+<h4>{{egitim.cikis | date:'MM/yyyy'}} - {{egitim.derece}}</h4>
 </button>
 </ion-card>
 
@@ -140,7 +140,7 @@
 </ion-card-header>
 <button ion-item *ngFor="let sertifika of (ozgecmis.sertifika | datePipe)" (click)="itemTapped($event, sertifika, 'sertifika', ozgecmis.sertifika)">
   <h4><b>{{sertifika.ad}}</b></h4>
-  <h4>{{sertifika.kurum}} - {{sertifika.cikis}}</h4>
+  <h4>{{sertifika.kurum}} - {{sertifika.cikis | date:'MM/yyyy'}}</h4>
 </button>
 </ion-card>
 

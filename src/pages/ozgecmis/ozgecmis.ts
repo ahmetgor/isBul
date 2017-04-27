@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
+import { OzgecmisSer} from '../../providers/ozgecmis-ser';
 
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
 
@@ -20,13 +21,18 @@ export class OzgecmisPage {
   ozgecmis: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ilanSer: IlanSer) {
+              public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer) {
 
-  this.ozgecmis = ilanSer.getOzgecmis();
+                this.ozgecmis = this.ozgecmisSer.getOzgecmis()
+                .then(ozgecmis => {
+                  this.ozgecmis = ozgecmis;
+                  console.log(JSON.stringify(this.ozgecmis.sertifika)+'ozgecmis');
+                });
     }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OzgecmisPage');
+
   }
 
   itemTapped(ev, ozDetay, des, ozDetayList) {

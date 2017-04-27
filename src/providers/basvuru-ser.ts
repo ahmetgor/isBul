@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { UserAuth } from './user-auth';
-
+import { OzgecmisSer } from './ozgecmis-ser';
 
 @Injectable()
 export class BasvuruSer {
@@ -13,9 +13,10 @@ export class BasvuruSer {
   basvuruList: any = {};
   ozgecmisId: string;
 
-  constructor(public http: Http, public authService: UserAuth) {
+  constructor(public http: Http, public authService: UserAuth,
+              public ozgecmisSer: OzgecmisSer) {
     console.log('Hello BasvuruSer Provider');
-    this.ozgecmisId = "58eba2904be8d6e2c51b0757";
+    this.ozgecmisId = this.ozgecmisSer.ozgecmisId;
 
     this.getBasvurularList()
     .then(ilanlist => {

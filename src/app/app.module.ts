@@ -16,6 +16,7 @@ import { OzgecmisDetayPage } from '../pages/ozgecmis-detay/ozgecmis-detay';
 import { IlanSer } from '../providers/ilan-ser';
 import { BasvuruSer } from '../providers/basvuru-ser';
 import { UserAuth } from '../providers/user-auth';
+import { OzgecmisSer } from '../providers/ozgecmis-ser';
 import { DatePipe } from '../pipes/date-pipe';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -62,6 +63,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     IlanSer,
     BasvuruSer,
     UserAuth,
+    OzgecmisSer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
