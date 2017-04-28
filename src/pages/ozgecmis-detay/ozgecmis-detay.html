@@ -24,7 +24,7 @@
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
     <ion-item>
       <ion-label floating>Doğum Tarihi</ion-label>
-      <ion-datetime formControlName="dogumTarihi" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="detay.dogumTarihi" cancelText="İptal" doneText="Tamam">
+      <ion-datetime formControlName="dogumTarihi" displayFormat="dd/MM/YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="detay.dogumTarihi" cancelText="İptal" doneText="Tamam">
       </ion-datetime>
     </ion-item>
 
@@ -59,16 +59,17 @@
 
     <ion-item>
     <ion-label floating color="primary">Eğitim:</ion-label>
-    <ion-select [(ngModel)]="detay.egitimdurum" multiple="true" cancelText="İptal" okText="Tamam">
+    <ion-select formControlName="egitimdurum" [(ngModel)]="detay.egitimdurum" cancelText="İptal" okText="Tamam">
       <ion-option value='Lise'>Lise</ion-option>
       <ion-option value='Lisans'>Lisans</ion-option>
-      <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans - Doktora</ion-option>
+      <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans</ion-option>
+      <ion-option value='Doktora'>Doktora</ion-option>
     </ion-select>
     </ion-item>
 
-  <ion-item>
+  <!-- <ion-item>
     <ion-label floating color="primary">Tecrübe Durumu:</ion-label>
-    <ion-select [(ngModel)]="detay.tecrubedurum" multiple="true" cancelText="İptal" okText="Tamam">
+    <ion-select formControlName="tecrubedurum" [(ngModel)]="detay.tecrubedurum" multiple="true" cancelText="İptal" okText="Tamam">
       <ion-option value='Az Tecrübeli (Junior)'>Az Tecrübeli (Junior)</ion-option>
       <ion-option value='Orta Tecrübeli (Midlevel)'>Orta Tecrübeli (Midlevel)</ion-option>
       <ion-option value='Çok Tecrübeli (Senior)'>Çok Tecrübeli (Senior)</ion-option>
@@ -76,7 +77,7 @@
       <ion-option value='Stajyer'>Stajyer</ion-option>
       <ion-option value='Hizmet Personeli - İşçi'>Hizmet Personeli - İşçi</ion-option>
     </ion-select>
-  </ion-item>
+  </ion-item> -->
 
 <!-- </form> -->
   </div>

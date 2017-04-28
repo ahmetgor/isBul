@@ -169,6 +169,7 @@ getKaydedilenler() {
   }
 
   checkBasvuru(ilanId: any) {
+    if (this.basvuruList == undefined) return false;
     return this.basvuruList.findIndex((item) => {
         return (item.basvuru == ilanId._id); }) > -1
   }
@@ -178,6 +179,7 @@ getKaydedilenler() {
     //     return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
     // console.log(JSON.stringify(this.kaydedilenList)+'kaydedilenList');
     // console.log(ilanId._id);
+    if (this.kaydedilenList == undefined) return false;
     return this.kaydedilenList.findIndex((item) => {
         return (item.kaydedilen == ilanId._id); }) > -1
   }

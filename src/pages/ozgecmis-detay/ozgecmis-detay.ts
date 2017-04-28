@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OzgecmisSer} from '../../providers/ozgecmis-ser';
+
 /*
   Generated class for the OzgecmisDetay page.
 
@@ -16,16 +18,17 @@ export class OzgecmisDetayPage {
   detay: any;
   detayList: any;
   des: string;
-  detayClone: any;
+  // detayClone: any;
   ozgecmisFormGroup: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public formBuilder: FormBuilder) {
+              public formBuilder: FormBuilder, public ozgecmisSer: OzgecmisSer) {
 
     this.detay = this.navParams.get('ozDetay');
     this.detayList = this.navParams.get('ozDetayList');
+    if(this.detayList) console.log("oki");
     this.des = this.navParams.get('des');
-    this.detayClone = Object.assign({}, this.detay);
+    // this.detayClone = Object.assign({}, this.detay);
 
     this.ozgecmisFormGroup = formBuilder.group({
           dogumTarihi: ['', Validators.required],
@@ -35,7 +38,7 @@ export class OzgecmisDetayPage {
           medeni: ['', Validators.required],
           ehliyet: ['', Validators.required],
           egitimdurum: ['', Validators.required],
-          tecrubedurum: ['', Validators.required],
+          // tecrubedurum: ['', Validators.required],
 
           telefon: ['', Validators.compose([ Validators.pattern('[\(]\d{3}[\)]\d{7}'), Validators.required])],
           email: ['', Validators.required],
@@ -69,7 +72,14 @@ export class OzgecmisDetayPage {
   }
 
   save() {
-    console.log(JSON.stringify(this.detay)+'detay');
+    console.log(JSON.stringify(this.detay)+'detaysave');
+    console.log(JSON.stringify(this.detayList)+'detaysavelist');
+
+    if(this.detayList) {
+    this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
+  }
+  else this.ozgecmisSer.updateOzgecmisAll(this.detay);
+    // ozgecmisSer.updateOzgecmis()
     this.navCtrl.pop();
   }
 
