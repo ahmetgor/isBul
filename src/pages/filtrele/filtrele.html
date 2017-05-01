@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Sırala & Filtrele</ion-title>
+    <ion-title>Filtrele</ion-title>
   <ion-buttons start>
   <button ion-button (click)="kapat()">
     <span ion-text color="dark" showWhen="ios">Kapat</span>
@@ -21,9 +21,9 @@
 
 <ion-content>
 
-  <div *ngIf="detayAra && sirala">
+  <div *ngIf="detayAra">
 
-  <ion-item-group>
+  <!-- <ion-item-group>
     <ion-item-divider color="light"></ion-item-divider>
   <ion-item>
   <ion-label color="secondary">Sırala:</ion-label>
@@ -32,7 +32,7 @@
     <ion-option value='{"olusturmaTarih" :-1}'>En Erken</ion-option>
   </ion-select>
 </ion-item>
-</ion-item-group>
+</ion-item-group> -->
 
 <ion-item-group>
   <ion-item-divider color="light"></ion-item-divider>
@@ -71,7 +71,7 @@
  <ion-col>
  <button ion-button block icon-left color="primary" (click)="kapat()">
    <ion-icon name="search"></ion-icon>
-   Filtrele & Sırala</button>
+   Filtrele</button>
  </ion-col>
 </ion-row>
 </div>

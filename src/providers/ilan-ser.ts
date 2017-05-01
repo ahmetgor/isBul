@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { Http, Headers, Response } from '@angular/http';
+import {ToastController, LoadingController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { UserAuth } from './user-auth';
 
@@ -17,14 +18,15 @@ export class IlanSer {
   url : string = 'http://127.0.0.1:8080/api/ilanlar/';
   // ilanlar: Array<any>;
   basvurKaydetList: any;
+  loading: any;
 
-  constructor(public http: Http, public authService: UserAuth) {
+  constructor(public http: Http, public authService: UserAuth,
+              public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     console.log('Hello IlanSer Provider');
-    this.basvurKaydetList = this.getBasvurKaydet();
+    // this.basvurKaydetList = this.getBasvurKaydet();
   }
 
   getIlanlar(searchTerm, searchKayit, orderBy){
-
       let headers = new Headers();
       // headers.append('Authorization', this.authService.token);
       let order = JSON.parse(orderBy);
@@ -38,7 +40,8 @@ export class IlanSer {
         .subscribe(data => {
           resolve(data);
         }, (err) => {
-          reject(err);
+          // reject(err);
+          this.presentToast();
         });
     });
       // console.log(JSON.stringify(orderBy)+'kayıtlar');
@@ -50,6 +53,28 @@ export class IlanSer {
     //       res.json().data as Hero[];})
     //     .catch(this.handleError);
   }
+
+  presentToast() {
+  let toast = this.toastCtrl.create({
+    message: 'İlan listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!',
+    duration: 3000,
+    position: 'top',
+    showCloseButton: true,
+    closeButtonText: 'OK'
+  });
+  toast.onDidDismiss(() => {
+    // console.log('Dismissed toast');
+  });
+  toast.present();
+}
+
+showLoader(){
+
+    this.loading = this.loadingCtrl.create({
+        content: 'İşlem yapılıyor...'
+    });
+    this.loading.present();
+}
 
   // createDb() {
   //    this.ilanlar = [
@@ -65,42 +90,42 @@ export class IlanSer {
   //   return this.ilanlar;
   // }
 
-  getBasvurKaydet() {
-    return [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
-  }
-
-  getOzgecmis() {
-    let ozgecmis = {
-"id": "1",
-"isim": "Ahmet",
-"soyisim" : "Gör",
-"dogumTarihi": "23.11.1983",
-"tc": "Evet",
-"askerlik": "Yapıldı/Muaf",
-"medeni": "Evli",
-"ehliyet": "B",
-"telefon": "2125366868",
-"email": "ahmet@gor.com",
-"adres": "Beşiktaş Beşiktaş BeşiktaşBeşiktaşBeşiktaş",
-"tecrube": [{"firma": "I2I", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz", "ulke": 'Türkiye'},
-			{"firma": "TTNET", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz", "ulke": 'Türkiye'}],
-"egitim": [{"okul": "İTÜ", "bolum": "Bilgisayar Müh.", "derece": "Lisans", "cikis": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'},
-			{"okul": "İEL", "bolum": "", "derece": "Lise", "cikis": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'}],
-"yabanciDil": [{"dil": "İngilizce", "seviye": "İyi"}, {"dil": "Almanca", "seviye": "Çok iyi"}],
-"sertifika": [{"ad": "SQL Expert", "cikis": "01.01.2017", "kurum": "Oracle"},
-			  {"ad": "Excel Expert", "cikis": "01.01.2017", "kurum": "Microsoft"}],
-"bilgisayar": "SQL, Java",
-"egitimdurum" : [
-    "Lisans",
-    "Lise"
-],
-"tecrubedurum" : [
-    "Az Tecrübeli (Junior)",
-    "Orta Tecrübeli (Midlevel)"
-]
-}
-
-return ozgecmis;
-  }
+//   getBasvurKaydet() {
+//     return [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
+//   }
+//
+//   getOzgecmis() {
+//     let ozgecmis = {
+// "id": "1",
+// "isim": "Ahmet",
+// "soyisim" : "Gör",
+// "dogumTarihi": "23.11.1983",
+// "tc": "Evet",
+// "askerlik": "Yapıldı/Muaf",
+// "medeni": "Evli",
+// "ehliyet": "B",
+// "telefon": "2125366868",
+// "email": "ahmet@gor.com",
+// "adres": "Beşiktaş Beşiktaş BeşiktaşBeşiktaşBeşiktaş",
+// "tecrube": [{"firma": "I2I", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz", "ulke": 'Türkiye'},
+// 			{"firma": "TTNET", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz", "ulke": 'Türkiye'}],
+// "egitim": [{"okul": "İTÜ", "bolum": "Bilgisayar Müh.", "derece": "Lisans", "cikis": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'},
+// 			{"okul": "İEL", "bolum": "", "derece": "Lise", "cikis": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'}],
+// "yabanciDil": [{"dil": "İngilizce", "seviye": "İyi"}, {"dil": "Almanca", "seviye": "Çok iyi"}],
+// "sertifika": [{"ad": "SQL Expert", "cikis": "01.01.2017", "kurum": "Oracle"},
+// 			  {"ad": "Excel Expert", "cikis": "01.01.2017", "kurum": "Microsoft"}],
+// "bilgisayar": "SQL, Java",
+// "egitimdurum" : [
+//     "Lisans",
+//     "Lise"
+// ],
+// "tecrubedurum" : [
+//     "Az Tecrübeli (Junior)",
+//     "Orta Tecrübeli (Midlevel)"
+// ]
+// }
+//
+// return ozgecmis;
+//   }
 
 }

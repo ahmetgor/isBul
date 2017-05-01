@@ -30,13 +30,13 @@ export class SonucPage {
               public basvuruSer: BasvuruSer) {
 
     this.searchControl = new FormControl();
-    this.basvuruList = this.basvuruSer.basvuruList;
-    this.kaydedilenList = this.basvuruSer.kaydedilenList;
     // this.getBasvuru();
     console.log('constructor SonucPage çağrıldı');
   }
 
   ionViewDidLoad() {
+    this.basvuruList = this.basvuruSer.basvuruList;
+    this.kaydedilenList = this.basvuruSer.kaydedilenList;
     this.ilanListele();
     console.log('ionViewDidLoad SonucPage çağrıldı');
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {

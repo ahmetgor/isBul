@@ -4,6 +4,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { UserAuth } from './user-auth';
 import { OzgecmisSer } from './ozgecmis-ser';
+import {ToastController, LoadingController } from 'ionic-angular';
 
 @Injectable()
 export class BasvuruSer {
@@ -12,9 +13,11 @@ export class BasvuruSer {
   kaydedilenList: any = {};
   basvuruList: any = {};
   ozgecmisId: string;
+  loading: any;
 
   constructor(public http: Http, public authService: UserAuth,
-              public ozgecmisSer: OzgecmisSer) {
+              public ozgecmisSer: OzgecmisSer, public toastCtrl: ToastController,
+              public loadingCtrl: LoadingController) {
     console.log('Hello BasvuruSer Provider');
     this.ozgecmisId = this.ozgecmisSer.ozgecmisId;
 
@@ -38,7 +41,8 @@ export class BasvuruSer {
       .subscribe(data => {
         resolve(data);
       }, (err) => {
-        reject(err);
+        // reject(err);
+        this.presentToast('Başvuru listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
 }
@@ -52,13 +56,13 @@ getKaydedilenler() {
     .subscribe(data => {
       resolve(data);
     }, (err) => {
-      reject(err);
+      // reject(err);
+      this.presentToast('Kaydedilen listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
     });
 });
 }
 
   getBasvurularList() {
-    // return [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
     let headers = new Headers();
     console.log('servis basvurularlist oluştur');
     // headers.append('Authorization', this.authService.token);
@@ -68,13 +72,13 @@ getKaydedilenler() {
       .subscribe(data => {
         resolve(data);
       }, (err) => {
-        reject(err);
+        // reject(err);
+        this.presentToast('Başvuru listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
   }
 
   getKaydedilenlerList() {
-    // return [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
     let headers = new Headers();
     // headers.append('Authorization', this.authService.token);
     return new Promise((resolve, reject) => {
@@ -83,17 +87,17 @@ getKaydedilenler() {
       .subscribe(data => {
         resolve(data);
       }, (err) => {
-        reject(err);
+        // reject(err);
+        // this.presentToast();
       });
   });
   }
 
   addBasvuru(basvuruId: string) {
-
+    this.showLoader();
     let kayit = {ozgecmis: this.ozgecmisId, basvuru : basvuruId};
     console.log(JSON.stringify(kayit)+'basvuruId');
 
-    this.basvuruList.push(kayit);
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -101,18 +105,21 @@ getKaydedilenler() {
       this.http.post(this.url+'basvuru/', JSON.stringify(kayit), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {
+          this.basvuruList.push(kayit);
           resolve(res);
+          this.loading.dismiss();
         }, (err) => {
-          reject(err);
+          // reject(err);
+          this.loading.dismiss();
+          this.presentToast('Başvuru eklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
         });
     });
   }
 
   deleteBasvuru(basvuruId: string) {
-
+    this.showLoader();
     let i = this.basvuruList.findIndex((item) => {
       return (item.basvuru == basvuruId); });
-    this.basvuruList.splice(i,1);
 
       return new Promise((resolve, reject) => {
           let headers = new Headers();
@@ -120,9 +127,13 @@ getKaydedilenler() {
 
           this.http.delete(this.url + `basvuru?ozgecmis=${this.ozgecmisId}&basvuruid=${basvuruId}`, {headers: headers})
           .subscribe((res) => {
+            this.basvuruList.splice(i,1);
               resolve(res);
+              this.loading.dismiss();
           }, (err) => {
-              reject(err);
+              // reject(err);
+              this.presentToast('Başvuru silinemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+              this.loading.dismiss();
           });
       });
   }
@@ -130,10 +141,10 @@ getKaydedilenler() {
   addKaydedilen(kaydedilenId: string) {
     console.log(JSON.stringify(kaydedilenId)+'kaydedilenId');
 
+    this.showLoader();
     let kayit = {ozgecmis: this.ozgecmisId, kaydedilen : kaydedilenId};
     console.log(JSON.stringify(kayit)+'kaydedilenId kayıt');
 
-    this.kaydedilenList.push(kayit);
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -141,19 +152,22 @@ getKaydedilenler() {
       this.http.post(this.url+'kaydedilen/', JSON.stringify(kayit), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {
+          this.kaydedilenList.push(kayit);
           resolve(res);
+          this.loading.dismiss();
         }, (err) => {
-          reject(err);
+          // reject(err);
+          this.presentToast('Kaydedilen eklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+          this.loading.dismiss();
         });
     });
   }
 
   deleteKaydedilen(kaydedilenId: string) {
     console.log(JSON.stringify(kaydedilenId)+'kaydedilenId delete');
-
+    this.showLoader();
     let i = this.kaydedilenList.findIndex((item) => {
       return (item.kaydedilen == kaydedilenId); });
-    this.kaydedilenList.splice(i,1);
 
       return new Promise((resolve, reject) => {
           let headers = new Headers();
@@ -161,15 +175,19 @@ getKaydedilenler() {
 
           this.http.delete(this.url + `kaydedilen?ozgecmis=${this.ozgecmisId}&kaydedilenid=${kaydedilenId}`, {headers: headers})
           .subscribe((res) => {
+            this.kaydedilenList.splice(i,1);
               resolve(res);
+              this.loading.dismiss();
           }, (err) => {
-              reject(err);
+              // reject(err);
+              this.loading.dismiss();
+              this.presentToast('Kaydedilen silinemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
           });
       });
   }
 
   checkBasvuru(ilanId: any) {
-    if (this.basvuruList == undefined) return false;
+    if (!this.basvuruList) return false;
     return this.basvuruList.findIndex((item) => {
         return (item.basvuru == ilanId._id); }) > -1
   }
@@ -179,9 +197,31 @@ getKaydedilenler() {
     //     return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
     // console.log(JSON.stringify(this.kaydedilenList)+'kaydedilenList');
     // console.log(ilanId._id);
-    if (this.kaydedilenList == undefined) return false;
+    if (!this.kaydedilenList) return false;
     return this.kaydedilenList.findIndex((item) => {
         return (item.kaydedilen == ilanId._id); }) > -1
   }
+
+  presentToast(mesaj) {
+  let toast = this.toastCtrl.create({
+    message: mesaj,
+    duration: 3000,
+    position: 'top',
+    showCloseButton: true,
+    closeButtonText: 'OK'
+  });
+  toast.onDidDismiss(() => {
+    // console.log('Dismissed toast');
+  });
+  toast.present();
+}
+
+showLoader(){
+
+    this.loading = this.loadingCtrl.create({
+        content: 'İşlem yapılıyor...'
+    });
+    this.loading.present();
+}
 
 }

@@ -8,12 +8,12 @@ export class DatePipe implements PipeTransform {
     if (items==undefined) return;
   return  items.sort(function(a: any, b: any) {
 
-    console.log(a.cikis+'cikis');
-    console.log(b.cikis+'cikis1');
+    // console.log(a.cikis+'cikis');
+    // console.log(b.cikis+'cikis1');
       let nameA = (new Date(a.cikis)).getTime();
       let nameB = (new Date(b.cikis)).getTime();
-      console.log(nameA+'name');
-      console.log(nameB+'name');
+      // console.log(nameA+'name');
+      // console.log(nameB+'name');
 
       if (nameA < nameB) {
         return -1;

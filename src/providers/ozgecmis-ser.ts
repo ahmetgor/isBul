@@ -3,7 +3,7 @@ import 'rxjs/add/operator/map';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { UserAuth } from './user-auth';
-
+import {ToastController, LoadingController } from 'ionic-angular';
 
 @Injectable()
 export class OzgecmisSer {
@@ -11,15 +11,16 @@ export class OzgecmisSer {
   // url : string = 'https://servistakip.herokuapp.com/api/kayitlar/';
   url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
   ozgecmisId: string;
-  user: any
+  user: any;
+  loading: any;
 
-  constructor(public http: Http, public authService: UserAuth) {
+  constructor(public http: Http, public authService: UserAuth,
+              public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     console.log('Hello OzgecmisSer Provider');
     this.ozgecmisId = "58eba2904be8d6e2c51b0757";
   }
 
   getOzgecmis(){
-
       let headers = new Headers();
       // headers.append('Authorization', this.authService.token);
       return new Promise((resolve, reject) => {
@@ -28,12 +29,14 @@ export class OzgecmisSer {
         .subscribe(data => {
           resolve(data);
         }, (err) => {
-          reject(err);
+          // reject(err);
+          this.presentToast('Özgeçmiş alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
         });
     });
 }
 
 updateOzgecmis(paramname: string, kayit: any){
+  this.showLoader();
   return new Promise((resolve, reject) => {
 
     let headers = new Headers();
@@ -44,13 +47,17 @@ updateOzgecmis(paramname: string, kayit: any){
       .map(res => res.json())
       .subscribe(res => {
         resolve(res);
+        this.loading.dismiss();
       }, (err) => {
-        reject(err);
+        // reject(err);
+        this.loading.dismiss();
+        this.presentToast('Özgeçmiş güncellenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
 }
 
 updateOzgecmisAll(kayit: any){
+  this.showLoader();
   return new Promise((resolve, reject) => {
 
     let headers = new Headers();
@@ -61,10 +68,35 @@ updateOzgecmisAll(kayit: any){
       .map(res => res.json())
       .subscribe(res => {
         resolve(res);
+        this.loading.dismiss();
       }, (err) => {
-        reject(err);
+        // reject(err);
+        this.loading.dismiss();
+        this.presentToast('Özgeçmiş güncellenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
+}
+
+presentToast(mesaj) {
+let toast = this.toastCtrl.create({
+  message: mesaj,
+  duration: 3000,
+  position: 'top',
+  showCloseButton: true,
+  closeButtonText: 'OK'
+});
+toast.onDidDismiss(() => {
+  // console.log('Dismissed toast');
+});
+toast.present();
+}
+
+showLoader(){
+
+    this.loading = this.loadingCtrl.create({
+        content: 'İşlem yapılıyor...'
+    });
+    this.loading.present();
 }
 
 }

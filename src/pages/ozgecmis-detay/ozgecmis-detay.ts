@@ -76,6 +76,7 @@ export class OzgecmisDetayPage {
     console.log(JSON.stringify(this.detayList)+'detaysavelist');
 
     if(this.detayList) {
+    this.des = this.des.replace("Ekle", "");
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
   }
   else this.ozgecmisSer.updateOzgecmisAll(this.detay);
@@ -88,6 +89,8 @@ export class OzgecmisDetayPage {
     let i = this.detayList.findIndex((item) => {
         return (item === this.detay ); });
     this.detayList.splice(i,1);
+    this.des = this.des.replace('Ekle', '');
+    this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
     console.log(JSON.stringify(this.detayList)+'detaylist');
     this.navCtrl.pop();
   }
@@ -95,6 +98,8 @@ export class OzgecmisDetayPage {
   add() {
     console.log(JSON.stringify(this.detay)+'detay');
     this.detayList.push(this.detay);
+    this.des = this.des.replace('Ekle', '');
+    this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
     this.navCtrl.pop();
   }
 
