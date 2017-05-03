@@ -21,6 +21,8 @@ export class AktivitePage {
   kaydedilenList: any;
   basvurular: any;
   kaydedilenler: any;
+  skip: number = 0;
+  limit: number = 2;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public basvuruSer: BasvuruSer, public ilanSer: IlanSer) {

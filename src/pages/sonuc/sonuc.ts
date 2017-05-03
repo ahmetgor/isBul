@@ -24,7 +24,9 @@ export class SonucPage {
   searchControl: FormControl;
   skip: number = 0;
   limit: number = 2;
-  scrollEnable: boolean = true;
+  // scrollEnable: boolean = true;
+  infiniteScroll:any;
+
   // {id: number, isim: string, firma: string, açıklama: string, il: string, tip:string, eğitim: string, tecrübe: string, ehliyet: string, askerlik: string, görüntülenme: string, başvuru: string, olusturan:string, olusurmaTarih:string, guncelleyen:string, guncellemeTarih:string }>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -44,9 +46,9 @@ export class SonucPage {
     this.ilanListele();
     console.log('ionViewDidLoad SonucPage çağrıldı');
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
-      // if(search.length > 2) {
-    this.scrollEnable = true;
+    // this.scrollEnable = true;
     this.skip = 0;
+    this.infiniteScroll.enable(true);
     console.log('ilanlistele searchkontrol çağrıldı');
     this.ilanListele();
 
@@ -55,7 +57,8 @@ export class SonucPage {
 });
 
 this.events.subscribe('ilan:filtered', (a) => {
-  this.scrollEnable = true;
+  // this.scrollEnable = true;
+  this.infiniteScroll.enable(true);
   this.skip = 0;
   if(a) {
     // console.log('filtre true');
@@ -90,6 +93,7 @@ this.events.subscribe('ilan:filtered', (a) => {
 
   doInfinite(infiniteScroll) {
   console.log('Begin async operation');
+  this.infiniteScroll = infiniteScroll;
   // infiniteScroll.enable(true);
   // infiniteScroll.enable(false);
 
@@ -99,15 +103,23 @@ this.events.subscribe('ilan:filtered', (a) => {
     .then(ilanlar => {
       console.log(JSON.stringify(ilanlar)+"ilanlar");
 
-      if(Object.keys(ilanlar).length == 0) {this.scrollEnable = false;}
+      if(Object.keys(ilanlar).length < this.limit) {
+        console.log('true');
+        infiniteScroll.enable(false);
+        // this.scrollEnable = false
+        ;}
 
-    else {  for( var key in ilanlar ) {
+      console.log('false');
+      // infiniteScroll.enable(true);
+      // this.scrollEnable = true;
+      for( var key in ilanlar ) {
     this.ilanList.push(ilanlar[key]);
-  }}
+  }
     });
     console.log('Async operation has ended');
     infiniteScroll.complete();
   }, 500);
+
 }
 
   // ilanAra(ev: any) {

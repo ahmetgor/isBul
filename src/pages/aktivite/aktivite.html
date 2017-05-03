@@ -81,6 +81,13 @@
       </ion-row>
 
     </button>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+
+    <ion-infinite-scroll-content
+    loadingText="Başvurular yükleniyor...">
+  </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
   </ion-list>
 
   <ion-list text-wrap *ngSwitchCase="'kaydedilen'">
@@ -133,6 +140,13 @@
 
     </button>
   </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+
+  <ion-infinite-scroll-content
+  loadingText="Kaydedilenler yükleniyor...">
+</ion-infinite-scroll-content>
+</ion-infinite-scroll>
 </div>
 
 </ion-content>
