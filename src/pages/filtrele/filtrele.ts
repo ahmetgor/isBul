@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, Events } from 'ionic-angular';
 
 /*
   Generated class for the Filtrele page.
@@ -17,7 +17,7 @@ export class FiltrelePage {
   sirala: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public viewCtrl: ViewController) {
+              public viewCtrl: ViewController, public events: Events) {
 
     this.detayAra = navParams.get('detayAra');
     console.log(JSON.stringify(this.detayAra) + 'detay')
@@ -28,20 +28,28 @@ export class FiltrelePage {
     console.log('ionViewDidLoad FiltrelePage');
   }
 
-kapat() {
+filtrele() {
+
   console.log(this.sirala+'kapatfiltre');
   // this.sirala = JSON.parse(this.sirala);
     console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
     // console.log(JSON.stringify(this.sirala)+'parsefiltre');
-  this.viewCtrl.dismiss(this.sirala, this.detayAra);
+  // this.viewCtrl.dismiss(this.sirala, this.detayAra);
+  this.events.publish('ilan:filtered');
+  this.navCtrl.pop();
  }
 
+ kapat() {
+    this.navCtrl.pop();
+  }
+
  clear() {
- this.detayAra = {};
- this.sirala = '{}';
+
  console.log(JSON.stringify(this.detayAra)+'clearfiltre');
  console.log(JSON.stringify(this.sirala)+'clearfiltre');
- this.viewCtrl.dismiss(this.sirala, this.detayAra);
+ // this.viewCtrl.dismiss(this.sirala, this.detayAra);
+ this.events.publish('ilan:filtered', 'clear');
+ this.navCtrl.pop();
 }
 
 }

@@ -26,7 +26,7 @@ export class IlanSer {
     // this.basvurKaydetList = this.getBasvurKaydet();
   }
 
-  getIlanlar(searchTerm, searchKayit, orderBy){
+  getIlanlar(searchTerm, searchKayit, orderBy, skip, limit){
       let headers = new Headers();
       // headers.append('Authorization', this.authService.token);
       let order = JSON.parse(orderBy);
@@ -34,7 +34,7 @@ export class IlanSer {
       console.log(order+'order service string');
 
       return new Promise((resolve, reject) => {
-      this.http.get(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}`
+      this.http.get(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}&skip=${skip}&limit=${limit}`
       , {headers: headers})
         .map(res => res.json())
         .subscribe(data => {

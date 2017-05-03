@@ -76,4 +76,20 @@
     </button>
   </ion-list>
 
+
+  <ion-infinite-scroll  (ionInfinite)="doInfinite($event)">
+    <div *ngIf="!scrollEnable">
+      <ion-infinite-scroll-content
+      loadingText="İlanlar bitti...">
+    </ion-infinite-scroll-content>
+    </div>
+    
+    <div *ngIf="scrollEnable">
+
+  <ion-infinite-scroll-content
+  loadingText="İlanlar yükleniyor...">
+</ion-infinite-scroll-content>
+</div>
+</ion-infinite-scroll>
+
 </ion-content>

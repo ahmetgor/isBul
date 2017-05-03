@@ -8,12 +8,15 @@
 
   <ion-navbar>
     <ion-title>Filtrele</ion-title>
-  <ion-buttons start>
+  <!-- <ion-buttons start>
   <button ion-button (click)="kapat()">
     <span ion-text color="dark" showWhen="ios">Kapat</span>
     <ion-icon name="close-circle" showWhen="android, windows"></ion-icon>
   </button>
-</ion-buttons>
+</ion-buttons> -->
+<button ion-button menuToggle>
+  <ion-icon name="menu"></ion-icon>
+</button>
   </ion-navbar>
 
 </ion-header>
@@ -69,7 +72,7 @@
    Temizle</button>
  </ion-col>
  <ion-col>
- <button ion-button block icon-left color="primary" (click)="kapat()">
+ <button ion-button block icon-left color="primary" (click)="filtrele()">
    <ion-icon name="search"></ion-icon>
    Filtrele</button>
  </ion-col>

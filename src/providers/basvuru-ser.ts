@@ -187,6 +187,7 @@ getKaydedilenler() {
   }
 
   checkBasvuru(ilanId: any) {
+    // console.log(JSON.stringify(this.basvuruList)+'basvurulist');
     if (!this.basvuruList) return false;
     return this.basvuruList.findIndex((item) => {
         return (item.basvuru == ilanId._id); }) > -1

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController} from 'ionic-angular';
+import { NavController, NavParams, ModalController, Events} from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { DetayPage } from '../detay/detay';
 import { FiltrelePage } from '../filtrele/filtrele';
@@ -22,12 +22,14 @@ export class SonucPage {
   searching: boolean = false;
   searchTerm: string = '';
   searchControl: FormControl;
-
+  skip: number = 0;
+  limit: number = 2;
+  scrollEnable: boolean = true;
   // {id: number, isim: string, firma: string, açıklama: string, il: string, tip:string, eğitim: string, tecrübe: string, ehliyet: string, askerlik: string, görüntülenme: string, başvuru: string, olusturan:string, olusurmaTarih:string, guncelleyen:string, guncellemeTarih:string }>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public modalCtrl: ModalController,
-              public basvuruSer: BasvuruSer) {
+              public basvuruSer: BasvuruSer, public events: Events) {
 
     this.searchControl = new FormControl();
     // this.getBasvuru();
@@ -37,19 +39,38 @@ export class SonucPage {
   ionViewDidLoad() {
     this.basvuruList = this.basvuruSer.basvuruList;
     this.kaydedilenList = this.basvuruSer.kaydedilenList;
+    console.log('ilanlistele didload çağrıldı');
+
     this.ilanListele();
     console.log('ionViewDidLoad SonucPage çağrıldı');
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
       // if(search.length > 2) {
+    this.scrollEnable = true;
+    this.skip = 0;
+    console.log('ilanlistele searchkontrol çağrıldı');
     this.ilanListele();
+
     console.log('searchkontrol çağrıldı');
   // }
+});
+
+this.events.subscribe('ilan:filtered', (a) => {
+  this.scrollEnable = true;
+  this.skip = 0;
+  if(a) {
+    // console.log('filtre true');
+    this.detayAra = {};
+    this.sirala = '{}';
+  }
+  console.log('ilanlistele filtre çağrıldı');
+  this.ilanListele();
+
 });
   }
 
   ilanListele() {
     this.searching = true;
-    this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala)
+    this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ilanlar => {
       this.ilanList = ilanlar;
       console.log(this.searchTerm);
@@ -67,6 +88,28 @@ export class SonucPage {
     });
   }
 
+  doInfinite(infiniteScroll) {
+  console.log('Begin async operation');
+  // infiniteScroll.enable(true);
+  // infiniteScroll.enable(false);
+
+  setTimeout(() => {
+    this.skip = this.skip + 1;
+    this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
+    .then(ilanlar => {
+      console.log(JSON.stringify(ilanlar)+"ilanlar");
+
+      if(Object.keys(ilanlar).length == 0) {this.scrollEnable = false;}
+
+    else {  for( var key in ilanlar ) {
+    this.ilanList.push(ilanlar[key]);
+  }}
+    });
+    console.log('Async operation has ended');
+    infiniteScroll.complete();
+  }, 500);
+}
+
   // ilanAra(ev: any) {
   //  // let val = ev.target.value;
   //   // if (val && val.trim() != '') {
@@ -76,22 +119,19 @@ export class SonucPage {
   // }
 
 presentFilter(myEvent) {
-  let modal = this.modalCtrl.create(FiltrelePage, {
+  // let modal = this.modalCtrl.create(FiltrelePage, {
+  //   detayAra: this.detayAra,
+  //   sirala: this.sirala
+  //   });
+  //
+  // console.log('Dismiss started');
+  //
+  // modal.present({
+  //   ev: myEvent
+  // });
+  this.navCtrl.push(FiltrelePage, {
     detayAra: this.detayAra,
     sirala: this.sirala
-  });
-
-  console.log('Dismiss started');
-  modal.onDidDismiss((sirala, detayAra) => {
-    console.log(sirala+'sirala ana sayfa');
-    this.searching = true;
-    this.sirala = sirala;
-    this.detayAra = detayAra;
-    this.ilanListele();
-
-});
-  modal.present({
-    ev: myEvent
   });
 }
 
