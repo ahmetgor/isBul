@@ -37,14 +37,14 @@
 </ion-item>
 </ion-item-group> -->
 
-<ion-item-group>
-  <ion-item-divider color="light"></ion-item-divider>
+<!-- <ion-item-group>
+  <ion-item-divider color="light"></ion-item-divider> -->
 <ion-item>
-    <ion-label floating color="primary">Firma:</ion-label>
+    <ion-label floating color="primary">Firma</ion-label>
     <ion-input type="text" [(ngModel)]="detayAra.firma"></ion-input>
 </ion-item>
 <ion-item>
-  <ion-label floating color="primary">Tecrübe:</ion-label>
+  <ion-label floating color="primary">Tecrübe</ion-label>
   <ion-select [(ngModel)]="detayAra.tecrube" multiple="true" cancelText="İptal" okText="Tamam">
     <!-- <ion-option value='' selected="true">Farketmez</ion-option> -->
     <ion-option value='Az Tecrübeli (Junior)'>Az Tecrübeli (Junior)</ion-option>
@@ -56,14 +56,23 @@
   </ion-select>
 </ion-item>
 <ion-item>
-<ion-label floating color="primary">Eğitim:</ion-label>
+<ion-label floating color="primary">Eğitim</ion-label>
 <ion-select [(ngModel)]="detayAra.egitim" multiple="true" cancelText="İptal" okText="Tamam">
   <ion-option value='Lise'>Lise</ion-option>
   <ion-option value='Lisans'>Lisans</ion-option>
   <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans - Doktora</ion-option>
 </ion-select>
 </ion-item>
- </ion-item-group>
+<ion-item>
+<ion-label floating color="primary">İl</ion-label>
+<ion-select [(ngModel)]="detayAra.il" cancelText="İptal" okText="Tamam">
+  <ion-option value=''>Konumum</ion-option>
+  <ion-option value='İstanbul'>İstanbul</ion-option>
+  <ion-option value='Ankara'>Ankara</ion-option>
+  <ion-option value='Kahramanmaraş'>Kahramanmaraş</ion-option>
+</ion-select>
+</ion-item>
+ <!-- </ion-item-group> -->
 
  <ion-row>
  <ion-col>

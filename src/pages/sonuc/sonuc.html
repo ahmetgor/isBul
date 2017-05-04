@@ -77,7 +77,7 @@
   </ion-list>
 
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll *ngIf="scrollEnable" (ionInfinite)="doInfinite($event)">
 
   <ion-infinite-scroll-content
   loadingText="İlanlar yükleniyor...">

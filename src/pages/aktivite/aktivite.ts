@@ -22,7 +22,11 @@ export class AktivitePage {
   basvurular: any;
   kaydedilenler: any;
   skip: number = 0;
-  limit: number = 2;
+  limit: number = 1;
+  scrollEnable: boolean = true;
+  scrollEnabl: boolean = true;
+  ski: number = 0;
+  limi: number = 1;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public basvuruSer: BasvuruSer, public ilanSer: IlanSer) {
@@ -34,23 +38,27 @@ export class AktivitePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad AktivitePage');
     // this.getBasvuruList();
-  }
-
-  ionViewWillEnter() {
-    console.log('ionViewWillEnter AktivitePage');
     this.getBasvuruList();
     this.getKaydedilenList();
   }
 
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter AktivitePage');
+  }
+
   getBasvuruList() {
-    this.basvuruSer.getBasvurular()
+    this.scrollEnable = true;
+    this.skip = 0;
+    this.basvuruSer.getBasvurular(this.skip, this.limit)
     .then(basvurular => {
       this.basvurular = basvurular;
     });
   }
 
   getKaydedilenList() {
-    this.basvuruSer.getKaydedilenler()
+    this.scrollEnabl = true;
+    this.ski = 0;
+    this.basvuruSer.getKaydedilenler(this.ski, this.limi)
     .then(kaydedilenler => {
       this.kaydedilenler = kaydedilenler;
     });
@@ -65,6 +73,54 @@ export class AktivitePage {
       kaydedilenlist: this.basvuruSer.kaydedilenList
     });
   }
+
+  doInfinite(infiniteScroll) {
+  console.log('Begin async operation');
+
+  setTimeout(() => {
+    this.skip = this.skip + 1;
+    this.basvuruSer.getBasvurular(this.skip, this.limit)
+    .then(basvurular => {
+      console.log(JSON.stringify(basvurular)+"basvuruList");
+
+      if(Object.keys(basvurular).length < this.limit) {
+        console.log('true');
+        // infiniteScroll.enable(false);
+        this.scrollEnable = false;
+        }
+
+        for( var key in basvurular ) {
+      this.basvurular.push(basvurular[key]);
+    }
+     });
+    console.log('Async operation has ended');
+    infiniteScroll.complete();
+  }, 500);
+}
+
+doInfinit(infiniteScroll) {
+console.log('Begin async operation');
+
+setTimeout(() => {
+  this.ski = this.ski + 1;
+  this.basvuruSer.getKaydedilenler(this.ski, this.limi)
+  .then(kaydedilenler => {
+    console.log(JSON.stringify(kaydedilenler)+"basvuruList");
+
+    if(Object.keys(kaydedilenler).length < this.limi) {
+      console.log('true');
+      // infiniteScroll.enable(false);
+      this.scrollEnabl = false;
+      }
+
+      for( var key in kaydedilenler ) {
+    this.kaydedilenler.push(kaydedilenler[key]);
+  }
+   });
+  console.log('Async operation has ended');
+  infiniteScroll.complete();
+}, 500);
+}
 
   checkBasvuru(ilanId) {
     return this.basvuruSer.checkBasvuru(ilanId);

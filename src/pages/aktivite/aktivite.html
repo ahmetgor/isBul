@@ -32,7 +32,9 @@
 
 <ion-content>
   <div [ngSwitch]="aktivite">
-  <ion-list text-wrap *ngSwitchCase="'basvurulan'">
+    <div  *ngSwitchCase="'basvurulan'">
+
+  <ion-list text-wrap>
     <button ion-item *ngFor="let basvuru of basvurular" (click)="itemTapped($event, basvuru.basvuru)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-avatar item-left>
@@ -81,16 +83,19 @@
       </ion-row>
 
     </button>
+  </ion-list>
 
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll *ngIf="scrollEnable" (ionInfinite)="doInfinite($event)">
 
     <ion-infinite-scroll-content
     loadingText="Başvurular yükleniyor...">
   </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  </ion-list>
+</div>
 
-  <ion-list text-wrap *ngSwitchCase="'kaydedilen'">
+<div *ngSwitchCase="'kaydedilen'">
+
+  <ion-list text-wrap>
     <button ion-item *ngFor="let kaydedilen of kaydedilenler" (click)="itemTapped($event, kaydedilen.kaydedilen)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-avatar item-left>
@@ -141,12 +146,14 @@
     </button>
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+  <ion-infinite-scroll *ngIf="scrollEnabl" (ionInfinite)="doInfinit($event)">
 
   <ion-infinite-scroll-content
   loadingText="Kaydedilenler yükleniyor...">
 </ion-infinite-scroll-content>
 </ion-infinite-scroll>
+
+</div>
 </div>
 
 </ion-content>
