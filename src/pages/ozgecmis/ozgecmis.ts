@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
 
@@ -21,7 +21,8 @@ export class OzgecmisPage {
   ozgecmis: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer) {
+              public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer,
+              public alertCtrl: AlertController) {
 
                 this.ozgecmis = this.ozgecmisSer.getOzgecmis()
                 .then(ozgecmis => {
@@ -46,5 +47,31 @@ export class OzgecmisPage {
       ozDetayList: ozDetayList
     });
   }
+
+  checkOzgecmis(ev) {
+    // if(false && this.ozgecmis.enabled) {
+    //   // this.ozgecmis.enabled = false;
+    //   this.presentAlert();
+    //   console.log(ev.checked);
+    //   console.log(this.ozgecmis.enabled);
+    //   this.ozgecmis.enabled = false;
+    //   console.log(ev.checked+'after');
+    //   console.log(this.ozgecmis.enabled+'after');
+    //
+    // }
+    console.log('cgecksd');
+      console.log(ev.checked+'after');
+      console.log(this.ozgecmis.enabled+'after');
+  }
+
+  presentAlert() {
+  let alert = this.alertCtrl.create({
+    title: 'Özgeçmişiniz Eksik!',
+    subTitle: 'Aktiflemek için Kişisel Bilgileriniz ve İletişim Bilgileriniz tam olmalı. Ayrıca Tecrübe ve Eğitim için en az 1 giriş olmalı.',
+    buttons: ['Kapat']
+  });
+  alert.present();
+}
+
 
 }

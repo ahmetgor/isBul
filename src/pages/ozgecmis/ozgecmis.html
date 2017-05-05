@@ -27,11 +27,23 @@
 
     <h1>{{ozgecmis.isim}} {{ozgecmis.soyisim}}</h1>
     <p>Analist</p>
-    <p>I2I-Systems</p>
+    <p>@ I2I-Systems</p>
+    <p>32 yaşında</p>
+    <!-- <ion-label *ngIf="ozgecmis.enabled" color="primary" >Aktif</ion-label>
+    <ion-label *ngIf="!ozgecmis.enabled" color="primary" >Pasif</ion-label> -->
+    <!-- <ion-toggle [(ngModel)]="ozgecmis.enabled"></ion-toggle> -->
+  </ion-item>
+    <ion-item no-margin no-padding>
+    <ion-label class="alignme" *ngIf="ozgecmis.enabled" color="primary" >Aktif</ion-label>
+    <ion-label class="alignme" *ngIf="!ozgecmis.enabled" color="primary" >Pasif</ion-label>
+    <ion-toggle [(ngModel)]="ozgecmis.enabled" (ionChange)="checkOzgecmis($event)">Aktiflik</ion-toggle>
   </ion-item>
 </ion-card>
 
+<div [class.ozgecmis]="!ozgecmis.enabled">
+
 <ion-card>
+
   <ion-card-header>
   <b>Kişisel Bilgiler</b>
   <!-- <ion-note item-right> -->
@@ -43,7 +55,9 @@
 <!-- </ion-note> -->
   </span>
 </ion-card-header>
+
   <ion-item text-wrap>
+
   <ion-grid no-padding>
   <ion-row><ion-col col-5><h4>Doğum Tarihi:</h4></ion-col> <ion-col><h4>{{ozgecmis.dogumTarihi | date:'dd/MM/yyyy'}}</h4></ion-col> </ion-row>
   <ion-row><ion-col col-5><h4>TC Vatandaşı: </h4></ion-col> <ion-col><h4>{{ozgecmis.tc}}</h4></ion-col> </ion-row>
@@ -54,8 +68,10 @@
   <!-- <ion-row><ion-col col-5><h4>Tecrübe: </h4></ion-col> <ion-col><h4> {{ozgecmis.tecrubedurum}}</h4></ion-col> </ion-row> -->
 
 </ion-grid>
+
 </ion-item>
-</ion-card>
+
+  </ion-card>
 
 <ion-card>
   <ion-card-header>
@@ -112,7 +128,7 @@
 </ion-card>
 
 <ion-card>
-  <ion-card-header>
+  <ion-card-header no-margin>
   <b>Yabancı Dil</b>
   <span ion-text style="float:right;" color="primary">
     <button ion-button small  icon-left clear (click)="itemTapped($event, {}, 'yabanciDilEkle', ozgecmis.yabanciDil)">
@@ -121,7 +137,7 @@
   </button>
   </span>
 </ion-card-header>
-<button ion-item *ngFor="let yabanciDil of ozgecmis.yabanciDil" (click)="itemTapped($event, yabanciDil, 'yabanciDil', ozgecmis.yabanciDil)">
+<button no-margin ion-item *ngFor="let yabanciDil of ozgecmis.yabanciDil" (click)="itemTapped($event, yabanciDil, 'yabanciDil', ozgecmis.yabanciDil)">
   <h4><b>{{yabanciDil.dil}} : </b>{{yabanciDil.seviye}}</h4>
   <!-- <ion-row><ion-col col-5><h4>{{yabanciDil.dil}} : </h4></ion-col> <ion-col><h4>{{yabanciDil.seviye}}</h4></ion-col> </ion-row> -->
 
@@ -145,11 +161,11 @@
 </ion-card>
 
 <ion-card>
-  <ion-card-header>
+  <ion-card-header no-margin>
   <b>Bilgisayar Teknolojileri</b>
   <!-- <ion-note item-right> -->
   <span ion-text style="float:right;" color="primary">
-    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'bilgisayar', '')">
+    <button no-margin ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'bilgisayar', '')">
     <ion-icon name="create"></ion-icon>
     Düzenle
   </button>
@@ -157,11 +173,13 @@
   </span>
 </ion-card-header>
   <!-- <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'bilgisayar')"> -->
-  <ion-item text-wrap>
+  <ion-item no-margin text-wrap>
   <h4>{{ozgecmis.bilgisayar}}</h4>
 </ion-item>
 <!-- </button> -->
 </ion-card>
+
+</div>
 
 </div>
 </ion-content>

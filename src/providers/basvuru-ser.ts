@@ -187,8 +187,11 @@ getKaydedilenler(skip, limit) {
   }
 
   checkBasvuru(ilanId: any) {
-    // console.log(JSON.stringify(this.basvuruList)+'basvurulist');
-    if (!this.basvuruList) return false;
+    console.log(JSON.stringify(this.basvuruList)+'basvurulist');
+    if (Object.keys(this.basvuruList).length == 0) {
+      console.log('check false');
+      return false;
+    }
     return this.basvuruList.findIndex((item) => {
         return (item.basvuru == ilanId._id); }) > -1
   }
@@ -196,9 +199,12 @@ getKaydedilenler(skip, limit) {
   checkKaydedilen(ilanId: any) {
     // return this.basvuruSer.basvuruList.findIndex((item) => {
     //     return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
-    // console.log(JSON.stringify(this.kaydedilenList)+'kaydedilenList');
+    console.log(JSON.stringify(this.kaydedilenList)+'kaydedilenList');
     // console.log(ilanId._id);
-    if (!this.kaydedilenList) return false;
+    if (Object.keys(this.kaydedilenList).length == 0) {
+      console.log('check false');
+      return false;
+    }
     return this.kaydedilenList.findIndex((item) => {
         return (item.kaydedilen == ilanId._id); }) > -1
   }
