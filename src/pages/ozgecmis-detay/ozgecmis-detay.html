@@ -23,6 +23,10 @@
 
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
     <ion-item>
+        <ion-label floating>Ünvan / Son Pozisyon</ion-label>
+        <ion-input formControlName="unvan" type="text" [(ngModel)]="detay.unvan"></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label floating>Doğum Tarihi</ion-label>
       <ion-datetime formControlName="dogumTarihi" displayFormat="dd/MM/YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="detay.dogumTarihi" cancelText="İptal" doneText="Tamam">
       </ion-datetime>
@@ -53,7 +57,7 @@
     </ion-item>
 
     <ion-item>
-        <ion-label floating>Ehliyet:</ion-label>
+        <ion-label floating>Ehliyet</ion-label>
         <ion-input formControlName="ehliyet" type="text" [(ngModel)]="detay.ehliyet"></ion-input>
     </ion-item>
 

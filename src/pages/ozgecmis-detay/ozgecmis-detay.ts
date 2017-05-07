@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
 
@@ -22,7 +22,8 @@ export class OzgecmisDetayPage {
   ozgecmisFormGroup: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public formBuilder: FormBuilder, public ozgecmisSer: OzgecmisSer) {
+              public formBuilder: FormBuilder, public ozgecmisSer: OzgecmisSer,
+              public toastCtrl: ToastController) {
 
     this.detay = this.navParams.get('ozDetay');
     this.detayList = this.navParams.get('ozDetayList');
@@ -86,10 +87,14 @@ export class OzgecmisDetayPage {
 
   delete() {
     console.log(JSON.stringify(this.detay)+'detay');
+    this.des = this.des.replace('Ekle', '');
+    if ((this.des == 'tecrube' || this.des == 'egitim') && Object.keys(this.detayList).length < 2) {
+      this.presentToast("Son kayıt silinemez!");
+      return;
+    }
     let i = this.detayList.findIndex((item) => {
         return (item === this.detay ); });
     this.detayList.splice(i,1);
-    this.des = this.des.replace('Ekle', '');
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
     console.log(JSON.stringify(this.detayList)+'detaylist');
     this.navCtrl.pop();
@@ -102,5 +107,16 @@ export class OzgecmisDetayPage {
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
     this.navCtrl.pop();
   }
+
+  presentToast(mesaj) {
+  let toast = this.toastCtrl.create({
+    message: mesaj,
+    duration: 3000,
+    position: 'top',
+    showCloseButton: true,
+    closeButtonText: 'OK'
+  });
+  toast.present();
+}
 
 }

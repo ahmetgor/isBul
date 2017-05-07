@@ -37,9 +37,9 @@ export class OzgecmisPage {
   }
 
   itemTapped(ev, ozDetay, des, ozDetayList) {
-    console.log(des);
-    console.log(JSON.stringify(ozDetay)+'ozDetay');
-    console.log(JSON.stringify(ozDetayList)+'ozdetlist');
+    // console.log(des);
+    // console.log(JSON.stringify(ozDetay)+'ozDetay');
+    // console.log(JSON.stringify(ozDetayList)+'ozdetlist');
     this.navCtrl.push(OzgecmisDetayPage, {
       ozDetay: ozDetay,
       basvurulist: this.ozgecmis,
@@ -49,19 +49,22 @@ export class OzgecmisPage {
   }
 
   checkOzgecmis(ev) {
-    // if(false && this.ozgecmis.enabled) {
-    //   // this.ozgecmis.enabled = false;
-    //   this.presentAlert();
-    //   console.log(ev.checked);
-    //   console.log(this.ozgecmis.enabled);
-    //   this.ozgecmis.enabled = false;
-    //   console.log(ev.checked+'after');
-    //   console.log(this.ozgecmis.enabled+'after');
-    //
-    // }
-    console.log('cgecksd');
-      console.log(ev.checked+'after');
+
+    if(this.ozgecmis.enabled && (this.ozgecmis.tecrube===undefined || Object.keys(this.ozgecmis.tecrube).length < 1 ||
+      this.ozgecmis.egitim===undefined || Object.keys(this.ozgecmis.egitim).length < 1 ||
+      this.ozgecmis.isim === undefined || this.ozgecmis.isim.trim() == '' ||
+      this.ozgecmis.adres === undefined || this.ozgecmis.adres.trim() == '')) {
+    console.log(JSON.stringify(this.ozgecmis.egitim)+ 'egitim');
+    console.log(JSON.stringify(this.ozgecmis.tecrube)+'tecrube');
+    this.ozgecmis.enabled = false;
+    ev.checked = false;
+    this.presentAlert();
+
       console.log(this.ozgecmis.enabled+'after');
+      console.log(ev.checked+'after');
+    }
+    console.log('cgecksd');
+
   }
 
   presentAlert() {
