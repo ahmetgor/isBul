@@ -24,11 +24,7 @@ export class OzgecmisPage {
               public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer,
               public alertCtrl: AlertController) {
 
-                this.ozgecmis = this.ozgecmisSer.getOzgecmis()
-                .then(ozgecmis => {
-                  this.ozgecmis = ozgecmis;
-                  console.log(JSON.stringify(this.ozgecmis.sertifika)+'ozgecmis');
-                });
+              this.ozgecmis = ozgecmisSer.ozgecmis;
     }
 
   ionViewDidLoad() {

@@ -22,11 +22,11 @@ export class AktivitePage {
   basvurular: any;
   kaydedilenler: any;
   skip: number = 0;
-  limit: number = 1;
+  limit: number = 10;
   scrollEnable: boolean = true;
   scrollEnabl: boolean = true;
   ski: number = 0;
-  limi: number = 1;
+  limi: number = 10;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public basvuruSer: BasvuruSer, public ilanSer: IlanSer) {

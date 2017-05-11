@@ -13,6 +13,7 @@ export class BasvuruSer {
   kaydedilenList: any = {};
   basvuruList: any = {};
   ozgecmisId: string;
+  ozgecmis: any;
   loading: any;
 
   constructor(public http: Http, public authService: UserAuth,
@@ -20,6 +21,14 @@ export class BasvuruSer {
               public loadingCtrl: LoadingController) {
     console.log('Hello BasvuruSer Provider');
     this.ozgecmisId = this.ozgecmisSer.ozgecmisId;
+    this.ozgecmisSer.getOzgecmis()
+    .then(ozgecmis => {
+      this.ozgecmis = ozgecmis;
+    });
+    console.log(JSON.stringify(this.ozgecmis)+"datadata");
+    console.log(JSON.stringify(this.ozgecmisSer.ozgecmisId)+"idid");
+
+
 
     this.getBasvurularList()
     .then(ilanlist => {
@@ -97,11 +106,18 @@ getKaydedilenler(skip, limit) {
     this.showLoader();
     let kayit = {ozgecmis: this.ozgecmisId, basvuru : basvuruId};
     console.log(JSON.stringify(kayit)+'basvuruId');
+    if(!this.ozgecmis.enabled) {
+      this.loading.dismiss();
+      this.presentToast('Pasif özgeçmiş ile başvuru yapılamaz!');
+      return;
+    }
 
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       // headers.append('Authorization', this.authService.token);
+      console.log(JSON.stringify(this.ozgecmis)+"addbasvuru");
+
       this.http.post(this.url+'basvuru/', JSON.stringify(kayit), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {
@@ -187,7 +203,7 @@ getKaydedilenler(skip, limit) {
   }
 
   checkBasvuru(ilanId: any) {
-    console.log(JSON.stringify(this.basvuruList)+'basvurulist');
+    // console.log(JSON.stringify(this.basvuruList)+'basvurulist');
     if (Object.keys(this.basvuruList).length == 0) {
       console.log('check false');
       return false;
@@ -199,7 +215,7 @@ getKaydedilenler(skip, limit) {
   checkKaydedilen(ilanId: any) {
     // return this.basvuruSer.basvuruList.findIndex((item) => {
     //     return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
-    console.log(JSON.stringify(this.kaydedilenList)+'kaydedilenList');
+    // console.log(JSON.stringify(this.kaydedilenList)+'kaydedilenList');
     // console.log(ilanId._id);
     if (Object.keys(this.kaydedilenList).length == 0) {
       console.log('check false');
@@ -212,7 +228,7 @@ getKaydedilenler(skip, limit) {
   presentToast(mesaj) {
   let toast = this.toastCtrl.create({
     message: mesaj,
-    duration: 3000,
+    duration: 4000,
     position: 'top',
     showCloseButton: true,
     closeButtonText: 'OK'

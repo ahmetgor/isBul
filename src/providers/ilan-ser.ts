@@ -57,7 +57,7 @@ export class IlanSer {
   presentToast() {
   let toast = this.toastCtrl.create({
     message: 'İlan listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!',
-    duration: 3000,
+    duration: 4000,
     position: 'top',
     showCloseButton: true,
     closeButtonText: 'OK'

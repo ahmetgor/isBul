@@ -32,16 +32,18 @@ export class OzgecmisDetayPage {
     // this.detayClone = Object.assign({}, this.detay);
 
     this.ozgecmisFormGroup = formBuilder.group({
-          dogumTarihi: ['', Validators.required],
-          tc: ['', Validators.required],
+          dogumTarihi: [this.detay.dogumTarihi, [Validators.maxLength(30),Validators.required]],
+          tc: [this.detay.tc, [Validators.maxLength(30),Validators.required]],
           // tc: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
-          askerlik: ['', Validators.required],
-          medeni: ['', Validators.required],
-          ehliyet: ['', Validators.required],
-          egitimdurum: ['', Validators.required],
+          askerlik: [this.detay.askerlik, [Validators.required]],
+          medeni: [this.detay.medeni, [Validators.required]],
+          ehliyet: [this.detay.ehliyet, [Validators.required]],
+          egitimdurum: [this.detay.egitimdurum, [Validators.required]],
+          unvan: [this.detay.unvan, [Validators.required]],
           // tecrubedurum: ['', Validators.required],
+          //  Validators.pattern('[\(]\d{3}[\)]\d{7}')
 
-          telefon: ['', Validators.compose([ Validators.pattern('[\(]\d{3}[\)]\d{7}'), Validators.required])],
+          telefon: ['', Validators.compose([Validators.required])],
           email: ['', Validators.required],
           adres: ['', Validators.required],
 
@@ -79,8 +81,12 @@ export class OzgecmisDetayPage {
     if(this.detayList) {
     this.des = this.des.replace("Ekle", "");
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
+    this.navCtrl.pop();
+
   }
   else this.ozgecmisSer.updateOzgecmisAll(this.detay);
+  console.log('updateall');
+
     // ozgecmisSer.updateOzgecmis()
     this.navCtrl.pop();
   }
@@ -111,7 +117,7 @@ export class OzgecmisDetayPage {
   presentToast(mesaj) {
   let toast = this.toastCtrl.create({
     message: mesaj,
-    duration: 3000,
+    duration: 4000,
     position: 'top',
     showCloseButton: true,
     closeButtonText: 'OK'

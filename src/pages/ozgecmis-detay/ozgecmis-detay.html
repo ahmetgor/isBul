@@ -17,9 +17,10 @@
 
 
 <ion-content>
-  <form [formGroup]="ozgecmisFormGroup">
 
   <div *ngIf="des=='kisisel'&&detay">
+    <form [formGroup]="ozgecmisFormGroup">
+
 
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
     <ion-item>
@@ -28,7 +29,7 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Doğum Tarihi</ion-label>
-      <ion-datetime formControlName="dogumTarihi" displayFormat="dd/MM/YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="detay.dogumTarihi" cancelText="İptal" doneText="Tamam">
+      <ion-datetime formControlName="dogumTarihi" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" [(ngModel)]="detay.dogumTarihi" cancelText="İptal" doneText="Tamam">
       </ion-datetime>
     </ion-item>
 
@@ -83,11 +84,11 @@
     </ion-select>
   </ion-item> -->
 
-<!-- </form> -->
+</form>
   </div>
 
   <div *ngIf="des=='iletisim'&&detay">
-    <!-- <form [formGroup]="ozgecmisFormGroup"> -->
+    <form [formGroup]="ozgecmisFormGroup">
 
     <ion-item>
         <ion-label floating>Telefon</ion-label>
@@ -104,11 +105,11 @@
         <ion-input formControlName="adres" type="text" [(ngModel)]="detay.adres"></ion-input>
     </ion-item>
 
-<!-- </form> -->
+</form>
   </div>
 
   <div *ngIf="(des=='tecrube'||des=='tecrubeEkle')&&detay">
-    <!-- <form [formGroup]="ozgecmisFormGroup"> -->
+    <form [formGroup]="ozgecmisFormGroup">
     <ion-item>
         <ion-label floating>Firma</ion-label>
         <ion-input formControlName="firma" type="text" [(ngModel)]="detay.firma"></ion-input>
@@ -150,10 +151,11 @@
       <ion-datetime formControlName="cikis" displayFormat="MMMM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="detay.cikis" cancelText="İptal" doneText="Tamam">
       </ion-datetime>
     </ion-item>
+  </form>
   </div>
 
   <div *ngIf="(des=='egitim'||des=='egitimEkle')&&detay">
-    <!-- <form [formGroup]="ozgecmisFormGroup"> -->
+    <form [formGroup]="ozgecmisFormGroup">
     <ion-item>
         <ion-label floating>Okul</ion-label>
         <ion-input formControlName="okul" type="text" [(ngModel)]="detay.okul"></ion-input>
@@ -189,11 +191,11 @@
         <ion-label floating>Ülke</ion-label>
         <ion-input formControlName="ulke" type="text" [(ngModel)]="detay.ulke"></ion-input>
     </ion-item>
-
+  </form>
   </div>
 
   <div *ngIf="(des=='sertifika'||des=='sertifikaEkle')&&detay">
-    <!-- <form [formGroup]="ozgecmisFormGroup"> -->
+    <form [formGroup]="ozgecmisFormGroup">
     <ion-item>
         <ion-label floating>Ad</ion-label>
         <ion-input formControlName="ad" type="text" [(ngModel)]="detay.ad"></ion-input>
@@ -209,11 +211,11 @@
       <ion-datetime formControlName="giris" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="detay.cikis" cancelText="İptal" doneText="Tamam">
       </ion-datetime>
     </ion-item>
-
+</form>
   </div>
 
   <div *ngIf="(des=='yabanciDil'||des=='yabanciDilEkle')&&detay">
-    <!-- <form [formGroup]="ozgecmisFormGroup"> -->
+    <form [formGroup]="ozgecmisFormGroup">
     <ion-item>
         <ion-label floating>Dil</ion-label>
         <ion-input formControlName="dil" type="text" [(ngModel)]="detay.dil"></ion-input>
@@ -228,22 +230,22 @@
       <ion-option value="Mükemmel">Mükemmel</ion-option>
     </ion-select>
     </ion-item>
-
+  </form>
   </div>
 
   <div *ngIf="des=='bilgisayar'&&detay">
-    <!-- <form [formGroup]="ozgecmisFormGroup"> -->
+    <form [formGroup]="ozgecmisFormGroup">
     <ion-item>
     <ion-label floating>Bilgisayar Teknolojileri</ion-label>
     <ion-input formControlName="bilgisayar" type="text" [(ngModel)]="detay.bilgisayar" placeholder="Örn: Excel, SQL"></ion-input>
     </ion-item>
-
+  </form>
   </div>
 
   <div *ngIf="(des=='tecrubeEkle'||des=='egitimEkle'||des=='yabanciDilEkle'||des=='sertifikaEkle')">
     <p>
     </p>
-<button ion-button block icon-left color="secondary" (click)="add()">
+<button ion-button block icon-left color="secondary" [disabled]="!ozgecmisFormGroup.valid" (click)="add()">
   <ion-icon name="add-circle"></ion-icon>
   Ekle</button>
 </div>
@@ -260,12 +262,12 @@
   </ion-col>
   <ion-col>
 
-  <button ion-button block icon-left (click)="save()">
+  <button ion-button block icon-left [disabled]="!ozgecmisFormGroup.valid" (click)="save()">
     <ion-icon name="checkmark"></ion-icon>
     Güncelle</button>
   </ion-col>
   </ion-row>
 </div>
 
-</form>
+<!-- </form> -->
 </ion-content>

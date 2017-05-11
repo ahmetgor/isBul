@@ -13,11 +13,14 @@ export class OzgecmisSer {
   ozgecmisId: string;
   user: any;
   loading: any;
+  ozgecmis: any;
 
   constructor(public http: Http, public authService: UserAuth,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     console.log('Hello OzgecmisSer Provider');
+
     this.ozgecmisId = "58eba2904be8d6e2c51b0757";
+    this.getOzgecmis();
   }
 
   getOzgecmis(){
@@ -27,6 +30,8 @@ export class OzgecmisSer {
       this.http.get(this.url + this.ozgecmisId, {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
+          this.ozgecmis = data;
+          console.log(JSON.stringify(data)+"data123");
           resolve(data);
         }, (err) => {
           // reject(err);
@@ -64,7 +69,7 @@ updateOzgecmisAll(kayit: any){
     headers.append('Content-Type', 'application/json');
     // headers.append('Authorization', this.authService.token);
 
-    this.http.put(this.url + this.ozgecmisId, JSON.stringify(kayit), {headers: headers})
+    this.http.put(this.url + kayit._id, JSON.stringify(kayit), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
         resolve(res);
@@ -80,7 +85,7 @@ updateOzgecmisAll(kayit: any){
 presentToast(mesaj) {
 let toast = this.toastCtrl.create({
   message: mesaj,
-  duration: 3000,
+  duration: 4000,
   position: 'top',
   showCloseButton: true,
   closeButtonText: 'OK'

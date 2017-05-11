@@ -23,7 +23,7 @@ export class SonucPage {
   searchTerm: string = '';
   searchControl: FormControl;
   skip: number = 0;
-  limit: number = 2;
+  limit: number = 20;
   scrollEnable: boolean = true;
   // infiniteScroll:any;
 
