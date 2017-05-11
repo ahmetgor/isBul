@@ -3,8 +3,6 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { Page1 } from '../pages/page1/page1';
-import { Page2 } from '../pages/page2/page2';
 import { AktivitePage } from '../pages/aktivite/aktivite';
 import { AraPage } from '../pages/ara/ara';
 import { OzgecmisPage } from '../pages/ozgecmis/ozgecmis';
@@ -27,8 +25,6 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Page One', component: Page1, icon: null },
-      { title: 'Page Two', component: Page2, icon: null },
       { title: 'İlan Ara', component: SonucPage, icon: 'search' },
       { title: 'Aktiviteler', component: AktivitePage, icon: 'walk' },
       { title: 'Özgeçmiş', component: OzgecmisPage, icon: 'list-box' },
