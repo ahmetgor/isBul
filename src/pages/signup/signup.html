@@ -7,12 +7,33 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>signup</ion-title>
+    <ion-title>Kayıt</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+    <!-- <ion-row class="account-form">
+        <ion-col> -->
+            <ion-list>
+
+                <ion-item>
+                    <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+                    <ion-input [(ngModel)]="email" placeholder="Email" type="email"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+                    <ion-input [(ngModel)]="password" placeholder="Şifre" type="password"></ion-input>
+                </ion-item>
+
+            </ion-list>
+
+            <button ion-button block (click)="register()">Kaydol</button>
+
+        <!-- </ion-col>
+    </ion-row> -->
 
 </ion-content>

@@ -21,8 +21,21 @@
   <div *ngIf="des=='kisisel'&&detay">
     <form [formGroup]="ozgecmisFormGroup">
 
-
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
+    <!-- <ion-label floating>Ünvan / Son Pozisyon</ion-label> -->
+    <ion-item no-lines>
+    <ion-thumbnail item-left>
+    <img src="detay.resim">
+    </ion-thumbnail>
+    <button ion-button icon-only outline><ion-icon name="logo-facebook" class="lighter"></ion-icon></button>
+    <button ion-button icon-only outline><ion-icon name="logo-twitter" class="lighter"></ion-icon></button>
+    <button ion-button icon-only outline><ion-icon name="logo-instagram" class="lighter"></ion-icon></button>
+    <button ion-button icon-left outline><ion-icon name="cloud-upload" class="lighter"></ion-icon>Yükle</button>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Resim</ion-label>
+    <ion-input item-end [ngModelOptions]="{standalone: true}" type="text" [(ngModel)]="detay.resim"></ion-input>
+    </ion-item>
     <ion-item>
         <ion-label floating>Ünvan / Son Pozisyon</ion-label>
         <ion-input formControlName="unvan" type="text" [(ngModel)]="detay.unvan"></ion-input>

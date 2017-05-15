@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, AlertController, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -8,6 +8,8 @@ import { AraPage } from '../pages/ara/ara';
 import { OzgecmisPage } from '../pages/ozgecmis/ozgecmis';
 import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 import { SonucPage } from '../pages/sonuc/sonuc';
+import { LoginPage } from '../pages/login/login';
+import { UserAuth } from '../providers/user-auth';
 
 
 @Component({
@@ -16,11 +18,13 @@ import { SonucPage } from '../pages/sonuc/sonuc';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = SonucPage;
+  rootPage: any = LoginPage;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public alertCtrl: AlertController,
+              public authService: UserAuth) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -48,4 +52,31 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+presentLogout() {
+let alert = this.alertCtrl.create({
+  title: 'Çıkmak istediğinizden emin misiniz?',
+  // message: 'Çıkmak istediğinizden emin misiniz?',
+  buttons: [
+    {
+      text: 'Hayır',
+      role: 'cancel',
+      handler: () => {
+        console.log('Cancel clicked');
+      }
+    },
+    {
+      text: 'Evet',
+      handler: () => {
+        console.log('Logged out');
+        // this.nav.setRoot(LoginPage);
+        this.authService.logout();
+        this.nav.setRoot(LoginPage);
+      }
+    }
+  ]
+});
+alert.present();
+}
+
 }

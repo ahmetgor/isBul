@@ -10,12 +10,15 @@ import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 import { FiltrelePage } from '../pages/filtrele/filtrele';
 import { OzgecmisPage } from '../pages/ozgecmis/ozgecmis';
 import { OzgecmisDetayPage } from '../pages/ozgecmis-detay/ozgecmis-detay';
+import { LoginPage } from '../pages/login/login';
+import { SignupPage } from '../pages/signup/signup';
 
 import { IlanSer } from '../providers/ilan-ser';
 import { BasvuruSer } from '../providers/basvuru-ser';
 import { UserAuth } from '../providers/user-auth';
 import { OzgecmisSer } from '../providers/ozgecmis-ser';
 import { DatePipe } from '../pipes/date-pipe';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,13 +34,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     FiltrelePage,
     OzgecmisPage,
     OzgecmisDetayPage,
+    LoginPage,
+    SignupPage,
     DatePipe
   ],
   imports: [
-    IonicModule.forRoot(MyApp, {
+  IonicModule.forRoot(MyApp, {
   monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık' ],
-
-})
+}),
+  IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,7 +54,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     DetayPage,
     FiltrelePage,
     OzgecmisPage,
-    OzgecmisDetayPage
+    OzgecmisDetayPage,
+    LoginPage,
+    SignupPage
   ],
   providers: [
     StatusBar,

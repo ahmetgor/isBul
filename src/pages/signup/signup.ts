@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-
+import { NavController, LoadingController, ToastController, NavParams } from 'ionic-angular';
+import { UserAuth } from '../../providers/user-auth';
+import { LoginPage } from '../login/login';
+// import { Storage } from '@ionic/storage';
 /*
   Generated class for the Signup page.
 
@@ -13,10 +15,64 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class SignupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  email: string;
+  password: string;
+  loading: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+      public authService: UserAuth, public loadingCtrl: LoadingController,
+      public toastCtrl: ToastController) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SignupPage');
+  }
+
+  register(){
+
+    this.showLoader();
+    let details = {
+        email: this.email,
+        password: this.password,
+    };
+
+    this.authService.createAccount(details).then((result) => {
+      this.loading.dismiss();
+      // console.log(result);
+      this.presentToast('Kaydınız yapıldı, Emailinize aktivasyon linki gönderildi. Aktivasyon sonrası giriş yapabilirsiniz');
+      this.navCtrl.setRoot(LoginPage);
+    }, (err) => {
+
+      let msg = JSON.parse(err._body);
+      // console.log(msg.error+'asdasd');
+      this.presentToast(msg.error);
+      this.loading.dismiss();
+    });
+
+  }
+
+  presentToast(errMsg) {
+  let toast = this.toastCtrl.create({
+    message: errMsg,
+    duration: 6000,
+    position: 'top',
+    showCloseButton: true,
+    closeButtonText: 'OK'
+  });
+
+  toast.onDidDismiss(() => {
+    // console.log('Dismissed toast');
+  });
+  toast.present();
+}
+
+  showLoader(){
+
+    this.loading = this.loadingCtrl.create({
+      content: 'Kimlik Doğrulanıyor...'
+    });
+
+    this.loading.present();
+
   }
 
 }
