@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, Events } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 
 /*
   Generated class for the Filtrele page.
@@ -17,7 +18,7 @@ export class FiltrelePage {
   sirala: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public viewCtrl: ViewController, public events: Events) {
+              public viewCtrl: ViewController, public events: Events, public geolocation: Geolocation) {
 
     this.detayAra = navParams.get('detayAra');
     console.log(JSON.stringify(this.detayAra) + 'detay')
@@ -44,7 +45,6 @@ filtrele() {
   }
 
  clear() {
-
  console.log(JSON.stringify(this.detayAra)+'clearfiltre');
  console.log(JSON.stringify(this.sirala)+'clearfiltre');
  // this.viewCtrl.dismiss(this.sirala, this.detayAra);
@@ -52,4 +52,10 @@ filtrele() {
  this.navCtrl.pop();
 }
 
+// getLoc(selectedValue: any) {
+//   this.geolocation.getCurrentPosition().then((position) => {
+//   }).catch((error) => {
+//   console.log('Error getting location', error);
+// });
+// }
 }
