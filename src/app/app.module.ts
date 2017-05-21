@@ -23,6 +23,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Camera} from '@ionic-native/camera';
+
 
 @NgModule({
   declarations: [
@@ -67,6 +69,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     UserAuth,
     OzgecmisSer,
     Geolocation,
+    Camera,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

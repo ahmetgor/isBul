@@ -22,12 +22,12 @@
   <ion-card class="item">
     <ion-item text-wrap class="item">
     <ion-thumbnail item-left>
-      <img src="../../assets/img/indir.png">
+      <img [src]="ozgecmis.resim.link">
     </ion-thumbnail>
 
     <h1>{{ozgecmis.isim}} {{ozgecmis.soyisim}}</h1>
     <p>{{ozgecmis.unvan}}</p>
-    <p>32 yaşında</p>
+    <p>32 yaşında, {{ozgecmis.yilTecrube}} yıl tecrübe</p>
     <!-- <ion-label *ngIf="ozgecmis.enabled" color="primary" >Aktif</ion-label>
     <ion-label *ngIf="!ozgecmis.enabled" color="primary" >Pasif</ion-label> -->
     <!-- <ion-toggle [(ngModel)]="ozgecmis.enabled"></ion-toggle> -->
@@ -40,6 +40,33 @@
 </ion-card>
 
 <div [class.ozgecmis]="!ozgecmis.enabled">
+
+<ion-card>
+  <ion-card-header>
+  <b>Kişisel Bilgiler</b>
+  <!-- <ion-note item-right> -->
+  <span ion-text style="float:right;" color="primary">
+    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'kisisel', '')">
+    <ion-icon name="create"></ion-icon>
+    Düzenle
+  </button>
+<!-- </ion-note> -->
+  </span>
+</ion-card-header>
+
+  <ion-item text-wrap>
+  <ion-grid no-padding>
+  <ion-row><ion-col col-5><h4>Doğum Tarihi:</h4></ion-col> <ion-col><h4>{{ozgecmis.dogumTarihi | date:'dd/MM/yyyy'}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>TC Vatandaşı: </h4></ion-col> <ion-col><h4>{{ozgecmis.tc}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Askerlik: </h4></ion-col> <ion-col><h4> {{ozgecmis.askerlik}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Medeni Hal:</h4> </ion-col> <ion-col><h4> {{ozgecmis.medeni}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Ehliyet Cinsi: </h4></ion-col> <ion-col><h4> {{ozgecmis.ehliyet}}</h4></ion-col> </ion-row>
+  <ion-row><ion-col col-5><h4>Eğitim: </h4></ion-col> <ion-col><h4> {{ozgecmis.egitimdurum}}</h4></ion-col> </ion-row>
+  <!-- <ion-row><ion-col col-5><h4>Tecrübe: </h4></ion-col> <ion-col><h4> {{ozgecmis.tecrubedurum}}</h4></ion-col> </ion-row> -->
+</ion-grid>
+</ion-item>
+
+  </ion-card>
 
 <ion-card>
   <ion-card-header>
@@ -113,7 +140,7 @@
 </ion-card>
 
 <ion-card>
-  <ion-card-header>
+  <ion-card-header no-margin>
   <b>Sertifikalar</b>
   <span ion-text style="float:right;" color="primary">
     <button ion-button small  icon-left clear (click)="itemTapped($event, {}, 'sertifikaEkle', ozgecmis.sertifika)">
@@ -146,37 +173,6 @@
 </ion-item>
 <!-- </button> -->
 </ion-card>
-
-<ion-card>
-
-  <ion-card-header>
-  <b>Kişisel Bilgiler</b>
-  <!-- <ion-note item-right> -->
-  <span ion-text style="float:right;" color="primary">
-    <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'kisisel', '')">
-    <ion-icon name="create"></ion-icon>
-    Düzenle
-  </button>
-<!-- </ion-note> -->
-  </span>
-</ion-card-header>
-
-  <ion-item text-wrap>
-
-  <ion-grid no-padding>
-  <ion-row><ion-col col-5><h4>Doğum Tarihi:</h4></ion-col> <ion-col><h4>{{ozgecmis.dogumTarihi | date:'dd/MM/yyyy'}}</h4></ion-col> </ion-row>
-  <ion-row><ion-col col-5><h4>TC Vatandaşı: </h4></ion-col> <ion-col><h4>{{ozgecmis.tc}}</h4></ion-col> </ion-row>
-  <ion-row><ion-col col-5><h4>Askerlik: </h4></ion-col> <ion-col><h4> {{ozgecmis.askerlik}}</h4></ion-col> </ion-row>
-  <ion-row><ion-col col-5><h4>Medeni Hal:</h4> </ion-col> <ion-col><h4> {{ozgecmis.medeni}}</h4></ion-col> </ion-row>
-  <ion-row><ion-col col-5><h4>Ehliyet Cinsi: </h4></ion-col> <ion-col><h4> {{ozgecmis.ehliyet}}</h4></ion-col> </ion-row>
-  <ion-row><ion-col col-5><h4>Eğitim: </h4></ion-col> <ion-col><h4> {{ozgecmis.egitimdurum}}</h4></ion-col> </ion-row>
-  <!-- <ion-row><ion-col col-5><h4>Tecrübe: </h4></ion-col> <ion-col><h4> {{ozgecmis.tecrubedurum}}</h4></ion-col> </ion-row> -->
-
-</ion-grid>
-
-</ion-item>
-
-  </ion-card>
 
 </div>
 

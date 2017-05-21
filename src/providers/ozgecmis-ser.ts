@@ -10,6 +10,7 @@ export class OzgecmisSer {
 
   // url : string = 'https://servistakip.herokuapp.com/api/kayitlar/';
   url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
+  url1: string = 'http://127.0.0.1:8080/api/tools/avatar';
   ozgecmisId: string;
   user: any;
   loading: any;
@@ -78,6 +79,27 @@ updateOzgecmisAll(kayit: any){
         // reject(err);
         this.loading.dismiss();
         this.presentToast('Özgeçmiş güncellenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+      });
+  });
+}
+
+updateAvatar(resim: any){
+  this.showLoader();
+  return new Promise((resolve, reject) => {
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'image/jpeg');
+    // headers.append('Authorization', this.authService.token);
+
+    this.http.put(this.url1, resim, {headers: headers})
+      .map(res => res.json())
+      .subscribe(res => {
+        resolve(res);
+        this.loading.dismiss();
+      }, (err) => {
+        // reject(err);
+        this.loading.dismiss();
+        this.presentToast('Resim yüklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
 }

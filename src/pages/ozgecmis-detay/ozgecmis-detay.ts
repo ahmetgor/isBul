@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
-
+import { Camera, CameraOptions } from '@ionic-native/camera';
 /*
   Generated class for the OzgecmisDetay page.
 
@@ -18,20 +18,25 @@ export class OzgecmisDetayPage {
   detay: any;
   detayList: any;
   des: string;
-  // detayClone: any;
-  ozgecmisFormGroup: FormGroup;
+  kisiselFormGroup: FormGroup;
+  iletisimFormGroup: FormGroup;
+  tecrubeFormGroup: FormGroup;
+  egitimFormGroup: FormGroup;
+  sertifikaFormGroup: FormGroup;
+  yabanciDilFormGroup: FormGroup;
+  bilgisayarFormGroup: FormGroup;
+  private imageSrc: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public formBuilder: FormBuilder, public ozgecmisSer: OzgecmisSer,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController, private camera: Camera) {
 
     this.detay = this.navParams.get('ozDetay');
     this.detayList = this.navParams.get('ozDetayList');
     if(this.detayList) console.log("oki");
     this.des = this.navParams.get('des');
     // this.detayClone = Object.assign({}, this.detay);
-
-    this.ozgecmisFormGroup = formBuilder.group({
+    this.kisiselFormGroup = formBuilder.group({
           dogumTarihi: [this.detay.dogumTarihi, [Validators.maxLength(30),Validators.required]],
           tc: [this.detay.tc, [Validators.maxLength(30),Validators.required]],
           // tc: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('[a-zA-Z ]*'), Validators.required])],
@@ -40,39 +45,79 @@ export class OzgecmisDetayPage {
           ehliyet: [this.detay.ehliyet, [Validators.required]],
           egitimdurum: [this.detay.egitimdurum, [Validators.required]],
           unvan: [this.detay.unvan, [Validators.required]],
-          // tecrubedurum: ['', Validators.required],
+          yilTecrube: [this.detay.yilTecrube, [Validators.required]],
+          resim: [this.detay.resim.profile, [Validators.required]]
+        });
           //  Validators.pattern('[\(]\d{3}[\)]\d{7}')
+  this.iletisimFormGroup = formBuilder.group({
+          telefon: [this.detay.telefon, Validators.compose([Validators.required])],
+          email: [this.detay.email, Validators.required],
+          adres: [this.detay.adres, Validators.required]
+        });
 
-          telefon: ['', Validators.compose([Validators.required])],
-          email: ['', Validators.required],
-          adres: ['', Validators.required],
+  this.tecrubeFormGroup = formBuilder.group({
+          firma: [this.detay.firma, Validators.required],
+          pozisyon: [this.detay.pozisyon, Validators.required],
+          isTanimiKisa: [this.detay.isTanimiKisa, Validators.required],
+          isTanimi: [this.detay.isTanimi, Validators.required],
+          sehir: [this.detay.sehir, Validators.required],
+          ulke: [this.detay.ulke, Validators.required],
+          giris: [this.detay.giris, Validators.required],
+          cikis: [this.detay.cikis]
+        });
 
-          firma: ['', Validators.required],
-          pozisyon: ['', Validators.required],
-          isTanimiKisa: ['', Validators.required],
-          isTanimi: ['', Validators.required],
-          sehir: ['', Validators.required],
-          ulke: ['', Validators.required],
-          giris: ['', Validators.required],
-          cikis: [''],
+  this.egitimFormGroup = formBuilder.group({
+          okul: [this.detay.okul, Validators.required],
+          derece: [this.detay.derece, Validators.required],
+          bolum: [this.detay.bolum],
+          cikis: [this.detay.cikis, Validators.required],
+          sehir: [this.detay.sehir, Validators.required],
+          ulke: [this.detay.ulke, Validators.required]
+        });
 
-          okul: ['', Validators.required],
-          derece: ['', Validators.required],
-          bolum: [''],
+  this.yabanciDilFormGroup = formBuilder.group({
+          dil: [this.detay.dil, Validators.required],
+          seviye: [this.detay.seviye, Validators.required]
+        });
 
-          dil: ['', Validators.required],
-          seviye: ['', Validators.required],
+  this.sertifikaFormGroup = formBuilder.group({
+          ad: [this.detay.ad, Validators.required],
+          kurum: [this.detay.kurum, Validators.required],
+          cikis: [this.detay.cikis, Validators.required],
+        });
 
-          ad: ['', Validators.required],
-          kurum: ['', Validators.required],
-
-          bilgisayar: ['', Validators.required],
+  this.bilgisayarFormGroup = formBuilder.group({
+          bilgisayar: [this.detay.bilgisayar, Validators.required]
       });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OzgecmisDetayPage');
   }
+
+   openGallery (): void {
+     const cameraOptions: CameraOptions = {
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    quality: 100,
+    targetWidth: 1000,
+    targetHeight: 1000,
+    encodingType: this.camera.EncodingType.JPEG
+    // correctOrientation: true
+    // mediaType: this.camera.MediaType.PICTURE
+  }
+
+  this.detay.resim.media = 'upload';
+  this.camera.getPicture(cameraOptions)
+    .then(file_uri => {
+      this.ozgecmisSer.updateAvatar('data:image/jpeg;base64,' + file_uri)
+      .then( (resUrl) => {
+        this.detay.resim.link = resUrl;
+        console.log(resUrl);
+      });
+      // this.detay.resim.link = 'data:image/jpeg;base64,' + file_uri;
+  },  (err) => console.log(err));
+}
 
   save() {
     console.log(JSON.stringify(this.detay)+'detaysave');
@@ -113,6 +158,17 @@ export class OzgecmisDetayPage {
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
     this.navCtrl.pop();
   }
+
+  emailChanged(){
+    this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile ;
+    console.log(this.detay.resim.link);
+
+}
+
+butPressed(media: String){
+  this.detay.resim.media = media;
+  this.emailChanged();
+}
 
   presentToast(mesaj) {
   let toast = this.toastCtrl.create({
