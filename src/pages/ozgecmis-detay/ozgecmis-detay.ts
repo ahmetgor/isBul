@@ -111,9 +111,10 @@ export class OzgecmisDetayPage {
   this.camera.getPicture(cameraOptions)
     .then(file_uri => {
       this.ozgecmisSer.updateAvatar('data:image/jpeg;base64,' + file_uri)
-      .then( (resUrl) => {
-        this.detay.resim.link = resUrl;
+      .then( (resUrl: any) => {
+        this.detay.resim.link = resUrl.secure_url;
         console.log(resUrl);
+        console.log(resUrl.secure_url+'secure');
       });
       // this.detay.resim.link = 'data:image/jpeg;base64,' + file_uri;
   },  (err) => console.log(err));
