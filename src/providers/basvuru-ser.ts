@@ -43,7 +43,7 @@ export class BasvuruSer {
 
   getBasvurular(skip, limit) {
     let headers = new Headers();
-    // headers.append('Authorization', this.authService.token);
+    headers.append('Authorization', this.authService.token);
     return new Promise((resolve, reject) => {
     this.http.get(this.url + `basvuru?ozgecmis=${this.ozgecmisId}&skip=${skip}&limit=${limit}`, {headers: headers})
       .map(res => res.json())
@@ -58,7 +58,7 @@ export class BasvuruSer {
 
 getKaydedilenler(skip, limit) {
   let headers = new Headers();
-  // headers.append('Authorization', this.authService.token);
+  headers.append('Authorization', this.authService.token);
   return new Promise((resolve, reject) => {
   this.http.get(this.url + `kaydedilen?ozgecmis=${this.ozgecmisId}&skip=${skip}&limit=${limit}`, {headers: headers})
     .map(res => res.json())
@@ -74,7 +74,7 @@ getKaydedilenler(skip, limit) {
   getBasvurularList() {
     let headers = new Headers();
     console.log('servis basvurularlist oluştur');
-    // headers.append('Authorization', this.authService.token);
+    headers.append('Authorization', this.authService.token);
     return new Promise((resolve, reject) => {
     this.http.get(this.url + `basvurulist?ozgecmis=${this.ozgecmisId}`, {headers: headers})
       .map(res => res.json())
@@ -89,7 +89,7 @@ getKaydedilenler(skip, limit) {
 
   getKaydedilenlerList() {
     let headers = new Headers();
-    // headers.append('Authorization', this.authService.token);
+    headers.append('Authorization', this.authService.token);
     return new Promise((resolve, reject) => {
     this.http.get(this.url + `kaydedilenlist?ozgecmis=${this.ozgecmisId}`, {headers: headers})
       .map(res => res.json())
@@ -115,7 +115,7 @@ getKaydedilenler(skip, limit) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      // headers.append('Authorization', this.authService.token);
+      headers.append('Authorization', this.authService.token);
       console.log(JSON.stringify(this.ozgecmis)+"addbasvuru");
 
       this.http.post(this.url+'basvuru/', JSON.stringify(kayit), {headers: headers})
@@ -139,7 +139,7 @@ getKaydedilenler(skip, limit) {
 
       return new Promise((resolve, reject) => {
           let headers = new Headers();
-          // headers.append('Authorization', this.authService.token);
+          headers.append('Authorization', this.authService.token);
 
           this.http.delete(this.url + `basvuru?ozgecmis=${this.ozgecmisId}&basvuruid=${basvuruId}`, {headers: headers})
           .subscribe((res) => {
@@ -164,7 +164,7 @@ getKaydedilenler(skip, limit) {
     return new Promise((resolve, reject) => {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      // headers.append('Authorization', this.authService.token);
+      headers.append('Authorization', this.authService.token);
       this.http.post(this.url+'kaydedilen/', JSON.stringify(kayit), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {
@@ -187,7 +187,7 @@ getKaydedilenler(skip, limit) {
 
       return new Promise((resolve, reject) => {
           let headers = new Headers();
-          // headers.append('Authorization', this.authService.token);
+          headers.append('Authorization', this.authService.token);
 
           this.http.delete(this.url + `kaydedilen?ozgecmis=${this.ozgecmisId}&kaydedilenid=${kaydedilenId}`, {headers: headers})
           .subscribe((res) => {

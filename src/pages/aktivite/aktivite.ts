@@ -44,6 +44,8 @@ export class AktivitePage {
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter AktivitePage');
+    this.getBasvuruList();
+    this.getKaydedilenList();
   }
 
   getBasvuruList() {

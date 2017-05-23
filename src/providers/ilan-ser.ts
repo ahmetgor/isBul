@@ -28,7 +28,7 @@ export class IlanSer {
 
   getIlanlar(searchTerm, searchKayit, orderBy, skip, limit){
       let headers = new Headers();
-      // headers.append('Authorization', this.authService.token);
+      headers.append('Authorization', this.authService.token);
       let order = JSON.parse(orderBy);
       console.log(JSON.stringify(order)+'order service');
       console.log(order+'order service string');
