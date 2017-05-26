@@ -72,5 +72,9 @@ export class OzgecmisPage {
   alert.present();
 }
 
+getAge() {
+  return ~~(((new Date()).getTime() - (new Date(this.ozgecmis.dogumTarihi)).getTime()) / (31557600000));
+}
+
 
 }

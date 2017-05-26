@@ -45,8 +45,8 @@ export class OzgecmisDetayPage {
           ehliyet: [this.detay.ehliyet, [Validators.required]],
           egitimdurum: [this.detay.egitimdurum, [Validators.required]],
           unvan: [this.detay.unvan, [Validators.required]],
-          yilTecrube: [this.detay.yilTecrube, [Validators.required]],
-          resim: [this.detay.resim.profile, [Validators.required]]
+          yilTecrube: [this.detay.yilTecrube, [Validators.required]]
+          // resim: [this.detay.resim==undefined ? this.detay.resim.profile : '', [Validators.required]]
         });
           //  Validators.pattern('[\(]\d{3}[\)]\d{7}')
   this.iletisimFormGroup = formBuilder.group({

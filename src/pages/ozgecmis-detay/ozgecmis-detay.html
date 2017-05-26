@@ -16,11 +16,11 @@
 
 <ion-content padding>
 
-  <div *ngIf="des=='kisisel'&&detay">
+  <div *ngIf="des=='kisisel'&&detay&&detay.resim">
     <form [formGroup]="kisiselFormGroup">
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
     <!-- <ion-label floating>Ünvan / Son Pozisyon</ion-label> -->
-    <ion-item no-lines *ngIf="!kisiselFormGroup.valid  && (kisiselFormGroup.dirty || kisiselFormGroup.untouched)">
+    <ion-item no-lines *ngIf="!kisiselFormGroup.valid  || (kisiselFormGroup.dirty || kisiselFormGroup.untouched)">
         <p style="color:red;">*Tüm alanlar zorunlu</p>
     </ion-item>
     <ion-item no-lines>
@@ -34,7 +34,7 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Resim</ion-label>
-    <ion-input [disabled]="detay.resim.media=='upload'" item-end formControlName="resim" type="file"
+    <ion-input [disabled]="detay.resim.media=='upload'" item-end [ngModelOptions]="{standalone: true}" type="file"
               [(ngModel)]="detay.resim.profile" (change)="emailChanged()" placeholder="Sosyal medya profil adınız"></ion-input>
     </ion-item>
     <ion-item>
@@ -117,7 +117,7 @@
   <div *ngIf="des=='iletisim'&&detay">
     <form [formGroup]="iletisimFormGroup">
 
-      <ion-item no-lines *ngIf="!iletisimFormGroup.valid  && (iletisimFormGroup.dirty || iletisimFormGroup.untouched)">
+      <ion-item no-lines *ngIf="!iletisimFormGroup.valid  || (iletisimFormGroup.dirty || iletisimFormGroup.untouched)">
           <p style="color:red;">*Tüm alanlar zorunlu</p>
       </ion-item>
     <ion-item>
@@ -162,7 +162,7 @@
   <div *ngIf="(des=='tecrube'||des=='tecrubeEkle')&&detay">
     <form [formGroup]="tecrubeFormGroup">
 
-      <ion-item no-lines *ngIf="!tecrubeFormGroup.valid  && (tecrubeFormGroup.dirty || tecrubeFormGroup.untouched)">
+      <ion-item no-lines *ngIf="!tecrubeFormGroup.valid  || (tecrubeFormGroup.dirty || tecrubeFormGroup.untouched)">
           <p style="color:red;">*Tüm alanlar zorunlu</p>
       </ion-item>
     <ion-item>
@@ -234,7 +234,7 @@
   <div *ngIf="(des=='egitim'||des=='egitimEkle')&&detay">
     <form [formGroup]="egitimFormGroup">
 
-      <ion-item no-lines *ngIf="!egitimFormGroup.valid  && (egitimFormGroup.dirty || egitimFormGroup.untouched)">
+      <ion-item no-lines *ngIf="!egitimFormGroup.valid  || (egitimFormGroup.dirty || egitimFormGroup.untouched)">
           <p style="color:red;">*Tüm alanlar zorunlu</p>
       </ion-item>
     <ion-item>
@@ -300,7 +300,7 @@
   <div *ngIf="(des=='sertifika'||des=='sertifikaEkle')&&detay">
     <form [formGroup]="sertifikaFormGroup">
 
-      <ion-item no-lines *ngIf="!sertifikaFormGroup.valid  && (sertifikaFormGroup.dirty || sertifikaFormGroup.untouched)">
+      <ion-item no-lines *ngIf="!sertifikaFormGroup.valid  || (sertifikaFormGroup.dirty || sertifikaFormGroup.untouched)">
           <p style="color:red;">*Tüm alanlar zorunlu</p>
       </ion-item>
     <ion-item>
@@ -346,7 +346,7 @@
   <div *ngIf="(des=='yabanciDil'||des=='yabanciDilEkle')&&detay">
     <form [formGroup]="yabanciDilFormGroup">
 
-      <ion-item no-lines *ngIf="!yabanciDilFormGroup.valid  && (yabanciDilFormGroup.dirty || yabanciDilFormGroup.untouched)">
+      <ion-item no-lines *ngIf="!yabanciDilFormGroup.valid  || (yabanciDilFormGroup.dirty || yabanciDilFormGroup.untouched)">
           <p style="color:red;">*Tüm alanlar zorunlu</p>
       </ion-item>
     <ion-item>
