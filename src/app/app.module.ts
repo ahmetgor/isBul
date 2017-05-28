@@ -24,7 +24,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera} from '@ionic-native/camera';
-
+import { PassResetPage } from '../pages/pass-reset/pass-reset';
 
 @NgModule({
   declarations: [
@@ -39,6 +39,7 @@ import { Camera} from '@ionic-native/camera';
     OzgecmisDetayPage,
     LoginPage,
     SignupPage,
+    PassResetPage,
     DatePipe
   ],
   imports: [
@@ -59,7 +60,8 @@ import { Camera} from '@ionic-native/camera';
     OzgecmisPage,
     OzgecmisDetayPage,
     LoginPage,
-    SignupPage
+    SignupPage,
+    PassResetPage
   ],
   providers: [
     StatusBar,

@@ -3,6 +3,8 @@ import { Http, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
+import {ToastController, LoadingController } from 'ionic-angular';
+
 /*
   Generated class for the UserAuth provider.
 
@@ -15,9 +17,13 @@ export class UserAuth {
   token: any;
   // url : string = 'https://servistakip.herokuapp.com/api/auth/';
   url : string = 'http://127.0.0.1:8080/api/auth/';
+  url1: string = 'http://127.0.0.1:8080/api/tools/';
   currentUser: any;
+  loading: any;
 
-  constructor(public http: Http, public storage: Storage) {
+
+  constructor(public http: Http, public storage: Storage,
+              public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     console.log('Hello UserAuth Provider');
   }
 
@@ -63,7 +69,6 @@ export class UserAuth {
             // console.log(JSON.stringify(err)+'registererr')
             reject(err);
           });
-
     });
   }
 
@@ -91,7 +96,50 @@ export class UserAuth {
             // console.log(JSON.stringify(err)+'servis err')
             reject(err);
           });
+    });
+  }
 
+  forgot(user){
+    this.showLoader();
+    return new Promise((resolve, reject) => {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        this.http.post(this.url1+'forgot', JSON.stringify(user), {headers: headers})
+          .subscribe(res => {
+            resolve(res);
+            // resolve(res.json());
+            this.loading.dismiss();
+            this.presentToast('Şifreniz resetlendi. Emailinize geçici şifre gönderildi');
+
+          }, (err) => {
+            // reject(err);
+            this.loading.dismiss();
+            this.presentToast('Şifre resetlenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+          });
+    });
+  }
+
+  reset(user){
+    this.showLoader();
+    return new Promise((resolve, reject) => {
+
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        this.http.post(this.url1+'reset', JSON.stringify(user), {headers: headers})
+          .subscribe(res => {
+            resolve(res);
+            // resolve(res.json());
+            this.loading.dismiss();
+            this.presentToast('Şifreniz değiştirildi.');
+
+          }, (err) => {
+            // reject(err);
+            this.loading.dismiss();
+            this.presentToast('Şifre değiştirilemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+          });
     });
   }
 
@@ -103,4 +151,25 @@ export class UserAuth {
       this.token = '';
   }
 
+  presentToast(mesaj) {
+  let toast = this.toastCtrl.create({
+    message: mesaj,
+    duration: 4000,
+    position: 'top',
+    showCloseButton: true,
+    closeButtonText: 'OK'
+  });
+  toast.onDidDismiss(() => {
+    // console.log('Dismissed toast');
+  });
+  toast.present();
+  }
+
+  showLoader(){
+
+      this.loading = this.loadingCtrl.create({
+          content: 'İşlem yapılıyor...'
+      });
+      this.loading.present();
+  }
 }

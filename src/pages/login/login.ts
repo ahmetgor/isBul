@@ -4,6 +4,7 @@ import { UserAuth } from '../../providers/user-auth';
 import { SonucPage } from '../sonuc/sonuc';
 import { SignupPage } from '../signup/signup';
 import { Storage } from '@ionic/storage';
+import { PassResetPage } from '../pass-reset/pass-reset';
 
 /*
   Generated class for the Login page.
@@ -90,6 +91,10 @@ export class LoginPage {
 
 launchSignup(){
   this.navCtrl.push(SignupPage);
+}
+
+resetPass(){
+  this.navCtrl.push(PassResetPage);
 }
 
 showLoader(){

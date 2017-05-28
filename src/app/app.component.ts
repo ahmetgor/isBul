@@ -11,7 +11,6 @@ import { SonucPage } from '../pages/sonuc/sonuc';
 import { LoginPage } from '../pages/login/login';
 import { UserAuth } from '../providers/user-auth';
 
-
 @Component({
   templateUrl: 'app.html'
 })
