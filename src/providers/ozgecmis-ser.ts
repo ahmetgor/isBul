@@ -4,11 +4,13 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { UserAuth } from './user-auth';
 import {ToastController, LoadingController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class OzgecmisSer {
 
-  // url : string = 'https://servistakip.herokuapp.com/api/kayitlar/';
+  // url : string = 'https://serverisgucvar.herokuapp.com/api/ozgecmis/';
+  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/avatar/';
   url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
   url1: string = 'http://127.0.0.1:8080/api/tools/avatar/';
   ozgecmisId: string;
@@ -17,18 +19,22 @@ export class OzgecmisSer {
   ozgecmis: any;
 
   constructor(public http: Http, public authService: UserAuth,
-              public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
+              public toastCtrl: ToastController, public loadingCtrl: LoadingController,
+              public storage: Storage,) {
     console.log('Hello OzgecmisSer Provider');
 
-    this.ozgecmisId = "58eba2904be8d6e2c51b0757";
-    this.getOzgecmis();
+    // this.ozgecmisId = "58eba2904be8d6e2c51b0757";
+    this.storage.get('user').then((user) => {
+    this.ozgecmisId = user.ozgecmis;
+    this.getOzgecmis(user.ozgecmis);
+  });
   }
 
-  getOzgecmis(){
+  getOzgecmis(ozgecmisId: string){
       let headers = new Headers();
       headers.append('Authorization', this.authService.token);
       return new Promise((resolve, reject) => {
-      this.http.get(this.url + this.ozgecmisId, {headers: headers})
+      this.http.get(this.url + ozgecmisId, {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           this.ozgecmis = data;

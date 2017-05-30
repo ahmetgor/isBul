@@ -15,12 +15,13 @@ import {ToastController, LoadingController } from 'ionic-angular';
 export class UserAuth {
 
   token: any;
-  // url : string = 'https://servistakip.herokuapp.com/api/auth/';
+  // url : string = 'https://serverisgucvar.herokuapp.com/api/auth/';
+  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
+
   url : string = 'http://127.0.0.1:8080/api/auth/';
   url1: string = 'http://127.0.0.1:8080/api/tools/';
   currentUser: any;
   loading: any;
-
 
   constructor(public http: Http, public storage: Storage,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
@@ -85,7 +86,7 @@ export class UserAuth {
             let data = res.json();
             this.token = data.token;
             // console.log(data+'data');
-            // console.log(JSON.stringify(data)+'jsondata');
+            console.log(JSON.stringify(data)+'user');
             this.currentUser = data.user;
             this.storage.set('token', data.token);
             this.storage.set('user', data.user);
@@ -93,7 +94,7 @@ export class UserAuth {
             resolve(data);
             // resolve(res.json());
           }, (err) => {
-            // console.log(JSON.stringify(err)+'servis err')
+            console.log(JSON.stringify(err)+'servis err')
             reject(err);
           });
     });
@@ -111,12 +112,13 @@ export class UserAuth {
             resolve(res);
             // resolve(res.json());
             this.loading.dismiss();
-            this.presentToast('Şifreniz resetlendi. Emailinize geçici şifre gönderildi');
+            this.presentToast('Şifreniz resetlendi. Emailinize 1 saat geçerli geçici şifre gönderildi');
 
           }, (err) => {
-            // reject(err);
+            let erm = JSON.parse(err._body);
+            console.log(erm.error+'forgot err')
             this.loading.dismiss();
-            this.presentToast('Şifre resetlenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+            this.presentToast("Geçici şifre gönderilemedi. "+erm.error);
           });
     });
   }
@@ -136,9 +138,10 @@ export class UserAuth {
             this.presentToast('Şifreniz değiştirildi.');
 
           }, (err) => {
-            // reject(err);
+            let erm = JSON.parse(err._body);
+            console.log(erm.error+'forgot err')
             this.loading.dismiss();
-            this.presentToast('Şifre değiştirilemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+            this.presentToast("Yeni şifre kaydedilemedi. "+erm.error);
           });
     });
   }
@@ -154,7 +157,7 @@ export class UserAuth {
   presentToast(mesaj) {
   let toast = this.toastCtrl.create({
     message: mesaj,
-    duration: 4000,
+    duration: 5000,
     position: 'top',
     showCloseButton: true,
     closeButtonText: 'OK'

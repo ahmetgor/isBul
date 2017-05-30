@@ -38,7 +38,7 @@ export class SignupPage {
     this.authService.createAccount(details).then((result) => {
       this.loading.dismiss();
       // console.log(result);
-      this.presentToast('Kaydınız yapıldı, Emailinize aktivasyon linki gönderildi. Aktivasyon sonrası giriş yapabilirsiniz');
+      this.presentToast('Kaydınız yapıldı, giriş yapabilirsiniz');
       this.navCtrl.setRoot(LoginPage);
     }, (err) => {
 

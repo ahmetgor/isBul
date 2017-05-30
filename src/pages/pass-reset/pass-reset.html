@@ -19,11 +19,11 @@
 <ion-list>
     <ion-item>
         <ion-label><ion-icon name="mail"></ion-icon></ion-label>
-        <ion-input [(ngModel)]="email" placeholder="Email" type="email"></ion-input>
+        <ion-input [(ngModel)]="email" placeholder="Email" type="email" required></ion-input>
     </ion-item>
 </ion-list>
-<button ion-button block (click)="reset()">Şifre Gönder</button>
-<button ion-button clear small (click)="reset=false;">Geçici şifrem geldi, yeni şifre gireceğim </button>
+<button ion-button block (click)="resetle()">Şİfre Gönder</button>
+<button ion-button clear small (click)="reset=false;">Geçİcİ şİfrem geldİ, yenİ şİfre belİrleyeceğİm </button>
 
 </div>
 
@@ -31,21 +31,21 @@
 <ion-list>
     <ion-item>
         <ion-label><ion-icon name="mail"></ion-icon></ion-label>
-        <ion-input [(ngModel)]="email" placeholder="Email" type="email"></ion-input>
+        <ion-input [(ngModel)]="email" placeholder="Email" type="email" required></ion-input>
     </ion-item>
 
     <ion-item>
         <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-        <ion-input [(ngModel)]="resetPasswordToken" placeholder="Geçici Şifre" type="text"></ion-input>
+        <ion-input [(ngModel)]="resetPasswordToken" placeholder="Geçici Şifre" type="text" required></ion-input>
     </ion-item>
 
     <ion-item>
         <ion-label><ion-icon name="lock"></ion-icon></ion-label>
-        <ion-input [(ngModel)]="password" placeholder="Yeni Şifre" type="password"></ion-input>
+        <ion-input [(ngModel)]="password" placeholder="Yeni Şifre" type="password" required></ion-input>
     </ion-item>
 </ion-list>
-<button ion-button block (click)="setPass()">Yeni Şifre Belirle</button>
-<button ion-button clear small (click)="reset=true;">Emailime geçici şifre gönder</button>
+<button ion-button block (click)="setPass()">Yenİ Şİfre Belİrle</button>
+<button ion-button clear small (click)="reset=true;">Emaİlİme geçİcİ şİfre gönder</button>
 
 </div>
 </ion-content>

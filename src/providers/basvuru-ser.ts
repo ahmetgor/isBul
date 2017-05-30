@@ -8,8 +8,8 @@ import {ToastController, LoadingController } from 'ionic-angular';
 
 @Injectable()
 export class BasvuruSer {
-  // url : string = 'https://servistakip.herokuapp.com/api/kayitlar/';
-  url : string = 'http://127.0.0.1:8080/api/aktiviteler/';
+  url : string = 'https://serverisgucvar.herokuapp.com/api/aktiviteler/';
+  // url : string = 'http://127.0.0.1:8080/api/aktiviteler/';
   kaydedilenList: any = {};
   basvuruList: any = {};
   ozgecmisId: string;
@@ -21,10 +21,11 @@ export class BasvuruSer {
               public loadingCtrl: LoadingController) {
     console.log('Hello BasvuruSer Provider');
     this.ozgecmisId = this.ozgecmisSer.ozgecmisId;
-    this.ozgecmisSer.getOzgecmis()
-    .then(ozgecmis => {
-      this.ozgecmis = ozgecmis;
-    });
+    this.ozgecmis = this.ozgecmisSer.ozgecmis;
+    // this.ozgecmisSer.getOzgecmis(this.ozgecmisId)
+    // .then(ozgecmis => {
+    //   this.ozgecmis = ozgecmis;
+    // });
     console.log(JSON.stringify(this.ozgecmis)+"datadata");
     console.log(JSON.stringify(this.ozgecmisSer.ozgecmisId)+"idid");
 
