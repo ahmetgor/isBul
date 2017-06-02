@@ -46,8 +46,8 @@ export class OzgecmisPage {
 
   checkOzgecmis(ev) {
 
-    if(this.ozgecmis.enabled && (this.ozgecmis.tecrube===undefined || Object.keys(this.ozgecmis.tecrube).length < 1 ||
-      this.ozgecmis.egitim===undefined || Object.keys(this.ozgecmis.egitim).length < 1 ||
+    if(this.ozgecmis.enabled && (Object.keys(this.ozgecmis.tecrube).length < 1 || this.ozgecmis.tecrube[0].firma=="" ||
+      Object.keys(this.ozgecmis.egitim).length < 1 || this.ozgecmis.egitim[0].okul=="" ||
       this.ozgecmis.isim === undefined || this.ozgecmis.isim.trim() == '' ||
       this.ozgecmis.adres === undefined || this.ozgecmis.adres.trim() == '')) {
     console.log(JSON.stringify(this.ozgecmis.egitim)+ 'egitim');
