@@ -152,6 +152,7 @@ presentFilter(myEvent) {
   }
 
   checkKaydedilen(ilanId: any) {
+    // console.log("checkk  "+"sonuc  "+JSON.stringify(ilanId._id));
     return this.basvuruSer.checkKaydedilen(ilanId);
   }
 

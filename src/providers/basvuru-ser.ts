@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { UserAuth } from './user-auth';
 import { OzgecmisSer } from './ozgecmis-ser';
 import {ToastController, LoadingController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+
 
 @Injectable()
 export class BasvuruSer {
@@ -18,19 +20,11 @@ export class BasvuruSer {
 
   constructor(public http: Http, public authService: UserAuth,
               public ozgecmisSer: OzgecmisSer, public toastCtrl: ToastController,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController, public storage: Storage) {
     console.log('Hello BasvuruSer Provider');
-    this.ozgecmisId = this.ozgecmisSer.ozgecmisId;
-    this.ozgecmis = this.ozgecmisSer.ozgecmis;
-    // this.ozgecmisSer.getOzgecmis(this.ozgecmisId)
-    // .then(ozgecmis => {
-    //   this.ozgecmis = ozgecmis;
-    // });
-    console.log(JSON.stringify(this.ozgecmis)+"datadata");
-    console.log(JSON.stringify(this.ozgecmisSer.ozgecmisId)+"idid");
-
-
-
+    // this.ozgecmisId = this.ozgecmisSer.ozgecmisId;
+    this.storage.get('user').then((user) => {
+    this.ozgecmisId = user.ozgecmis;
     this.getBasvurularList()
     .then(ilanlist => {
       this.basvuruList = ilanlist;
@@ -39,7 +33,13 @@ export class BasvuruSer {
     .then(ilanlist => {
       this.kaydedilenList = ilanlist;
     });
-    // this.kaydedilenList = this.getKaydedilenler();
+  });
+
+  this.storage.get('ozgecmis').then((ozgecmis) => {
+    this.ozgecmis = ozgecmis;
+    });
+    console.log(JSON.stringify(this.ozgecmis)+"datadata");
+    console.log(JSON.stringify(this.ozgecmisSer.ozgecmisId)+"idid");
   }
 
   getBasvurular(skip, limit) {
@@ -105,12 +105,13 @@ getKaydedilenler(skip, limit) {
 
   addBasvuru(basvuruId: string) {
     this.showLoader();
+    this.ozgecmis = this.ozgecmisSer.ozgecmis;
     let kayit = {ozgecmis: this.ozgecmisId, basvuru : basvuruId};
-    console.log(JSON.stringify(kayit)+'basvuruId');
+    console.log(JSON.stringify(this.ozgecmis)+'basvuruId');
     if(!this.ozgecmis.enabled) {
       this.loading.dismiss();
       this.presentToast('Pasif özgeçmiş ile başvuru yapılamaz!');
-      return;
+      return new Promise((res, rej)=>{});
     }
 
     return new Promise((resolve, reject) => {
@@ -204,9 +205,10 @@ getKaydedilenler(skip, limit) {
   }
 
   checkBasvuru(ilanId: any) {
+
     // console.log(JSON.stringify(this.basvuruList)+'basvurulist');
     if (Object.keys(this.basvuruList).length == 0) {
-      console.log('check false');
+      // console.log('check false');
       return false;
     }
     return this.basvuruList.findIndex((item) => {
@@ -214,12 +216,13 @@ getKaydedilenler(skip, limit) {
   }
 
   checkKaydedilen(ilanId: any) {
-    // return this.basvuruSer.basvuruList.findIndex((item) => {
-    //     return (item.id == ilanId && item.basvuruldu == 'Y' ); }) > -1
-    // console.log(JSON.stringify(this.kaydedilenList)+'kaydedilenList');
-    // console.log(ilanId._id);
+
+    // console.log('check'+ilanId._id);
+    // for( const key of Object.keys(this.kaydedilenList)) {
+    //   console.log(key +'   ' +JSON.stringify(this.kaydedilenList[key]));
+    // }
     if (Object.keys(this.kaydedilenList).length == 0) {
-      console.log('check false');
+      // console.log(JSON.stringify(Object.keys(this.kaydedilenList)));
       return false;
     }
     return this.kaydedilenList.findIndex((item) => {

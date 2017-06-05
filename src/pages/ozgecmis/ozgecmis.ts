@@ -59,7 +59,8 @@ export class OzgecmisPage {
       console.log(this.ozgecmis.enabled+'after');
       console.log(ev.checked+'after');
     }
-    console.log('cgecksd');
+    this.ozgecmisSer.updateOzgecmisAll(this.ozgecmis);
+    console.log(JSON.stringify(this.ozgecmis));
 
   }
 

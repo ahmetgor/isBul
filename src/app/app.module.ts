@@ -18,6 +18,7 @@ import { BasvuruSer } from '../providers/basvuru-ser';
 import { UserAuth } from '../providers/user-auth';
 import { OzgecmisSer } from '../providers/ozgecmis-ser';
 import { DatePipe } from '../pipes/date-pipe';
+import { Basvuruldu } from '../pipes/basvuruldu';
 import { IonicStorageModule } from '@ionic/storage';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -40,7 +41,8 @@ import { PassResetPage } from '../pages/pass-reset/pass-reset';
     LoginPage,
     SignupPage,
     PassResetPage,
-    DatePipe
+    DatePipe,
+    Basvuruldu
   ],
   imports: [
   IonicModule.forRoot(MyApp, {

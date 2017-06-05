@@ -15,11 +15,11 @@ import {ToastController, LoadingController } from 'ionic-angular';
 export class UserAuth {
 
   token: any;
-  // url : string = 'https://serverisgucvar.herokuapp.com/api/auth/';
-  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
+  url : string = 'https://serverisgucvar.herokuapp.com/api/auth/';
+  url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
 
-  url : string = 'http://127.0.0.1:8080/api/auth/';
-  url1: string = 'http://127.0.0.1:8080/api/tools/';
+  // url : string = 'http://127.0.0.1:8080/api/auth/';
+  // url1: string = 'http://127.0.0.1:8080/api/tools/';
   currentUser: any;
   loading: any;
 

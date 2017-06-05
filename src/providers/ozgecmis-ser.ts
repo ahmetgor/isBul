@@ -9,10 +9,10 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class OzgecmisSer {
 
-  // url : string = 'https://serverisgucvar.herokuapp.com/api/ozgecmis/';
-  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/avatar/';
-  url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
-  url1: string = 'http://127.0.0.1:8080/api/tools/avatar/';
+  url : string = 'https://serverisgucvar.herokuapp.com/api/ozgecmis/';
+  url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/avatar/';
+  // url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
+  // url1: string = 'http://127.0.0.1:8080/api/tools/avatar/';
   ozgecmisId: string;
   user: any;
   loading: any;
@@ -38,6 +38,7 @@ export class OzgecmisSer {
         .map(res => res.json())
         .subscribe(data => {
           this.ozgecmis = data;
+          this.storage.set('ozgecmis', data);
           console.log(JSON.stringify(data)+"data123");
           resolve(data);
         }, (err) => {
@@ -79,6 +80,9 @@ updateOzgecmisAll(kayit: any){
     this.http.put(this.url + kayit._id, JSON.stringify(kayit), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
+        this.ozgecmis = kayit;
+        this.storage.set('ozgecmis', kayit);
+        console.log(JSON.stringify(res)+"updateall");
         resolve(res);
         this.loading.dismiss();
       }, (err) => {
