@@ -18,6 +18,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
+  alert: any;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
@@ -43,6 +44,20 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      this.platform.registerBackButtonAction(() => {
+
+  if(this.nav.canGoBack()){
+    this.nav.pop();
+  }else{
+    if(this.alert){
+      this.alert.dismiss();
+      this.alert =null;
+    }else{
+      this.presentLogout('Uygulama kapansın mı?');
+     }
+  }
+});
     });
   }
 
@@ -52,9 +67,9 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
 
-presentLogout() {
-let alert = this.alertCtrl.create({
-  title: 'Çıkmak istediğinizden emin misiniz?',
+presentLogout(message) {
+ this.alert = this.alertCtrl.create({
+  title: message,
   // message: 'Çıkmak istediğinizden emin misiniz?',
   buttons: [
     {
@@ -68,14 +83,18 @@ let alert = this.alertCtrl.create({
       text: 'Evet',
       handler: () => {
         console.log('Logged out');
-        // this.nav.setRoot(LoginPage);
+        if (message=='Uygulama kapansın mı?') {
+          this.platform.exitApp();
+        }
+        else {
         this.authService.logout();
         this.nav.setRoot(LoginPage);
+      }
       }
     }
   ]
 });
-alert.present();
+this.alert.present();
 }
 
 }
