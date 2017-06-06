@@ -115,7 +115,7 @@ export class OzgecmisDetayPage {
       .then( (resUrl: any) => {
         this.detay.resim.link = resUrl.secure_url;
         console.log(resUrl);
-        console.log(resUrl.secure_url+'secure');
+        // console.log(resUrl.secure_url+'secure');
       });
       // this.detay.resim.link = 'data:image/jpeg;base64,' + file_uri;
   },  (err) => console.log(err));
@@ -161,15 +161,9 @@ export class OzgecmisDetayPage {
     this.navCtrl.pop();
   }
 
-  emailChanged(){
-    this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile ;
-    console.log(this.detay.resim.link);
-
-}
-
 butPressed(media: String){
   this.detay.resim.media = media;
-  this.emailChanged();
+  this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile ;
 }
 
   presentToast(mesaj) {
