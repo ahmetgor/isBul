@@ -14,8 +14,19 @@ color: red;
 
 }
 
-.item ion-avatar {
-  font-size:100px; /* as big size as you want */
+ion-avatar {
+  // font-size:100px; /* as big size as you want */
+  // max-height: 100px !important;
+
+//   max-width: 50px;
+//   max-height: 50px;
+img {
+  // top: 10px;
+  // left: 0px;
+  min-width: 65px ;
+  min-height: 65px ;
+    // font-size: 100px !important;
+}
 }
 
 }

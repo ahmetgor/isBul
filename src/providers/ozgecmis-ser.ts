@@ -59,10 +59,11 @@ updateOzgecmis(paramname: string, kayit: any){
     this.http.put(this.url + this.ozgecmisId + '/' + paramname, JSON.stringify(kayit), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
+        console.log(JSON.stringify(res)+"avatarres");
         resolve(res);
         this.loading.dismiss();
       }, (err) => {
-        // reject(err);
+        console.log(JSON.stringify(err)+"avatarerr");
         this.loading.dismiss();
         this.presentToast('Özgeçmiş güncellenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
