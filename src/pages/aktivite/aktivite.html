@@ -38,7 +38,7 @@
     <button ion-item *ngFor="let basvuru of basvurular" (click)="itemTapped($event, basvuru.basvuru)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-avatar item-left>
-        <img src="../../assets/img/indir.png">
+        <img [src]="basvuru.basvuru.resim">
       </ion-avatar>
 
       <ion-row>
@@ -99,7 +99,7 @@
     <button ion-item *ngFor="let kaydedilen of kaydedilenler" (click)="itemTapped($event, kaydedilen.kaydedilen)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-avatar item-left>
-        <img src="../../assets/img/indir.png">
+        <img [src]="kaydedilen.kaydedilen.resim">
       </ion-avatar>
 
       <ion-row>

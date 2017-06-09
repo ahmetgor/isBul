@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController } from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
-
+import { Storage } from '@ionic/storage';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
 
 /*
@@ -22,14 +22,21 @@ export class OzgecmisPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,public storage: Storage) {
 
               this.ozgecmis = ozgecmisSer.ozgecmis;
+              console.log('ionViewDidLoad OzgecmisPage const');
+
     }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad OzgecmisPage');
-
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter OzgecmisPage const');
+    // this.storage.get('ozgecmis').then((ozgecmis) => {
+    //   console.log("storage"+ JSON.stringify(ozgecmis));
+    //   this.ozgecmis = ozgecmis;
+    //   });
+    this.ozgecmisSer.getOzgecmis(this.ozgecmisSer.ozgecmis._id)
+    .then(ozgecmis => this.ozgecmis)
   }
 
   itemTapped(ev, ozDetay, des, ozDetayList) {
@@ -59,8 +66,10 @@ export class OzgecmisPage {
       console.log(this.ozgecmis.enabled+'after');
       console.log(ev.checked+'after');
     }
-    this.ozgecmisSer.updateOzgecmisAll(this.ozgecmis);
+    else {
+      this.ozgecmisSer.updateOzgecmisAll(this.ozgecmis);
     console.log(JSON.stringify(this.ozgecmis));
+  }
 
   }
 

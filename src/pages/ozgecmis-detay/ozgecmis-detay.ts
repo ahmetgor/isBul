@@ -3,6 +3,8 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { Storage } from '@ionic/storage';
+
 /*
   Generated class for the OzgecmisDetay page.
 
@@ -18,6 +20,7 @@ export class OzgecmisDetayPage {
   detay: any;
   detayList: any;
   des: string;
+  basvurulist: any;
   kisiselFormGroup: FormGroup;
   iletisimFormGroup: FormGroup;
   tecrubeFormGroup: FormGroup;
@@ -29,10 +32,12 @@ export class OzgecmisDetayPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public formBuilder: FormBuilder, public ozgecmisSer: OzgecmisSer,
-              public toastCtrl: ToastController, private camera: Camera) {
+              public toastCtrl: ToastController, private camera: Camera,
+              public storage: Storage) {
 
     this.detay = this.navParams.get('ozDetay');
     this.detayList = this.navParams.get('ozDetayList');
+    this.basvurulist = this.navParams.get('basvurulist');
     if(this.detayList) console.log("oki");
     this.des = this.navParams.get('des');
     // this.detayClone = Object.assign({}, this.detay);
@@ -51,7 +56,7 @@ export class OzgecmisDetayPage {
         });
           //  Validators.pattern('[\(]\d{3}[\)]\d{7}')
   this.iletisimFormGroup = formBuilder.group({
-          telefon: [this.detay.telefon, Validators.compose([Validators.required])],
+          telefon: [this.detay.telefon, [Validators.required]],
           email: [this.detay.email, Validators.required],
           adres: [this.detay.adres, Validators.required]
         });
@@ -127,15 +132,25 @@ export class OzgecmisDetayPage {
 
     if(this.detayList) {
     this.des = this.des.replace("Ekle", "");
-    this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
+    this.ozgecmisSer.updateOzgecmis(this.des, this.detayList, this.basvurulist)
+    .then((res) =>{
+      console.log(JSON.stringify(this.basvurulist)+'detaylist');
+      this.storage.set('ozgecmis', this.basvurulist)
+      .then(res => this.navCtrl.pop() )
+
+    } );
     // this.navCtrl.pop();
 
   }
-  else this.ozgecmisSer.updateOzgecmisAll(this.detay);
-  console.log('updateall');
-
+  else {
+    this.ozgecmisSer.updateOzgecmisAll(this.detay)
+    .then((res) =>{
+      console.log(JSON.stringify(this.detay)+'detaylist');
+      this.storage.set('ozgecmis', this.detay)
+      .then(res => this.navCtrl.pop() )
+    } );
+}
     // ozgecmisSer.updateOzgecmis()
-    this.navCtrl.pop();
   }
 
   delete() {
@@ -148,23 +163,36 @@ export class OzgecmisDetayPage {
     let i = this.detayList.findIndex((item) => {
         return (item === this.detay ); });
     this.detayList.splice(i,1);
-    this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
-    console.log(JSON.stringify(this.detayList)+'detaylist');
-    this.navCtrl.pop();
+    this.ozgecmisSer.updateOzgecmis(this.des, this.detayList, this.basvurulist)
+    .then((res) =>{
+      console.log(JSON.stringify(this.basvurulist)+'detaylist');
+      this.storage.set('ozgecmis', this.basvurulist)
+      .then(res => this.navCtrl.pop() )
+
+    } );
   }
 
   add() {
     console.log(JSON.stringify(this.detay)+'detay');
     this.detayList.push(this.detay);
     this.des = this.des.replace('Ekle', '');
-    this.ozgecmisSer.updateOzgecmis(this.des, this.detayList);
-    this.navCtrl.pop();
+    this.ozgecmisSer.updateOzgecmis(this.des, this.detayList, this.basvurulist)
+      .then((res) =>{
+        console.log(JSON.stringify(this.basvurulist)+'detaylist');
+        this.storage.set('ozgecmis', this.basvurulist)
+        .then(res => this.navCtrl.pop() )
+      });
   }
 
 butPressed(media: String){
   this.detay.resim.media = media;
   this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile ;
 }
+//
+// goBack() {
+//   this.ozgecmisSer.getOzgecmis(this.basvurulist._id)
+//   .then(ozgecmisOrg => this.basvurulist = ozgecmisOrg);
+// }
 
   presentToast(mesaj) {
   let toast = this.toastCtrl.create({

@@ -7,9 +7,15 @@
 <ion-header>
 
   <ion-navbar>
+    <ion-buttons start>
+    <button (click)="goBack()" royal>
+        <ion-icon name="arrow-round-back"></ion-icon>
+    </button>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+</ion-buttons>
+
     <ion-title>Özgeçmiş Detayı</ion-title>
   </ion-navbar>
 </ion-header>
@@ -20,7 +26,7 @@
     <form [formGroup]="kisiselFormGroup">
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
     <!-- <ion-label floating>Ünvan / Son Pozisyon</ion-label> -->
-    <ion-item no-lines *ngIf="!kisiselFormGroup.valid   ">
+    <ion-item no-lines *ngIf="!kisiselFormGroup.valid">
         <p style="color:red;">*Tüm alanlar zorunlu</p>
     </ion-item>
     <ion-item no-lines>
@@ -35,7 +41,7 @@
     <ion-item>
       <ion-label floating>Resim</ion-label>
     <ion-input [disabled]="detay.resim.media=='upload'" item-end [ngModelOptions]="{standalone: true}" type="file"
-              [(ngModel)]="detay.resim.profile" (change)="emailChanged()" placeholder="Sosyal medya profil adınız"></ion-input>
+              [(ngModel)]="detay.resim.profile" placeholder="Sosyal medya profil adınız"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label floating>İsim Soyisim</ion-label>
@@ -131,7 +137,7 @@
 
     <ion-item>
         <ion-label floating>Email</ion-label>
-        <ion-input formControlName="email" type="email" [(ngModel)]="detay.email"></ion-input>
+        <ion-input formControlName="email" type="text" [(ngModel)]="detay.email"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -207,7 +213,7 @@
 
     <ion-item>
       <ion-label floating>Çıkış Tarihi</ion-label>
-      <ion-datetime formControlName="cikis" displayFormat="MMMM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="detay.cikis" cancelText="İptal" doneText="Tamam">
+      <ion-datetime formControlName="cikis" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="detay.cikis" cancelText="İptal" doneText="Tamam">
       </ion-datetime>
     </ion-item>
     <div *ngIf="(des=='tecrubeEkle'||des=='egitimEkle'||des=='yabanciDilEkle'||des=='sertifikaEkle')">

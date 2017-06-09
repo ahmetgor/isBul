@@ -20,7 +20,7 @@ export class OzgecmisSer {
 
   constructor(public http: Http, public authService: UserAuth,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController,
-              public storage: Storage,) {
+              public storage: Storage) {
     console.log('Hello OzgecmisSer Provider');
 
     // this.ozgecmisId = "58eba2904be8d6e2c51b0757";
@@ -48,7 +48,7 @@ export class OzgecmisSer {
     });
 }
 
-updateOzgecmis(paramname: string, kayit: any){
+updateOzgecmis(paramname: string, kayit: any, ozgecmisUpd: any){
   this.showLoader();
   return new Promise((resolve, reject) => {
 
@@ -60,6 +60,7 @@ updateOzgecmis(paramname: string, kayit: any){
       .map(res => res.json())
       .subscribe(res => {
         console.log(JSON.stringify(res)+"avatarres");
+        // this.storage.set('ozgecmis', ozgecmisUpd);
         resolve(res);
         this.loading.dismiss();
       }, (err) => {
@@ -81,8 +82,8 @@ updateOzgecmisAll(kayit: any){
     this.http.put(this.url + kayit._id, JSON.stringify(kayit), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
-        this.ozgecmis = kayit;
-        this.storage.set('ozgecmis', kayit);
+        // this.ozgecmis = kayit;
+        // this.storage.set('ozgecmis', kayit);
         console.log(JSON.stringify(res)+"updateall");
         resolve(res);
         this.loading.dismiss();

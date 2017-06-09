@@ -150,6 +150,7 @@ export class UserAuth {
 
       this.storage.remove('token');
       this.storage.remove('user');
+      this.storage.remove('ozgecmis');
       this.currentUser = undefined;
       this.token = '';
   }
