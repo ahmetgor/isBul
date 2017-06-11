@@ -24,10 +24,10 @@ export class OzgecmisSer {
     console.log('Hello OzgecmisSer Provider');
 
     // this.ozgecmisId = "58eba2904be8d6e2c51b0757";
-    this.storage.get('user').then((user) => {
-    this.ozgecmisId = user.ozgecmis;
-    this.getOzgecmis(user.ozgecmis);
-  });
+  //   this.storage.get('user').then((user) => {
+  //   this.ozgecmisId = user.ozgecmis;
+  //   this.getOzgecmis(user.ozgecmis);
+  // });
   }
 
   getOzgecmis(ozgecmisId: string){
@@ -60,7 +60,8 @@ updateOzgecmis(paramname: string, kayit: any, ozgecmisUpd: any){
       .map(res => res.json())
       .subscribe(res => {
         console.log(JSON.stringify(res)+"avatarres");
-        // this.storage.set('ozgecmis', ozgecmisUpd);
+        this.ozgecmis = ozgecmisUpd;
+        this.storage.set('ozgecmis', ozgecmisUpd);
         resolve(res);
         this.loading.dismiss();
       }, (err) => {
@@ -82,8 +83,8 @@ updateOzgecmisAll(kayit: any){
     this.http.put(this.url + kayit._id, JSON.stringify(kayit), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
-        // this.ozgecmis = kayit;
-        // this.storage.set('ozgecmis', kayit);
+        this.ozgecmis = kayit;
+        this.storage.set('ozgecmis', kayit);
         console.log(JSON.stringify(res)+"updateall");
         resolve(res);
         this.loading.dismiss();

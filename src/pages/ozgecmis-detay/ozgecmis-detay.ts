@@ -186,13 +186,12 @@ export class OzgecmisDetayPage {
 
 butPressed(media: String){
   this.detay.resim.media = media;
-  this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile ;
+  this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile;
 }
-//
-// goBack() {
-//   this.ozgecmisSer.getOzgecmis(this.basvurulist._id)
-//   .then(ozgecmisOrg => this.basvurulist = ozgecmisOrg);
-// }
+
+picChanged() {
+  this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile;
+}
 
   presentToast(mesaj) {
   let toast = this.toastCtrl.create({

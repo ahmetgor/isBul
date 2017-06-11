@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, AlertController, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Deeplinks } from '@ionic-native/deeplinks';
+import { DetayPage } from '../pages/detay/detay';
 
 import { AktivitePage } from '../pages/aktivite/aktivite';
 import { AraPage } from '../pages/ara/ara';
@@ -23,8 +25,8 @@ export class MyApp {
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public alertCtrl: AlertController,
-              public authService: UserAuth) {
+              public alertCtrl: AlertController, public authService: UserAuth,
+              public deeplinks: Deeplinks) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -95,6 +97,21 @@ presentLogout(message) {
   ]
 });
 this.alert.present();
+}
+
+ngAfterViewInit() {
+  this.platform.ready().then(() => {
+    // Convenience to route with a given nav
+    this.deeplinks.routeWithNavController(this.nav, {
+      '/ilan/:ilanId': DetayPage,
+      // '/universal-links-test': AboutPage,
+      // '/products/:productId': ProductPage
+    }).subscribe((match) => {
+      console.log('Successfully routed', match);
+    }, (nomatch) => {
+      console.warn('Unmatched Route', nomatch);
+    });
+  })
 }
 
 }

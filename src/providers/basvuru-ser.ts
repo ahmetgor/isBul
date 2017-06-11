@@ -43,6 +43,7 @@ export class BasvuruSer {
   }
 
   getBasvurular(skip, limit) {
+    this.ozgecmisId = this.authService.currentUser.ozgecmis;
     let headers = new Headers();
     headers.append('Authorization', this.authService.token);
     return new Promise((resolve, reject) => {
@@ -58,6 +59,7 @@ export class BasvuruSer {
 }
 
 getKaydedilenler(skip, limit) {
+  this.ozgecmisId = this.authService.currentUser.ozgecmis;
   let headers = new Headers();
   headers.append('Authorization', this.authService.token);
   return new Promise((resolve, reject) => {
@@ -73,6 +75,7 @@ getKaydedilenler(skip, limit) {
 }
 
   getBasvurularList() {
+    this.ozgecmisId = this.authService.currentUser.ozgecmis;
     let headers = new Headers();
     console.log('servis basvurularlist oluştur');
     headers.append('Authorization', this.authService.token);
@@ -89,6 +92,7 @@ getKaydedilenler(skip, limit) {
   }
 
   getKaydedilenlerList() {
+    this.ozgecmisId = this.authService.currentUser.ozgecmis;
     let headers = new Headers();
     headers.append('Authorization', this.authService.token);
     return new Promise((resolve, reject) => {
@@ -135,6 +139,7 @@ getKaydedilenler(skip, limit) {
   }
 
   deleteBasvuru(basvuruId: string) {
+    this.ozgecmisId = this.authService.currentUser.ozgecmis;
     this.showLoader();
     let i = this.basvuruList.findIndex((item) => {
       return (item.basvuru == basvuruId); });
@@ -182,6 +187,7 @@ getKaydedilenler(skip, limit) {
   }
 
   deleteKaydedilen(kaydedilenId: string) {
+    this.ozgecmisId = this.authService.currentUser.ozgecmis;
     console.log(JSON.stringify(kaydedilenId)+'kaydedilenId delete');
     this.showLoader();
     let i = this.kaydedilenList.findIndex((item) => {

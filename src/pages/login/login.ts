@@ -5,6 +5,7 @@ import { SonucPage } from '../sonuc/sonuc';
 import { SignupPage } from '../signup/signup';
 import { Storage } from '@ionic/storage';
 import { PassResetPage } from '../pass-reset/pass-reset';
+import { OzgecmisSer} from '../../providers/ozgecmis-ser';
 
 /*
   Generated class for the Login page.
@@ -25,7 +26,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public authService: UserAuth,
     public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public storage: Storage) {
+    public storage: Storage, public ozgecmisSer: OzgecmisSer) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -55,7 +56,7 @@ export class LoginPage {
           password: this.password
       };
         // console.log(JSON.stringify(credentials)+'credentials');
-      this.authService.login(credentials).then((result) => {
+      this.authService.login(credentials).then((result: any) => {
         //   this.userService.getUser(credentials.email)
         //   .then((user) => {
         //   this.storage.set('user', user);
@@ -65,19 +66,28 @@ export class LoginPage {
         //     // this.presentToast();
         //     // console.log(err);
         // });
-        this.loading.dismiss();
-        this.navCtrl.setRoot(SonucPage);
+        console.log(JSON.stringify(result)+"result");
+        this.ozgecmisSer.getOzgecmis(result.user.ozgecmis)
+        .then((res) => {this.loading.dismiss();
+                this.navCtrl.setRoot(SonucPage);
+              }, (err) => {
+                  this.loading.dismiss();
+                    console.log(JSON.stringify(err._body)+'asdasd');
+                  // let msg = JSON.parse(err._body);
+                  this.presentToast("Özgeçmiş alınamadı, çıkış yapıp tekrar deneyin");
+              });
+
       }, (err) => {
           this.loading.dismiss();
             console.log(JSON.stringify(err._body)+'asdasd');
           // let msg = JSON.parse(err._body);
-          this.presentToast();
+          this.presentToast("Girdiğiniz bilgiler yanlış veya hesabınız aktif değil!");
       });
   }
 
-  presentToast() {
+  presentToast(message) {
   let toast = this.toastCtrl.create({
-    message: 'Girdiğiniz bilgiler yanlış veya hesabınız aktif değil!',
+    message: message,
     duration: 4000,
     position: 'top',
     showCloseButton: true,

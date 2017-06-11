@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { IlanSer } from '../../providers/ilan-ser';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 /*
   Generated class for the Detay page.
 
@@ -17,19 +19,27 @@ export class DetayPage {
 ilan: any;
 basvuruList: Array<any>;
 kaydedilenList: Array<any>;
+ilanId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ilanSer: IlanSer, public basvuruSer: BasvuruSer ) {
+              public ilanSer: IlanSer, public basvuruSer: BasvuruSer,
+              private socialSharing: SocialSharing) {
 
                  this.ilan = this.navParams.get('ilan');
                  this.basvuruList = this.navParams.get('basvurulist');
                  this.kaydedilenList = this.navParams.get('kaydedilenlist');
+                 this.ilanId = this.navParams.get('ilanId');
                 //  this.basvuruList.push({id: 'hebe'});
                  console.log(JSON.stringify(this.kaydedilenList)+'detay basvuru');
               }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetayPage');
+    //Deeplink
+    if(!this.ilan) {
+      this.ilanSer.getIlan(this.ilanId)
+      .then((ilan) => this.ilan = ilan)
+    }
   }
 
   getDays(d1) {
@@ -79,6 +89,25 @@ kaydedilenList: Array<any>;
   checkKaydedilen(ilanId: any) {
     return this.basvuruSer.checkKaydedilen(ilanId);
   }
+
+share() {
+  // this is the complete list of currently supported params you can pass to the plugin (all optional)
+var options = {
+  message: 'share this', // not supported on some apps (Facebook, Instagram)
+  subject: 'the subject', // fi. for email
+  files: ['', ''], // an array of filenames either locally or remotely
+  url: 'https://www.website.com/foo/#bar?a=b',
+  chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+}
+this.socialSharing.share('message', 'subject', this.ilan.resim, 'https://www.website.com/foo/#bar?a=b')
+// this.socialSharing.shareWithOptions(options)
+.then((result) => {
+    console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+    console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+}).catch((msg) => {
+    console.log("Sharing failed with message: " + msg);
+});
+}
 
   // checkKaydet(ilanId) {
   //   return this.basvuruList.findIndex((item) => {

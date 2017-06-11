@@ -24,19 +24,18 @@ export class OzgecmisPage {
               public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer,
               public alertCtrl: AlertController,public storage: Storage) {
 
-              this.ozgecmis = ozgecmisSer.ozgecmis;
+              // this.ozgecmis = ozgecmisSer.ozgecmis;
               console.log('ionViewDidLoad OzgecmisPage const');
-
     }
 
   ionViewWillEnter() {
     console.log('ionViewWillEnter OzgecmisPage const');
-    // this.storage.get('ozgecmis').then((ozgecmis) => {
-    //   console.log("storage"+ JSON.stringify(ozgecmis));
-    //   this.ozgecmis = ozgecmis;
-    //   });
-    this.ozgecmisSer.getOzgecmis(this.ozgecmisSer.ozgecmis._id)
-    .then(ozgecmis => this.ozgecmis)
+    this.storage.get('ozgecmis').then((ozgecmis) => {
+      console.log("storage"+ JSON.stringify(ozgecmis));
+      this.ozgecmis = ozgecmis;
+      });
+    // this.ozgecmisSer.getOzgecmis(this.ozgecmisSer.ozgecmis._id)
+    // .then(ozgecmis => this.ozgecmis)
   }
 
   itemTapped(ev, ozDetay, des, ozDetayList) {

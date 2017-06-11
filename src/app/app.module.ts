@@ -1,6 +1,7 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 import { AktivitePage } from '../pages/aktivite/aktivite';
 import { AraPage } from '../pages/ara/ara';
@@ -20,6 +21,7 @@ import { OzgecmisSer } from '../providers/ozgecmis-ser';
 import { DatePipe } from '../pipes/date-pipe';
 import { Basvuruldu } from '../pipes/basvuruldu';
 import { IonicStorageModule } from '@ionic/storage';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -74,6 +76,8 @@ import { PassResetPage } from '../pages/pass-reset/pass-reset';
     OzgecmisSer,
     Geolocation,
     Camera,
+    Deeplinks,
+    SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

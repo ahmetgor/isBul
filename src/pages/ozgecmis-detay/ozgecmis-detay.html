@@ -7,14 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-buttons start>
+    <!-- <ion-buttons start>
     <button (click)="goBack()" royal>
         <ion-icon name="arrow-round-back"></ion-icon>
-    </button>
+    </button> -->
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-</ion-buttons>
+<!-- </ion-buttons> -->
 
     <ion-title>Özgeçmiş Detayı</ion-title>
   </ion-navbar>
@@ -40,8 +40,8 @@
     </ion-item>
     <ion-item>
       <ion-label floating>Resim</ion-label>
-    <ion-input [disabled]="detay.resim.media=='upload'" item-end [ngModelOptions]="{standalone: true}" type="file"
-              [(ngModel)]="detay.resim.profile" placeholder="Sosyal medya profil adınız"></ion-input>
+    <ion-input [disabled]="detay.resim.media=='upload'" [ngModelOptions]="{standalone: true}" type="text"
+              [(ngModel)]="detay.resim.profile" placeholder="Sosyal medya profil adınız" (change)="picChanged()"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label floating>İsim Soyisim</ion-label>
@@ -60,7 +60,7 @@
     <ion-item>
     <ion-label floating>TC Vatandaşı</ion-label>
     <ion-select formControlName="tc" [(ngModel)]="detay.tc" cancelText="İptal" okText="Tamam">
-      <ion-option value="Evet" selected="true">Evet</ion-option>
+      <ion-option value="Evet" >Evet</ion-option>
       <ion-option value="Hayır">Hayır</ion-option>
     </ion-select>
     </ion-item>
@@ -68,7 +68,7 @@
     <ion-item>
     <ion-label floating>Askerlik</ion-label>
     <ion-select formControlName="askerlik" [(ngModel)]="detay.askerlik" cancelText="İptal" okText="Tamam">
-      <ion-option value="Yapıldı/Muaf" selected="true">Yapıldı/Muaf</ion-option>
+      <ion-option value="Yapıldı/Muaf" >Yapıldı/Muaf</ion-option>
       <ion-option value="Tecilli/Yapılmadı">Tecilli/Yapılmadı</ion-option>
     </ion-select>
     </ion-item>
@@ -76,7 +76,7 @@
     <ion-item>
     <ion-label floating>Medeni Hal</ion-label>
     <ion-select formControlName="medeni" [(ngModel)]="detay.medeni" cancelText="İptal" okText="Tamam">
-      <ion-option value="Evli" selected="true">Evli</ion-option>
+      <ion-option value="Evli" >Evli</ion-option>
       <ion-option value="Hayır">Hayır</ion-option>
     </ion-select>
     </ion-item>
