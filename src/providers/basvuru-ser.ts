@@ -128,8 +128,8 @@ getKaydedilenler(skip, limit) {
         .map(res => res.json())
         .subscribe(res => {
           this.basvuruList.push(kayit);
-          resolve(res);
           this.loading.dismiss();
+          resolve(res);
         }, (err) => {
           // reject(err);
           this.loading.dismiss();
@@ -151,8 +151,8 @@ getKaydedilenler(skip, limit) {
           this.http.delete(this.url + `basvuru?ozgecmis=${this.ozgecmisId}&basvuruid=${basvuruId}`, {headers: headers})
           .subscribe((res) => {
             this.basvuruList.splice(i,1);
+            this.loading.dismiss();
               resolve(res);
-              this.loading.dismiss();
           }, (err) => {
               // reject(err);
               this.presentToast('Başvuru silinemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
@@ -176,8 +176,8 @@ getKaydedilenler(skip, limit) {
         .map(res => res.json())
         .subscribe(res => {
           this.kaydedilenList.push(kayit);
-          resolve(res);
           this.loading.dismiss();
+          resolve(res);
         }, (err) => {
           // reject(err);
           this.presentToast('Kaydedilen eklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
@@ -200,8 +200,8 @@ getKaydedilenler(skip, limit) {
           this.http.delete(this.url + `kaydedilen?ozgecmis=${this.ozgecmisId}&kaydedilenid=${kaydedilenId}`, {headers: headers})
           .subscribe((res) => {
             this.kaydedilenList.splice(i,1);
+            this.loading.dismiss();
               resolve(res);
-              this.loading.dismiss();
           }, (err) => {
               // reject(err);
               this.loading.dismiss();

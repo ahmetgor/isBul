@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { IlanSer } from '../../providers/ilan-ser';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { FacebookService, InitParams,  UIParams, UIResponse } from 'ngx-facebook';
 
 /*
   Generated class for the Detay page.
@@ -23,7 +24,7 @@ ilanId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public basvuruSer: BasvuruSer,
-              private socialSharing: SocialSharing) {
+              private socialSharing: SocialSharing, private fb: FacebookService) {
 
                  this.ilan = this.navParams.get('ilan');
                  this.basvuruList = this.navParams.get('basvurulist');
@@ -31,7 +32,28 @@ ilanId: string;
                  this.ilanId = this.navParams.get('ilanId');
                 //  this.basvuruList.push({id: 'hebe'});
                  console.log(JSON.stringify(this.kaydedilenList)+'detay basvuru');
-              }
+
+    let initParams: InitParams = {
+      appId: '112498582687614',
+      xfbml: true,
+      version: 'v2.9'
+    };
+
+    fb.init(initParams);
+  }
+
+  sharef(url: string) {
+
+  let params: UIParams = {
+    href: 'https://isgucvar.herokuapp.com/',
+    method: 'share'
+  };
+
+  this.fb.ui(params)
+    .then((res: UIResponse) => console.log(res))
+    .catch((e: any) => console.error(e));
+
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetayPage');
@@ -91,6 +113,12 @@ ilanId: string;
   }
 
 share() {
+
+//   FB.ui({
+//   method: 'share',
+//   mobile_iframe: true,
+//   href: 'https://developers.facebook.com/docs/',
+// }, function(response){});
   // this is the complete list of currently supported params you can pass to the plugin (all optional)
 var options = {
   message: 'share this', // not supported on some apps (Facebook, Instagram)

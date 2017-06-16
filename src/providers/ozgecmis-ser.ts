@@ -62,8 +62,8 @@ updateOzgecmis(paramname: string, kayit: any, ozgecmisUpd: any){
         console.log(JSON.stringify(res)+"avatarres");
         this.ozgecmis = ozgecmisUpd;
         this.storage.set('ozgecmis', ozgecmisUpd);
-        resolve(res);
         this.loading.dismiss();
+        resolve(res);
       }, (err) => {
         console.log(JSON.stringify(err)+"avatarerr");
         this.loading.dismiss();
@@ -86,8 +86,8 @@ updateOzgecmisAll(kayit: any){
         this.ozgecmis = kayit;
         this.storage.set('ozgecmis', kayit);
         console.log(JSON.stringify(res)+"updateall");
-        resolve(res);
         this.loading.dismiss();
+        resolve(res);
       }, (err) => {
         // reject(err);
         this.loading.dismiss();
@@ -107,8 +107,8 @@ updateAvatar(resim: String){
     this.http.post(this.url1, { "resim" : resim }, {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
-        resolve(res);
         this.loading.dismiss();
+        resolve(res);
       }, (err) => {
         // reject(err);
         this.loading.dismiss();

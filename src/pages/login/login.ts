@@ -37,7 +37,7 @@ export class LoginPage {
         })
         .catch((err) => {return;
         });
-        this.showLoader();
+        this.showLoader('Bilgiler yükleniyor...');
         //Check if already authenticated
         this.authService.checkAuthentication().then((res) => {
             // console.log("Already authorized");
@@ -50,7 +50,7 @@ export class LoginPage {
     }
 
   login(){
-      this.showLoader();
+      this.showLoader('Giriş Yapılıyor...');
       let credentials = {
           email: this.email,
           password: this.password
@@ -107,9 +107,9 @@ resetPass(){
   this.navCtrl.push(PassResetPage);
 }
 
-showLoader(){
+showLoader(message){
   this.loading = this.loadingCtrl.create({
-      content: 'Giriş yapılıyor...'
+      content: message
   });
   this.loading.present();
 }

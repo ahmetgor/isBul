@@ -132,9 +132,9 @@ export class UserAuth {
 
         this.http.post(this.url1+'reset', JSON.stringify(user), {headers: headers})
           .subscribe(res => {
+            this.loading.dismiss();
             resolve(res);
             // resolve(res.json());
-            this.loading.dismiss();
             this.presentToast('Şifreniz değiştirildi.');
 
           }, (err) => {

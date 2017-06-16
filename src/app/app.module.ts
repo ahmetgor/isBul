@@ -28,6 +28,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Camera} from '@ionic-native/camera';
 import { PassResetPage } from '../pages/pass-reset/pass-reset';
+import { FacebookModule } from 'ngx-facebook';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { PassResetPage } from '../pages/pass-reset/pass-reset';
   IonicModule.forRoot(MyApp, {
   monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık' ],
 }),
-  IonicStorageModule.forRoot()
+  IonicStorageModule.forRoot(),
+  FacebookModule.forRoot()
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [

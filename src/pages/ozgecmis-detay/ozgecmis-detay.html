@@ -26,9 +26,7 @@
     <form [formGroup]="kisiselFormGroup">
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
     <!-- <ion-label floating>Ünvan / Son Pozisyon</ion-label> -->
-    <ion-item no-lines *ngIf="!kisiselFormGroup.valid">
-        <p style="color:red;">*Tüm alanlar zorunlu</p>
-    </ion-item>
+
     <ion-item no-lines>
     <ion-thumbnail item-left>
     <img [src]="detay.resim.link">
@@ -99,6 +97,9 @@
         <ion-label floating>Çalışılan yıl</ion-label>
         <ion-input formControlName="yilTecrube" type="number" [(ngModel)]="detay.yilTecrube"></ion-input>
     </ion-item>
+    <ion-item no-lines *ngIf="!kisiselFormGroup.valid">
+        <p style="color:red;">Tüm alanlar zorunlu</p>
+    </ion-item>
     <div *ngIf="(des=='tecrubeEkle'||des=='egitimEkle'||des=='yabanciDilEkle'||des=='sertifikaEkle')">
       <p></p>
   <button ion-button block icon-left color="secondary" [disabled]="!kisiselFormGroup.valid" (click)="add()">
@@ -127,9 +128,6 @@
   <div *ngIf="des=='iletisim'&&detay">
     <form [formGroup]="iletisimFormGroup">
 
-      <ion-item no-lines *ngIf="!iletisimFormGroup.valid">
-          <p style="color:red;">*Tüm alanlar zorunlu</p>
-      </ion-item>
     <ion-item>
         <ion-label floating>Telefon</ion-label>
         <ion-input formControlName="telefon" type="number" [(ngModel)]="detay.telefon"></ion-input>
@@ -143,6 +141,9 @@
     <ion-item>
         <ion-label floating>Adres:</ion-label>
         <ion-input formControlName="adres" type="text" [(ngModel)]="detay.adres"></ion-input>
+    </ion-item>
+    <ion-item no-lines *ngIf="!iletisimFormGroup.valid">
+        <p style="color:red;">Tüm alanlar zorunlu</p>
     </ion-item>
     <div *ngIf="(des=='tecrubeEkle'||des=='egitimEkle'||des=='yabanciDilEkle'||des=='sertifikaEkle')">
       <p></p>
@@ -172,9 +173,6 @@
   <div *ngIf="(des=='tecrube'||des=='tecrubeEkle')&&detay">
     <form [formGroup]="tecrubeFormGroup">
 
-      <ion-item no-lines *ngIf="!tecrubeFormGroup.valid">
-          <p style="color:red;">*Tüm alanlar zorunlu</p>
-      </ion-item>
     <ion-item>
         <ion-label floating>Firma</ion-label>
         <ion-input formControlName="firma" type="text" [(ngModel)]="detay.firma"></ion-input>
@@ -216,6 +214,10 @@
       <ion-datetime formControlName="cikis" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY" [(ngModel)]="detay.cikis" cancelText="İptal" doneText="Tamam">
       </ion-datetime>
     </ion-item>
+
+    <ion-item no-lines *ngIf="!tecrubeFormGroup.valid">
+        <p style="color:red;">Tüm alanlar zorunlu</p>
+    </ion-item>
     <div *ngIf="(des=='tecrubeEkle'||des=='egitimEkle'||des=='yabanciDilEkle'||des=='sertifikaEkle')">
       <p></p>
   <button ion-button block icon-left color="secondary" [disabled]="!tecrubeFormGroup.valid" (click)="add()">
@@ -244,9 +246,6 @@
   <div *ngIf="(des=='egitim'||des=='egitimEkle')&&detay">
     <form [formGroup]="egitimFormGroup">
 
-      <ion-item no-lines *ngIf="!egitimFormGroup.valid">
-          <p style="color:red;">*Tüm alanlar zorunlu</p>
-      </ion-item>
     <ion-item>
         <ion-label floating>Okul</ion-label>
         <ion-input formControlName="okul" type="text" [(ngModel)]="detay.okul"></ion-input>
@@ -282,6 +281,10 @@
         <ion-label floating>Ülke</ion-label>
         <ion-input formControlName="ulke" type="text" [(ngModel)]="detay.ulke"></ion-input>
     </ion-item>
+
+    <ion-item no-lines *ngIf="!egitimFormGroup.valid">
+        <p style="color:red;">Tüm alanlar zorunlu</p>
+    </ion-item>
     <div *ngIf="(des=='tecrubeEkle'||des=='egitimEkle'||des=='yabanciDilEkle'||des=='sertifikaEkle')">
       <p></p>
   <button ion-button block icon-left color="secondary" [disabled]="!egitimFormGroup.valid" (click)="add()">
@@ -310,9 +313,6 @@
   <div *ngIf="(des=='sertifika'||des=='sertifikaEkle')&&detay">
     <form [formGroup]="sertifikaFormGroup">
 
-      <ion-item no-lines *ngIf="!sertifikaFormGroup.valid">
-          <p style="color:red;">*Tüm alanlar zorunlu</p>
-      </ion-item>
     <ion-item>
         <ion-label floating>Ad</ion-label>
         <ion-input formControlName="ad" type="text" [(ngModel)]="detay.ad"></ion-input>
@@ -335,6 +335,9 @@
     Ekle</button>
   </div>
 
+    <ion-item no-lines *ngIf="!sertifikaFormGroup.valid">
+        <p style="color:red;">Tüm alanlar zorunlu</p>
+    </ion-item>
   <div *ngIf="(des!='tecrubeEkle'&&des!='egitimEkle'&&des!='yabanciDilEkle'&&des!='sertifikaEkle')">
     <p></p>
     <ion-row>
@@ -356,9 +359,6 @@
   <div *ngIf="(des=='yabanciDil'||des=='yabanciDilEkle')&&detay">
     <form [formGroup]="yabanciDilFormGroup">
 
-      <ion-item no-lines *ngIf="!yabanciDilFormGroup.valid">
-          <p style="color:red;">*Tüm alanlar zorunlu</p>
-      </ion-item>
     <ion-item>
         <ion-label floating>Dil</ion-label>
         <ion-input formControlName="dil" type="text" [(ngModel)]="detay.dil"></ion-input>
@@ -372,6 +372,10 @@
       <ion-option value="Çok İyi">Çok İyi</ion-option>
       <ion-option value="Mükemmel">Mükemmel</ion-option>
     </ion-select>
+    </ion-item>
+
+    <ion-item no-lines *ngIf="!yabanciDilFormGroup.valid">
+        <p style="color:red;">Tüm alanlar zorunlu</p>
     </ion-item>
     <div *ngIf="(des=='tecrubeEkle'||des=='egitimEkle'||des=='yabanciDilEkle'||des=='sertifikaEkle')">
       <p></p>
@@ -401,15 +405,15 @@
   <div *ngIf="des=='bilgisayar'&&detay">
     <form [formGroup]="bilgisayarFormGroup">
 
-      <ion-item no-lines *ngIf="!bilgisayarFormGroup.valid">
-          <p style="color:red;">*Bu alan zorunlu</p>
-      </ion-item>
     <ion-item>
     <ion-label floating>Bilgisayar Teknolojileri</ion-label>
     <ion-input formControlName="bilgisayar" type="text" [(ngModel)]="detay.bilgisayar" placeholder="Örn: Excel, SQL"></ion-input>
     </ion-item>
     <div *ngIf="(des=='tecrubeEkle'||des=='egitimEkle'||des=='yabanciDilEkle'||des=='sertifikaEkle')">
       <p></p>
+    <ion-item no-lines *ngIf="!bilgisayarFormGroup.valid">
+        <p style="color:red;">Bu alan zorunlu</p>
+    </ion-item>
   <button ion-button block icon-left color="secondary" [disabled]="!bilgisayarFormGroup.valid" (click)="add()">
     <ion-icon name="add-circle"></ion-icon>
     Ekle</button>
