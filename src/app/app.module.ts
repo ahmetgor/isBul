@@ -29,6 +29,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { Camera} from '@ionic-native/camera';
 import { PassResetPage } from '../pages/pass-reset/pass-reset';
 import { FacebookModule } from 'ngx-facebook';
+import { Facebook } from '@ionic-native/facebook';
 
 
 @NgModule({
@@ -82,6 +83,7 @@ import { FacebookModule } from 'ngx-facebook';
     Camera,
     Deeplinks,
     SocialSharing,
+    Facebook,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

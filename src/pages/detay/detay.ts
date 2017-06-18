@@ -1,16 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Platform, ActionSheetController } from 'ionic-angular';
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { IlanSer } from '../../providers/ilan-ser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { FacebookService, InitParams,  UIParams, UIResponse } from 'ngx-facebook';
+import { Facebook } from '@ionic-native/facebook';
 
-/*
-  Generated class for the Detay page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-detay',
   templateUrl: 'detay.html'
@@ -24,7 +19,9 @@ ilanId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public basvuruSer: BasvuruSer,
-              private socialSharing: SocialSharing, private fb: FacebookService) {
+              private socialSharing: SocialSharing, private fb: FacebookService,
+              private face: Facebook, public plt: Platform,
+              public actionSheetCtrl: ActionSheetController) {
 
                  this.ilan = this.navParams.get('ilan');
                  this.basvuruList = this.navParams.get('basvurulist');
@@ -40,20 +37,37 @@ ilanId: string;
     };
 
     fb.init(initParams);
+    // face.browserInit(112498582687614, 'v2.9');
   }
 
-  sharef(url: string) {
-
-  let params: UIParams = {
-    href: 'https://isgucvar.herokuapp.com/',
-    method: 'share'
-  };
-
-  this.fb.ui(params)
-    .then((res: UIResponse) => console.log(res))
-    .catch((e: any) => console.error(e));
-
+  shareFace() {
+    let options = 	{
+  method: "share",
+	href: "https://isgucvar.herokuapp.com/"+this.ilan._id,
+	caption: "Such caption, very feed.",
+	description: "Much description",
+	picture: this.ilan.resim
 }
+let params: UIParams = {
+  href: 'https://isgucvar.herokuapp.com/'+this.ilan._id,
+  method: 'share'
+};
+
+if(this.plt.is('ios') || this.plt.is('android')) {
+    this.face.showDialog( options)
+    .then((res) => console.log(res)+"res")
+    .catch((e: any) => console.error(e)+"error");
+    // this.fb.ui(params)
+    // .then((res: UIResponse) => console.log(res))
+    // .catch((e: any) => console.error(e));
+  }
+
+  else {
+      this.fb.ui(params)
+      .then((res: UIResponse) => console.log(res))
+      .catch((e: any) => console.error(e));
+    }
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetayPage');
@@ -112,29 +126,55 @@ ilanId: string;
     return this.basvuruSer.checkKaydedilen(ilanId);
   }
 
-share() {
+  presentActionSheet() {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: 'Paylaş',
+        buttons: [
+          {
+            text: 'Facebook',
+            icon: 'logo-facebook',
+            handler: () => {
+              this.shareFace();
+            }
+          },{
+            text: 'LinkedIn',
+            icon: 'logo-linkedin',
+            handler: () => {
+              console.log('Archive clicked');
+            }
+          },{
+            text: 'İptal',
+            role: 'cancel',
+            icon: 'close',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          }
+        ]
+      });
+      actionSheet.present();
+    }
 
-//   FB.ui({
-//   method: 'share',
-//   mobile_iframe: true,
-//   href: 'https://developers.facebook.com/docs/',
-// }, function(response){});
-  // this is the complete list of currently supported params you can pass to the plugin (all optional)
+share() {
+  if(this.plt.is('ios') || this.plt.is('android')) {
 var options = {
-  message: 'share this', // not supported on some apps (Facebook, Instagram)
-  subject: 'the subject', // fi. for email
-  files: ['', ''], // an array of filenames either locally or remotely
-  url: 'https://www.website.com/foo/#bar?a=b',
-  chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+  message: "share this\n", // not supported on some apps (Facebook, Instagram)
+  // subject: 'the subject', // fi. for email
+  // files: [this.ilan.resim], // an array of filenames either locally or remotely
+  url: "https://isgucvar.herokuapp.com/ilan/"+this.ilan._id,
+  chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
 }
-this.socialSharing.share('message', 'subject', this.ilan.resim, 'https://www.website.com/foo/#bar?a=b')
-// this.socialSharing.shareWithOptions(options)
+// this.socialSharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null, "https://isgucvar.herokuapp.com/", "paste it")
+// this.socialSharing.share('message', 'subject', this.ilan.resim, 'https://www.website.com/foo/#bar?a=b')
+this.socialSharing.shareWithOptions(options)
 .then((result) => {
     console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
     console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
 }).catch((msg) => {
     console.log("Sharing failed with message: " + msg);
 });
+}
+else this.presentActionSheet();
 }
 
   // checkKaydet(ilanId) {
