@@ -109,7 +109,7 @@ getKaydedilenler(skip, limit) {
 
   addBasvuru(basvuruId: string) {
     this.showLoader();
-    this.ozgecmis = this.ozgecmisSer.ozgecmis;
+    // this.ozgecmis = this.ozgecmisSer.ozgecmis;
     let kayit = {ozgecmis: this.ozgecmisId, basvuru : basvuruId};
     console.log(JSON.stringify(this.ozgecmis)+'basvuruId');
     if(!this.ozgecmis.enabled) {

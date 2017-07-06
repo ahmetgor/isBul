@@ -103,11 +103,11 @@ export class OzgecmisDetayPage {
 
    openGallery (): void {
      const cameraOptions: CameraOptions = {
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    // sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: this.camera.DestinationType.DATA_URL,
     quality: 100,
-    targetWidth: 1000,
-    targetHeight: 1000,
+    targetWidth: 100,
+    targetHeight: 100,
     encodingType: this.camera.EncodingType.JPEG
     // correctOrientation: true
     // mediaType: this.camera.MediaType.PICTURE
