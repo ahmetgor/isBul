@@ -14,11 +14,27 @@ import { UserAuth } from './user-auth';
 @Injectable()
 export class IlanSer {
 
-  url : string = 'https://serverisgucvar.herokuapp.com/api/ilanlar/';
-  // url : string = 'http://127.0.0.1:8080/api/ilanlar/';
+  // url : string = 'https://serverisgucvar.herokuapp.com/api/ilanlar/';
+  url : string = 'http://127.0.0.1:8080/api/ilanlar/';
   // ilanlar: Array<any>;
   basvurKaydetList: any;
   loading: any;
+  sehirler = [
+    {"sehir":"İstanbul"},{"sehir":"Ankara"},{"sehir":"İzmir"},{"sehir":"Adana"},{"sehir":"Adıyaman"},{"sehir":"Afyonkarahisar"}
+   ,{"sehir":"Ağrı"},{"sehir":"Aksaray"},{"sehir":"Amasya"},{"sehir":"Antalya"},{"sehir":"Ardahan"},{"sehir":"Artvin"}
+   ,{"sehir":"Aydın"},{"sehir":"Balıkesir"},{"sehir":"Bartın"},{"sehir":"Batman"},{"sehir":"Bayburt"},{"sehir":"Bilecik"}
+   ,{"sehir":"Bingöl"},{"sehir":"Bitlis"},{"sehir":"Bolu"},{"sehir":"Burdur"},{"sehir":"Bursa"},{"sehir":"Çanakkale"},{"sehir":"Çankırı"}
+   ,{"sehir":"Çorum"},{"sehir":"Denizli"},{"sehir":"Diyarbakır"},{"sehir":"Düzce"},{"sehir":"Edirne"},{"sehir":"Elazığ"}
+   ,{"sehir":"Erzincan"},{"sehir":"Erzurum"},{"sehir":"Eskişehir"},{"sehir":"Gaziantep"},{"sehir":"Giresun"},{"sehir":"Gümüşhane"}
+   ,{"sehir":"Hakkari"},{"sehir":"Hatay"},{"sehir":"Iğdır"},{"sehir":"Isparta"},{"sehir":"Kahramanmaraş"},{"sehir":"Karabük"}
+   ,{"sehir":"Karaman"},{"sehir":"Kars"},{"sehir":"Kastamonu"},{"sehir":"Kayseri"},{"sehir":"Kırıkkale"},{"sehir":"Kırklareli"}
+   ,{"sehir":"Kırşehir"},{"sehir":"Kilis"},{"sehir":"Kocaeli"},{"sehir":"Konya"},{"sehir":"Kütahya"},{"sehir":"Malatya"}
+   ,{"sehir":"Manisa"},{"sehir":"Mardin"},{"sehir":"Mersin"},{"sehir":"Muğla"},{"sehir":"Muş"},{"sehir":"Nevşehir"}
+   ,{"sehir":"Niğde"},{"sehir":"Ordu"},{"sehir":"Osmaniye"},{"sehir":"Rize"},{"sehir":"Sakarya"},{"sehir":"Samsun"}
+   ,{"sehir":"Siirt"},{"sehir":"Sinop"},{"sehir":"Sivas"},{"sehir":"Şırnak"},{"sehir":"Tekirdağ"},{"sehir":"Tokat"}
+   ,{"sehir":"Trabzon"},{"sehir":"Tunceli"},{"sehir":"Şanlıurfa"},{"sehir":"Uşak"},{"sehir":"Van"},{"sehir":"Yalova"}
+   ,{"sehir":"Yozgat"},{"sehir":"Zonguldak"}
+  ];
 
   constructor(public http: Http, public authService: UserAuth,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
@@ -91,56 +107,5 @@ showLoader(){
     this.loading.present();
 }
 
-  // createDb() {
-  //    this.ilanlar = [
-  //     {id: 13, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'Kahramanmaraş', tip:'Yarı Z.', egitim: ['Lisans', 'Lise'], tecrube: ['Az Tecrübeli (Junior)', 'Orta Tecrübeli (Midlevel)'], ehliyet: 'B', askerlik: 'Yapıldı/Muaf', goruntulenme: '', basvuru: '', olusturan:'', olusurmaTarih:'03/25/2017', guncelleyen:'', guncellemeTarih:'03/25/2017' },
-  //     {id: 14, baslik: 'Analist', firma: 'I2I-Systems', aciklama: 'analist aranıyor', il: 'İstanbul', tip:'Tam Z.', egitim: ['Lisans', 'Lise'], tecrube: ['Çok Tecrübeli (Senior)'], ehliyet: 'B', askerlik: 'Yapıldı/Muaf', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'03/25/2016', guncelleyen:'', guncellemeTarih:'03/25/2016' },
-  //     {id: 15, baslik: 'Tester', firma: 'I2I-Systems', aciklama: 'tester aranıyor', il: 'İstanbul', tip:'', egitim: ['Yüksek Lisans'], tecrube:['Az Tecrübeli (Junior)', 'Orta Tecrübeli (Midlevel)'], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-  //     {id: 16, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: ['Az Tecrübeli (Junior)', 'Orta Tecrübeli (Midlevel)'], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-  //     {id: 17, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-  //     {id: 18, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-  //     {id: 19, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' },
-  //     {id: 20, baslik: 'Developer', firma: 'I2I-Systems', aciklama: 'developer aranıyor', il: 'İstanbul', tip:'', egitim: [], tecrube: [], ehliyet: '', askerlik: '', goruntulenme: '', başvuru: '', olusturan:'', olusurmaTarih:'', guncelleyen:'', guncellemeTarih:'' }
-  //   ];
-  //   return this.ilanlar;
-  // }
-
-//   getBasvurKaydet() {
-//     return [ {id: 13, basvuruldu: 'N', kaydedildi: 'Y'}, {id: 14, basvuruldu: 'Y', kaydedildi: 'N'} ];
-//   }
-//
-//   getOzgecmis() {
-//     let ozgecmis = {
-// "id": "1",
-// "isim": "Ahmet",
-// "soyisim" : "Gör",
-// "dogumTarihi": "23.11.1983",
-// "tc": "Evet",
-// "askerlik": "Yapıldı/Muaf",
-// "medeni": "Evli",
-// "ehliyet": "B",
-// "telefon": "2125366868",
-// "email": "ahmet@gor.com",
-// "adres": "Beşiktaş Beşiktaş BeşiktaşBeşiktaşBeşiktaş",
-// "tecrube": [{"firma": "I2I", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz", "ulke": 'Türkiye'},
-// 			{"firma": "TTNET", "pozisyon": "Analist", "giris": "10.10.2010", "cikis": "10.10.2012", "sehir": "İstanbul", "isTanimiKisa": "billing analiz", "detay": "billing analiz billing analiz", "ulke": 'Türkiye'}],
-// "egitim": [{"okul": "İTÜ", "bolum": "Bilgisayar Müh.", "derece": "Lisans", "cikis": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'},
-// 			{"okul": "İEL", "bolum": "", "derece": "Lise", "cikis": "10.10.2012", "sehir": "İstanbul", "ulke": 'Türkiye'}],
-// "yabanciDil": [{"dil": "İngilizce", "seviye": "İyi"}, {"dil": "Almanca", "seviye": "Çok iyi"}],
-// "sertifika": [{"ad": "SQL Expert", "cikis": "01.01.2017", "kurum": "Oracle"},
-// 			  {"ad": "Excel Expert", "cikis": "01.01.2017", "kurum": "Microsoft"}],
-// "bilgisayar": "SQL, Java",
-// "egitimdurum" : [
-//     "Lisans",
-//     "Lise"
-// ],
-// "tecrubedurum" : [
-//     "Az Tecrübeli (Junior)",
-//     "Orta Tecrübeli (Midlevel)"
-// ]
-// }
-//
-// return ozgecmis;
-//   }
 
 }
