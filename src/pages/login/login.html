@@ -32,12 +32,16 @@
               </ion-item>
             </ion-list>
 
-            <button ion-button block (click)="login()" color="primary" class="login-button"  [disabled]="!heroForm.form.valid">Gİrİş</button>
+            <button ion-button block icon-left (click)="login()" color="primary" class="login-button"  [disabled]="!heroForm.form.valid">
+              <ion-icon name="log-in"></ion-icon>
+              Gİrİş</button>
           </form>
 
     <ion-row>
         <ion-col>
-            <button ion-button round color="secondary" (click)="launchSignup()" class="create-account">Hesap Oluştur</button>
+            <button ion-button round icon-left color="secondary" (click)="launchSignup()" class="create-account">
+              <ion-icon name="person-add"></ion-icon>
+              Hesap Oluştur</button>
         </ion-col>
     </ion-row>
     <button ion-button clear small (click)="resetPass()">Şİfremİ unuttum</button>

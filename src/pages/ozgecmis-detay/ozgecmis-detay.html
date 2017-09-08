@@ -34,7 +34,8 @@
     <button ion-button icon-only outline [class.lighter]="detay.resim.media!='facebook'" (click)="butPressed('facebook')"><ion-icon name="logo-facebook"></ion-icon></button>
     <button ion-button icon-only outline [class.lighter]="detay.resim.media!='twitter'" (click)="butPressed('twitter')"><ion-icon name="logo-twitter"></ion-icon></button>
     <button ion-button icon-only outline [class.lighter]="detay.resim.media!='instagram'" (click)="butPressed('instagram')"><ion-icon name="logo-instagram"></ion-icon></button>
-    <button ion-button icon-left outline [class.lighter]="detay.resim.media!='upload'" (click)="openGallery()"><ion-icon name="cloud-upload"></ion-icon>Yükle</button>
+    <!-- <button ion-button icon-left outline #fileInput [class.lighter]="detay.resim.media!='upload'" (click)="openGallery()"><ion-icon name="cloud-upload"></ion-icon>Yükle</button> -->
+    <input type="file" #fileInput placeholder="resim"/>
     </ion-item>
     <ion-item>
       <ion-label floating>Resim</ion-label>
@@ -85,7 +86,7 @@
     </ion-item>
 
     <ion-item>
-    <ion-label floating color="primary">Eğitim</ion-label>
+    <ion-label floating>Eğitim</ion-label>
     <ion-select formControlName="egitimdurum" [(ngModel)]="detay.egitimdurum" cancelText="İptal" okText="Tamam">
       <ion-option value='Lise'>Lise</ion-option>
       <ion-option value='Lisans'>Lisans</ion-option>
@@ -136,6 +137,13 @@
     <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input formControlName="email" type="text" [(ngModel)]="detay.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+    <ion-label floating>Şehir</ion-label>
+    <ion-select formControlName="sehir" [(ngModel)]="detay.sehir" interface="popover" cancelText="İptal" okText="Tamam">
+      <ion-option *ngFor="let item of sehirler" value='{{item.sehir}}'>{{item.sehir}}</ion-option>
+    </ion-select>
     </ion-item>
 
     <ion-item>
