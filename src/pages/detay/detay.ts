@@ -27,7 +27,17 @@ ilanId: string;
                  this.basvuruList = this.navParams.get('basvurulist');
                  this.kaydedilenList = this.navParams.get('kaydedilenlist');
                  this.ilanId = this.navParams.get('ilanId');
+
+                 console.log(this.ilanId+"ilanId");
+                //  this.basvuruList.push({id: 'hebe'});
                  console.log(JSON.stringify(this.kaydedilenList)+'detay basvuru');
+
+                if(this.ilanId) {
+                  ilanSer.getIlan(this.ilanId)
+                  .then((ilan) => {this.ilan = ilan;
+                  console.log(JSON.stringify(this.ilan)+"link ilan");
+                });
+                }
 
     let initParams: InitParams = {
       appId: '112498582687614',
@@ -42,13 +52,13 @@ ilanId: string;
   shareFace() {
     let options = 	{
   method: "share",
-	href: "https://isgucvar.herokuapp.com/"+this.ilan._id,
+	href: "https://isgucvar.herokuapp.com/#/ilan/"+this.ilan._id,
 	caption: "Such caption, very feed.",
 	description: "Much description",
 	picture: this.ilan.resim
 }
 let params: UIParams = {
-  href: 'https://isgucvar.herokuapp.com/'+this.ilan._id,
+  href: 'https://isgucvar.herokuapp.com/#/ilan/'+this.ilan._id,
   method: 'share'
 };
 
@@ -160,7 +170,7 @@ var options = {
   message: "share this\n", // not supported on some apps (Facebook, Instagram)
   // subject: 'the subject', // fi. for email
   // files: [this.ilan.resim], // an array of filenames either locally or remotely
-  url: "https://isgucvar.herokuapp.com/ilan/"+this.ilan._id,
+  url: "https://isgucvar.herokuapp.com/#/ilan/"+this.ilan._id,
   chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
 }
 // this.socialSharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null, "https://isgucvar.herokuapp.com/", "paste it")

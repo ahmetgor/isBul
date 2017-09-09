@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
@@ -17,6 +17,7 @@ import { Storage } from '@ionic/storage';
 })
 export class OzgecmisDetayPage {
 
+  @ViewChild('fileInput') fileInput;
   detay: any;
   detayList: any;
   des: string;
@@ -29,6 +30,22 @@ export class OzgecmisDetayPage {
   yabanciDilFormGroup: FormGroup;
   bilgisayarFormGroup: FormGroup;
   private imageSrc: string;
+  sehirler = [
+    {"sehir":"İstanbul"},{"sehir":"Ankara"},{"sehir":"İzmir"},{"sehir":"Adana"},{"sehir":"Adıyaman"},{"sehir":"Afyonkarahisar"}
+   ,{"sehir":"Ağrı"},{"sehir":"Aksaray"},{"sehir":"Amasya"},{"sehir":"Antalya"},{"sehir":"Ardahan"},{"sehir":"Artvin"}
+   ,{"sehir":"Aydın"},{"sehir":"Balıkesir"},{"sehir":"Bartın"},{"sehir":"Batman"},{"sehir":"Bayburt"},{"sehir":"Bilecik"}
+   ,{"sehir":"Bingöl"},{"sehir":"Bitlis"},{"sehir":"Bolu"},{"sehir":"Burdur"},{"sehir":"Bursa"},{"sehir":"Çanakkale"},{"sehir":"Çankırı"}
+   ,{"sehir":"Çorum"},{"sehir":"Denizli"},{"sehir":"Diyarbakır"},{"sehir":"Düzce"},{"sehir":"Edirne"},{"sehir":"Elazığ"}
+   ,{"sehir":"Erzincan"},{"sehir":"Erzurum"},{"sehir":"Eskişehir"},{"sehir":"Gaziantep"},{"sehir":"Giresun"},{"sehir":"Gümüşhane"}
+   ,{"sehir":"Hakkari"},{"sehir":"Hatay"},{"sehir":"Iğdır"},{"sehir":"Isparta"},{"sehir":"Kahramanmaraş"},{"sehir":"Karabük"}
+   ,{"sehir":"Karaman"},{"sehir":"Kars"},{"sehir":"Kastamonu"},{"sehir":"Kayseri"},{"sehir":"Kırıkkale"},{"sehir":"Kırklareli"}
+   ,{"sehir":"Kırşehir"},{"sehir":"Kilis"},{"sehir":"Kocaeli"},{"sehir":"Konya"},{"sehir":"Kütahya"},{"sehir":"Malatya"}
+   ,{"sehir":"Manisa"},{"sehir":"Mardin"},{"sehir":"Mersin"},{"sehir":"Muğla"},{"sehir":"Muş"},{"sehir":"Nevşehir"}
+   ,{"sehir":"Niğde"},{"sehir":"Ordu"},{"sehir":"Osmaniye"},{"sehir":"Rize"},{"sehir":"Sakarya"},{"sehir":"Samsun"}
+   ,{"sehir":"Siirt"},{"sehir":"Sinop"},{"sehir":"Sivas"},{"sehir":"Şırnak"},{"sehir":"Tekirdağ"},{"sehir":"Tokat"}
+   ,{"sehir":"Trabzon"},{"sehir":"Tunceli"},{"sehir":"Şanlıurfa"},{"sehir":"Uşak"},{"sehir":"Van"},{"sehir":"Yalova"}
+   ,{"sehir":"Yozgat"},{"sehir":"Zonguldak"}
+  ];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public formBuilder: FormBuilder, public ozgecmisSer: OzgecmisSer,
@@ -58,7 +75,8 @@ export class OzgecmisDetayPage {
   this.iletisimFormGroup = formBuilder.group({
           telefon: [this.detay.telefon, [Validators.required]],
           email: [this.detay.email, Validators.required],
-          adres: [this.detay.adres, Validators.required]
+          adres: [this.detay.adres, Validators.required],
+          sehir: [this.detay.sehir, Validators.required]
         });
 
   this.tecrubeFormGroup = formBuilder.group({
@@ -102,12 +120,14 @@ export class OzgecmisDetayPage {
   }
 
    openGallery (): void {
+     if (Camera['installed']()) {
+
      const cameraOptions: CameraOptions = {
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    // sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: this.camera.DestinationType.DATA_URL,
     quality: 100,
-    targetWidth: 1000,
-    targetHeight: 1000,
+    targetWidth: 100,
+    targetHeight: 100,
     encodingType: this.camera.EncodingType.JPEG
     // correctOrientation: true
     // mediaType: this.camera.MediaType.PICTURE
@@ -126,8 +146,14 @@ export class OzgecmisDetayPage {
   },  (err) => console.log(err));
 }
 
+  else {
+    this.fileInput.nativeElement.click();
+  }
+
+}
+
   save() {
-    console.log(JSON.stringify(this.detay)+'detaysave');
+    console.log(JSON.stringify(this.detay)+'detaysavee');
     console.log(JSON.stringify(this.detayList)+'detaysavelist');
 
     if(this.detayList) {

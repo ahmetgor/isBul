@@ -103,7 +103,7 @@ ngAfterViewInit() {
   this.platform.ready().then(() => {
     // Convenience to route with a given nav
     this.deeplinks.routeWithNavController(this.nav, {
-      '/ilan/:ilanId': DetayPage,
+      '/#/ilan/:ilanId': DetayPage,
       // '/universal-links-test': AboutPage,
       // '/products/:productId': ProductPage
     }).subscribe((match) => {
