@@ -27,7 +27,6 @@ ilanId: string;
                  this.basvuruList = this.navParams.get('basvurulist');
                  this.kaydedilenList = this.navParams.get('kaydedilenlist');
                  this.ilanId = this.navParams.get('ilanId');
-                //  this.basvuruList.push({id: 'hebe'});
                  console.log(JSON.stringify(this.kaydedilenList)+'detay basvuru');
 
     let initParams: InitParams = {
