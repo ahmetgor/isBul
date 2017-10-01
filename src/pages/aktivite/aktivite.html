@@ -37,9 +37,9 @@
   <ion-list text-wrap>
     <button ion-item *ngFor="let basvuru of basvurular" (click)="itemTapped($event, basvuru.basvuru)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
-      <ion-avatar item-left>
-        <img [src]="basvuru.basvuru.resim">
-      </ion-avatar>
+      <ion-thumbnail item-left>
+        <img class="img-circle" [src]="basvuru.basvuru.resim">
+      </ion-thumbnail>
 
       <ion-row>
       <ion-col>
@@ -98,9 +98,9 @@
   <ion-list text-wrap>
     <button ion-item *ngFor="let kaydedilen of kaydedilenler" (click)="itemTapped($event, kaydedilen.kaydedilen)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
-      <ion-avatar item-left>
-        <img [src]="kaydedilen.kaydedilen.resim">
-      </ion-avatar>
+      <ion-thumbnail item-left>
+        <img class="img-circle" [src]="kaydedilen.kaydedilen.resim">
+      </ion-thumbnail>
 
       <ion-row>
       <ion-col>

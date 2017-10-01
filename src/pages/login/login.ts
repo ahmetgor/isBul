@@ -37,15 +37,15 @@ export class LoginPage {
         })
         .catch((err) => {return;
         });
-        this.showLoader('Bilgiler yükleniyor...');
+        // this.showLoader('Bilgiler yükleniyor...');
         //Check if already authenticated
         this.authService.checkAuthentication().then((res) => {
             // console.log("Already authorized");
-            this.loading.dismiss();
+            // this.loading.dismiss();
             this.navCtrl.setRoot(SonucPage);
         }, (err) => {
             // console.log("Not already authorized");
-            this.loading.dismiss();
+            // this.loading.dismiss();
         });
     }
 

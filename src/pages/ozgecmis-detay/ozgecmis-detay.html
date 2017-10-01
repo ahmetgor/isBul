@@ -76,7 +76,7 @@
     <ion-label floating>Medeni Hal</ion-label>
     <ion-select formControlName="medeni" [(ngModel)]="detay.medeni" cancelText="İptal" okText="Tamam">
       <ion-option value="Evli" >Evli</ion-option>
-      <ion-option value="Hayır">Hayır</ion-option>
+      <ion-option value="Bekar">Bekar</ion-option>
     </ion-select>
     </ion-item>
 
@@ -88,10 +88,11 @@
     <ion-item>
     <ion-label floating>Eğitim</ion-label>
     <ion-select formControlName="egitimdurum" [(ngModel)]="detay.egitimdurum" cancelText="İptal" okText="Tamam">
-      <ion-option value='Lise'>Lise</ion-option>
-      <ion-option value='Lisans'>Lisans</ion-option>
-      <ion-option value='Yüksek Lisans - Doktora'>Yüksek Lisans</ion-option>
-      <ion-option value='Doktora'>Doktora</ion-option>
+      <ion-option value="1">İlköğretim</ion-option>
+      <ion-option value="2">Lise</ion-option>
+      <ion-option value="3">Lisans</ion-option>
+      <ion-option value="4">Yüksek Lisans</ion-option>
+      <ion-option value="5">Doktora</ion-option>
     </ion-select>
     </ion-item>
     <ion-item>
@@ -273,10 +274,11 @@
     <ion-item>
     <ion-label floating>Mezuniyet Derecesi</ion-label>
     <ion-select formControlName="derece" [(ngModel)]="detay.derece" cancelText="İptal" okText="Tamam">
-      <ion-option value="Lise">Lise</ion-option>
-      <ion-option value="Lisans">Lisans</ion-option>
-      <ion-option value="Yüksek Lisans">Yüksek Lisans</ion-option>
-      <ion-option value="Doktora">Doktora</ion-option>
+      <ion-option value="1">İlköğretim</ion-option>
+      <ion-option value="2">Lise</ion-option>
+      <ion-option value="3">Lisans</ion-option>
+      <ion-option value="4">Yüksek Lisans</ion-option>
+      <ion-option value="5">Doktora</ion-option>
     </ion-select>
     </ion-item>
 
@@ -375,10 +377,11 @@
     <ion-item>
     <ion-label floating>Seviye</ion-label>
     <ion-select formControlName="seviye" [(ngModel)]="detay.seviye" cancelText="İptal" okText="Tamam">
-      <ion-option value="Orta">Orta</ion-option>
-      <ion-option value="İyi">İyi</ion-option>
-      <ion-option value="Çok İyi">Çok İyi</ion-option>
-      <ion-option value="Mükemmel">Mükemmel</ion-option>
+      <ion-option value="1">Başlangıç</ion-option>
+      <ion-option value="2">Orta</ion-option>
+      <ion-option value="3">İyi</ion-option>
+      <ion-option value="4">Çok İyi</ion-option>
+      <ion-option value="5">Mükemmel</ion-option>
     </ion-select>
     </ion-item>
 
