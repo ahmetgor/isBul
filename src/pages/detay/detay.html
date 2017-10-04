@@ -65,34 +65,8 @@
     </ion-row>
   </ion-item>
 
-<ion-toolbar>
-  <ion-row>
-    <ion-col>
-  <div *ngIf="!checkBasvuru(ilan)">
-  <button ion-button block icon-left color="secondary" (click)="basvur(ilan)">
-    <ion-icon name="checkmark-circle"></ion-icon>
-    Başvur</button>
-  </div>
-  <div *ngIf="checkBasvuru(ilan)">
-  <button ion-button block icon-left color="secondary" (click)="deleteBasvur(ilan)">
-    <ion-icon name="ios-arrow-dropleft"></ion-icon>
-    Başvuru İptal</button>
-  </div>
-  </ion-col>
-  <ion-col>
-  <div *ngIf="!checkKaydedilen(ilan)">
-  <button ion-button block icon-left color="primary" (click)="kaydet(ilan)">
-    <ion-icon name="bookmark"></ion-icon>
-    Kaydet</button>
-  </div>
-  <div *ngIf="checkKaydedilen(ilan)">
-  <button ion-button block icon-left color="primary" (click)="deleteKaydet(ilan)">
-    <ion-icon name="ios-arrow-dropleft"></ion-icon>
-    Kayıt İptal</button>
-  </div>
-  </ion-col>
-  </ion-row>
-</ion-toolbar>
+<!-- <ion-toolbar> -->
+<!-- </ion-toolbar> -->
 </div>
 
 </ion-header>
@@ -101,6 +75,33 @@
 
   <div *ngIf="ilan">
 
+    <ion-row>
+      <ion-col>
+    <div *ngIf="!checkBasvuru(ilan)">
+    <button ion-button block icon-left color="secondary" (click)="basvur(ilan)">
+      <ion-icon name="checkmark-circle"></ion-icon>
+      Başvur</button>
+    </div>
+    <div *ngIf="checkBasvuru(ilan)">
+    <button ion-button block icon-left color="secondary" (click)="deleteBasvur(ilan)">
+      <ion-icon name="ios-arrow-dropleft"></ion-icon>
+      Başvuru İptal</button>
+    </div>
+    </ion-col>
+    <ion-col>
+    <div *ngIf="!checkKaydedilen(ilan)">
+    <button ion-button block icon-left color="primary" (click)="kaydet(ilan)">
+      <ion-icon name="bookmark"></ion-icon>
+      Kaydet</button>
+    </div>
+    <div *ngIf="checkKaydedilen(ilan)">
+    <button ion-button block icon-left color="primary" (click)="deleteKaydet(ilan)">
+      <ion-icon name="ios-arrow-dropleft"></ion-icon>
+      Kayıt İptal</button>
+    </div>
+    </ion-col>
+    </ion-row>
+    
   <ion-card>
   <ion-card-header>
     <b>Açıklama</b>

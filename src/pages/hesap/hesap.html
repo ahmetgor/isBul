@@ -1,0 +1,60 @@
+<!--
+  Generated template for the HesapPage page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Hesap</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #heroForm="ngForm">
+    <div *ngIf="user">
+    <ion-list>
+
+        <ion-item-divider no-lines color="light">Yeni şifre belirleyin:</ion-item-divider>
+        <ion-item>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="newpassword" placeholder="Yeni Şifre" autocomplete="off" type="password" #pass="ngModel" name="pass" minlength="6">
+            </ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="pass.errors">
+            <p style="color:red;">Şifre minimum 6 karakter olmalı</p>
+        </ion-item>
+        <ion-item>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="newpassword1" placeholder="Yeni Şifre tekrar" autocomplete="off" type="password" #pass1="ngModel" name="pass1" minlength="6">
+            </ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="pass1.value != pass.value">
+            <p style="color:red;">Girilen şifreler aynı değil</p>
+        </ion-item>
+        <ion-item-divider no-lines color="light"></ion-item-divider>
+        <ion-item>
+            <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="user.email" placeholder="Email" type="email" #name="ngModel" name="name" disabled>
+          </ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+            <ion-input [(ngModel)]="password" placeholder="Mevcut Şifre" type="password" #oldpass="ngModel" name="passwrd" required>
+            </ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="oldpass.errors">
+            <p style="color:red;">Lütfen şifrenizi giriniz</p>
+        </ion-item>
+
+    </ion-list>
+
+    <button ion-button block (click)="updateUser()"
+            [disabled]="!heroForm.form.valid||pass1.value != pass.value||heroForm.form.untouched">Güncelle</button>
+  </div>
+  </form>
+
+</ion-content>

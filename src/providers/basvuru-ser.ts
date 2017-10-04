@@ -10,21 +10,20 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class BasvuruSer {
-  url : string = 'https://serverisgucvar.herokuapp.com/api/aktiviteler/';
-  // url : string = 'http://127.0.0.1:8080/api/aktiviteler/';
+  // url : string = 'https://serverisgucvar.herokuapp.com/api/aktiviteler/';
+  url : string = 'http://127.0.0.1:8080/api/aktiviteler/';
   kaydedilenList: any = {};
   basvuruList: any = {};
   ozgecmisId: string;
-  ozgecmis: any;
+  // ozgecmis: any;
   loading: any;
 
   constructor(public http: Http, public authService: UserAuth,
               public ozgecmisSer: OzgecmisSer, public toastCtrl: ToastController,
               public loadingCtrl: LoadingController, public storage: Storage) {
     console.log('Hello BasvuruSer Provider');
-    // this.ozgecmisId = this.ozgecmisSer.ozgecmisId;
-    this.storage.get('user').then((user) => {
-    this.ozgecmisId = user.ozgecmis;
+    // this.storage.get('user').then((user) => {
+    // this.ozgecmisId = authService.ozgecmis._id;
     this.getBasvurularList()
     .then(ilanlist => {
       this.basvuruList = ilanlist;
@@ -33,13 +32,13 @@ export class BasvuruSer {
     .then(ilanlist => {
       this.kaydedilenList = ilanlist;
     });
-  });
+  // });
 
-  this.storage.get('ozgecmis').then((ozgecmis) => {
-    this.ozgecmis = ozgecmis;
-    });
-    console.log(JSON.stringify(this.ozgecmis)+"datadata");
-    console.log(JSON.stringify(this.ozgecmisSer.ozgecmisId)+"idid");
+  // this.storage.get('ozgecmis').then((ozgecmis) => {
+    // this.ozgecmis = authService.ozgecmis;
+    // });
+    console.log(JSON.stringify(this.authService.ozgecmis)+"datadata");
+    // console.log(JSON.stringify(this.ozgecmisSer.ozgecmisId)+"idid");
   }
 
   getBasvurular(skip, limit) {
@@ -111,8 +110,8 @@ getKaydedilenler(skip, limit) {
     this.showLoader();
     // this.ozgecmis = this.ozgecmisSer.ozgecmis;
     let kayit = {ozgecmis: this.ozgecmisId, basvuru : basvuruId};
-    console.log(JSON.stringify(this.ozgecmis)+'basvuruId');
-    if(!this.ozgecmis.enabled) {
+    console.log(JSON.stringify(this.authService.ozgecmis)+'basvuruId');
+    if(!this.authService.ozgecmis.enabled) {
       this.loading.dismiss();
       this.presentToast('Pasif özgeçmiş ile başvuru yapılamaz!');
       return new Promise((res, rej)=>{});
@@ -122,7 +121,7 @@ getKaydedilenler(skip, limit) {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authService.token);
-      console.log(JSON.stringify(this.ozgecmis)+"addbasvuru");
+      console.log(JSON.stringify(this.authService.ozgecmis)+"addbasvuru");
 
       this.http.post(this.url+'basvuru/', JSON.stringify(kayit), {headers: headers})
         .map(res => res.json())

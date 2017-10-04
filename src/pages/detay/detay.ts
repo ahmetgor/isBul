@@ -3,7 +3,7 @@ import { NavController, NavParams, Platform, ActionSheetController } from 'ionic
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { IlanSer } from '../../providers/ilan-ser';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { FacebookService, InitParams,  UIParams, UIResponse } from 'ngx-facebook';
+// import { FacebookService, InitParams,  UIParams, UIResponse } from 'ngx-facebook';
 import { Facebook } from '@ionic-native/facebook';
 
 @Component({
@@ -19,7 +19,8 @@ ilanId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public basvuruSer: BasvuruSer,
-              private socialSharing: SocialSharing, private fb: FacebookService,
+              private socialSharing: SocialSharing,
+              // private fb: FacebookService,
               private face: Facebook, public plt: Platform,
               public actionSheetCtrl: ActionSheetController) {
 
@@ -39,14 +40,14 @@ ilanId: string;
                 });
                 }
 
-    let initParams: InitParams = {
-      appId: '112498582687614',
-      xfbml: true,
-      version: 'v2.9'
-    };
-
-    fb.init(initParams);
-    // face.browserInit(112498582687614, 'v2.9');
+  //   let initParams: InitParams = {
+  //     appId: '112498582687614',
+  //     xfbml: true,
+  //     version: 'v2.9'
+  //   };
+  //
+  //   fb.init(initParams);
+  //   // face.browserInit(112498582687614, 'v2.9');
   }
 
   shareFace() {
@@ -57,25 +58,23 @@ ilanId: string;
 	description: "Much description",
 	picture: this.ilan.resim
 }
-let params: UIParams = {
-  href: 'https://isgucvar.herokuapp.com/#/ilan/'+this.ilan._id,
-  method: 'share'
-};
+// let params: UIParams = {
+//   href: 'https://isgucvar.herokuapp.com/#/ilan/'+this.ilan._id,
+//   method: 'share'
+// };
 
-if(this.plt.is('ios') || this.plt.is('android')) {
+// if(this.plt.is('ios') || this.plt.is('android')) {
     this.face.showDialog( options)
     .then((res) => console.log(res)+"res")
     .catch((e: any) => console.error(e)+"error");
-    // this.fb.ui(params)
-    // .then((res: UIResponse) => console.log(res))
-    // .catch((e: any) => console.error(e));
-  }
 
-  else {
-      this.fb.ui(params)
-      .then((res: UIResponse) => console.log(res))
-      .catch((e: any) => console.error(e));
-    }
+  // }
+
+  // else {
+  //     this.fb.ui(params)
+  //     .then((res: UIResponse) => console.log(res))
+  //     .catch((e: any) => console.error(e));
+  //   }
   }
 
   ionViewDidLoad() {

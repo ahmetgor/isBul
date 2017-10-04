@@ -50,7 +50,7 @@ export class LoginPage {
     }
 
   login(){
-      this.showLoader('Giriş Yapılıyor...');
+      // this.showLoader('Giriş Yapılıyor...');
       let credentials = {
           email: this.email,
           password: this.password
@@ -68,36 +68,35 @@ export class LoginPage {
         // });
         console.log(JSON.stringify(result)+"result");
         this.ozgecmisSer.getOzgecmis(result.user.ozgecmis)
-        .then((res) => {this.loading.dismiss();
+        .then((res) => {
+                // this.loading.dismiss();
                 this.navCtrl.setRoot(SonucPage);
               }, (err) => {
-                  this.loading.dismiss();
+                  // this.loading.dismiss();
                     console.log(JSON.stringify(err._body)+'asdasd');
                   // let msg = JSON.parse(err._body);
-                  this.presentToast("Özgeçmiş alınamadı, çıkış yapıp tekrar deneyin");
               });
 
       }, (err) => {
-          this.loading.dismiss();
+          // this.loading.dismiss();
             console.log(JSON.stringify(err._body)+'asdasd');
           // let msg = JSON.parse(err._body);
-          this.presentToast("Girdiğiniz bilgiler yanlış veya hesabınız aktif değil!");
       });
   }
 
-  presentToast(message) {
-  let toast = this.toastCtrl.create({
-    message: message,
-    duration: 4000,
-    position: 'top',
-    showCloseButton: true,
-    closeButtonText: 'OK'
-  });
-
-  // toast.onDidDismiss(() => {
-  // });
-  toast.present();
-}
+//   presentToast(message) {
+//   let toast = this.toastCtrl.create({
+//     message: message,
+//     duration: 4000,
+//     position: 'top',
+//     showCloseButton: true,
+//     closeButtonText: 'OK'
+//   });
+//
+//   // toast.onDidDismiss(() => {
+//   // });
+//   toast.present();
+// }
 
 launchSignup(){
   this.navCtrl.push(SignupPage);

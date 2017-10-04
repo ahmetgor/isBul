@@ -22,6 +22,7 @@ export class UserAuth {
   url1: string = 'http://127.0.0.1:8080/api/tools/';
   currentUser: any;
   loading: any;
+  ozgecmis: any;
 
   constructor(public http: Http, public storage: Storage,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
@@ -90,19 +91,25 @@ export class UserAuth {
           .subscribe(res => {
 
             let data = res.json();
-            this.token = data.token;
-            // console.log(data+'data');
-            console.log(JSON.stringify(data)+'user');
-            this.currentUser = data.user;
-            this.storage.set('token', data.token);
-            this.storage.set('user', data.user);
-            this.loading.dismiss();
 
+
+          this.token = data.token;
+          console.log(JSON.stringify(data)+'user');
+          this.currentUser = data.user;
+          this.storage.set('token', data.token);
+          this.storage.set('user', data.user);
+
+            this.loading.dismiss();
+              this.getOzgecmis(data.user.ozgecmis)
+              .then((ozgecmis) => {
+                // this.ozgecmis = ozgecmis;
+              // console.log(data+'data');
+            });
             resolve(data);
             // resolve(res.json());
           }, (err) => {
             this.loading.dismiss();
-
+            this.presentToast("Girdiğiniz bilgiler yanlış veya hesabınız aktif değil!");
             console.log(JSON.stringify(err)+'servis err');
             reject(err);
           });
@@ -162,6 +169,7 @@ export class UserAuth {
       this.storage.remove('ozgecmis');
       this.currentUser = undefined;
       this.token = '';
+      this.ozgecmis = undefined;
   }
 
   presentToast(mesaj) {
@@ -185,4 +193,49 @@ export class UserAuth {
       });
       this.loading.present();
   }
+
+  getOzgecmis(ozgecmisId: string){
+      let headers = new Headers();
+      headers.append('Authorization', this.token);
+      return new Promise((resolve, reject) => {
+      this.http.get('http://127.0.0.1:8080/api/ozgecmis/' + ozgecmisId, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+          this.ozgecmis = data;
+          this.storage.set('ozgecmis', data);
+          console.log(JSON.stringify(data)+"data123");
+          resolve(data);
+        }, (err) => {
+          console.log(JSON.stringify(err));
+          // reject(err);
+          this.presentToast('Özgeçmiş alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+        });
+    });
+}
+
+updateUser(user){
+  this.showLoader();
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Authorization', this.token);
+    console.log(JSON.stringify(user)+'updateuser');
+    return new Promise((resolve, reject) => {
+    this.http.post(this.url + 'updatenormaluser', JSON.stringify(user), {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        this.currentUser = data;
+        this.storage.set('user', data);
+        console.log(JSON.stringify(data)+"updateduser");
+        this.loading.dismiss();
+
+        resolve(data);
+      }, (err) => {
+        this.loading.dismiss();
+        console.log(JSON.stringify(err));
+        // reject(err);
+        this.presentToast('Şifre değiştirilemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+      });
+  });
+}
 }

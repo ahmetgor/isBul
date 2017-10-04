@@ -9,10 +9,10 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class OzgecmisSer {
 
-  url : string = 'https://serverisgucvar.herokuapp.com/api/ozgecmis/';
-  url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/avatar/';
-  // url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
-  // url1: string = 'http://127.0.0.1:8080/api/tools/avatar/';
+  // url : string = 'https://serverisgucvar.herokuapp.com/api/ozgecmis/';
+  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/avatar/';
+  url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
+  url1: string = 'http://127.0.0.1:8080/api/tools/avatar/';
   ozgecmisId: string;
   user: any;
   loading: any;
@@ -60,8 +60,8 @@ updateOzgecmis(paramname: string, kayit: any, ozgecmisUpd: any){
       .map(res => res.json())
       .subscribe(res => {
         console.log(JSON.stringify(res)+"avatarres");
-        this.ozgecmis = ozgecmisUpd;
-        this.storage.set('ozgecmis', ozgecmisUpd);
+        this.authService.ozgecmis = res;
+        this.storage.set('ozgecmis', res);
         this.loading.dismiss();
         resolve(res);
       }, (err) => {
@@ -83,8 +83,8 @@ updateOzgecmisAll(kayit: any){
     this.http.put(this.url + kayit._id, JSON.stringify(kayit), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
-        this.ozgecmis = kayit;
-        this.storage.set('ozgecmis', kayit);
+        this.authService.ozgecmis = res;
+        this.storage.set('ozgecmis', res);
         console.log(JSON.stringify(res)+"updateall");
         this.loading.dismiss();
         resolve(res);

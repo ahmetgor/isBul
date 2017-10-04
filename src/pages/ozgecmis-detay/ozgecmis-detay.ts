@@ -18,17 +18,14 @@ import { Storage } from '@ionic/storage';
 export class OzgecmisDetayPage {
 
   @ViewChild('fileInput') fileInput;
+  resimUrl: string;
+  resimCloudUrl: string;
   detay: any;
   detayList: any;
   des: string;
   basvurulist: any;
-  kisiselFormGroup: FormGroup;
-  iletisimFormGroup: FormGroup;
-  tecrubeFormGroup: FormGroup;
-  egitimFormGroup: FormGroup;
-  sertifikaFormGroup: FormGroup;
-  yabanciDilFormGroup: FormGroup;
-  bilgisayarFormGroup: FormGroup;
+  kisiselFormGroup: FormGroup; iletisimFormGroup: FormGroup; tecrubeFormGroup: FormGroup; egitimFormGroup: FormGroup;
+  sertifikaFormGroup: FormGroup; yabanciDilFormGroup: FormGroup; bilgisayarFormGroup: FormGroup;
   private imageSrc: string;
   sehirler = [
     {"sehir":"İstanbul"},{"sehir":"Ankara"},{"sehir":"İzmir"},{"sehir":"Adana"},{"sehir":"Adıyaman"},{"sehir":"Afyonkarahisar"}
@@ -133,16 +130,17 @@ export class OzgecmisDetayPage {
     // mediaType: this.camera.MediaType.PICTURE
   }
 
-  this.detay.resim.media = 'upload';
+  // this.detay.resim.media = 'upload';
   this.camera.getPicture(cameraOptions)
     .then(file_uri => {
-      this.ozgecmisSer.updateAvatar('data:image/jpeg;base64,' + file_uri)
-      .then( (resUrl: any) => {
-        this.detay.resim.link = resUrl.secure_url;
-        console.log(resUrl);
-        // console.log(resUrl.secure_url+'secure');
-      });
-      // this.detay.resim.link = 'data:image/jpeg;base64,' + file_uri;
+      this.detay.resim = 'data:image/jpg;base64,' + file_uri;
+
+      // this.ozgecmisSer.updateAvatar('data:image/jpeg;base64,' + file_uri)
+      // .then( (resUrl: any) => {
+      //   this.detay.resim.link = resUrl.secure_url;
+      //   console.log(resUrl);
+      //   // console.log(resUrl.secure_url+'secure');
+      // });
   },  (err) => console.log(err));
 }
 
@@ -153,10 +151,11 @@ export class OzgecmisDetayPage {
 }
 
   save() {
-    console.log(JSON.stringify(this.detay)+'detaysavee');
-    console.log(JSON.stringify(this.detayList)+'detaysavelist');
+    // console.log(JSON.stringify(this.detay)+'detaysavee');
+    // console.log(JSON.stringify(this.detayList)+'detaysavelist');
 
     if(this.detayList) {
+      console.log("resim update");
     this.des = this.des.replace("Ekle", "");
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList, this.basvurulist)
     .then((res) =>{
@@ -169,6 +168,8 @@ export class OzgecmisDetayPage {
 
   }
   else {
+    console.log("resim else");
+
     this.ozgecmisSer.updateOzgecmisAll(this.detay)
     .then((res) =>{
       console.log(JSON.stringify(this.detay)+'detaylist');
@@ -211,12 +212,25 @@ export class OzgecmisDetayPage {
   }
 
 butPressed(media: String){
-  this.detay.resim.media = media;
-  this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile;
+  // this.detay.resim.media = media;
+  // this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile;
+  console.log("butPressed");
 }
 
-picChanged() {
-  this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile;
+processWebImage(event) {
+  let reader = new FileReader();
+  // let dataUrl = undefined;
+  reader.onload = (readerEvent) => {
+    console.log("event");
+    this.detay.resim = (readerEvent.target as any).result;
+    // console.log(dataUrl);
+    // console.log(dataUrl.length);
+    this.resimCloudUrl = 'url(' + this.detay.resim + ')';
+
+  };
+  reader.readAsDataURL(event.target.files[0]);
+  console.log(event.target.files[0]);
+
 }
 
   presentToast(mesaj) {

@@ -28,20 +28,18 @@
     <!-- <ion-label floating>Ünvan / Son Pozisyon</ion-label> -->
 
     <ion-item no-lines>
-    <ion-thumbnail item-left>
-    <img [src]="detay.resim.link">
+    <ion-thumbnail class="profile-image" item-left (click)="openGallery()">
+    <img class="profile-image1" [src]="detay.resim">
     </ion-thumbnail>
-    <button ion-button icon-only outline [class.lighter]="detay.resim.media!='facebook'" (click)="butPressed('facebook')"><ion-icon name="logo-facebook"></ion-icon></button>
-    <button ion-button icon-only outline [class.lighter]="detay.resim.media!='twitter'" (click)="butPressed('twitter')"><ion-icon name="logo-twitter"></ion-icon></button>
-    <button ion-button icon-only outline [class.lighter]="detay.resim.media!='instagram'" (click)="butPressed('instagram')"><ion-icon name="logo-instagram"></ion-icon></button>
-    <!-- <button ion-button icon-left outline #fileInput [class.lighter]="detay.resim.media!='upload'" (click)="openGallery()"><ion-icon name="cloud-upload"></ion-icon>Yükle</button> -->
-    <input type="file" #fileInput placeholder="resim"/>
+    <!-- <button ion-button icon-only outline [class.lighter]="detay.resim.media!='facebook'" (click)="butPressed('facebook')"><ion-icon name="logo-facebook"></ion-icon></button>
+    <!-- <button ion-button icon-left outline #fileInputa [class.lighter]="detay.resim.media!='upload'" (click)="openGallery()"><ion-icon name="cloud-upload"></ion-icon>Yükle</button> -->
+    <input type="file" #fileInput placeholder="resim" [hidden]="true" (change)="processWebImage($event)"/>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-label floating>Resim</ion-label>
     <ion-input [disabled]="detay.resim.media=='upload'" [ngModelOptions]="{standalone: true}" type="text"
               [(ngModel)]="detay.resim.profile" placeholder="Sosyal medya profil adınız" (change)="picChanged()"></ion-input>
-    </ion-item>
+    </ion-item> -->
     <ion-item>
         <ion-label floating>İsim Soyisim</ion-label>
         <ion-input formControlName="isim" type="text" [(ngModel)]="detay.isim"></ion-input>

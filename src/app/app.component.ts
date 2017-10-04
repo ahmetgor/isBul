@@ -12,6 +12,9 @@ import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 import { SonucPage } from '../pages/sonuc/sonuc';
 import { LoginPage } from '../pages/login/login';
 import { UserAuth } from '../providers/user-auth';
+import { Storage } from '@ionic/storage';
+import { HesapPage } from '../pages/hesap/hesap';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -21,17 +24,18 @@ export class MyApp {
 
   rootPage: any = LoginPage;
   alert: any;
+  user: any;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public alertCtrl: AlertController, public authService: UserAuth,
-              public deeplinks: Deeplinks) {
+              public deeplinks: Deeplinks, public storage: Storage) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'İlan Ara', component: SonucPage, icon: 'search' },
+      { title: 'İlanlar', component: SonucPage, icon: 'search' },
       { title: 'Aktiviteler', component: AktivitePage, icon: 'walk' },
       { title: 'Özgeçmiş', component: OzgecmisPage, icon: 'list-box' },
       { title: 'Ayarlar', component: AyarlarPage, icon: 'settings' },
@@ -41,6 +45,12 @@ export class MyApp {
   }
 
   initializeApp() {
+
+    this.storage.get('ozgecmis')
+        .then((user) => { this.user = user;
+          console.log(JSON.stringify(user)+"initializeApp");
+          // str.substring(0, str.indexOf(":"));
+        });
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -59,6 +69,16 @@ export class MyApp {
       this.presentLogout('Uygulama kapansın mı?');
      }
   }
+});
+
+this.deeplinks.routeWithNavController(this.nav, {
+  '/#/ilan/:ilanId': DetayPage,
+  // '/universal-links-test': AboutPage,
+  // '/products/:productId': ProductPage
+}).subscribe((match) => {
+  console.log('Successfully routed', match);
+}, (nomatch) => {
+  console.warn('Unmatched Route', nomatch);
 });
     });
   }
@@ -99,19 +119,23 @@ presentLogout(message) {
 this.alert.present();
 }
 
-ngAfterViewInit() {
-  this.platform.ready().then(() => {
-    // Convenience to route with a given nav
-    this.deeplinks.routeWithNavController(this.nav, {
-      '/#/ilan/:ilanId': DetayPage,
-      // '/universal-links-test': AboutPage,
-      // '/products/:productId': ProductPage
-    }).subscribe((match) => {
-      console.log('Successfully routed', match);
-    }, (nomatch) => {
-      console.warn('Unmatched Route', nomatch);
-    });
-  })
+goHesap() {
+  this.nav.push(HesapPage);
 }
+
+// ngAfterViewInit() {
+//   this.platform.ready().then(() => {
+//     // Convenience to route with a given nav
+//     this.deeplinks.routeWithNavController(this.nav, {
+//       '/#/ilan/:ilanId': DetayPage,
+//       // '/universal-links-test': AboutPage,
+//       // '/products/:productId': ProductPage
+//     }).subscribe((match) => {
+//       console.log('Successfully routed', match);
+//     }, (nomatch) => {
+//       console.warn('Unmatched Route', nomatch);
+//     });
+//   })
+// }
 
 }
