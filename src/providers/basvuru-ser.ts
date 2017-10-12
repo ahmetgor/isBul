@@ -37,7 +37,7 @@ export class BasvuruSer {
   // this.storage.get('ozgecmis').then((ozgecmis) => {
     // this.ozgecmis = authService.ozgecmis;
     // });
-    console.log(JSON.stringify(this.authService.ozgecmis)+"datadata");
+    console.log(JSON.stringify(this.authService.currentUser.ozgecmis)+"datadata");
     // console.log(JSON.stringify(this.ozgecmisSer.ozgecmisId)+"idid");
   }
 

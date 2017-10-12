@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Events} from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
+import { UserAuth} from '../../providers/user-auth';
 import { Storage } from '@ionic/storage';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
 
@@ -21,21 +22,28 @@ export class OzgecmisPage {
   ozgecmis: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer,
-              public alertCtrl: AlertController,public storage: Storage) {
+              public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer,  public authService: UserAuth,
+              public alertCtrl: AlertController,public storage: Storage, public events: Events) {
 
               // this.ozgecmis = ozgecmisSer.ozgecmis;
               console.log('ionViewDidLoad OzgecmisPage const');
     }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     console.log('ionViewWillEnter OzgecmisPage const');
-    this.storage.get('ozgecmis').then((ozgecmis) => {
-      console.log("storage"+ JSON.stringify(ozgecmis));
-      this.ozgecmis = ozgecmis;
-      });
-    // this.ozgecmisSer.getOzgecmis(this.ozgecmisSer.ozgecmis._id)
-    // .then(ozgecmis => this.ozgecmis)
+    // this.storage.get('ozgecmis').then((ozgecmis) => {
+    //   console.log("storage"+ JSON.stringify(ozgecmis));
+    //   this.ozgecmis = ozgecmis;
+    //   });
+      console.log("storage"+ JSON.stringify(this.authService.currentUser.ozgecmis));
+
+    this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
+    .then((ozgecmis) => this.ozgecmis = ozgecmis);
+
+    this.events.subscribe('ozgecmis:update', ()=> {
+    this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
+    .then((ozgecmis) => this.ozgecmis = ozgecmis)
+  });
   }
 
   itemTapped(ev, ozDetay, des, ozDetayList) {

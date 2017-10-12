@@ -8,6 +8,11 @@
 .img-circle {
     border-radius: 50%;
     display: inline-block;
+    text-align: center;
+    // align-items: center;
+    background-position: center;
+    width: 100px;
+    height: 100px;
 }
 
 // App Global Sass

@@ -56,7 +56,7 @@ updateOzgecmis(paramname: string, kayit: any, ozgecmisUpd: any){
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', this.authService.token);
 
-    this.http.put(this.url + this.ozgecmisId + '/' + paramname, JSON.stringify(kayit), {headers: headers})
+    this.http.put(this.url + this.authService.currentUser.ozgecmis + '/' + paramname, JSON.stringify(kayit), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
         console.log(JSON.stringify(res)+"avatarres");

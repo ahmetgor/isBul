@@ -4,7 +4,6 @@ import { MyApp } from './app.component';
 import { Deeplinks } from '@ionic-native/deeplinks';
 
 import { AktivitePage } from '../pages/aktivite/aktivite';
-import { AraPage } from '../pages/ara/ara';
 import { SonucPage } from '../pages/sonuc/sonuc';
 import { DetayPage } from '../pages/detay/detay';
 import { AyarlarPage } from '../pages/ayarlar/ayarlar';
@@ -37,7 +36,6 @@ import { Facebook } from '@ionic-native/facebook';
   declarations: [
     MyApp,
     AktivitePage,
-    AraPage,
     AyarlarPage,
     SonucPage,
     DetayPage,
@@ -63,7 +61,6 @@ import { Facebook } from '@ionic-native/facebook';
   entryComponents: [
     MyApp,
     AktivitePage,
-    AraPage,
     AyarlarPage,
     SonucPage,
     DetayPage,

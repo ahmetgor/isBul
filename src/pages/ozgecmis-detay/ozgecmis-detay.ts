@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -47,7 +47,7 @@ export class OzgecmisDetayPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public formBuilder: FormBuilder, public ozgecmisSer: OzgecmisSer,
               public toastCtrl: ToastController, private camera: Camera,
-              public storage: Storage) {
+              public storage: Storage, public events: Events) {
 
     this.detay = this.navParams.get('ozDetay');
     this.detayList = this.navParams.get('ozDetayList');
@@ -147,7 +147,6 @@ export class OzgecmisDetayPage {
   else {
     this.fileInput.nativeElement.click();
   }
-
 }
 
   save() {
@@ -160,11 +159,11 @@ export class OzgecmisDetayPage {
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList, this.basvurulist)
     .then((res) =>{
       console.log(JSON.stringify(this.basvurulist)+'detaylist');
-      this.storage.set('ozgecmis', this.basvurulist)
-      .then(res => this.navCtrl.pop() )
+      this.storage.set('ozgecmis', this.basvurulist);
+      this.events.publish('ozgecmis:update');
+      this.navCtrl.pop();
 
     } );
-    // this.navCtrl.pop();
 
   }
   else {
@@ -173,8 +172,9 @@ export class OzgecmisDetayPage {
     this.ozgecmisSer.updateOzgecmisAll(this.detay)
     .then((res) =>{
       console.log(JSON.stringify(this.detay)+'detaylist');
-      this.storage.set('ozgecmis', this.detay)
-      .then(res => this.navCtrl.pop() )
+      this.events.publish('ozgecmis:update');
+      this.storage.set('ozgecmis', this.detay);
+      this.navCtrl.pop();
     } );
 }
     // ozgecmisSer.updateOzgecmis()

@@ -1,17 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, AlertController, NavController } from 'ionic-angular';
+import { Nav, Platform, AlertController, NavController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { DetayPage } from '../pages/detay/detay';
 
 import { AktivitePage } from '../pages/aktivite/aktivite';
-import { AraPage } from '../pages/ara/ara';
 import { OzgecmisPage } from '../pages/ozgecmis/ozgecmis';
 import { AyarlarPage } from '../pages/ayarlar/ayarlar';
 import { SonucPage } from '../pages/sonuc/sonuc';
 import { LoginPage } from '../pages/login/login';
 import { UserAuth } from '../providers/user-auth';
+import { OzgecmisSer } from '../providers/ozgecmis-ser';
 import { Storage } from '@ionic/storage';
 import { HesapPage } from '../pages/hesap/hesap';
 
@@ -25,12 +25,14 @@ export class MyApp {
   rootPage: any = LoginPage;
   alert: any;
   user: any;
+  username: String;
 
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public alertCtrl: AlertController, public authService: UserAuth,
-              public deeplinks: Deeplinks, public storage: Storage) {
+              public deeplinks: Deeplinks, public storage: Storage, public ozgecmisSer: OzgecmisSer,
+              public events: Events) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -48,9 +50,14 @@ export class MyApp {
 
     this.storage.get('ozgecmis')
         .then((user) => { this.user = user;
+          // this.username = user.isim.substring(0, user.isim.indexOf('@'));
           console.log(JSON.stringify(user)+"initializeApp");
-          // str.substring(0, str.indexOf(":"));
         });
+
+        this.events.subscribe('ozgecmis:update', ()=> {
+        this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
+        .then((ozgecmis) => this.user = ozgecmis);
+      });
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

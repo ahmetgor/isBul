@@ -61,11 +61,17 @@ export class UserAuth {
 
         this.http.post(this.url+'register', JSON.stringify(details), {headers: headers})
           .subscribe(res => {
-            // this.currentUser = details;
             let data = res.json();
-            // this.token = data.token;
-            // this.storage.set('token', data.token);
-            // this.storage.set('user', details);
+            this.currentUser = data.user;
+            this.token = data.token;
+            this.storage.set('token', data.token);
+            this.storage.set('user', data.user);
+
+            this.getOzgecmis(data.user.ozgecmis)
+            .then((ozgecmis) => {
+              // this.ozgecmis = ozgecmis;
+            // console.log(data+'data');
+          });
             this.loading.dismiss();
             resolve(data);
 

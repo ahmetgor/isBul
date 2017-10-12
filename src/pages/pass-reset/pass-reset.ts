@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController, ToastController, NavParams} from 'ionic-angular';
 import { UserAuth } from '../../providers/user-auth';
+import { LoginPage } from '../login/login';
 
 /*
   Generated class for the PassReset page.
@@ -35,7 +36,7 @@ loading: any;
       };
         // console.log(JSON.stringify(credentials)+'credentials');
       this.authService.forgot(user).then((result) => {
-        this.loading.dismiss();
+        // this.loading.dismiss();
         // this.navCtrl.setRoot(SonucPage);
       }, (err) => {
           // this.loading.dismiss();
@@ -53,6 +54,7 @@ loading: any;
     };
       // console.log(JSON.stringify(credentials)+'credentials');
     this.authService.reset(user).then((result) => {
+      this.navCtrl.setRoot(LoginPage);
       // this.loading.dismiss();
       // this.navCtrl.setRoot(SonucPage);
     }, (err) => {

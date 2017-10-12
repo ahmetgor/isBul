@@ -39,7 +39,7 @@ export class SignupPage {
     this.authService.createAccount(details).then((result) => {
       this.loading.dismiss();
       // console.log(result);
-      this.presentToast('Kaydınız yapıldı, giriş yapabilirsiniz');
+      this.presentToast('Kayıt yapıldı, hoşgeldin ' + this.email.substring(0, this.email.indexOf('@')));
       this.navCtrl.setRoot(LoginPage);
     }, (err) => {
 
