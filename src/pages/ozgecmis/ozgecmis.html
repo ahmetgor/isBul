@@ -118,7 +118,7 @@
 <button ion-item *ngFor="let egitim of (ozgecmis.egitim | datePipe)" (click)="itemTapped($event, egitim, 'egitim', ozgecmis.egitim)">
 <h4><b>{{egitim.okul}}</b> <span ion-text style="float:right;">{{egitim.sehir}}</span></h4>
 <h4>{{egitim.bolum}}</h4>
-<h4>{{egitim.cikis | date:'MM/yyyy'}} - {{egitim.derece}}</h4>
+<h4>{{egitim.cikis | date:'MM/yyyy'}} - {{egitim.derece | datePipe:'egitimdurum'}}</h4>
 </button>
 </ion-card>
 
