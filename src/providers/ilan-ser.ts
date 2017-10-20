@@ -46,6 +46,7 @@ export class IlanSer {
       let headers = new Headers();
       headers.append('Authorization', this.authService.token);
       let order = JSON.parse(orderBy);
+      searchKayit.enabled = true;
       console.log(JSON.stringify(order)+'order service');
       console.log(order+'order service string');
 

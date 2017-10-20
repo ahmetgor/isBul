@@ -80,7 +80,7 @@ export class OzgecmisDetayPage {
           firma: [this.detay.firma, Validators.required],
           pozisyon: [this.detay.pozisyon, Validators.required],
           isTanimiKisa: [this.detay.isTanimiKisa, Validators.required],
-          isTanimi: [this.detay.isTanimi, Validators.required],
+          // isTanimi: [this.detay.isTanimi, Validators.required],
           sehir: [this.detay.sehir, Validators.required],
           ulke: [this.detay.ulke, Validators.required],
           giris: [this.detay.giris, Validators.required],
