@@ -1,3 +1,5 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
@@ -36,9 +38,9 @@ import { Facebook } from '@ionic-native/facebook';
   declarations: [
     MyApp,
     AktivitePage,
-    AyarlarPage,
+    // AyarlarPage,
     SonucPage,
-    DetayPage,
+    // DetayPage,
     FiltrelePage,
     OzgecmisPage,
     OzgecmisDetayPage,
@@ -50,6 +52,8 @@ import { Facebook } from '@ionic-native/facebook';
     Basvuruldu
   ],
   imports: [
+  BrowserModule,
+  HttpModule,
   IonicModule.forRoot(MyApp, {
   monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık' ],
 }),
@@ -61,9 +65,9 @@ import { Facebook } from '@ionic-native/facebook';
   entryComponents: [
     MyApp,
     AktivitePage,
-    AyarlarPage,
+    // AyarlarPage,
     SonucPage,
-    DetayPage,
+    // DetayPage,
     FiltrelePage,
     OzgecmisPage,
     OzgecmisDetayPage,

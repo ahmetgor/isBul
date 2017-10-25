@@ -70,7 +70,7 @@ export class AktivitePage {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(ilan)+'ilan');
     this.navCtrl.push(DetayPage, {
-      ilan: ilan,
+      ilanId: ilan._id,
       basvurulist: this.basvuruSer.basvuruList,
       kaydedilenlist: this.basvuruSer.kaydedilenList
     });

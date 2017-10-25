@@ -27,6 +27,23 @@ export class UserAuth {
   constructor(public http: Http, public storage: Storage,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     console.log('Hello UserAuth Provider');
+    this.storage.get('token').then((value) => {
+        console.log(value+' token');
+        this.token = value;
+
+    this.storage.get('user')
+        .then((user) => {this.currentUser = user;
+        console.log(user+' user');
+
+        this.storage.get('ozgecmis')
+            .then((ozgecmis) => {
+              this.ozgecmis = ozgecmis;
+              console.log(ozgecmis+' ozgecmis');
+
+            });
+          });
+
+          });
   }
 
   checkAuthentication(){
@@ -38,6 +55,9 @@ export class UserAuth {
 
         this.storage.get('user')
             .then((user) => this.currentUser = user);
+
+            this.storage.get('ozgecmis')
+                .then((ozgecmis) => this.ozgecmis = ozgecmis);
 
             let headers = new Headers();
             headers.append('Authorization', this.token);

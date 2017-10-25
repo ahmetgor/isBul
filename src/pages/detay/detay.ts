@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ActionSheetController } from 'ionic-angular';
+import { NavController, NavParams, Platform, ActionSheetController, IonicPage } from 'ionic-angular';
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { IlanSer } from '../../providers/ilan-ser';
 import { SocialSharing } from '@ionic-native/social-sharing';
 // import { FacebookService, InitParams,  UIParams, UIResponse } from 'ngx-facebook';
 import { Facebook } from '@ionic-native/facebook';
+import { UserAuth } from '../../providers/user-auth';
+import { SonucPage } from '../sonuc/sonuc';
+import { LoginPage } from '../login/login';
 
+@IonicPage({
+    segment: 'detay/:ilanId'
+})
 @Component({
   selector: 'page-detay',
   templateUrl: 'detay.html'
@@ -19,27 +25,26 @@ ilanId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public basvuruSer: BasvuruSer,
-              private socialSharing: SocialSharing,
+              private socialSharing: SocialSharing, public authService: UserAuth,
               // private fb: FacebookService,
               private face: Facebook, public plt: Platform,
               public actionSheetCtrl: ActionSheetController) {
 
-                 this.ilan = this.navParams.get('ilan');
-                 this.basvuruList = this.navParams.get('basvurulist');
-                 this.kaydedilenList = this.navParams.get('kaydedilenlist');
-                 this.ilanId = this.navParams.get('ilanId');
+  //  this.ilan = this.navParams.get('ilan');
+   this.basvuruList = this.navParams.get('basvurulist');
+   this.kaydedilenList = this.navParams.get('kaydedilenlist');
+   this.ilanId = this.navParams.get('ilanId');
 
-                 console.log(this.ilanId+"ilanId");
-                //  this.basvuruList.push({id: 'hebe'});
-                 console.log(JSON.stringify(this.kaydedilenList)+'detay basvuru');
+   console.log(this.ilanId+"ilanId");
+  //  this.basvuruList.push({id: 'hebe'});
+   console.log(JSON.stringify(this.kaydedilenList)+'detay basvuru');
 
-                if(this.ilanId) {
-                  ilanSer.getIlan(this.ilanId)
-                  .then((ilan) => {this.ilan = ilan;
-                  console.log(JSON.stringify(this.ilan)+"link ilan");
-                });
-                }
-
+  // if(this.ilanId) {
+    ilanSer.getIlan(this.ilanId)
+    .then((ilan) => {this.ilan = ilan;
+    console.log(JSON.stringify(this.ilan)+"link ilan");
+  });
+  // }
   //   let initParams: InitParams = {
   //     appId: '112498582687614',
   //     xfbml: true,
@@ -53,10 +58,10 @@ ilanId: string;
   shareFace() {
     let options = 	{
   method: "share",
-	href: "https://isgucvar.herokuapp.com/#/ilan/"+this.ilan._id,
+	href: encodeURI('https://isgucvar.herokuapp.com/ilan/'+this.ilan._id),
 	caption: "Such caption, very feed.",
-	description: "Much description",
-	picture: this.ilan.resim
+	description: "Much description"
+	// picture: this.ilan.resim
 }
 // let params: UIParams = {
 //   href: 'https://isgucvar.herokuapp.com/#/ilan/'+this.ilan._id,
@@ -64,6 +69,7 @@ ilanId: string;
 // };
 
 // if(this.plt.is('ios') || this.plt.is('android')) {
+console.log("share face");
     this.face.showDialog( options)
     .then((res) => console.log(res)+"res")
     .catch((e: any) => console.error(e)+"error");
@@ -84,6 +90,16 @@ ilanId: string;
       this.ilanSer.getIlan(this.ilanId)
       .then((ilan) => this.ilan = ilan)
     }
+
+    this.authService.checkAuthentication().then((res) => {
+        // console.log("Already authorized");
+        // this.loading.dismiss();
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+
+        // console.log("Not already authorized");
+        // this.loading.dismiss();
+    });
   }
 
   getDays(d1) {

@@ -15,15 +15,16 @@ export class BasvuruSer {
   kaydedilenList: any = {};
   basvuruList: any = {};
   ozgecmisId: string;
-  // ozgecmis: any;
+  ozgecmis: any;
   loading: any;
 
   constructor(public http: Http, public authService: UserAuth,
               public ozgecmisSer: OzgecmisSer, public toastCtrl: ToastController,
               public loadingCtrl: LoadingController, public storage: Storage) {
     console.log('Hello BasvuruSer Provider');
-    // this.storage.get('user').then((user) => {
-    // this.ozgecmisId = authService.ozgecmis._id;
+    this.storage.get('ozgecmis').then((ozgecmis) => {
+    if(this.authService.currentUser) this.ozgecmis = this.authService.currentUser.ozgecmis;
+     else this.ozgecmis = ozgecmis._id;
     this.getBasvurularList()
     .then(ilanlist => {
       this.basvuruList = ilanlist;
@@ -32,12 +33,12 @@ export class BasvuruSer {
     .then(ilanlist => {
       this.kaydedilenList = ilanlist;
     });
-  // });
+  });
 
   // this.storage.get('ozgecmis').then((ozgecmis) => {
     // this.ozgecmis = authService.ozgecmis;
     // });
-    console.log(JSON.stringify(this.authService.currentUser.ozgecmis)+"datadata");
+    // console.log(JSON.stringify(this.authService.currentUser.ozgecmis)+"datadata");
     // console.log(JSON.stringify(this.ozgecmisSer.ozgecmisId)+"idid");
   }
 
@@ -74,7 +75,7 @@ getKaydedilenler(skip, limit) {
 }
 
   getBasvurularList() {
-    this.ozgecmisId = this.authService.currentUser.ozgecmis;
+    this.ozgecmisId = this.ozgecmis;
     let headers = new Headers();
     console.log('servis basvurularlist oluştur');
     headers.append('Authorization', this.authService.token);
@@ -91,7 +92,7 @@ getKaydedilenler(skip, limit) {
   }
 
   getKaydedilenlerList() {
-    this.ozgecmisId = this.authService.currentUser.ozgecmis;
+    this.ozgecmisId = this.ozgecmis;
     let headers = new Headers();
     headers.append('Authorization', this.authService.token);
     return new Promise((resolve, reject) => {

@@ -78,15 +78,15 @@ export class MyApp {
   }
 });
 
-this.deeplinks.routeWithNavController(this.nav, {
-  '/#/ilan/:ilanId': DetayPage,
-  // '/universal-links-test': AboutPage,
-  // '/products/:productId': ProductPage
-}).subscribe((match) => {
-  console.log('Successfully routed', match);
-}, (nomatch) => {
-  console.warn('Unmatched Route', nomatch);
-});
+// this.deeplinks.routeWithNavController(this.nav, {
+//   '/#/ilan/:ilanId': DetayPage,
+//   // '/universal-links-test': AboutPage,
+//   // '/products/:productId': ProductPage
+// }).subscribe((match) => {
+//   console.log('Successfully routed', match);
+// }, (nomatch) => {
+//   console.warn('Unmatched Route', nomatch);
+// });
     });
   }
 

@@ -84,8 +84,8 @@ this.events.subscribe('ilan:filtered', (a) => {
   itemTapped(ev, ilan) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(ilan)+'ilan');
-    this.navCtrl.push(DetayPage, {
-      ilan: ilan,
+    this.navCtrl.push('DetayPage', {
+      ilanId: ilan._id,
       basvurulist: this.basvuruSer.basvuruList,
       kaydedilenlist: this.basvuruSer.kaydedilenList
     });
