@@ -42,7 +42,7 @@ export class LoginPage {
         this.authService.checkAuthentication().then((res) => {
             // console.log("Already authorized");
             // this.loading.dismiss();
-            this.navCtrl.setRoot(SonucPage);
+            this.navCtrl.setRoot('SonucPage');
         }, (err) => {
             // console.log("Not already authorized");
             // this.loading.dismiss();
@@ -70,7 +70,7 @@ export class LoginPage {
         this.ozgecmisSer.getOzgecmis(result.user.ozgecmis)
         .then((res) => {
                 // this.loading.dismiss();
-                this.navCtrl.setRoot(SonucPage);
+                this.navCtrl.setRoot('SonucPage');
               }, (err) => {
                   // this.loading.dismiss();
                     console.log(JSON.stringify(err._body)+'asdasd');

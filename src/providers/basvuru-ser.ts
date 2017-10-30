@@ -4,7 +4,7 @@ import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { UserAuth } from './user-auth';
 import { OzgecmisSer } from './ozgecmis-ser';
-import {ToastController, LoadingController } from 'ionic-angular';
+import {ToastController, LoadingController, NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 
@@ -24,7 +24,7 @@ export class BasvuruSer {
     console.log('Hello BasvuruSer Provider');
     this.storage.get('ozgecmis').then((ozgecmis) => {
     if(this.authService.currentUser) this.ozgecmis = this.authService.currentUser.ozgecmis;
-     else this.ozgecmis = ozgecmis._id;
+    else this.ozgecmis = ozgecmis._id;
     this.getBasvurularList()
     .then(ilanlist => {
       this.basvuruList = ilanlist;
@@ -33,7 +33,9 @@ export class BasvuruSer {
     .then(ilanlist => {
       this.kaydedilenList = ilanlist;
     });
-  });
+  })
+  .catch((err) => {});
+
 
   // this.storage.get('ozgecmis').then((ozgecmis) => {
     // this.ozgecmis = authService.ozgecmis;
@@ -43,7 +45,7 @@ export class BasvuruSer {
   }
 
   getBasvurular(skip, limit) {
-    this.ozgecmisId = this.authService.currentUser.ozgecmis;
+    this.ozgecmisId = this.ozgecmis;
     let headers = new Headers();
     headers.append('Authorization', this.authService.token);
     return new Promise((resolve, reject) => {
@@ -52,14 +54,14 @@ export class BasvuruSer {
       .subscribe(data => {
         resolve(data);
       }, (err) => {
-        // reject(err);
+         reject(err);
         this.presentToast('Başvuru listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
 }
 
 getKaydedilenler(skip, limit) {
-  this.ozgecmisId = this.authService.currentUser.ozgecmis;
+  this.ozgecmisId = this.ozgecmis;
   let headers = new Headers();
   headers.append('Authorization', this.authService.token);
   return new Promise((resolve, reject) => {
@@ -68,7 +70,7 @@ getKaydedilenler(skip, limit) {
     .subscribe(data => {
       resolve(data);
     }, (err) => {
-      // reject(err);
+       reject(err);
       this.presentToast('Kaydedilen listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
     });
 });
@@ -85,7 +87,7 @@ getKaydedilenler(skip, limit) {
       .subscribe(data => {
         resolve(data);
       }, (err) => {
-        // reject(err);
+         reject(err);
         this.presentToast('Başvuru listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
@@ -101,8 +103,8 @@ getKaydedilenler(skip, limit) {
       .subscribe(data => {
         resolve(data);
       }, (err) => {
-        // reject(err);
-        // this.presentToast();
+         reject(err);
+         this.presentToast('Kaydedilen listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
   }
@@ -131,7 +133,7 @@ getKaydedilenler(skip, limit) {
           this.loading.dismiss();
           resolve(res);
         }, (err) => {
-          // reject(err);
+           reject(err);
           this.loading.dismiss();
           this.presentToast('Başvuru eklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
         });
@@ -139,7 +141,7 @@ getKaydedilenler(skip, limit) {
   }
 
   deleteBasvuru(basvuruId: string) {
-    this.ozgecmisId = this.authService.currentUser.ozgecmis;
+    this.ozgecmisId = this.ozgecmis;
     this.showLoader();
     let i = this.basvuruList.findIndex((item) => {
       return (item.basvuru == basvuruId); });
@@ -154,7 +156,7 @@ getKaydedilenler(skip, limit) {
             this.loading.dismiss();
               resolve(res);
           }, (err) => {
-              // reject(err);
+              reject(err);
               this.presentToast('Başvuru silinemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
               this.loading.dismiss();
           });
@@ -179,7 +181,7 @@ getKaydedilenler(skip, limit) {
           this.loading.dismiss();
           resolve(res);
         }, (err) => {
-          // reject(err);
+           reject(err);
           this.presentToast('Kaydedilen eklenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
           this.loading.dismiss();
         });
@@ -187,7 +189,7 @@ getKaydedilenler(skip, limit) {
   }
 
   deleteKaydedilen(kaydedilenId: string) {
-    this.ozgecmisId = this.authService.currentUser.ozgecmis;
+    this.ozgecmisId = this.ozgecmis;
     console.log(JSON.stringify(kaydedilenId)+'kaydedilenId delete');
     this.showLoader();
     let i = this.kaydedilenList.findIndex((item) => {
@@ -203,7 +205,7 @@ getKaydedilenler(skip, limit) {
             this.loading.dismiss();
               resolve(res);
           }, (err) => {
-              // reject(err);
+               reject(err);
               this.loading.dismiss();
               this.presentToast('Kaydedilen silinemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
           });

@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, Events} from 'ionic-angular';
+import { NavController, NavParams, AlertController, Events, IonicPage, ActionSheetController, Platform} from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
 import { UserAuth} from '../../providers/user-auth';
 import { Storage } from '@ionic/storage';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
+import { LoginPage } from '../login/login';
+import { Facebook } from '@ionic-native/facebook';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
-/*
-  Generated class for the Ozgecmis page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-ozgecmis',
   templateUrl: 'ozgecmis.html'
@@ -23,27 +21,38 @@ export class OzgecmisPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer,  public authService: UserAuth,
-              public alertCtrl: AlertController,public storage: Storage, public events: Events) {
+              public alertCtrl: AlertController,public storage: Storage, public events: Events,
+              public actionSheetCtrl: ActionSheetController, private face: Facebook,
+              public plt: Platform,private socialSharing: SocialSharing) {
 
               // this.ozgecmis = ozgecmisSer.ozgecmis;
               console.log('ionViewDidLoad OzgecmisPage const');
     }
 
   ionViewDidEnter() {
+    if (!this.authService.currentUser) {
+    this.authService.checkAuthentication().then((res) => {
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
+  else{
     console.log('ionViewWillEnter OzgecmisPage const');
     // this.storage.get('ozgecmis').then((ozgecmis) => {
     //   console.log("storage"+ JSON.stringify(ozgecmis));
     //   this.ozgecmis = ozgecmis;
     //   });
-      console.log("storage"+ JSON.stringify(this.authService.currentUser.ozgecmis));
+      // console.log("storage"+ JSON.stringify(this.authService.currentUser.ozgecmis));
 
     this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
-    .then((ozgecmis) => this.ozgecmis = ozgecmis);
+    .then((ozgecmis) => this.ozgecmis = ozgecmis)
+    .catch((err) => {});
 
     this.events.subscribe('ozgecmis:update', ()=> {
     this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
     .then((ozgecmis) => this.ozgecmis = ozgecmis)
   });
+}
   }
 
   itemTapped(ev, ozDetay, des, ozDetayList) {
@@ -80,6 +89,21 @@ export class OzgecmisPage {
 
   }
 
+  shareFace() {
+    let options = 	{
+  method: "share",
+  href: 'http://localhost:8100/#/ozgecmisdetay/'+this.ozgecmis._id,
+  caption: "Such caption, very feed.",
+  description: "Much description"
+  // picture: this.ilan.resim
+}
+console.log("share face");
+    this.face.showDialog( options)
+    .then((res) => console.log(res)+"res")
+    .catch((e: any) => console.error(e)+"error");
+
+  }
+
   presentAlert() {
   let alert = this.alertCtrl.create({
     title: 'Özgeçmişiniz Eksik!',
@@ -88,6 +112,54 @@ export class OzgecmisPage {
   });
   alert.present();
 }
+
+presentActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'İlan Paylaş',
+      buttons: [
+        {
+          text: 'Facebook',
+          icon: 'logo-facebook',
+          handler: () => {
+            this.shareFace();
+          }},{
+          text: 'LinkedIn',
+          icon: 'logo-linkedin',
+          handler: () => {
+            console.log('Archive clicked');
+          }},{
+          text: 'İptal',
+          role: 'cancel',
+          icon: 'close',
+          handler: () => {
+            console.log('Cancel clicked');
+          }  }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  share() {
+    if(this.plt.is('ios') || this.plt.is('android')) {
+  var options = {
+    message: "share this\n", // not supported on some apps (Facebook, Instagram)
+    // subject: 'the subject', // fi. for email
+    // files: [this.ilan.resim], // an array of filenames either locally or remotely
+    url: "https://isgucvar.herokuapp.com/#/ilan/"+this.ozgecmis._id,
+    chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
+  }
+  // this.socialSharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null, "https://isgucvar.herokuapp.com/", "paste it")
+  // this.socialSharing.share('message', 'subject', this.ilan.resim, 'https://www.website.com/foo/#bar?a=b')
+  this.socialSharing.shareWithOptions(options)
+  .then((result) => {
+      console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+      console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+  }).catch((msg) => {
+      console.log("Sharing failed with message: " + msg);
+  });
+  }
+  else this.presentActionSheet();
+  }
 
 getAge() {
   return ~~(((new Date()).getTime() - (new Date(this.ozgecmis.dogumTarihi)).getTime()) / (31557600000));

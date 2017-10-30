@@ -37,10 +37,10 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'İlanlar', component: SonucPage, icon: 'search' },
-      { title: 'Aktiviteler', component: AktivitePage, icon: 'walk' },
-      { title: 'Özgeçmiş', component: OzgecmisPage, icon: 'list-box' },
-      { title: 'Ayarlar', component: AyarlarPage, icon: 'settings' },
+      { title: 'İlanlar', component: 'SonucPage', icon: 'search' },
+      { title: 'Aktiviteler', component: 'AktivitePage', icon: 'walk' },
+      { title: 'Özgeçmiş', component: 'OzgecmisPage', icon: 'list-box' },
+      { title: 'Ayarlar', component: 'AyarlarPage', icon: 'settings' },
       // { title: 'İlan Ara', component: SonucPage, icon: null },
     ];
 
@@ -49,9 +49,11 @@ export class MyApp {
   initializeApp() {
 
     this.storage.get('ozgecmis')
-        .then((user) => { this.user = user;
+        .then((ozgecmis) => {
+          if (this.authService.ozgecmis) this.user = this.authService.ozgecmis;
+          else this.user = ozgecmis;
           // this.username = user.isim.substring(0, user.isim.indexOf('@'));
-          console.log(JSON.stringify(user)+"initializeApp");
+          console.log(JSON.stringify(ozgecmis)+"initializeApp");
         });
 
         this.events.subscribe('ozgecmis:update', ()=> {
@@ -127,7 +129,7 @@ this.alert.present();
 }
 
 goHesap() {
-  this.nav.push(HesapPage);
+  this.nav.push('HesapPage');
 }
 
 // ngAfterViewInit() {

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { DetayPage } from '../detay/detay';
+import { UserAuth} from '../../providers/user-auth';
+import { LoginPage } from '../login/login';
 
 /*
   Generated class for the Aktivite page.
@@ -10,6 +12,7 @@ import { DetayPage } from '../detay/detay';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+@IonicPage()
 @Component({
   selector: 'page-aktivite',
   templateUrl: 'aktivite.html'
@@ -29,23 +32,28 @@ export class AktivitePage {
   limi: number = 10;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public basvuruSer: BasvuruSer, public ilanSer: IlanSer) {
+              public basvuruSer: BasvuruSer, public ilanSer: IlanSer, public authService: UserAuth) {
 
-                this.basvuruList = this.basvuruSer.basvuruList;
-                this.kaydedilenList = this.basvuruSer.kaydedilenList;
               }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AktivitePage');
-    // this.getBasvuruList();
-    this.getBasvuruList();
-    this.getKaydedilenList();
   }
 
   ionViewWillEnter() {
+    if (!this.authService.currentUser) {
+    this.authService.checkAuthentication().then((res) => {
+      this.getBasvuruList();
+      this.getKaydedilenList();
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
+  else{
     console.log('ionViewWillEnter AktivitePage');
     this.getBasvuruList();
     this.getKaydedilenList();
+  }
+  this.basvuruList = this.basvuruSer.basvuruList;
+  this.kaydedilenList = this.basvuruSer.kaydedilenList;
   }
 
   getBasvuruList() {
@@ -54,7 +62,9 @@ export class AktivitePage {
     this.basvuruSer.getBasvurular(this.skip, this.limit)
     .then(basvurular => {
       this.basvurular = basvurular;
-    });
+      // console.log(JSON.stringify(basvurular));
+    })
+    .catch((err) => {});
   }
 
   getKaydedilenList() {
@@ -63,7 +73,8 @@ export class AktivitePage {
     this.basvuruSer.getKaydedilenler(this.ski, this.limi)
     .then(kaydedilenler => {
       this.kaydedilenler = kaydedilenler;
-    });
+    })
+    .catch((err) => {});
   }
 
   itemTapped(ev, ilan) {
@@ -94,7 +105,8 @@ export class AktivitePage {
         for( var key in basvurular ) {
       this.basvurular.push(basvurular[key]);
     }
-     });
+     })
+     .catch((err) => {});
     console.log('Async operation has ended');
     infiniteScroll.complete();
   }, 500);
@@ -118,7 +130,8 @@ setTimeout(() => {
       for( var key in kaydedilenler ) {
     this.kaydedilenler.push(kaydedilenler[key]);
   }
-   });
+   })
+   .catch((err) => {});
   console.log('Async operation has ended');
   infiniteScroll.complete();
 }, 500);

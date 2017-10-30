@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { UserAuth } from '../../providers/user-auth';
 import { LoginPage } from '../login/login';
 
-/*
-  Generated class for the HesapPage page.
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-hesap',
   templateUrl: 'hesap.html'
@@ -31,6 +27,12 @@ export class HesapPage   {
   }
 
   ionViewDidLoad() {
+    if (!this.authService.currentUser) {
+    this.authService.checkAuthentication().then((res) => {
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
     this.newpassword = "";
     this.newpassword1 = "";
     console.log('ionViewDidLoad HesapPagePage');

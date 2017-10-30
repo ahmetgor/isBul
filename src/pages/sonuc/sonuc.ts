@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, Events} from 'ionic-angular';
+import { NavController, NavParams, ModalController, Events, IonicPage} from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { DetayPage } from '../detay/detay';
 import { FiltrelePage } from '../filtrele/filtrele';
 import { FormControl } from '@angular/forms';
 import { BasvuruSer } from '../../providers/basvuru-ser';
-
+import { LoginPage } from '../login/login';
+import { UserAuth} from '../../providers/user-auth';
 import 'rxjs/add/operator/debounceTime';
 
+@IonicPage({segment: 'ilanlar'})
 @Component({
   selector: 'page-sonuc',
   templateUrl: 'sonuc.html'
@@ -31,7 +33,7 @@ export class SonucPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public modalCtrl: ModalController,
-              public basvuruSer: BasvuruSer, public events: Events) {
+              public basvuruSer: BasvuruSer, public events: Events, public authService: UserAuth) {
 
     this.searchControl = new FormControl();
     // this.getBasvuru();
@@ -39,6 +41,12 @@ export class SonucPage {
   }
 
   ionViewDidLoad() {
+    if (!this.authService.currentUser) {
+    this.authService.checkAuthentication().then((res) => {
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
     this.basvuruList = this.basvuruSer.basvuruList;
     this.kaydedilenList = this.basvuruSer.kaydedilenList;
     console.log('ilanlistele didload çağrıldı');

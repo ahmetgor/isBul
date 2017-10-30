@@ -31,6 +31,12 @@ ilanId: string;
               public actionSheetCtrl: ActionSheetController) {
 
   //  this.ilan = this.navParams.get('ilan');
+  if (!this.authService.currentUser) {
+  this.authService.checkAuthentication().then((res) => {
+  }, (err) => {
+    this.navCtrl.setRoot(LoginPage);
+  });
+}
    this.basvuruList = this.navParams.get('basvurulist');
    this.kaydedilenList = this.navParams.get('kaydedilenlist');
    this.ilanId = this.navParams.get('ilanId');
@@ -58,7 +64,7 @@ ilanId: string;
   shareFace() {
     let options = 	{
   method: "share",
-	href: encodeURI('https://isgucvar.herokuapp.com/ilan/'+this.ilan._id),
+	href: 'http://localhost:8100/#/detay/'+this.ilan._id,
 	caption: "Such caption, very feed.",
 	description: "Much description"
 	// picture: this.ilan.resim
@@ -91,15 +97,12 @@ console.log("share face");
       .then((ilan) => this.ilan = ilan)
     }
 
+    if (!this.authService.currentUser) {
     this.authService.checkAuthentication().then((res) => {
-        // console.log("Already authorized");
-        // this.loading.dismiss();
     }, (err) => {
       this.navCtrl.setRoot(LoginPage);
-
-        // console.log("Not already authorized");
-        // this.loading.dismiss();
     });
+  }
   }
 
   getDays(d1) {
@@ -152,28 +155,25 @@ console.log("share face");
 
   presentActionSheet() {
       let actionSheet = this.actionSheetCtrl.create({
-        title: 'Paylaş',
+        title: 'İlan Paylaş',
         buttons: [
           {
             text: 'Facebook',
             icon: 'logo-facebook',
             handler: () => {
               this.shareFace();
-            }
-          },{
+            }},{
             text: 'LinkedIn',
             icon: 'logo-linkedin',
             handler: () => {
               console.log('Archive clicked');
-            }
-          },{
+            }},{
             text: 'İptal',
             role: 'cancel',
             icon: 'close',
             handler: () => {
               console.log('Cancel clicked');
-            }
-          }
+            }  }
         ]
       });
       actionSheet.present();

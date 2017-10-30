@@ -37,18 +37,18 @@ import { Facebook } from '@ionic-native/facebook';
 @NgModule({
   declarations: [
     MyApp,
-    AktivitePage,
+    // AktivitePage,
     // AyarlarPage,
-    SonucPage,
+    // SonucPage,
     // DetayPage,
     FiltrelePage,
-    OzgecmisPage,
+    // OzgecmisPage,
     OzgecmisDetayPage,
     LoginPage,
     SignupPage,
     PassResetPage,
-    HesapPage,
-    DatePipe,
+    // HesapPage,
+    // DatePipe,
     Basvuruldu
   ],
   imports: [
@@ -64,17 +64,17 @@ import { Facebook } from '@ionic-native/facebook';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AktivitePage,
+    // AktivitePage,
     // AyarlarPage,
-    SonucPage,
+    // SonucPage,
     // DetayPage,
     FiltrelePage,
-    OzgecmisPage,
+    // OzgecmisPage,
     OzgecmisDetayPage,
     LoginPage,
     SignupPage,
-    PassResetPage,
-    HesapPage
+    PassResetPage
+    // HesapPage
   ],
   providers: [
     StatusBar,

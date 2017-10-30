@@ -8,8 +8,8 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
   Ionic pages and navigation.
 */
 @IonicPage(
-  {    segment: 'ayarlar'
-}
+//   {    segment: 'ayarlar'
+// }
 )
 
 @Component({

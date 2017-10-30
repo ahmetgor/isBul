@@ -35,26 +35,26 @@
     <div  *ngSwitchCase="'basvurulan'">
 
   <ion-list text-wrap>
-    <button ion-item *ngFor="let basvuru of basvurular" (click)="itemTapped($event, basvuru.basvuru)">
+    <button ion-item *ngFor="let basvuru of basvurular" (click)="itemTapped($event, basvuru)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-thumbnail item-left>
-        <img class="img-circle" [src]="basvuru.basvuru.resim">
+        <img class="img-circle" [src]="basvuru.firma.resim">
       </ion-thumbnail>
 
       <ion-row>
       <ion-col>
-      <h2>{{basvuru.basvuru.baslik}}</h2>
+      <h2>{{basvuru.baslik}}</h2>
       </ion-col>
     </ion-row>
 
       <ion-row>
         <ion-col>
-      <div class="firma"><h4>{{basvuru.basvuru.firmaAdi}}</h4></div>
+      <div class="firma"><h4>{{basvuru.firmaAdi}}</h4></div>
       </ion-col>
       <ion-col>
-        <h4 align="right" [class.my-class]="getDays(basvuru.basvuru.olusurmaTarih) < 10">
+        <h4 align="right" [class.my-class]="getDays(basvuru.olusurmaTarih) < 10">
           <ion-icon name="calendar"></ion-icon>
-          {{getDays(basvuru.basvuru.olusturmaTarih)}} gün
+          {{getDays(basvuru.olusturmaTarih)}} gün
         </h4>
       </ion-col>
       </ion-row>
@@ -62,22 +62,22 @@
       <ion-row>
       <ion-col col-auto>
           <p><ion-icon name="pin"></ion-icon>
-            {{basvuru.basvuru.il}}
+            {{basvuru.il}}
 
           </p>
       </ion-col>
       <ion-col>
         <p align="right">
           <span style="float:left;">
-          <i *ngIf="checkBasvuru(basvuru.basvuru)">
+          <i *ngIf="checkBasvuru(basvuru)">
             <ion-icon name="checkmark-circle"></ion-icon>
           </i>
-          <i *ngIf="checkKaydet(basvuru.basvuru)">
+          <i *ngIf="checkKaydet(basvuru)">
             <ion-icon name="bookmark"></ion-icon>
           </i>
         </span>
           <ion-icon name="briefcase"></ion-icon>
-          {{basvuru.basvuru.tip}}
+          {{basvuru.tip}}
         </p>
       </ion-col>
       </ion-row>
@@ -96,26 +96,26 @@
 <div *ngSwitchCase="'kaydedilen'">
 
   <ion-list text-wrap>
-    <button ion-item *ngFor="let kaydedilen of kaydedilenler" (click)="itemTapped($event, kaydedilen.kaydedilen)">
+    <button ion-item *ngFor="let kaydedilen of kaydedilenler" (click)="itemTapped($event, kaydedilen)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-thumbnail item-left>
-        <img class="img-circle" [src]="kaydedilen.kaydedilen.resim">
+        <img class="img-circle" [src]="kaydedilen.firma.resim">
       </ion-thumbnail>
 
       <ion-row>
       <ion-col>
-      <h2>{{kaydedilen.kaydedilen.baslik}}</h2>
+      <h2>{{kaydedilen.baslik}}</h2>
       </ion-col>
     </ion-row>
 
       <ion-row>
         <ion-col>
-      <div class="firma"><h4>{{kaydedilen.kaydedilen.firmaAdi}}</h4></div>
+      <div class="firma"><h4>{{kaydedilen.firmaAdi}}</h4></div>
       </ion-col>
       <ion-col>
-        <h4 align="right" [class.my-class]="getDays(kaydedilen.kaydedilen.olusurmaTarih) < 10">
+        <h4 align="right" [class.my-class]="getDays(kaydedilen.olusurmaTarih) < 10">
           <ion-icon name="calendar"></ion-icon>
-          {{getDays(kaydedilen.kaydedilen.olusturmaTarih)}} gün
+          {{getDays(kaydedilen.olusturmaTarih)}} gün
         </h4>
       </ion-col>
       </ion-row>
@@ -123,22 +123,22 @@
       <ion-row>
       <ion-col col-auto>
           <p><ion-icon name="pin"></ion-icon>
-            {{kaydedilen.kaydedilen.il}}
+            {{kaydedilen.il}}
 
           </p>
       </ion-col>
       <ion-col>
         <p align="right">
           <span style="float:left;">
-          <i *ngIf="checkBasvuru(kaydedilen.kaydedilen)">
+          <i *ngIf="checkBasvuru(kaydedilen)">
             <ion-icon name="checkmark-circle"></ion-icon>
           </i>
-          <i *ngIf="checkKaydet(kaydedilen.kaydedilen)">
+          <i *ngIf="checkKaydet(kaydedilen)">
             <ion-icon name="bookmark"></ion-icon>
           </i>
         </span>
           <ion-icon name="briefcase"></ion-icon>
-          {{kaydedilen.kaydedilen.tip}}
+          {{kaydedilen.tip}}
         </p>
       </ion-col>
       </ion-row>
