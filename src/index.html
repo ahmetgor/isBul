@@ -23,6 +23,11 @@
     }
   </script>-->
 
+  <script type="text/javascript" src="//platform.linkedin.com/in.js">
+      api_key: 86p3aqpfdryb6f
+      authorize: true
+  </script>
+
   <link href="build/main.css" rel="stylesheet">
 
 </head>
@@ -36,6 +41,28 @@
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>
 
+
+
+  <!-- <script type="text/javascript" src="https://connect.facebook.net/en_US/sdk.js"></script> -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '112498582687614',
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v2.9'
+      });
+      FB.AppEvents.logPageView();
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
   <!-- all code from node_modules directory is here -->
 <!-- <script src="build/vendor.js"></script> -->
 

@@ -48,13 +48,13 @@ export class MyApp {
 
   initializeApp() {
 
-    this.storage.get('ozgecmis')
-        .then((ozgecmis) => {
-          if (this.authService.ozgecmis) this.user = this.authService.ozgecmis;
-          else this.user = ozgecmis;
-          // this.username = user.isim.substring(0, user.isim.indexOf('@'));
-          console.log(JSON.stringify(ozgecmis)+"initializeApp");
-        });
+    // this.storage.get('ozgecmis')
+    //     .then((ozgecmis) => {
+    //       if (this.authService.ozgecmis) this.user = this.authService.ozgecmis;
+    //       else this.user = ozgecmis;
+    //       // this.username = user.isim.substring(0, user.isim.indexOf('@'));
+    //       console.log(JSON.stringify(ozgecmis)+"initializeApp");
+    //     });
 
         this.events.subscribe('ozgecmis:update', ()=> {
         this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)

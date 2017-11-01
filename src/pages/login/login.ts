@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController, ToastController, NavParams} from 'ionic-angular';
+import { NavController, LoadingController, ToastController, NavParams, Events} from 'ionic-angular';
 import { UserAuth } from '../../providers/user-auth';
 import { SonucPage } from '../sonuc/sonuc';
 import { SignupPage } from '../signup/signup';
@@ -26,7 +26,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public authService: UserAuth,
     public loadingCtrl: LoadingController, public toastCtrl: ToastController,
-    public storage: Storage, public ozgecmisSer: OzgecmisSer) {
+    public storage: Storage, public ozgecmisSer: OzgecmisSer, public events: Events) {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
@@ -42,6 +42,7 @@ export class LoginPage {
         this.authService.checkAuthentication().then((res) => {
             // console.log("Already authorized");
             // this.loading.dismiss();
+            this.events.publish('ozgecmis:update');
             this.navCtrl.setRoot('SonucPage');
         }, (err) => {
             // console.log("Not already authorized");
@@ -70,6 +71,7 @@ export class LoginPage {
         this.ozgecmisSer.getOzgecmis(result.user.ozgecmis)
         .then((res) => {
                 // this.loading.dismiss();
+                this.events.publish('ozgecmis:update');
                 this.navCtrl.setRoot('SonucPage');
               }, (err) => {
                   // this.loading.dismiss();

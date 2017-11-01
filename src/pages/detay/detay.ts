@@ -3,11 +3,15 @@ import { NavController, NavParams, Platform, ActionSheetController, IonicPage } 
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { IlanSer } from '../../providers/ilan-ser';
 import { SocialSharing } from '@ionic-native/social-sharing';
-// import { FacebookService, InitParams,  UIParams, UIResponse } from 'ngx-facebook';
+import { FacebookService, InitParams,  UIParams, UIResponse } from 'ngx-facebook';
 import { Facebook } from '@ionic-native/facebook';
 import { UserAuth } from '../../providers/user-auth';
 import { SonucPage } from '../sonuc/sonuc';
 import { LoginPage } from '../login/login';
+import { LinkedIn } from '@ionic-native/linkedin';
+
+declare var IN;
+declare var FB;
 
 @IonicPage({
     segment: 'detay/:ilanId'
@@ -26,9 +30,9 @@ ilanId: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public basvuruSer: BasvuruSer,
               private socialSharing: SocialSharing, public authService: UserAuth,
-              // private fb: FacebookService,
+              private fb: FacebookService,
               private face: Facebook, public plt: Platform,
-              public actionSheetCtrl: ActionSheetController) {
+              public actionSheetCtrl: ActionSheetController, private linkedin: LinkedIn) {
 
   //  this.ilan = this.navParams.get('ilan');
   if (!this.authService.currentUser) {
@@ -50,15 +54,15 @@ ilanId: string;
     .then((ilan) => {this.ilan = ilan;
     console.log(JSON.stringify(this.ilan)+"link ilan");
   });
-  // }
-  //   let initParams: InitParams = {
-  //     appId: '112498582687614',
-  //     xfbml: true,
-  //     version: 'v2.9'
-  //   };
-  //
-  //   fb.init(initParams);
-  //   // face.browserInit(112498582687614, 'v2.9');
+
+    let initParams: InitParams = {
+      appId: '112498582687614',
+      xfbml: true,
+      version: 'v2.9'
+    };
+
+    fb.init(initParams);
+     face.browserInit(112498582687614, 'v2.9');
   }
 
   shareFace() {
@@ -69,24 +73,49 @@ ilanId: string;
 	description: "Much description"
 	// picture: this.ilan.resim
 }
-// let params: UIParams = {
-//   href: 'https://isgucvar.herokuapp.com/#/ilan/'+this.ilan._id,
-//   method: 'share'
-// };
+let params: UIParams = {
+  href: 'http://localhost:8100/#/detay/'+this.ilan._id,
+  method: 'share'
+};
 
-// if(this.plt.is('ios') || this.plt.is('android')) {
 console.log("share face");
-    this.face.showDialog( options)
-    .then((res) => console.log(res)+"res")
-    .catch((e: any) => console.error(e)+"error");
+    // this.face.showDialog( options)
+    // .then((res) => console.log(res)+"res")
+    // .catch((e: any) => console.error(e)+"error");
 
-  // }
+  FB.ui({
+  method: 'share',
+  href: 'http://localhost:8100/#/detay/'+this.ilan._id,
+}, function(response){});
 
-  // else {
   //     this.fb.ui(params)
   //     .then((res: UIResponse) => console.log(res))
   //     .catch((e: any) => console.error(e));
-  //   }
+  }
+
+  shareLinked(){
+//     const body = {
+//   comment: 'Hello world!',
+//   visibility: {
+//     code: 'anyone'
+//   }
+// };
+//
+// this.linkedin.postRequest('~/shares', body)
+//   .then(res => console.log(res))
+//   .catch(e => console.log(e));
+var payload = {
+  "comment": "Check out developer.linkedin.com! http://linkd.in/1FC2PyG",
+  "visibility": {
+    "code": "anyone"
+  }
+};
+
+IN.API.Raw("/people/~/shares?format=json")
+  .method("POST")
+  .body(JSON.stringify(payload))
+  .result((onSuccess) =>{})
+  .error((onError) =>{});
   }
 
   ionViewDidLoad() {
@@ -167,6 +196,7 @@ console.log("share face");
             icon: 'logo-linkedin',
             handler: () => {
               console.log('Archive clicked');
+              this.shareLinked();
             }},{
             text: 'İptal',
             role: 'cancel',

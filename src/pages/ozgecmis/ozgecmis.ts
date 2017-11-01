@@ -9,6 +9,9 @@ import { LoginPage } from '../login/login';
 import { Facebook } from '@ionic-native/facebook';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
+declare var IN;
+declare var FB;
+
 @IonicPage()
 @Component({
   selector: 'page-ozgecmis',
@@ -92,17 +95,36 @@ export class OzgecmisPage {
   shareFace() {
     let options = 	{
   method: "share",
-  href: 'http://localhost:8100/#/ozgecmisdetay/'+this.ozgecmis._id,
-  caption: "Such caption, very feed.",
-  description: "Much description"
-  // picture: this.ilan.resim
+	href: 'http://localhost:8100/#/detay/'+this.ozgecmis._id,
+	caption: "Such caption, very feed.",
+	description: "Much description"
+	// picture: this.ilan.resim
 }
+
 console.log("share face");
-    this.face.showDialog( options)
-    .then((res) => console.log(res)+"res")
-    .catch((e: any) => console.error(e)+"error");
+
+  FB.ui({
+  method: 'share',
+  href: 'http://localhost:8100/#/detay/'+this.ozgecmis._id,
+}, function(response){});
 
   }
+
+  shareLinked(){
+var payload = {
+  "comment": "Check out developer.linkedin.com! http://linkd.in/1FC2PyG",
+  "visibility": {
+    "code": "anyone"
+  }
+};
+
+IN.API.Raw("/people/~/shares?format=json")
+  .method("POST")
+  .body(JSON.stringify(payload))
+  .result((onSuccess) =>{})
+  .error((onError) =>{});
+  }
+
 
   presentAlert() {
   let alert = this.alertCtrl.create({
@@ -127,6 +149,7 @@ presentActionSheet() {
           icon: 'logo-linkedin',
           handler: () => {
             console.log('Archive clicked');
+            this.shareLinked();
           }},{
           text: 'İptal',
           role: 'cancel',

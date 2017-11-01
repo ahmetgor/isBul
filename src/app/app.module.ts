@@ -32,6 +32,7 @@ import { Camera} from '@ionic-native/camera';
 import { PassResetPage } from '../pages/pass-reset/pass-reset';
 import { FacebookModule } from 'ngx-facebook';
 import { Facebook } from '@ionic-native/facebook';
+import { LinkedIn } from '@ionic-native/linkedin';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { Facebook } from '@ionic-native/facebook';
     Deeplinks,
     SocialSharing,
     Facebook,
+    LinkedIn,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

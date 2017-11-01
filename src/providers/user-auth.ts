@@ -18,8 +18,8 @@ export class UserAuth {
   // url : string = 'https://serverisgucvar.herokuapp.com/api/auth/';
   // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
 
-  url : string = 'http://127.0.0.1:8080/api/auth/';
-  url1: string = 'http://127.0.0.1:8080/api/tools/';
+  url : string = window.location.origin+'/api/auth/';
+  url1: string = window.location.origin+'/api/tools/';
   currentUser: any;
   loading: any;
   ozgecmis: any;
@@ -27,6 +27,7 @@ export class UserAuth {
   constructor(public http: Http, public storage: Storage,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
     console.log('Hello UserAuth Provider');
+    console.log(window.location.origin+'host');
     this.storage.get('token').then((value) => {
         console.log(value+' token');
         this.token = value;
