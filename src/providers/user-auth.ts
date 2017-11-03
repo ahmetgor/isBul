@@ -3,7 +3,7 @@ import { Http, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs';
-import {ToastController, LoadingController } from 'ionic-angular';
+import {ToastController, LoadingController, Events } from 'ionic-angular';
 
 /*
   Generated class for the UserAuth provider.
@@ -25,26 +25,26 @@ export class UserAuth {
   ozgecmis: any;
 
   constructor(public http: Http, public storage: Storage,
-              public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
+              public toastCtrl: ToastController, public loadingCtrl: LoadingController,
+              public events: Events) {
     console.log('Hello UserAuth Provider');
     console.log(window.location.origin+'host');
-    this.storage.get('token').then((value) => {
-        console.log(value+' token');
-        this.token = value;
-
-    this.storage.get('user')
-        .then((user) => {this.currentUser = user;
-        console.log(user+' user');
-
-        this.storage.get('ozgecmis')
-            .then((ozgecmis) => {
-              this.ozgecmis = ozgecmis;
-              console.log(ozgecmis+' ozgecmis');
-
-            });
-          });
-
-          });
+    // this.storage.get('token').then((value) => {
+    //     console.log(value+' token');
+    //     this.token = value;
+    //
+    // this.storage.get('user')
+    //     .then((user) => {this.currentUser = user;
+    //     console.log(JSON.stringify(user)+' user');
+    //
+    //     this.storage.get('ozgecmis')
+    //         .then((ozgecmis) => {
+    //           this.ozgecmis = ozgecmis;
+    //           console.log(JSON.stringify(ozgecmis)+' ozgecmis');
+    //         });
+    //       });
+    //       });
+    this.checkAuthentication();
   }
 
   checkAuthentication(){
@@ -55,7 +55,11 @@ export class UserAuth {
             this.token = value;
 
         this.storage.get('user')
-            .then((user) => this.currentUser = user);
+            .then((user) => {
+              this.currentUser = user;
+              console.log(JSON.stringify(this.currentUser)+"  checkauth currentuser");
+
+            });
 
             this.storage.get('ozgecmis')
                 .then((ozgecmis) => this.ozgecmis = ozgecmis);
@@ -64,6 +68,7 @@ export class UserAuth {
             headers.append('Authorization', this.token);
             this.http.get(this.url+'protected', {headers: headers})
                 .subscribe(res => {
+                  this.events.publish('ozgecmis:update');
                     resolve(res);
                 }, (err) => {
                     reject(err);

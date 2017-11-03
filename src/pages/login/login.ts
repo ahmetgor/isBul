@@ -42,7 +42,6 @@ export class LoginPage {
         this.authService.checkAuthentication().then((res) => {
             // console.log("Already authorized");
             // this.loading.dismiss();
-            this.events.publish('ozgecmis:update');
             this.navCtrl.setRoot('SonucPage');
         }, (err) => {
             // console.log("Not already authorized");

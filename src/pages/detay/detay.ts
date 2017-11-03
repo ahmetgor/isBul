@@ -68,13 +68,13 @@ ilanId: string;
   shareFace() {
     let options = 	{
   method: "share",
-	href: 'http://localhost:8100/#/detay/'+this.ilan._id,
+	href: window.location.origin+'/#/detay/'+this.ilan._id,
 	caption: "Such caption, very feed.",
 	description: "Much description"
 	// picture: this.ilan.resim
 }
 let params: UIParams = {
-  href: 'http://localhost:8100/#/detay/'+this.ilan._id,
+  href: window.location.origin+'/#/detay/'+this.ilan._id,
   method: 'share'
 };
 
@@ -85,7 +85,7 @@ console.log("share face");
 
   FB.ui({
   method: 'share',
-  href: 'http://localhost:8100/#/detay/'+this.ilan._id,
+  href: window.location.origin+'/#/detay/'+this.ilan._id,
 }, function(response){});
 
   //     this.fb.ui(params)
@@ -94,18 +94,9 @@ console.log("share face");
   }
 
   shareLinked(){
-//     const body = {
-//   comment: 'Hello world!',
-//   visibility: {
-//     code: 'anyone'
-//   }
-// };
-//
-// this.linkedin.postRequest('~/shares', body)
-//   .then(res => console.log(res))
-//   .catch(e => console.log(e));
+
 var payload = {
-  "comment": "Check out developer.linkedin.com! http://linkd.in/1FC2PyG",
+  "comment": "Yeni bir İşgüçvar ilanı!" + window.location.origin+'/#/detay/'+this.ilan._id,
   "visibility": {
     "code": "anyone"
   }
@@ -191,13 +182,15 @@ IN.API.Raw("/people/~/shares?format=json")
             icon: 'logo-facebook',
             handler: () => {
               this.shareFace();
-            }},{
-            text: 'LinkedIn',
-            icon: 'logo-linkedin',
-            handler: () => {
-              console.log('Archive clicked');
-              this.shareLinked();
-            }},{
+            }},
+            // {
+            // text: 'LinkedIn',
+            // icon: 'logo-linkedin',
+            // handler: () => {
+            //   console.log('Archive clicked');
+            //   this.shareLinked();
+            // }},
+            {
             text: 'İptal',
             role: 'cancel',
             icon: 'close',
@@ -215,7 +208,7 @@ var options = {
   message: "share this\n", // not supported on some apps (Facebook, Instagram)
   // subject: 'the subject', // fi. for email
   // files: [this.ilan.resim], // an array of filenames either locally or remotely
-  url: "https://isgucvar.herokuapp.com/#/ilan/"+this.ilan._id,
+  url: window.location.origin+"/#/ilan/"+this.ilan._id,
   chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
 }
 // this.socialSharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null, "https://isgucvar.herokuapp.com/", "paste it")

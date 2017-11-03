@@ -56,10 +56,11 @@ export class MyApp {
     //       console.log(JSON.stringify(ozgecmis)+"initializeApp");
     //     });
 
-        this.events.subscribe('ozgecmis:update', ()=> {
-        this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
-        .then((ozgecmis) => this.user = ozgecmis);
-      });
+      this.events.subscribe('ozgecmis:update', ()=> {
+        console.log('ozgecmis:update' + this.authService.currentUser.ozgecmis);
+      this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
+      .then((ozgecmis) => this.user = ozgecmis);
+    });
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

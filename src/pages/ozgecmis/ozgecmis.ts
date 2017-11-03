@@ -93,37 +93,37 @@ export class OzgecmisPage {
   }
 
   shareFace() {
-    let options = 	{
-  method: "share",
-	href: 'http://localhost:8100/#/detay/'+this.ozgecmis._id,
-	caption: "Such caption, very feed.",
-	description: "Much description"
-	// picture: this.ilan.resim
-}
+//     let options = 	{
+//   method: "share",
+// 	href: window.location.origin+'/#/detay/'+this.ozgecmis._id,
+// 	caption: "Such caption, very feed.",
+// 	description: "Much description"
+// 	// picture: this.ilan.resim
+// }
 
 console.log("share face");
 
   FB.ui({
   method: 'share',
-  href: 'http://localhost:8100/#/detay/'+this.ozgecmis._id,
+  href: 'https://isgucvarisveren.herokuapp.com'+'/#/ilandetay/'+this.ozgecmis._id,
 }, function(response){});
 
   }
 
-  shareLinked(){
-var payload = {
-  "comment": "Check out developer.linkedin.com! http://linkd.in/1FC2PyG",
-  "visibility": {
-    "code": "anyone"
-  }
-};
-
-IN.API.Raw("/people/~/shares?format=json")
-  .method("POST")
-  .body(JSON.stringify(payload))
-  .result((onSuccess) =>{})
-  .error((onError) =>{});
-  }
+//   shareLinked(){
+// var payload = {
+//   "comment": "Yeni bir İşgüçvar ilanı!" + window.location.origin+'/#/detay/'+this.ozgecmis._id,
+//   "visibility": {
+//     "code": "anyone"
+//   }
+// };
+//
+// IN.API.Raw("/people/~/shares?format=json")
+//   .method("POST")
+//   .body(JSON.stringify(payload))
+//   .result((onSuccess) =>{})
+//   .error((onError) =>{});
+//   }
 
 
   presentAlert() {
@@ -144,13 +144,15 @@ presentActionSheet() {
           icon: 'logo-facebook',
           handler: () => {
             this.shareFace();
-          }},{
-          text: 'LinkedIn',
-          icon: 'logo-linkedin',
-          handler: () => {
-            console.log('Archive clicked');
-            this.shareLinked();
-          }},{
+          }},
+          // {
+          // text: 'LinkedIn',
+          // icon: 'logo-linkedin',
+          // handler: () => {
+          //   console.log('Archive clicked');
+          //   this.shareLinked();
+          // }},
+          {
           text: 'İptal',
           role: 'cancel',
           icon: 'close',
@@ -168,7 +170,7 @@ presentActionSheet() {
     message: "share this\n", // not supported on some apps (Facebook, Instagram)
     // subject: 'the subject', // fi. for email
     // files: [this.ilan.resim], // an array of filenames either locally or remotely
-    url: "https://isgucvar.herokuapp.com/#/ilan/"+this.ozgecmis._id,
+    url: 'https://isgucvarisveren.herokuapp.com'+'/#/ilandetay/'+this.ozgecmis._id,
     chooserTitle: 'Uygulama seçin:' // Android only, you can override the default share sheet title
   }
   // this.socialSharing.shareViaFacebookWithPasteMessageHint('Message via Facebook', null, "https://isgucvar.herokuapp.com/", "paste it")
