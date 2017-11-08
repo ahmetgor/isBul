@@ -44,7 +44,7 @@ export class UserAuth {
     //         });
     //       });
     //       });
-    this.checkAuthentication();
+    // this.checkAuthentication();
   }
 
   checkAuthentication(){
@@ -62,7 +62,10 @@ export class UserAuth {
             });
 
             this.storage.get('ozgecmis')
-                .then((ozgecmis) => this.ozgecmis = ozgecmis);
+                .then((ozgecmis) => this.ozgecmis = ozgecmis)
+                .catch((err) => {
+                  console.log("hata");
+                });
 
             let headers = new Headers();
             headers.append('Authorization', this.token);
@@ -230,7 +233,7 @@ export class UserAuth {
       let headers = new Headers();
       headers.append('Authorization', this.token);
       return new Promise((resolve, reject) => {
-      this.http.get('http://127.0.0.1:8080/api/ozgecmis/' + ozgecmisId, {headers: headers})
+      this.http.get(window.location.origin+'/api/ozgecmis/' + ozgecmisId, {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           this.ozgecmis = data;

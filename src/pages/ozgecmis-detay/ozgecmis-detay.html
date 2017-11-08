@@ -27,19 +27,28 @@
 <!-- <form [formGroup]="ozgecmisFormGroup"> -->
     <!-- <ion-label floating>Ünvan / Son Pozisyon</ion-label> -->
 
-    <ion-item no-lines>
+    <!-- <ion-item no-lines>
     <ion-thumbnail class="profile-image" item-left (click)="openGallery()">
     <img class="profile-image1" [src]="detay.resim">
     </ion-thumbnail>
-    <!-- <button ion-button icon-only outline [class.lighter]="detay.resim.media!='facebook'" (click)="butPressed('facebook')"><ion-icon name="logo-facebook"></ion-icon></button>
-    <!-- <button ion-button icon-left outline #fileInputa [class.lighter]="detay.resim.media!='upload'" (click)="openGallery()"><ion-icon name="cloud-upload"></ion-icon>Yükle</button> -->
     <input type="file" #fileInput placeholder="resim" [hidden]="true" (change)="processWebImage($event)"/>
-    </ion-item>
+    </ion-item> -->
     <!-- <ion-item>
       <ion-label floating>Resim</ion-label>
     <ion-input [disabled]="detay.resim.media=='upload'" [ngModelOptions]="{standalone: true}" type="text"
               [(ngModel)]="detay.resim.profile" placeholder="Sosyal medya profil adınız" (change)="picChanged()"></ion-input>
     </ion-item> -->
+    <input type="file" #fileInput style="visibility: hidden; height: 0px" (change)="processWebImage($event)" required />
+    <div class="profile-image-wrapper">
+      <div class="profile-image-placeholder" *ngIf="!detay.resim" (click)="openGallery()">
+        <ion-icon name="add"></ion-icon>
+        <div>Profil Resmi</div>
+      </div>
+      <!-- <div class="profile-image" [style.backgroundImage]="getProfileImageStyle(userUrl)" *ngIf="userUrl"></div> -->
+      <div *ngIf="detay.resim" >
+          <img class="profile-image" [src]="detay.resim" (click)="openGallery()">
+      </div>
+    </div>
     <ion-item>
         <ion-label floating>İsim Soyisim</ion-label>
         <ion-input formControlName="isim" type="text" [(ngModel)]="detay.isim"></ion-input>

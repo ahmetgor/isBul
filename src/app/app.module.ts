@@ -48,7 +48,7 @@ import { LinkedIn } from '@ionic-native/linkedin';
     LoginPage,
     SignupPage,
     PassResetPage,
-    // HesapPage,
+    HesapPage,
     // DatePipe,
     Basvuruldu
   ],
@@ -74,8 +74,8 @@ import { LinkedIn } from '@ionic-native/linkedin';
     OzgecmisDetayPage,
     LoginPage,
     SignupPage,
-    PassResetPage
-    // HesapPage
+    PassResetPage,
+    HesapPage
   ],
   providers: [
     StatusBar,

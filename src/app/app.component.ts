@@ -130,7 +130,7 @@ this.alert.present();
 }
 
 goHesap() {
-  this.nav.push('HesapPage');
+  this.nav.push(HesapPage);
 }
 
 // ngAfterViewInit() {
