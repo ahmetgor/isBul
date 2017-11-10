@@ -51,6 +51,18 @@
     <ion-label floating color="primary">Firma</ion-label>
     <ion-input type="text" [(ngModel)]="detayAra.firma"></ion-input>
 </ion-item>
+
+<ion-item>
+    <ion-label floating color="primary">Tip</ion-label>
+  <ion-select  type="text" [(ngModel)]="detayAra.tip" cancelText="İptal" okText="Tamam">
+    <ion-option value='Tam Z.'>Tam Z.</ion-option>
+    <ion-option value='Yarı Z.'>Yarı Z.</ion-option>
+    <ion-option value='Proje Bazlı'>Proje Bazlı</ion-option>
+    <ion-option value='Staj'>Staj</ion-option>
+    <ion-option value='Günlük'>Günlük</ion-option>
+  </ion-select>
+</ion-item>
+
 <ion-item>
   <ion-label floating color="primary">Tecrübe</ion-label>
   <ion-select [(ngModel)]="detayAra.tecrube" multiple="true" cancelText="İptal" okText="Tamam">

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { UserAuth } from '../../providers/user-auth';
+import { LoginPage } from '../login/login';
 
 /*
   Generated class for the Ayarlar page.
@@ -18,10 +20,17 @@ import { NavController, NavParams, IonicPage } from 'ionic-angular';
 })
 export class AyarlarPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public authService: UserAuth) {}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AyarlarPage');
+    if (!this.authService.currentUser) {
+    this.authService.checkAuthentication().then((res) => {
+    }, (err) => {
+      this.navCtrl.setRoot(LoginPage);
+    });
+  }
   }
 
 }

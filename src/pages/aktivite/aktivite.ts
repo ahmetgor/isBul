@@ -35,15 +35,19 @@ export class AktivitePage {
               public basvuruSer: BasvuruSer, public ilanSer: IlanSer, public authService: UserAuth) {
 
               }
-  ionViewDidLoad() {
-  }
+  // ionViewDidLoad() {
+  // }
 
-  ionViewWillEnter() {
+  ionViewDidLoad() {
     if (!this.authService.currentUser) {
     this.authService.checkAuthentication().then((res) => {
+      console.log('aktivite checkauth');
       this.getBasvuruList();
       this.getKaydedilenList();
+      this.basvuruList = this.basvuruSer.basvuruList;
+      this.kaydedilenList = this.basvuruSer.kaydedilenList;
     }, (err) => {
+      console.log('aktivite checkauth error');
       this.navCtrl.setRoot(LoginPage);
     });
   }
@@ -51,9 +55,9 @@ export class AktivitePage {
     console.log('ionViewWillEnter AktivitePage');
     this.getBasvuruList();
     this.getKaydedilenList();
+    this.basvuruList = this.basvuruSer.basvuruList;
+    this.kaydedilenList = this.basvuruSer.kaydedilenList;
   }
-  this.basvuruList = this.basvuruSer.basvuruList;
-  this.kaydedilenList = this.basvuruSer.kaydedilenList;
   }
 
   getBasvuruList() {

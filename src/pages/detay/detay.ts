@@ -41,8 +41,10 @@ ilanId: string;
     this.navCtrl.setRoot(LoginPage);
   });
 }
-   this.basvuruList = this.navParams.get('basvurulist');
-   this.kaydedilenList = this.navParams.get('kaydedilenlist');
+   // this.basvuruList = this.navParams.get('basvurulist');
+   // this.kaydedilenList = this.navParams.get('kaydedilenlist');
+   this.basvuruList = this.basvuruSer.basvuruList;
+   this.kaydedilenList = this.basvuruSer.kaydedilenList;
    this.ilanId = this.navParams.get('ilanId');
 
    console.log(this.ilanId+"ilanId");

@@ -15,11 +15,11 @@ import {ToastController, LoadingController, Events } from 'ionic-angular';
 export class UserAuth {
 
   token: any;
-  // url : string = 'https://serverisgucvar.herokuapp.com/api/auth/';
-  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/';
+  url : string = 'http://127.0.0.1:8080/api/auth/';
+  url1: string = 'http://127.0.0.1:8080/api/tools/';
 
-  url : string = window.location.origin+'/api/auth/';
-  url1: string = window.location.origin+'/api/tools/';
+  // url : string = window.location.origin+'/api/auth/';
+  // url1: string = window.location.origin+'/api/tools/';
   currentUser: any;
   loading: any;
   ozgecmis: any;
@@ -72,8 +72,10 @@ export class UserAuth {
             this.http.get(this.url+'protected', {headers: headers})
                 .subscribe(res => {
                   this.events.publish('ozgecmis:update');
+                  console.log(JSON.stringify(res)+"success");
                     resolve(res);
                 }, (err) => {
+                  console.log(JSON.stringify(err)+"err");
                     reject(err);
                 });
         });
@@ -91,16 +93,16 @@ export class UserAuth {
         this.http.post(this.url+'register', JSON.stringify(details), {headers: headers})
           .subscribe(res => {
             let data = res.json();
-            this.currentUser = data.user;
-            this.token = data.token;
-            this.storage.set('token', data.token);
-            this.storage.set('user', data.user);
-
-            this.getOzgecmis(data.user.ozgecmis)
-            .then((ozgecmis) => {
-              // this.ozgecmis = ozgecmis;
-            // console.log(data+'data');
-          });
+          //   this.currentUser = data.user;
+          //   this.token = data.token;
+          //   this.storage.set('token', data.token);
+          //   this.storage.set('user', data.user);
+          //
+          //   this.getOzgecmis(data.user.ozgecmis)
+          //   .then((ozgecmis) => {
+          //     // this.ozgecmis = ozgecmis;
+          //   // console.log(data+'data');
+          // });
             this.loading.dismiss();
             resolve(data);
 
@@ -233,7 +235,7 @@ export class UserAuth {
       let headers = new Headers();
       headers.append('Authorization', this.token);
       return new Promise((resolve, reject) => {
-      this.http.get(window.location.origin+'/api/ozgecmis/' + ozgecmisId, {headers: headers})
+      this.http.get('http://127.0.0.1:8080/api/ozgecmis/' + ozgecmisId, {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           this.ozgecmis = data;

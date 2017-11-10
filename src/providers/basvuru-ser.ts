@@ -10,8 +10,8 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class BasvuruSer {
-  // url : string = 'https://serverisgucvar.herokuapp.com/api/aktiviteler/';
-  url : string = window.location.origin+'/api/aktiviteler/';
+  url : string = 'http://127.0.0.1:8080/api/aktiviteler/';
+  // url : string = window.location.origin+'/api/aktiviteler/';
   kaydedilenList: any = {};
   basvuruList: any = {};
   ozgecmisId: string;

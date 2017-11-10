@@ -32,10 +32,15 @@ export class OzgecmisPage {
               console.log('ionViewDidLoad OzgecmisPage const');
     }
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     if (!this.authService.currentUser) {
+      console.log('ozgecmis checkauth');
     this.authService.checkAuthentication().then((res) => {
+      this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
+      .then((ozgecmis) => this.ozgecmis = ozgecmis)
+      .catch((err) => {});
     }, (err) => {
+      console.log('ozgecmis checkauth error');
       this.navCtrl.setRoot(LoginPage);
     });
   }
@@ -46,16 +51,14 @@ export class OzgecmisPage {
     //   this.ozgecmis = ozgecmis;
     //   });
       // console.log("storage"+ JSON.stringify(this.authService.currentUser.ozgecmis));
-
     this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
     .then((ozgecmis) => this.ozgecmis = ozgecmis)
     .catch((err) => {});
-
-    this.events.subscribe('ozgecmis:update', ()=> {
-    this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
-    .then((ozgecmis) => this.ozgecmis = ozgecmis)
-  });
 }
+this.events.subscribe('ozgecmis:update', ()=> {
+this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
+.then((ozgecmis) => this.ozgecmis = ozgecmis)
+});
   }
 
   itemTapped(ev, ozDetay, des, ozDetayList) {

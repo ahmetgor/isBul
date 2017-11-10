@@ -9,10 +9,10 @@ import { Storage } from '@ionic/storage';
 @Injectable()
 export class OzgecmisSer {
 
-  // url : string = 'https://serverisgucvar.herokuapp.com/api/ozgecmis/';
-  // url1 : string = 'https://serverisgucvar.herokuapp.com/api/tools/avatar/';
-  url : string = window.location.origin+'/api/ozgecmis/';
-  url1: string = window.location.origin+'/api/tools/avatar/';
+  url : string = 'http://127.0.0.1:8080/api/ozgecmis/';
+  url1 : string = 'http://127.0.0.1:8080/api/tools/avatar/';
+  // url : string = window.location.origin+'/api/ozgecmis/';
+  // url1: string = window.location.origin+'/api/tools/avatar/';
   ozgecmisId: string;
   user: any;
   loading: any;

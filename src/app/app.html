@@ -9,11 +9,11 @@
 
     <ion-list>
       <div *ngIf="user">
-      <ion-item no-lines>
+      <ion-item no-lines text-wrap>
         <ion-thumbnail class="img-circle" item-start *ngIf="user.resim">
         <img class="img-circle" [src]="user.resim">
         </ion-thumbnail>
-        <h2>{{user.isim}}</h2>
+        <h2 text-wrap>{{user.isim}}</h2>
       </ion-item>
 
       <button menuClose ion-item no-lines (click)="goHesap()">
