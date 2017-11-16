@@ -3,7 +3,7 @@ import { HttpModule } from '@angular/http';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { Deeplinks } from '@ionic-native/deeplinks';
+// import { Deeplinks } from '@ionic-native/deeplinks';
 
 import { AktivitePage } from '../pages/aktivite/aktivite';
 import { SonucPage } from '../pages/sonuc/sonuc';
@@ -86,7 +86,7 @@ import { LinkedIn } from '@ionic-native/linkedin';
     OzgecmisSer,
     Geolocation,
     Camera,
-    Deeplinks,
+    // Deeplinks,
     SocialSharing,
     Facebook,
     LinkedIn,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, Platform, ActionSheetController, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, Platform, ActionSheetController, IonicPage, Events } from 'ionic-angular';
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { IlanSer } from '../../providers/ilan-ser';
 import { SocialSharing } from '@ionic-native/social-sharing';
@@ -28,7 +28,7 @@ kaydedilenList: Array<any>;
 ilanId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public ilanSer: IlanSer, public basvuruSer: BasvuruSer,
+              public ilanSer: IlanSer, public basvuruSer: BasvuruSer, public events: Events,
               private socialSharing: SocialSharing, public authService: UserAuth,
               private fb: FacebookService,
               private face: Facebook, public plt: Platform,
@@ -137,6 +137,8 @@ IN.API.Raw("/people/~/shares?format=json")
     console.log(ilan._id+'detay');
     this.basvuruSer.addBasvuru(ilan._id);
     console.log(JSON.stringify(this.basvuruSer.basvuruList)+'create');
+    this.events.publish('basvur:update');
+
   //   console.log( JSON.stringify(this.basvuruList.find((item) => {
   //       return (item.basvuru == ilanId ); })) + 'console')
   //
@@ -152,18 +154,24 @@ IN.API.Raw("/people/~/shares?format=json")
     console.log(ilan._id+'detay');
     this.basvuruSer.deleteBasvuru(ilan._id);
     console.log(JSON.stringify(this.basvuruSer.basvuruList)+'detay');
+    this.events.publish('basvur:update');
+
 
   }
 
   kaydet(ilan :any) {
     this.basvuruSer.addKaydedilen(ilan._id);
     console.log(JSON.stringify(this.basvuruSer.kaydedilenList)+'create');
+    this.events.publish('kaydet:update');
+
 
   }
 
   deleteKaydet(ilan :any) {
     this.basvuruSer.deleteKaydedilen(ilan._id);
     console.log(JSON.stringify(this.basvuruSer.kaydedilenList)+'detay');
+    this.events.publish('kaydet:update');
+
   }
 
   checkBasvuru(ilanId: any) {

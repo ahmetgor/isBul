@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonicPage } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, Events } from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { DetayPage } from '../detay/detay';
@@ -32,7 +32,8 @@ export class AktivitePage {
   limi: number = 10;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public basvuruSer: BasvuruSer, public ilanSer: IlanSer, public authService: UserAuth) {
+              public basvuruSer: BasvuruSer, public ilanSer: IlanSer, public authService: UserAuth,
+              public events: Events) {
 
               }
   // ionViewDidLoad() {
@@ -58,6 +59,13 @@ export class AktivitePage {
     this.basvuruList = this.basvuruSer.basvuruList;
     this.kaydedilenList = this.basvuruSer.kaydedilenList;
   }
+
+  this.events.subscribe('kaydet:update', ()=> {
+    this.getKaydedilenList();
+});
+this.events.subscribe('basvur:update', ()=> {
+  this.getBasvuruList();
+});
   }
 
   getBasvuruList() {
@@ -84,7 +92,7 @@ export class AktivitePage {
   itemTapped(ev, ilan) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
     console.log(JSON.stringify(ilan)+'ilan');
-    this.navCtrl.push(DetayPage, {
+    this.navCtrl.push('DetayPage', {
       ilanId: ilan._id,
       basvurulist: this.basvuruSer.basvuruList,
       kaydedilenlist: this.basvuruSer.kaydedilenList

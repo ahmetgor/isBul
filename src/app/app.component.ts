@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, AlertController, NavController, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Deeplinks } from '@ionic-native/deeplinks';
+// import { Deeplinks } from '@ionic-native/deeplinks';
 import { DetayPage } from '../pages/detay/detay';
 
 import { AktivitePage } from '../pages/aktivite/aktivite';
@@ -31,7 +31,7 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public alertCtrl: AlertController, public authService: UserAuth,
-              public deeplinks: Deeplinks, public storage: Storage, public ozgecmisSer: OzgecmisSer,
+              public storage: Storage, public ozgecmisSer: OzgecmisSer,
               public events: Events) {
     this.initializeApp();
 

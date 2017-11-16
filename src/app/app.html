@@ -9,10 +9,18 @@
 
     <ion-list>
       <div *ngIf="user">
-      <ion-item no-lines text-wrap>
+        <ion-item no-lines>
+          <!-- <ion-thumbnail item-start> -->
+          <img item-start width="30" height="30" src="/assets/icon/happy.png">
+          <!-- </ion-thumbnail> -->
+          <p text-wrap style="color:lightgrey;">İşgüçvar İş Arayan</p>
+        </ion-item>
+
+      <ion-item no-lines text-wrap no-padding no-margin>
         <ion-thumbnail class="img-circle" item-start *ngIf="user.resim">
         <img class="img-circle" [src]="user.resim">
         </ion-thumbnail>
+        <p>Merhaba</p>
         <h2 text-wrap>{{user.isim}}</h2>
       </ion-item>
 
@@ -24,7 +32,7 @@
       <ion-item-divider color="light"></ion-item-divider>
     </div>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        <ion-icon name="{{p.icon}}"></ion-icon>
+        <ion-icon name="{{p.icon}}  "></ion-icon>
         {{p.title}}
       </button>
       <button menuClose ion-item no-lines (click)="presentLogout('Oturumunuz kapansın mı?')">

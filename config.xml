@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.isgucvar" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.isgucvar.isarayan" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>İşGüçVar</name>
-    <description>Pratik iş arama motoru, burada iş güç var</description>
+    <description>Modern iş arama motoru, aradığınız iş burada</description>
     <author email="agor.yazilim@gmail.com" href="https://plus.google.com/+AhmetGor/">Ahmet Gör</author>
     <content src="index.html" />
     <access origin="*" />

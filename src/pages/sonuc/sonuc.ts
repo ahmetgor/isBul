@@ -29,8 +29,6 @@ export class SonucPage {
   scrollEnable: boolean = true;
   // infiniteScroll:any;
 
-  // {id: number, isim: string, firma: string, açıklama: string, il: string, tip:string, eğitim: string, tecrübe: string, ehliyet: string, askerlik: string, görüntülenme: string, başvuru: string, olusturan:string, olusurmaTarih:string, guncelleyen:string, guncellemeTarih:string }>;
-
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public modalCtrl: ModalController,
               public basvuruSer: BasvuruSer, public events: Events, public authService: UserAuth) {
@@ -139,16 +137,7 @@ this.events.subscribe('ilan:filtered', (a) => {
   // }
 
 presentFilter(myEvent) {
-  // let modal = this.modalCtrl.create(FiltrelePage, {
-  //   detayAra: this.detayAra,
-  //   sirala: this.sirala
-  //   });
-  //
-  // console.log('Dismiss started');
-  //
-  // modal.present({
-  //   ev: myEvent
-  // });
+
   this.navCtrl.push(FiltrelePage, {
     detayAra: this.detayAra,
     sirala: this.sirala
