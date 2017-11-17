@@ -27,7 +27,7 @@ export class SonucPage {
   skip: number = 0;
   limit: number = 20;
   scrollEnable: boolean = true;
-  // infiniteScroll:any;
+  isEmpty: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public modalCtrl: ModalController,
@@ -79,10 +79,14 @@ this.events.subscribe('ilan:filtered', (a) => {
 
   ilanListele() {
     this.searching = true;
+    this.isEmpty = false;
     this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ilanlar => {
       this.ilanList = ilanlar;
       console.log(this.searchTerm);
+      if (Object.keys(this.ilanList).length <= 0) {
+        this.isEmpty = true;
+}
       this.searching = false;
     });
   }

@@ -10,7 +10,9 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class BasvuruSer {
-  url : string = 'http://127.0.0.1:8080/api/aktiviteler/';
+  // url : string = 'http://127.0.0.1:8080/api/aktiviteler/';
+  url : string = 'https://isgucvarisarayan.herokuapp.com/api/aktiviteler/';
+
   // url : string = window.location.origin+'/api/aktiviteler/';
   kaydedilenList: any = {};
   basvuruList: any = {};
@@ -28,15 +30,15 @@ export class BasvuruSer {
     this.getBasvurularList()
     .then(ilanlist => {
       this.basvuruList = ilanlist;
-    });
+    })
+    .catch((err) => {});
     this.getKaydedilenlerList()
     .then(ilanlist => {
       this.kaydedilenList = ilanlist;
-    });
+    })
+    .catch((err) => {});
   })
   .catch((err) => {});
-
-
   // this.storage.get('ozgecmis').then((ozgecmis) => {
     // this.ozgecmis = authService.ozgecmis;
     // });
@@ -88,7 +90,7 @@ getKaydedilenler(skip, limit) {
         resolve(data);
       }, (err) => {
          reject(err);
-        this.presentToast('Başvuru listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+        // this.presentToast('Başvuru listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
   }
@@ -104,7 +106,7 @@ getKaydedilenler(skip, limit) {
         resolve(data);
       }, (err) => {
          reject(err);
-         this.presentToast('Kaydedilen listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
+         // this.presentToast('Kaydedilen listesi alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
   });
   }

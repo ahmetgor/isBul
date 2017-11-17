@@ -3,7 +3,7 @@ import { NavController, NavParams, Platform, ActionSheetController, IonicPage, E
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { IlanSer } from '../../providers/ilan-ser';
 import { SocialSharing } from '@ionic-native/social-sharing';
-import { FacebookService, InitParams,  UIParams, UIResponse } from 'ngx-facebook';
+// import { FacebookService, InitParams,  UIParams, UIResponse } from 'ngx-facebook';
 import { Facebook } from '@ionic-native/facebook';
 import { UserAuth } from '../../providers/user-auth';
 import { SonucPage } from '../sonuc/sonuc';
@@ -30,7 +30,7 @@ ilanId: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public basvuruSer: BasvuruSer, public events: Events,
               private socialSharing: SocialSharing, public authService: UserAuth,
-              private fb: FacebookService,
+              // private fb: FacebookService,
               private face: Facebook, public plt: Platform,
               public actionSheetCtrl: ActionSheetController, private linkedin: LinkedIn) {
 
@@ -57,14 +57,14 @@ ilanId: string;
     console.log(JSON.stringify(this.ilan)+"link ilan");
   });
 
-    let initParams: InitParams = {
-      appId: '112498582687614',
-      xfbml: true,
-      version: 'v2.9'
-    };
-
-    fb.init(initParams);
-     face.browserInit(112498582687614, 'v2.9');
+    // let initParams: InitParams = {
+    //   appId: '112498582687614',
+    //   xfbml: true,
+    //   version: 'v2.9'
+    // };
+    //
+    // fb.init(initParams);
+    //  face.browserInit(112498582687614, 'v2.9');
   }
 
   shareFace() {
@@ -75,10 +75,10 @@ ilanId: string;
 	description: "Much description"
 	// picture: this.ilan.resim
 }
-let params: UIParams = {
-  href: window.location.origin+'/#/detay/'+this.ilan._id,
-  method: 'share'
-};
+// let params: UIParams = {
+//   href: window.location.origin+'/#/detay/'+this.ilan._id,
+//   method: 'share'
+// };
 
 console.log("share face");
     // this.face.showDialog( options)

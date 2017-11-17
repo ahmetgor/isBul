@@ -14,7 +14,9 @@ import { UserAuth } from './user-auth';
 @Injectable()
 export class IlanSer {
 
-  url : string = 'http://127.0.0.1:8080/api/ilanlar/';
+  // url : string = 'http://127.0.0.1:8080/api/ilanlar/';
+  url : string = 'https://isgucvarisarayan.herokuapp.com/api/ilanlar/';
+
   // url : string = window.location.origin+'/api/ilanlar/';
   // ilanlar: Array<any>;
   basvurKaydetList: any;
