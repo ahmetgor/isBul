@@ -33,12 +33,12 @@
 <ion-content>
   <div [ngSwitch]="aktivite">
     <div  *ngSwitchCase="'basvurulan'">
-
+<div *ngIf="basvurular">
   <ion-list text-wrap>
     <button ion-item *ngFor="let basvuru of basvurular" (click)="itemTapped($event, basvuru)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-thumbnail item-left>
-        <img class="img-circle" [src]="basvuru.firma.resim">
+        <img class="img-circle" [src]="basvuru?.firma?.resim">
       </ion-thumbnail>
 
       <ion-row>
@@ -52,7 +52,7 @@
       <div class="firma"><h4>{{basvuru.firmaAdi}}</h4></div>
       </ion-col>
       <ion-col>
-        <h4 align="right" [class.my-class]="getDays(basvuru.olusurmaTarih) < 10">
+        <h4 align="right" [class.my-class]="getDays(basvuru?.olusurmaTarih) < 10">
           <ion-icon name="calendar"></ion-icon>
           {{getDays(basvuru.olusturmaTarih)}} gün
         </h4>
@@ -92,14 +92,16 @@
   </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </div>
+</div>
 
 <div *ngSwitchCase="'kaydedilen'">
+  <div *ngIf="kaydedilenler">
 
   <ion-list text-wrap>
     <button ion-item *ngFor="let kaydedilen of kaydedilenler" (click)="itemTapped($event, kaydedilen)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
       <ion-thumbnail item-left>
-        <img class="img-circle" [src]="kaydedilen.firma.resim">
+        <img class="img-circle" [src]="kaydedilen?.firma?.resim">
       </ion-thumbnail>
 
       <ion-row>
@@ -113,7 +115,7 @@
       <div class="firma"><h4>{{kaydedilen.firmaAdi}}</h4></div>
       </ion-col>
       <ion-col>
-        <h4 align="right" [class.my-class]="getDays(kaydedilen.olusurmaTarih) < 10">
+        <h4 align="right" [class.my-class]="getDays(kaydedilen?.olusurmaTarih) < 10">
           <ion-icon name="calendar"></ion-icon>
           {{getDays(kaydedilen.olusturmaTarih)}} gün
         </h4>
@@ -152,7 +154,7 @@
   loadingText="Kaydedilenler yükleniyor...">
 </ion-infinite-scroll-content>
 </ion-infinite-scroll>
-
+</div>
 </div>
 </div>
 

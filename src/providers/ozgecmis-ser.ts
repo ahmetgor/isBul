@@ -24,7 +24,7 @@ export class OzgecmisSer {
   constructor(public http: Http, public authService: UserAuth,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController,
               public storage: Storage) {
-    console.log('Hello OzgecmisSer Provider');
+    //console.log('Hello OzgecmisSer Provider');
 
     // this.ozgecmisId = "58eba2904be8d6e2c51b0757";
   //   this.storage.get('user').then((user) => {
@@ -42,7 +42,7 @@ export class OzgecmisSer {
         .subscribe(data => {
           this.ozgecmis = data;
           this.storage.set('ozgecmis', data);
-          console.log(JSON.stringify(data)+"data123");
+          //console.log(JSON.stringify(data)+"data123");
           resolve(data);
         }, (err) => {
           // reject(err);
@@ -62,13 +62,13 @@ updateOzgecmis(paramname: string, kayit: any, ozgecmisUpd: any){
     this.http.put(this.url + this.authService.currentUser.ozgecmis + '/' + paramname, JSON.stringify(kayit), {headers: headers})
       .map(res => res.json())
       .subscribe(res => {
-        console.log(JSON.stringify(res)+"avatarres");
+        //console.log(JSON.stringify(res)+"avatarres");
         this.authService.ozgecmis = res;
         this.storage.set('ozgecmis', res);
         this.loading.dismiss();
         resolve(res);
       }, (err) => {
-        console.log(JSON.stringify(err)+"avatarerr");
+        //console.log(JSON.stringify(err)+"avatarerr");
         this.loading.dismiss();
         this.presentToast('Özgeçmiş güncellenemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
@@ -88,7 +88,7 @@ updateOzgecmisAll(kayit: any){
       .subscribe(res => {
         this.authService.ozgecmis = res;
         this.storage.set('ozgecmis', res);
-        console.log(JSON.stringify(res)+"updateall");
+        //console.log(JSON.stringify(res)+"updateall");
         this.loading.dismiss();
         resolve(res);
       }, (err) => {

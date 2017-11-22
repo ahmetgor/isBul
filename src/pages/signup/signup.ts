@@ -25,7 +25,7 @@ export class SignupPage {
       public toastCtrl: ToastController) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SignupPage');
+    //console.log('ionViewDidLoad SignupPage');
   }
 
   register(){

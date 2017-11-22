@@ -18,7 +18,7 @@ export class Basvuruldu implements PipeTransform {
     Takes a value and makes it lowercase.
    */
   transform(ilanId) {
-    console.log("pipe");
+    // console.log("pipe");
     // value = value + ''; // make sure it's a string
       return this.basvuruSer.checkBasvuru(ilanId);
   }

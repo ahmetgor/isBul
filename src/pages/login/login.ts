@@ -29,7 +29,7 @@ export class LoginPage {
     public storage: Storage, public ozgecmisSer: OzgecmisSer, public events: Events) {
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    //console.log('ionViewDidLoad LoginPage');
 
     this.storage.get('user')
         .then((user) => {this.email = user.email;
@@ -66,7 +66,7 @@ export class LoginPage {
         //     // this.presentToast();
         //     // console.log(err);
         // });
-        console.log(JSON.stringify(result)+"result");
+        //console.log(JSON.stringify(result)+"result");
         this.ozgecmisSer.getOzgecmis(result.user.ozgecmis)
         .then((res) => {
                 // this.loading.dismiss();
@@ -74,13 +74,13 @@ export class LoginPage {
                 this.navCtrl.setRoot('SonucPage');
               }, (err) => {
                   // this.loading.dismiss();
-                    console.log(JSON.stringify(err._body)+'asdasd');
+                    //console.log(JSON.stringify(err._body)+'asdasd');
                   // let msg = JSON.parse(err._body);
               });
 
       }, (err) => {
           // this.loading.dismiss();
-            console.log(JSON.stringify(err._body)+'asdasd');
+            //console.log(JSON.stringify(err._body)+'asdasd');
           // let msg = JSON.parse(err._body);
       });
   }

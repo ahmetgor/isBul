@@ -52,8 +52,9 @@ export class OzgecmisDetayPage {
     this.detay = this.navParams.get('ozDetay');
     this.detayList = this.navParams.get('ozDetayList');
     this.basvurulist = this.navParams.get('basvurulist');
-    if(this.detayList) console.log("oki");
+    // if(this.detayList) //console.log("oki");
     this.des = this.navParams.get('des');
+    // console.log(JSON.stringify(this.detay)+this.des+"odetay")
     // this.detayClone = Object.assign({}, this.detay);
     this.kisiselFormGroup = formBuilder.group({
           isim: [this.detay.isim, [Validators.required]],
@@ -113,7 +114,7 @@ export class OzgecmisDetayPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OzgecmisDetayPage');
+    //console.log('ionViewDidLoad OzgecmisDetayPage');
   }
 
    openGallery (): void {
@@ -154,11 +155,11 @@ export class OzgecmisDetayPage {
     // console.log(JSON.stringify(this.detayList)+'detaysavelist');
 
     if(this.detayList) {
-      console.log("resim update");
+      //console.log("resim update");
     this.des = this.des.replace("Ekle", "");
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList, this.basvurulist)
     .then((res) =>{
-      console.log(JSON.stringify(this.basvurulist)+'detaylist');
+      //console.log(JSON.stringify(this.basvurulist)+'detaylist');
       this.storage.set('ozgecmis', this.basvurulist);
       this.events.publish('ozgecmis:update');
       this.navCtrl.pop();
@@ -167,11 +168,11 @@ export class OzgecmisDetayPage {
 
   }
   else {
-    console.log("resim else");
+    //console.log("resim else");
 
     this.ozgecmisSer.updateOzgecmisAll(this.detay)
     .then((res) =>{
-      console.log(JSON.stringify(this.detay)+'detaylist');
+      //console.log(JSON.stringify(this.detay)+'detaylist');
       this.events.publish('ozgecmis:update');
       this.storage.set('ozgecmis', this.detay);
       this.navCtrl.pop();
@@ -181,7 +182,7 @@ export class OzgecmisDetayPage {
   }
 
   delete() {
-    console.log(JSON.stringify(this.detay)+'detay');
+    //console.log(JSON.stringify(this.detay)+'detay');
     this.des = this.des.replace('Ekle', '');
     if ((this.des == 'tecrube' || this.des == 'egitim') && Object.keys(this.detayList).length < 2) {
       this.presentToast("Son kayıt silinemez!");
@@ -192,7 +193,7 @@ export class OzgecmisDetayPage {
     this.detayList.splice(i,1);
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList, this.basvurulist)
     .then((res) =>{
-      console.log(JSON.stringify(this.basvurulist)+'detaylist');
+      //console.log(JSON.stringify(this.basvurulist)+'detaylist');
       this.storage.set('ozgecmis', this.basvurulist)
       .then(res => this.navCtrl.pop() )
 
@@ -200,12 +201,12 @@ export class OzgecmisDetayPage {
   }
 
   add() {
-    console.log(JSON.stringify(this.detay)+'detay');
+    //console.log(JSON.stringify(this.detay)+'detay');
     this.detayList.push(this.detay);
     this.des = this.des.replace('Ekle', '');
     this.ozgecmisSer.updateOzgecmis(this.des, this.detayList, this.basvurulist)
       .then((res) =>{
-        console.log(JSON.stringify(this.basvurulist)+'detaylist');
+        //console.log(JSON.stringify(this.basvurulist)+'detaylist');
         this.storage.set('ozgecmis', this.basvurulist)
         .then(res => this.navCtrl.pop() )
       });
@@ -214,14 +215,14 @@ export class OzgecmisDetayPage {
 butPressed(media: String){
   // this.detay.resim.media = media;
   // this.detay.resim.link = "https://avatars.io/"+this.detay.resim.media+"/"+this.detay.resim.profile;
-  console.log("butPressed");
+  //console.log("butPressed");
 }
 
 processWebImage(event) {
   let reader = new FileReader();
   // let dataUrl = undefined;
   reader.onload = (readerEvent) => {
-    console.log("event");
+    //console.log("event");
     this.detay.resim = (readerEvent.target as any).result;
     // console.log(dataUrl);
     // console.log(dataUrl.length);
@@ -229,7 +230,7 @@ processWebImage(event) {
 
   };
   reader.readAsDataURL(event.target.files[0]);
-  console.log(event.target.files[0]);
+  //console.log(event.target.files[0]);
 
 }
 

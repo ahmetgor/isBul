@@ -6,7 +6,7 @@ import { UserAuth} from '../../providers/user-auth';
 import { Storage } from '@ionic/storage';
 import { OzgecmisDetayPage } from '../ozgecmis-detay/ozgecmis-detay';
 import { LoginPage } from '../login/login';
-import { Facebook } from '@ionic-native/facebook';
+// import { Facebook } from '@ionic-native/facebook';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
 declare var IN;
@@ -25,27 +25,27 @@ export class OzgecmisPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public ozgecmisSer: OzgecmisSer,  public authService: UserAuth,
               public alertCtrl: AlertController,public storage: Storage, public events: Events,
-              public actionSheetCtrl: ActionSheetController, private face: Facebook,
+              public actionSheetCtrl: ActionSheetController,
               public plt: Platform,private socialSharing: SocialSharing) {
 
               // this.ozgecmis = ozgecmisSer.ozgecmis;
-              console.log('ionViewDidLoad OzgecmisPage const');
+              //console.log('ionViewDidLoad OzgecmisPage const');
     }
 
   ionViewDidLoad() {
     if (!this.authService.currentUser) {
-      console.log('ozgecmis checkauth');
+      //console.log('ozgecmis checkauth');
     this.authService.checkAuthentication().then((res) => {
       this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
       .then((ozgecmis) => this.ozgecmis = ozgecmis)
       .catch((err) => {});
     }, (err) => {
-      console.log('ozgecmis checkauth error');
+      //console.log('ozgecmis checkauth error');
       this.navCtrl.setRoot(LoginPage);
     });
   }
   else{
-    console.log('ionViewWillEnter OzgecmisPage const');
+    //console.log('ionViewWillEnter OzgecmisPage const');
     // this.storage.get('ozgecmis').then((ozgecmis) => {
     //   console.log("storage"+ JSON.stringify(ozgecmis));
     //   this.ozgecmis = ozgecmis;
@@ -79,18 +79,18 @@ this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
       Object.keys(this.ozgecmis.egitim).length < 1 || this.ozgecmis.egitim[0].okul=="" ||
       this.ozgecmis.isim === undefined || this.ozgecmis.isim.trim() == '' ||
       this.ozgecmis.adres === undefined || this.ozgecmis.adres.trim() == '')) {
-    console.log(JSON.stringify(this.ozgecmis.egitim)+ 'egitim');
-    console.log(JSON.stringify(this.ozgecmis.tecrube)+'tecrube');
+    //console.log(JSON.stringify(this.ozgecmis.egitim)+ 'egitim');
+    //console.log(JSON.stringify(this.ozgecmis.tecrube)+'tecrube');
     this.ozgecmis.enabled = false;
     ev.checked = false;
     this.presentAlert();
 
-      console.log(this.ozgecmis.enabled+'after');
-      console.log(ev.checked+'after');
+      //console.log(this.ozgecmis.enabled+'after');
+      //console.log(ev.checked+'after');
     }
     else {
       this.ozgecmisSer.updateOzgecmisAll(this.ozgecmis);
-    console.log(JSON.stringify(this.ozgecmis));
+    //console.log(JSON.stringify(this.ozgecmis));
   }
 
   }
@@ -104,7 +104,7 @@ this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
 // 	// picture: this.ilan.resim
 // }
 
-console.log("share face");
+//console.log("share face");
 
   FB.ui({
   method: 'share',
@@ -160,7 +160,7 @@ presentActionSheet() {
           role: 'cancel',
           icon: 'close',
           handler: () => {
-            console.log('Cancel clicked');
+            //console.log('Cancel clicked');
           }  }
       ]
     });
@@ -170,7 +170,7 @@ presentActionSheet() {
   share() {
     if(this.plt.is('ios') || this.plt.is('android')) {
   var options = {
-    message: "share this\n", // not supported on some apps (Facebook, Instagram)
+    message: "İşgüçvar özgeçmişine bir göz atın:\n", // not supported on some apps (Facebook, Instagram)
     // subject: 'the subject', // fi. for email
     // files: [this.ilan.resim], // an array of filenames either locally or remotely
     url: 'https://isgucvarisveren.herokuapp.com'+'/#/ilandetay/'+this.ozgecmis._id,
@@ -180,10 +180,10 @@ presentActionSheet() {
   // this.socialSharing.share('message', 'subject', this.ilan.resim, 'https://www.website.com/foo/#bar?a=b')
   this.socialSharing.shareWithOptions(options)
   .then((result) => {
-      console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
-      console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+      //console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+      //console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
   }).catch((msg) => {
-      console.log("Sharing failed with message: " + msg);
+      //console.log("Sharing failed with message: " + msg);
   });
   }
   else this.presentActionSheet();

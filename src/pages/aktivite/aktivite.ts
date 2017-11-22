@@ -42,18 +42,18 @@ export class AktivitePage {
   ionViewDidLoad() {
     if (!this.authService.currentUser) {
     this.authService.checkAuthentication().then((res) => {
-      console.log('aktivite checkauth');
+      //console.log('aktivite checkauth');
       this.getBasvuruList();
       this.getKaydedilenList();
       this.basvuruList = this.basvuruSer.basvuruList;
       this.kaydedilenList = this.basvuruSer.kaydedilenList;
     }, (err) => {
-      console.log('aktivite checkauth error');
+      //console.log('aktivite checkauth error');
       this.navCtrl.setRoot(LoginPage);
     });
   }
   else{
-    console.log('ionViewWillEnter AktivitePage');
+    //console.log('ionViewWillEnter AktivitePage');
     this.getBasvuruList();
     this.getKaydedilenList();
     this.basvuruList = this.basvuruSer.basvuruList;
@@ -74,7 +74,7 @@ this.events.subscribe('basvur:update', ()=> {
     this.basvuruSer.getBasvurular(this.skip, this.limit)
     .then(basvurular => {
       this.basvurular = basvurular;
-      // console.log(JSON.stringify(basvurular));
+      console.log(JSON.stringify(basvurular));
     })
     .catch((err) => {});
   }
@@ -91,7 +91,7 @@ this.events.subscribe('basvur:update', ()=> {
 
   itemTapped(ev, ilan) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
-    console.log(JSON.stringify(ilan)+'ilan');
+    //console.log(JSON.stringify(ilan)+'ilan');
     this.navCtrl.push('DetayPage', {
       ilanId: ilan._id,
       basvurulist: this.basvuruSer.basvuruList,
@@ -100,16 +100,16 @@ this.events.subscribe('basvur:update', ()=> {
   }
 
   doInfinite(infiniteScroll) {
-  console.log('Begin async operation');
+  //console.log('Begin async operation');
 
   setTimeout(() => {
     this.skip = this.skip + 1;
     this.basvuruSer.getBasvurular(this.skip, this.limit)
     .then(basvurular => {
-      console.log(JSON.stringify(basvurular)+"basvuruList");
+      //console.log(JSON.stringify(basvurular)+"basvuruList");
 
       if(Object.keys(basvurular).length < this.limit) {
-        console.log('true');
+        //console.log('true');
         // infiniteScroll.enable(false);
         this.scrollEnable = false;
         }
@@ -119,22 +119,22 @@ this.events.subscribe('basvur:update', ()=> {
     }
      })
      .catch((err) => {});
-    console.log('Async operation has ended');
+    //console.log('Async operation has ended');
     infiniteScroll.complete();
   }, 500);
 }
 
 doInfinit(infiniteScroll) {
-console.log('Begin async operation');
+//console.log('Begin async operation');
 
 setTimeout(() => {
   this.ski = this.ski + 1;
   this.basvuruSer.getKaydedilenler(this.ski, this.limi)
   .then(kaydedilenler => {
-    console.log(JSON.stringify(kaydedilenler)+"basvuruList");
+    //console.log(JSON.stringify(kaydedilenler)+"basvuruList");
 
     if(Object.keys(kaydedilenler).length < this.limi) {
-      console.log('true');
+      //console.log('true');
       // infiniteScroll.enable(false);
       this.scrollEnabl = false;
       }
@@ -144,7 +144,7 @@ setTimeout(() => {
   }
    })
    .catch((err) => {});
-  console.log('Async operation has ended');
+  //console.log('Async operation has ended');
   infiniteScroll.complete();
 }, 500);
 }

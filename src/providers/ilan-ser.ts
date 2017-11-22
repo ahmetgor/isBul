@@ -40,7 +40,7 @@ export class IlanSer {
 
   constructor(public http: Http, public authService: UserAuth,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController) {
-    console.log('Hello IlanSer Provider');
+    //console.log('Hello IlanSer Provider');
     // this.basvurKaydetList = this.getBasvurKaydet();
   }
 
@@ -49,8 +49,8 @@ export class IlanSer {
       headers.append('Authorization', this.authService.token);
       let order = JSON.parse(orderBy);
       searchKayit.enabled = true;
-      console.log(JSON.stringify(order)+'order service');
-      console.log(order+'order service string');
+      //console.log(JSON.stringify(order)+'order service');
+      //console.log(order+'order service string');
 
       return new Promise((resolve, reject) => {
       this.http.get(this.url + `?term=${searchTerm}&kayit=${JSON.stringify(searchKayit)}&orderBy=${JSON.stringify(order)}&skip=${skip}&limit=${limit}`

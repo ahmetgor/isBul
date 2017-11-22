@@ -24,7 +24,7 @@ export class AyarlarPage {
               public authService: UserAuth) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AyarlarPage');
+    //console.log('ionViewDidLoad AyarlarPage');
     if (!this.authService.currentUser) {
     this.authService.checkAuthentication().then((res) => {
     }, (err) => {

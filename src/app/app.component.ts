@@ -57,7 +57,7 @@ export class MyApp {
     //     });
 
       this.events.subscribe('ozgecmis:update', ()=> {
-        console.log('ozgecmis:update' + this.authService.currentUser.ozgecmis);
+        //console.log('ozgecmis:update' + this.authService.currentUser.ozgecmis);
       this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
       .then((ozgecmis) => this.user = ozgecmis);
     });
@@ -108,13 +108,13 @@ presentLogout(message) {
       text: 'Hayır',
       role: 'cancel',
       handler: () => {
-        console.log('Cancel clicked');
+        // console.log('Cancel clicked');
       }
     },
     {
       text: 'Evet',
       handler: () => {
-        console.log('Logged out');
+        //console.log('Logged out');
         if (message=='Uygulama kapansın mı?') {
           this.platform.exitApp();
         }

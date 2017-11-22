@@ -27,12 +27,12 @@ import { SocialSharing } from '@ionic-native/social-sharing';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { Geolocation } from '@ionic-native/geolocation';
+// import { Geolocation } from '@ionic-native/geolocation';
 import { Camera} from '@ionic-native/camera';
 import { PassResetPage } from '../pages/pass-reset/pass-reset';
 // import { FacebookModule } from 'ngx-facebook';
 import { Facebook } from '@ionic-native/facebook';
-import { LinkedIn } from '@ionic-native/linkedin';
+// import { LinkedIn } from '@ionic-native/linkedin';
 
 
 @NgModule({
@@ -84,12 +84,12 @@ import { LinkedIn } from '@ionic-native/linkedin';
     BasvuruSer,
     UserAuth,
     OzgecmisSer,
-    Geolocation,
+    // Geolocation,
     Camera,
     // Deeplinks,
     SocialSharing,
-    Facebook,
-    LinkedIn,
+    // Facebook,
+    // LinkedIn,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -23,7 +23,7 @@ export class BasvuruSer {
   constructor(public http: Http, public authService: UserAuth,
               public ozgecmisSer: OzgecmisSer, public toastCtrl: ToastController,
               public loadingCtrl: LoadingController, public storage: Storage) {
-    console.log('Hello BasvuruSer Provider');
+    //console.log('Hello BasvuruSer Provider');
     this.storage.get('ozgecmis').then((ozgecmis) => {
     if(this.authService.currentUser) this.ozgecmis = this.authService.currentUser.ozgecmis;
     else this.ozgecmis = ozgecmis._id;
@@ -81,7 +81,7 @@ getKaydedilenler(skip, limit) {
   getBasvurularList() {
     this.ozgecmisId = this.ozgecmis;
     let headers = new Headers();
-    console.log('servis basvurularlist oluştur');
+    //console.log('servis basvurularlist oluştur');
     headers.append('Authorization', this.authService.token);
     return new Promise((resolve, reject) => {
     this.http.get(this.url + `basvurulist?ozgecmis=${this.ozgecmisId}`, {headers: headers})
@@ -115,7 +115,7 @@ getKaydedilenler(skip, limit) {
     this.showLoader();
     // this.ozgecmis = this.ozgecmisSer.ozgecmis;
     let kayit = {ozgecmis: this.ozgecmisId, basvuru : basvuruId};
-    console.log(JSON.stringify(this.authService.ozgecmis)+'basvuruId');
+    //console.log(JSON.stringify(this.authService.ozgecmis)+'basvuruId');
     if(!this.authService.ozgecmis.enabled) {
       this.loading.dismiss();
       this.presentToast('Pasif özgeçmiş ile başvuru yapılamaz!');
@@ -126,7 +126,7 @@ getKaydedilenler(skip, limit) {
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authService.token);
-      console.log(JSON.stringify(this.authService.ozgecmis)+"addbasvuru");
+      //console.log(JSON.stringify(this.authService.ozgecmis)+"addbasvuru");
 
       this.http.post(this.url+'basvuru/', JSON.stringify(kayit), {headers: headers})
         .map(res => res.json())
@@ -166,11 +166,11 @@ getKaydedilenler(skip, limit) {
   }
 
   addKaydedilen(kaydedilenId: string) {
-    console.log(JSON.stringify(kaydedilenId)+'kaydedilenId');
+    //console.log(JSON.stringify(kaydedilenId)+'kaydedilenId');
 
     this.showLoader();
     let kayit = {ozgecmis: this.ozgecmisId, kaydedilen : kaydedilenId};
-    console.log(JSON.stringify(kayit)+'kaydedilenId kayıt');
+    //console.log(JSON.stringify(kayit)+'kaydedilenId kayıt');
 
     return new Promise((resolve, reject) => {
       let headers = new Headers();
@@ -192,7 +192,7 @@ getKaydedilenler(skip, limit) {
 
   deleteKaydedilen(kaydedilenId: string) {
     this.ozgecmisId = this.ozgecmis;
-    console.log(JSON.stringify(kaydedilenId)+'kaydedilenId delete');
+    //console.log(JSON.stringify(kaydedilenId)+'kaydedilenId delete');
     this.showLoader();
     let i = this.kaydedilenList.findIndex((item) => {
       return (item.kaydedilen == kaydedilenId); });

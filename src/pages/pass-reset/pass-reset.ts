@@ -26,7 +26,7 @@ loading: any;
     public toastCtrl: ToastController,) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PassResetPage');
+    // console.log('ionViewDidLoad PassResetPage');
   }
 
   resetle(){
@@ -40,7 +40,7 @@ loading: any;
         // this.navCtrl.setRoot(SonucPage);
       }, (err) => {
           // this.loading.dismiss();
-            console.log(JSON.stringify(err._body)+'asdasd');
+            //console.log(JSON.stringify(err._body)+'asdasd');
           // this.presentToast('Girdiğiniz kullanıcı geçersiz veya bağ');
       });
   }
@@ -59,7 +59,7 @@ loading: any;
       // this.navCtrl.setRoot(SonucPage);
     }, (err) => {
         // this.loading.dismiss();
-          console.log(JSON.stringify(err._body)+'asdasd');
+          //console.log(JSON.stringify(err._body)+'asdasd');
         // this.presentToast('Girdiğiniz kullanıcı geçersiz veya bağ');
     });
   }

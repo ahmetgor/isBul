@@ -36,20 +36,20 @@ export class FiltrelePage {
               public viewCtrl: ViewController, public events: Events, public geolocation: Geolocation) {
 
     this.detayAra = navParams.get('detayAra');
-    console.log(JSON.stringify(this.detayAra) + 'detay')
+    //console.log(JSON.stringify(this.detayAra) + 'detay')
     this.sirala = navParams.get('sirala');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FiltrelePage');
+    //console.log('ionViewDidLoad FiltrelePage');
   }
 
 filtrele() {
 
-  console.log(this.sirala+'kapatfiltre');
+  //console.log(this.sirala+'kapatfiltre');
   // this.sirala = JSON.parse(this.sirala);
-    console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
-    // console.log(JSON.stringify(this.sirala)+'parsefiltre');
+    //console.log(JSON.stringify(this.detayAra)+'kapatfiltre');
+    // //console.log(JSON.stringify(this.sirala)+'parsefiltre');
   // this.viewCtrl.dismiss(this.sirala, this.detayAra);
   this.events.publish('ilan:filtered');
   this.navCtrl.pop();
@@ -60,8 +60,8 @@ filtrele() {
   }
 
  clear() {
- console.log(JSON.stringify(this.detayAra)+'clearfiltre');
- console.log(JSON.stringify(this.sirala)+'clearfiltre');
+ //console.log(JSON.stringify(this.detayAra)+'clearfiltre');
+ //console.log(JSON.stringify(this.sirala)+'clearfiltre');
  // this.viewCtrl.dismiss(this.sirala, this.detayAra);
  this.events.publish('ilan:filtered', 'clear');
  this.navCtrl.pop();
@@ -70,7 +70,7 @@ filtrele() {
 // getLoc(selectedValue: any) {
 //   this.geolocation.getCurrentPosition().then((position) => {
 //   }).catch((error) => {
-//   console.log('Error getting location', error);
+//   //console.log('Error getting location', error);
 // });
 // }
 }

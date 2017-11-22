@@ -22,7 +22,7 @@ export class HesapPage   {
     this.storage.get('user')
         .then((user) => { this.user = user;
 
-          console.log(JSON.stringify(user));
+          //console.log(JSON.stringify(user));
         });
   }
 
@@ -35,7 +35,7 @@ export class HesapPage   {
   }
     this.newpassword = "";
     this.newpassword1 = "";
-    console.log('ionViewDidLoad HesapPagePage');
+    //console.log('ionViewDidLoad HesapPagePage');
   }
 
   updateUser(){

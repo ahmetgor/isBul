@@ -2,7 +2,7 @@
 <widget id="com.isgucvar.isarayan" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>İşGüçVar</name>
     <description>Modern iş arama motoru, aradığınız iş burada</description>
-    <author email="agor.yazilim@gmail.com" href="https://plus.google.com/+AhmetGor/">Ahmet Gör</author>
+    <author email="agor.yazilim@gmail.com" href="http://www.isgucvar.com">Ahmet Gör</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="*" />
@@ -31,7 +31,6 @@
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
-    <engine name="android" spec="^6.2.3" />
     <engine name="browser" spec="^4.1.0" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="cordova-plugin-console" spec="^1.0.5" />
@@ -68,4 +67,5 @@
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <engine name="android" spec="~6.2.3" />
 </widget>

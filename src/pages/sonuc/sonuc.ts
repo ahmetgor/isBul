@@ -35,7 +35,7 @@ export class SonucPage {
 
     this.searchControl = new FormControl();
     // this.getBasvuru();
-    console.log('constructor SonucPage çağrıldı');
+    //console.log('constructor SonucPage çağrıldı');
   }
 
   ionViewDidLoad() {
@@ -47,18 +47,18 @@ export class SonucPage {
   }
     this.basvuruList = this.basvuruSer.basvuruList;
     this.kaydedilenList = this.basvuruSer.kaydedilenList;
-    console.log('ilanlistele didload çağrıldı');
+    //console.log('ilanlistele didload çağrıldı');
 
     this.ilanListele();
-    console.log('ionViewDidLoad SonucPage çağrıldı');
+    //console.log('ionViewDidLoad SonucPage çağrıldı');
     this.searchControl.valueChanges.debounceTime(700).subscribe(search => {
     this.scrollEnable = true;
     this.skip = 0;
     // this.infiniteScroll.enable(true);
-    console.log('ilanlistele searchkontrol çağrıldı');
+    //console.log('ilanlistele searchkontrol çağrıldı');
     this.ilanListele();
 
-    console.log('searchkontrol çağrıldı');
+    //console.log('searchkontrol çağrıldı');
   // }
 });
 
@@ -71,7 +71,7 @@ this.events.subscribe('ilan:filtered', (a) => {
     this.detayAra = {};
     this.sirala = '{}';
   }
-  console.log('ilanlistele filtre çağrıldı');
+  //console.log('ilanlistele filtre çağrıldı');
   this.ilanListele();
 
 });
@@ -83,7 +83,7 @@ this.events.subscribe('ilan:filtered', (a) => {
     this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ilanlar => {
       this.ilanList = ilanlar;
-      console.log(this.searchTerm);
+      //console.log(this.searchTerm);
       if (Object.keys(this.ilanList).length <= 0) {
         this.isEmpty = true;
 }
@@ -93,7 +93,7 @@ this.events.subscribe('ilan:filtered', (a) => {
 
   itemTapped(ev, ilan) {
     // console.log(JSON.stringify(this.basvuruList)+'sonuc basvuru');
-    console.log(JSON.stringify(ilan)+'ilan');
+    //console.log(JSON.stringify(ilan)+'ilan');
     this.navCtrl.push('DetayPage', {
       ilanId: ilan._id,
       basvurulist: this.basvuruSer.basvuruList,
@@ -102,7 +102,7 @@ this.events.subscribe('ilan:filtered', (a) => {
   }
 
   doInfinite(infiniteScroll) {
-  console.log('Begin async operation');
+  //console.log('Begin async operation');
   // this.infiniteScroll = infiniteScroll;
   // infiniteScroll.enable(true);
   // infiniteScroll.enable(false);
@@ -111,22 +111,22 @@ this.events.subscribe('ilan:filtered', (a) => {
     this.skip = this.skip + 1;
     this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ilanlar => {
-      console.log(JSON.stringify(ilanlar)+"ilanlar");
+      //console.log(JSON.stringify(ilanlar)+"ilanlar");
 
       if(Object.keys(ilanlar).length < this.limit) {
-        console.log('true');
+        //console.log('true');
         // infiniteScroll.enable(false);
         this.scrollEnable = false;
         ;}
 
-      console.log('false');
+      //console.log('false');
       // infiniteScroll.enable(true);
       // this.scrollEnable = true;
       for( var key in ilanlar ) {
     this.ilanList.push(ilanlar[key]);
   }
     });
-    console.log('Async operation has ended');
+    //console.log('Async operation has ended');
     infiniteScroll.complete();
   }, 500);
 

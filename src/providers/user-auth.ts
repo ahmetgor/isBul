@@ -30,8 +30,8 @@ export class UserAuth {
   constructor(public http: Http, public storage: Storage,
               public toastCtrl: ToastController, public loadingCtrl: LoadingController,
               public events: Events) {
-    console.log('Hello UserAuth Provider');
-    console.log(window.location.origin+'host');
+    //console.log('Hello UserAuth Provider');
+    //console.log(window.location.origin+'host');
     // this.storage.get('token').then((value) => {
     //     console.log(value+' token');
     //     this.token = value;
@@ -60,14 +60,14 @@ export class UserAuth {
         this.storage.get('user')
             .then((user) => {
               this.currentUser = user;
-              console.log(JSON.stringify(this.currentUser)+"  checkauth currentuser");
+              //console.log(JSON.stringify(this.currentUser)+"  checkauth currentuser");
 
             });
 
             this.storage.get('ozgecmis')
                 .then((ozgecmis) => this.ozgecmis = ozgecmis)
                 .catch((err) => {
-                  console.log("hata");
+                  //console.log("hata");
                 });
 
             let headers = new Headers();
@@ -75,10 +75,10 @@ export class UserAuth {
             this.http.get(this.url+'protected', {headers: headers})
                 .subscribe(res => {
                   this.events.publish('ozgecmis:update');
-                  console.log(JSON.stringify(res)+"success");
+                  //console.log(JSON.stringify(res)+"success");
                     resolve(res);
                 }, (err) => {
-                  console.log(JSON.stringify(err)+"err");
+                  //console.log(JSON.stringify(err)+"err");
                     reject(err);
                 });
         });
@@ -121,7 +121,7 @@ export class UserAuth {
   login(credentials){
 
     return new Promise((resolve, reject) => {
-      console.log(JSON.stringify(credentials)+'credentials');
+      //console.log(JSON.stringify(credentials)+'credentials');
       this.showLoader();
 
         let headers = new Headers();
@@ -134,7 +134,7 @@ export class UserAuth {
 
 
           this.token = data.token;
-          console.log(JSON.stringify(data)+'user');
+          //console.log(JSON.stringify(data)+'user');
           this.currentUser = data.user;
           this.storage.set('token', data.token);
           this.storage.set('user', data.user);
@@ -150,7 +150,7 @@ export class UserAuth {
           }, (err) => {
             this.loading.dismiss();
             this.presentToast("Girdiğiniz bilgiler yanlış veya hesabınız aktif değil!");
-            console.log(JSON.stringify(err)+'servis err');
+            //console.log(JSON.stringify(err)+'servis err');
             reject(err);
           });
     });
@@ -172,7 +172,7 @@ export class UserAuth {
 
           }, (err) => {
             let erm = JSON.parse(err._body);
-            console.log(erm.error+'forgot err')
+            //console.log(erm.error+'forgot err')
             this.loading.dismiss();
             this.presentToast("Geçici şifre gönderilemedi. "+erm.error);
           });
@@ -195,7 +195,7 @@ export class UserAuth {
 
           }, (err) => {
             let erm = JSON.parse(err._body);
-            console.log(erm.error+'forgot err')
+            //console.log(erm.error+'forgot err')
             this.loading.dismiss();
             this.presentToast("Yeni şifre kaydedilemedi. "+erm.error);
           });
@@ -243,10 +243,10 @@ export class UserAuth {
         .subscribe(data => {
           this.ozgecmis = data;
           this.storage.set('ozgecmis', data);
-          console.log(JSON.stringify(data)+"data123");
+          //console.log(JSON.stringify(data)+"data123");
           resolve(data);
         }, (err) => {
-          console.log(JSON.stringify(err));
+          //console.log(JSON.stringify(err));
           // reject(err);
           this.presentToast('Özgeçmiş alınamadı. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
         });
@@ -259,20 +259,20 @@ updateUser(user){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Authorization', this.token);
-    console.log(JSON.stringify(user)+'updateuser');
+    //console.log(JSON.stringify(user)+'updateuser');
     return new Promise((resolve, reject) => {
     this.http.post(this.url + 'updatenormaluser', JSON.stringify(user), {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.currentUser = data;
         this.storage.set('user', data);
-        console.log(JSON.stringify(data)+"updateduser");
+        //console.log(JSON.stringify(data)+"updateduser");
         this.loading.dismiss();
 
         resolve(data);
       }, (err) => {
         this.loading.dismiss();
-        console.log(JSON.stringify(err));
+        //console.log(JSON.stringify(err));
         // reject(err);
         this.presentToast('Şifre değiştirilemedi. Bağlantı problemi olabilir. Lütfen tekrar deneyin!');
       });
