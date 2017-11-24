@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ViewController, Events } from 'ionic-angular';
-import { Geolocation } from '@ionic-native/geolocation';
+// import { Geolocation } from '@ionic-native/geolocation';
 
-/*
-  Generated class for the Filtrele page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-filtrele',
   templateUrl: 'filtrele.html'
@@ -33,7 +27,7 @@ export class FiltrelePage {
    ,{"sehir":"Yozgat"},{"sehir":"Zonguldak"}
   ];
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              public viewCtrl: ViewController, public events: Events, public geolocation: Geolocation) {
+              public viewCtrl: ViewController, public events: Events) {
 
     this.detayAra = navParams.get('detayAra');
     //console.log(JSON.stringify(this.detayAra) + 'detay')

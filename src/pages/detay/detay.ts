@@ -135,9 +135,11 @@ IN.API.Raw("/people/~/shares?format=json")
 
   basvur(ilan :any) {
     // console.log(ilan._id+'detay');
-    this.basvuruSer.addBasvuru(ilan._id);
-    // console.log(JSON.stringify(this.basvuruSer.basvuruList)+'create');
-    this.events.publish('basvur:update');
+    this.basvuruSer.addBasvuru(ilan._id)
+    .then((ilan) => {
+       this.events.publish('basvur:update');
+  });
+  // console.log(JSON.stringify(this.basvuruSer.basvuruList)+'create');
 
   //   // console.log( JSON.stringify(this.basvuruList.find((item) => {
   //       return (item.basvuru == ilanId ); })) + 'console')
@@ -152,26 +154,29 @@ IN.API.Raw("/people/~/shares?format=json")
 
   deleteBasvur(ilan: any) {
     // console.log(ilan._id+'detay');
-    this.basvuruSer.deleteBasvuru(ilan._id);
+    this.basvuruSer.deleteBasvuru(ilan._id)
     // console.log(JSON.stringify(this.basvuruSer.basvuruList)+'detay');
-    this.events.publish('basvur:update');
-
+    .then((ilan) => {
+       this.events.publish('basvur:update');
+  });
 
   }
 
   kaydet(ilan :any) {
-    this.basvuruSer.addKaydedilen(ilan._id);
+    this.basvuruSer.addKaydedilen(ilan._id)
     // console.log(JSON.stringify(this.basvuruSer.kaydedilenList)+'create');
-    this.events.publish('kaydet:update');
-
+    .then((ilan) => {
+       this.events.publish('kaydet:update');
+  });
 
   }
 
   deleteKaydet(ilan :any) {
-    this.basvuruSer.deleteKaydedilen(ilan._id);
+    this.basvuruSer.deleteKaydedilen(ilan._id)
     // console.log(JSON.stringify(this.basvuruSer.kaydedilenList)+'detay');
-    this.events.publish('kaydet:update');
-
+    .then((ilan) => {
+       this.events.publish('kaydet:update');
+  });
   }
 
   checkBasvuru(ilanId: any) {
