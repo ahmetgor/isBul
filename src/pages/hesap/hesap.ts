@@ -5,7 +5,7 @@ import { UserAuth } from '../../providers/user-auth';
 import { LoginPage } from '../login/login';
 
 
-@IonicPage()
+// @IonicPage()
 @Component({
   selector: 'page-hesap',
   templateUrl: 'hesap.html'
