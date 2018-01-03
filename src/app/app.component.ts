@@ -14,7 +14,6 @@ import { OzgecmisSer } from '../providers/ozgecmis-ser';
 import { Storage } from '@ionic/storage';
 import { HesapPage } from '../pages/hesap/hesap';
 
-
 @Component({
   templateUrl: 'app.html'
 })

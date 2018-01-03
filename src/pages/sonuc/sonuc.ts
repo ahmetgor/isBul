@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, Events, IonicPage} from 'ionic-angular';
+import { NavController, NavParams, ModalController, Events, IonicPage,PopoverController } from 'ionic-angular';
 import { IlanSer } from '../../providers/ilan-ser';
 import { DetayPage } from '../detay/detay';
 import { FiltrelePage } from '../filtrele/filtrele';
+import { NotPage } from '../not/not';
 import { FormControl } from '@angular/forms';
 import { BasvuruSer } from '../../providers/basvuru-ser';
 import { LoginPage } from '../login/login';
@@ -28,10 +29,12 @@ export class SonucPage {
   limit: number = 20;
   scrollEnable: boolean = true;
   isEmpty: boolean = false;
+  notList: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public ilanSer: IlanSer, public modalCtrl: ModalController,
-              public basvuruSer: BasvuruSer, public events: Events, public authService: UserAuth) {
+              public basvuruSer: BasvuruSer, public events: Events, public authService: UserAuth,
+              public popoverCtrl: PopoverController) {
 
     this.searchControl = new FormControl();
     // this.getBasvuru();
@@ -145,6 +148,14 @@ presentFilter(myEvent) {
   this.navCtrl.push(FiltrelePage, {
     detayAra: this.detayAra,
     sirala: this.sirala
+  });
+}
+
+presentNot(myEvent) {
+
+  let popover = this.popoverCtrl.create(NotPage);
+  popover.present({
+    ev: myEvent
   });
 }
 

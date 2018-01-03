@@ -15,6 +15,7 @@ import { OzgecmisDetayPage } from '../pages/ozgecmis-detay/ozgecmis-detay';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { HesapPage } from '../pages/hesap/hesap';
+import { NotPage } from '../pages/not/not';
 
 import { IlanSer } from '../providers/ilan-ser';
 import { BasvuruSer } from '../providers/basvuru-ser';
@@ -49,6 +50,7 @@ import { Facebook } from '@ionic-native/facebook';
     SignupPage,
     PassResetPage,
     HesapPage,
+    NotPage,
     // DatePipe,
     Basvuruldu
   ],
@@ -75,6 +77,7 @@ import { Facebook } from '@ionic-native/facebook';
     LoginPage,
     SignupPage,
     PassResetPage,
+    NotPage,
     HesapPage
   ],
   providers: [

@@ -6,9 +6,12 @@
     </button>
     <ion-title>İlanlar</ion-title>
     <ion-buttons end>
-  <button ion-button icon-only (click)="presentFilter($event)">
-    <ion-icon name="funnel"></ion-icon>
-  </button>
+      <button ion-button icon-only (click)="presentNot($event)">
+        <ion-icon name="notifications"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="presentFilter($event)">
+        <ion-icon name="funnel"></ion-icon>
+      </button>
 </ion-buttons>
   </ion-navbar>
 
@@ -26,7 +29,7 @@
       Kayıt bulunamadı
     </p>
   </div>
-  
+
   <ion-list text-wrap>
     <button ion-item *ngFor="let ilan of ilanList" (click)="itemTapped($event, ilan)">
       <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
