@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, ToastController, Events } from 'ionic-angular';
+import { NavController, NavParams, ToastController, Events, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OzgecmisSer} from '../../providers/ozgecmis-ser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -46,7 +46,7 @@ export class OzgecmisDetayPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public formBuilder: FormBuilder, public ozgecmisSer: OzgecmisSer,
-              public toastCtrl: ToastController, private camera: Camera,
+              public toastCtrl: ToastController, private camera: Camera, public plt: Platform,
               public storage: Storage, public events: Events) {
 
     this.detay = this.navParams.get('ozDetay');
@@ -54,7 +54,7 @@ export class OzgecmisDetayPage {
     this.basvurulist = this.navParams.get('basvurulist');
     // if(this.detayList) //console.log("oki");
     this.des = this.navParams.get('des');
-    // console.log(JSON.stringify(this.detay)+this.des+"odetay")
+    console.log(JSON.stringify(this.detay)+this.des+"odetay")
     // this.detayClone = Object.assign({}, this.detay);
     this.kisiselFormGroup = formBuilder.group({
           isim: [this.detay.isim, [Validators.required]],
@@ -105,11 +105,12 @@ export class OzgecmisDetayPage {
   this.sertifikaFormGroup = formBuilder.group({
           ad: [this.detay.ad, Validators.required],
           kurum: [this.detay.kurum, Validators.required],
-          cikis: [this.detay.cikis, Validators.required],
+          cikis: [this.detay.cikis, Validators.required]
         });
 
   this.bilgisayarFormGroup = formBuilder.group({
-          bilgisayar: [this.detay.bilgisayar, Validators.required]
+          // tag: [this.detay.tags.tag, Validators.required],
+          // yil: [this.detay.tags.yil, Validators.required]
       });
   }
 
@@ -118,11 +119,11 @@ export class OzgecmisDetayPage {
   }
 
    openGallery (): void {
-     if (Camera['installed']()) {
+     if (this.plt.is('ios') || this.plt.is('android')) {
 
      const cameraOptions: CameraOptions = {
-    // sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     destinationType: this.camera.DestinationType.DATA_URL,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
     quality: 100,
     targetWidth: 100,
     targetHeight: 100,
@@ -231,7 +232,14 @@ processWebImage(event) {
   };
   reader.readAsDataURL(event.target.files[0]);
   //console.log(event.target.files[0]);
+}
 
+addTag() {
+  this.detay.tags.push({});
+}
+
+removeTag(value) {
+  this.detay.tags = this.detay.tags.filter(item => item.tag !== value)
 }
 
   presentToast(mesaj) {

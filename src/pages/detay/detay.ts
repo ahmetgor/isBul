@@ -46,16 +46,18 @@ ilanId: string;
    this.basvuruList = this.basvuruSer.basvuruList;
    this.kaydedilenList = this.basvuruSer.kaydedilenList;
    this.ilanId = this.navParams.get('ilanId');
+   this.ilan = this.navParams.get('ilan');
 
    // console.log(this.ilanId+"ilanId");
   //  this.basvuruList.push({id: 'hebe'});
    // console.log(JSON.stringify(this.kaydedilenList)+'detay basvuru');
 
   // if(this.ilanId) {
-    ilanSer.getIlan(this.ilanId)
-    .then((ilan) => {this.ilan = ilan;
-    // console.log(JSON.stringify(this.ilan)+"link ilan");
-  });
+
+  // -------- get ilan silindi
+  //   ilanSer.getIlan(this.ilanId)
+  //   .then((ilan) => {this.ilan = ilan;
+  // });
 
     // let initParams: InitParams = {
     //   appId: '112498582687614',

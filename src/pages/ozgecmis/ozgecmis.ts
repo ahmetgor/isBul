@@ -28,11 +28,9 @@ export class OzgecmisPage {
               public actionSheetCtrl: ActionSheetController,
               public plt: Platform,private socialSharing: SocialSharing) {
 
-              // this.ozgecmis = ozgecmisSer.ozgecmis;
-              //console.log('ionViewDidLoad OzgecmisPage const');
     }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     if (!this.authService.currentUser) {
       //console.log('ozgecmis checkauth');
     this.authService.checkAuthentication().then((res) => {
@@ -62,7 +60,6 @@ this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
   }
 
   itemTapped(ev, ozDetay, des, ozDetayList) {
-    // console.log(des);
     // console.log(JSON.stringify(ozDetay)+'ozDetay');
     // console.log(JSON.stringify(ozDetayList)+'ozdetlist');
     this.navCtrl.push(OzgecmisDetayPage, {
@@ -104,8 +101,6 @@ this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
 // 	// picture: this.ilan.resim
 // }
 
-//console.log("share face");
-
   FB.ui({
   method: 'share',
   href: 'https://isgucvarisveren.herokuapp.com'+'/#/ilandetay/'+this.ozgecmis._id,
@@ -127,7 +122,6 @@ this.ozgecmisSer.getOzgecmis(this.authService.currentUser.ozgecmis)
 //   .result((onSuccess) =>{})
 //   .error((onError) =>{});
 //   }
-
 
   presentAlert() {
   let alert = this.alertCtrl.create({
@@ -192,6 +186,5 @@ presentActionSheet() {
 getAge() {
   return ~~(((new Date()).getTime() - (new Date(this.ozgecmis.dogumTarihi)).getTime()) / (31557600000));
 }
-
 
 }

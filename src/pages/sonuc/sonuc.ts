@@ -83,6 +83,7 @@ this.events.subscribe('ilan:filtered', (a) => {
   ilanListele() {
     this.searching = true;
     this.isEmpty = false;
+    this.detayAra.tags = this.authService.ozgecmis.tags;
     this.ilanSer.getIlanlar(this.searchTerm, this.detayAra, this.sirala, this.skip, this.limit)
     .then(ilanlar => {
       this.ilanList = ilanlar;
@@ -99,6 +100,7 @@ this.events.subscribe('ilan:filtered', (a) => {
     //console.log(JSON.stringify(ilan)+'ilan');
     this.navCtrl.push('DetayPage', {
       ilanId: ilan._id,
+      ilan: ilan,
       basvurulist: this.basvuruSer.basvuruList,
       kaydedilenlist: this.basvuruSer.kaydedilenList
     });

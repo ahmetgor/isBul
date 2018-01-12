@@ -200,11 +200,11 @@
   <ion-card-header no-margin>
     <ion-row>
       <ion-col>
-  <b>Bilgisayar Teknolojileri</b>
+  <b>Teknik & Mesleki Uzmanlık</b>
 </ion-col>
 <ion-col>
   <ion-buttons end>
-    <button no-margin ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'bilgisayar', '')">
+    <button no-margin ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'tags', '')">
     <ion-icon name="create"></ion-icon>
     Düzenle
   </button>
@@ -212,11 +212,21 @@
 </ion-col>
   </ion-row>
 </ion-card-header>
-  <!-- <button ion-button small  icon-left clear (click)="itemTapped($event, ozgecmis, 'bilgisayar')"> -->
-  <ion-item no-margin text-wrap>
+  <!-- <ion-item no-margin text-wrap>
   <h4>{{ozgecmis.bilgisayar}}</h4>
-</ion-item>
-<!-- </button> -->
+</ion-item> -->
+<ion-grid>
+<ion-row *ngFor="let tags of ozgecmis.tags">
+<ion-col col-7>
+  <h4>{{tags.tag}}</h4>
+
+</ion-col>
+<ion-col>
+  <h4>{{tags.yil}} yıl</h4>
+
+</ion-col>
+</ion-row>
+</ion-grid>
 </ion-card>
 
 </div>
